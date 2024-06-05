@@ -4,6 +4,7 @@
   font-family: 'Poppins', sans-serif, 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
+  letter-spacing: -0.02em;
 
   color: #fdfdfd;
   background-color: #585858;
@@ -14,7 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
 
   --white: #fdfdfd;
+  --white-text: #fff;
   --black: #121212;
+  --dull-black: #161616;
   --dark: #1f1f1f;
   --violet: #d6d8ff;
   --green-btn: #bedbb0;
@@ -25,6 +28,7 @@
   --label-color-blue: #8fa1d0;
   --label-color-red: #e09cb5;
   --label-color-green: #bedbb0;
+  --form-error-red: #e7b4ad;
 }
 
 *,
