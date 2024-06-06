@@ -1,0 +1,17 @@
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .descriptionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .avatarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
