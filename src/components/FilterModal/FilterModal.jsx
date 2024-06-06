@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import css from './FilterModal.module.css';
 import clsx from 'clsx';
+import closeBtn from '../../images/icons.svg#icon-x-close';
 
 const FilterModal = () => {
   const [selectedPriority, setSelectedPriority] = useState('without');
@@ -12,7 +13,9 @@ const FilterModal = () => {
   return (
     <div className={css.modal}>
       <button type="button" className={css.closeBtn}>
-        x
+        <svg width={18} height={18}>
+          <use href={closeBtn} />
+        </svg>
       </button>
       <h2 className={css.title}>Filters</h2>
       <div className={css.line}></div>
@@ -23,54 +26,27 @@ const FilterModal = () => {
         </button>
       </div>
       <div className={css.options}>
-        <label className={clsx([css.priorityOpt, css.customRadio])}>
-          <input
-            type="radio"
-            name="priority"
-            value="without"
-            checked={selectedPriority === 'without'}
-            onChange={handlePriorityChange}
-            className={css.radioInput}
-          />
-          <span className={css.radioButton}></span>
-          <span>Without priority</span>
-        </label>
-        <label className={clsx([css.priorityOpt, css.customRadio])}>
-          <input
-            type="radio"
-            name="priority"
-            value="low"
-            checked={selectedPriority === 'low'}
-            onChange={handlePriorityChange}
-            className={css.radioInput}
-          />
-          <span className={css.radioButton}></span>
-          <span>Low</span>
-        </label>
-        <label className={clsx([css.priorityOpt, css.customRadio])}>
-          <input
-            type="radio"
-            name="priority"
-            value="medium"
-            checked={selectedPriority === 'medium'}
-            onChange={handlePriorityChange}
-            className={css.radioInput}
-          />
-          <span className={css.radioButton}></span>
-          <span>Medium</span>
-        </label>
-        <label className={clsx([css.priorityOpt, css.customRadio])}>
-          <input
-            type="radio"
-            name="priority"
-            value="high"
-            checked={selectedPriority === 'high'}
-            onChange={handlePriorityChange}
-            className={css.radioInput}
-          />
-          <span className={css.radioButton}></span>
-          <span>High</span>
-        </label>
+        {['without', 'low', 'medium', 'high'].map((priority) => (
+          <label
+            key={priority}
+            className={clsx([css.priorityOpt, css.customRadio])}
+          >
+            <div className={css.radioWrapper}>
+              <input
+                type="radio"
+                name="priority"
+                value={priority}
+                checked={selectedPriority === priority}
+                onChange={handlePriorityChange}
+                className={css.radioInput}
+              />
+              <span className={css.radioButton}>
+                <span className={css.innerCircle}></span>
+              </span>
+            </div>
+            <span>{priority === 'without' ? 'Without priority' : priority.charAt(0).toUpperCase() + priority.slice(1)}</span>
+          </label>
+        ))}
       </div>
     </div>
   );
