@@ -1,0 +1,51 @@
+.component {
+  width: 197px;
+  height: 238px;
+  border-radius: 8px;
+  padding: 14px;
+
+  background: var(--dark);
+}
+
+.cactus {
+  margin-bottom: 14px;
+}
+
+.text {
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+
+  color: #fff;
+}
+
+.brandName {
+  color: var(--green-btn);
+}
+
+.help {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.helpText {
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .component {
+    width: 212px;
+    height: 272px;
+    padding: 20px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 143%;
+  }
+}
