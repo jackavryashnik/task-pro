@@ -1,0 +1,29 @@
+.button {
+  width: 100%;
+  height: 49px;
+  border-radius: 8px;
+  border: transparent;
+  background-color: var(--green-btn);
+
+  color: var(--dull-black);
+  text-align: center;
+
+  transition: background-color, 250ms ease-in;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--green-btn-hover);
+}
+
+@media screen and (min-width: 375px) {
+  .button {
+    width: 287px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    width: 334px;
+  }
+}
