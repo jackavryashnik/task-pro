@@ -1,11 +1,5 @@
-import FilterModal from '../../components/FilterModal/FilterModal';
-
 const HomePage = () => {
-  return (
-    <div>
-      <FilterModal />
-    </div>
-  );
+  return <div>HomePage</div>;
 };
 
 export default HomePage;
