@@ -1,0 +1,29 @@
+.moveCardItem {
+display: flex;
+justify-content: space-between;
+padding: 18px;
+color: var();
+}
+
+.moveCardItem.current {
+color: var();
+}
+
+.moveCardItem.current button {
+pointer-events: none;
+}
+
+.moveCardItem.current svg {
+stroke: var();
+}
+
+.button {
+display: flex;
+justify-content: space-between;
+width: 100%;
+border: none;
+background-color: transparent;
+color: inherit;
+font-family: inherit;
+cursor: pointer;
+}
