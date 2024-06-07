@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './FilterModal.module.css';
 import clsx from 'clsx';
-import closeBtn from '../../images/icons.svg#icon-x-close';
+import icons from '../../images/icons.svg';
 
 const FilterModal = () => {
   const [selectedPriority, setSelectedPriority] = useState('without');
@@ -14,7 +14,7 @@ const FilterModal = () => {
     <div className={css.modal}>
       <button type="button" className={css.closeBtn}>
         <svg width={18} height={18}>
-          <use href={closeBtn} />
+        <use href={`${icons}#icon-x-close`}></use>
         </svg>
       </button>
       <h2 className={css.title}>Filters</h2>
