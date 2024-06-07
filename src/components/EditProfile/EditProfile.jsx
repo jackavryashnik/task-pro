@@ -3,7 +3,7 @@ import css from './EditProfile.module.css';
 import { NameInput } from '../NameInput/NameInput.jsx';
 import { EmailInput } from '../EmailInput/EmailInput.jsx';
 import { PasswordInput } from '../PasswordInput/PasswordInput.jsx';
-import { SubmitButton } from '../SubmitButton/SubmitButton.jsx';
+import { Button } from '../Button/Button.jsx';
 import { useForm } from 'react-hook-form';
 
 import icons from '../../images/icons.svg';
@@ -59,7 +59,14 @@ export const EditProfile = () => {
           errors={errors}
           register={register}
         />
-        <SubmitButton>Send</SubmitButton>
+        <Button>Send</Button>
+        <Button className={"test"}>
+          <div className={css.iconContainer}>
+            <span><svg className={css.icon} width={23} height={23}>
+              <use href={`${icons}#icon-plus`}></use>
+            </svg></span>Submit
+          </div>
+        </Button>
       </form>
     </div>
   );

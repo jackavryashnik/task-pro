@@ -12,17 +12,7 @@
   transition: background-color, 250ms ease-in;
 }
 
-@media screen and (min-width: 375px) {
-  .button {
-    width: 287px;
-  }
-}
 
-@media screen and (min-width: 768px) {
-  .button {
-    width: 334px;
-  }
-}
 
 @media screen and (min-width: 1024px) {
   .button:hover,
