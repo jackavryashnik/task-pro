@@ -30,8 +30,7 @@
 .chevronIcon {
   width: 16px;
   height: 16px;
-  /* fill: rgba(255, 255, 255, 0.8);
-  stroke: rgba(255, 255, 255, 0.8); */
+  /* fill: rgba(255, 255, 255, 0.8); */
 }
 
 .rightSection {
@@ -48,12 +47,9 @@
 }
 
 .themeButton {
-  /* padding: 5px 10px; */
   border: none;
-  /* border-radius: 4px; */
   cursor: pointer;
   background-color: #161616;
-  /* text-align: center; */
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
@@ -106,7 +102,6 @@
   font-size: 14px;
   color: #fff;
   padding: 8px;
-  letter-spacing: -0.02em;
 }
 
 /* Responsive Styles */
