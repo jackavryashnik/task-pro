@@ -6,6 +6,9 @@ import { PasswordInput } from '../PasswordInput/PasswordInput.jsx';
 import { SubmitButton } from '../SubmitButton/SubmitButton.jsx';
 import { useForm } from 'react-hook-form';
 
+import icons from '../../images/icons.svg';
+import avatar from '../../images/bg-mobile/abstraction.webp';
+
 export const EditProfile = () => {
   const {
     register,
@@ -18,15 +21,24 @@ export const EditProfile = () => {
   };
 
   return (
-    <div>
+    <div className={css.container}>
+      <div className={css.descriptionContainer}>
+        <h3 className={css.description}>Edit profile</h3>
+        <button className={css.buttonClose} type="button">
+          <svg width={18} height={18}>
+            <use href={`${icons}#icon-x-close`}></use>
+          </svg>
+        </button>
+      </div>
       <form className={css.form} onSubmit={handleSubmit(submitForm)}>
-        <div className={css.descriptionContainer}>
-          <p>Edit profile</p>
-          <button type="button">X</button>
-        </div>
         <div className={css.avatarContainer}>
-          <p>Profile picture</p>
-          <button type="button">+</button>
+          <img className={css.avatar} src={avatar} />
+          <label className={css.label}>
+            <svg className={css.icon} width={10} height={10}>
+              <use href={`${icons}#icon-plus`}></use>
+            </svg>
+            <input className={css.input} type="file" />
+          </label>
         </div>
 
         <NameInput
