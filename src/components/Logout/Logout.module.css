@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 14px;
+  padding-left: 10px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+.text {
+  font-weight: 500;
+  color: var(--white-text);
+}
+.icon {
+  stroke: var(--green-btn);
+  transition: transform 200ms ease;
+}
+.icon:hover,
+.icon:focus {
+  stroke: var(--green-btn-hover);
+}
+.button {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+}
