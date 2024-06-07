@@ -21,12 +21,6 @@
   display: block;
 }
 
-.menuIcon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-}
-
 .chevronIcon {
   width: 16px;
   height: 16px;
@@ -127,6 +121,15 @@
   .header {
     flex-direction: row;
     justify-content: space-between;
+  }
+  .menuButton {
+    font-size: 1.5rem;
+  
+  }
+
+  .svgMenu{
+     width: 32px;
+    height: 32px;
   }
 }
 
