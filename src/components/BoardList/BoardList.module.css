@@ -1,0 +1,54 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: start;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.text {
+  font-weight: 500;
+}
+.item:hover,
+.item:focus {
+  color: var(--white-text);
+  background-color: var(--dark);
+  border-right: 4px solid var(--green-btn);
+  border-radius: 4px;
+}
+.containerBoard {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.containerIcons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.item:hover .focusIcon,
+.item:focus .focusIcon {
+  display: inline-block;
+  opacity: 1;
+}
+.focusIcon {
+  opacity: 0;
+  stroke: rgba(255, 255, 255, 0.5);
+  transition: opacity 200ms ease;
+}
+.icon {
+  stroke: rgba(255, 255, 255, 0.5);
+}
+.item:hover .icon,
+.item:focus .icon {
+  stroke: var(--white-text);
+}
