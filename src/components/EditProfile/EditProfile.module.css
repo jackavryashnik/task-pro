@@ -86,12 +86,6 @@
   transition: background-color, 250ms ease-in;
 }
 
-.iconContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-}
 .icon {
   stroke: var(--dull-black);
 }
