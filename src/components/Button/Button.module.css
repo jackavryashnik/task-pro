@@ -12,8 +12,6 @@
   transition: background-color, 250ms ease-in;
 }
 
-
-
 @media screen and (min-width: 1024px) {
   .button:hover,
   .button:focus {

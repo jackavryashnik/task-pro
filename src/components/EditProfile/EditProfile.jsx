@@ -60,13 +60,6 @@ export const EditProfile = () => {
           register={register}
         />
         <Button>Send</Button>
-        <Button className={"test"}>
-          <div className={css.iconContainer}>
-            <span><svg className={css.icon} width={23} height={23}>
-              <use href={`${icons}#icon-plus`}></use>
-            </svg></span>Submit
-          </div>
-        </Button>
       </form>
     </div>
   );
