@@ -14,18 +14,12 @@
 }
 
 .menuButton {
-  font-size: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
   display: block;
 }
 
-.chevronIcon {
-  width: 16px;
-  height: 16px;
-  /* fill: rgba(255, 255, 255, 0.8); */
-}
 
 .rightSection {
   display: flex;
@@ -46,7 +40,6 @@
   background-color: #161616;
   font-weight: 500;
   font-size: 14px;
-  letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
@@ -79,7 +72,9 @@
 .themeSelector li:hover {
   color: #bedbb0;
 }
+/* THEME END*/
 
+/* UserInfo */
 .userInfo {
   display: flex;
   align-items: center;
@@ -113,7 +108,10 @@
   .header {
     flex-direction: row;
     justify-content: space-between;
+    min-width: 375px;
+    min-height: 60px;
   }
+  
 }
 
 /* Tablet */
@@ -121,14 +119,13 @@
   .header {
     flex-direction: row;
     justify-content: space-between;
-  }
-  .menuButton {
-    font-size: 1.5rem;
-  
+    min-width: 768px;
+    min-height: 68px;
   }
 
+  /* SVG Burger Menu */
   .svgMenu{
-     width: 32px;
+    width: 32px;
     height: 32px;
   }
 }
@@ -138,8 +135,10 @@
   .header {
     flex-direction: row;
     justify-content: space-between;
+    min-width: 1180px;
   }
 
+  /* HIDE ICON MENU for Desktop */
   .menuBtnContainer {
     display: none;
   }

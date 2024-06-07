@@ -48,7 +48,7 @@ const Header = () => {
           <span className={css.userName}>Ivetta</span>
           <img
           // заглушка
-            src="/src/images/start-page/start-mob.png"
+            src="/src/images/cactus.png"
             alt="User Avatar"
             className={css.avatar}
           />
