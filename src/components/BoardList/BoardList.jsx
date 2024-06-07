@@ -1,14 +1,14 @@
+import { useTasks } from '../../redux/tasks/selectors';
 import css from './BoardList.module.css';
 import icon from '../../images/icons.svg';
 
-const arr = ['Project Office', 'Neon Light Project'];
-
 export default function BoardList() {
+  const { boards } = useTasks();
   return (
     <>
-      {arr.length > 0 && (
+      {boards.length > 0 && (
         <ul className={css.list}>
-          {arr.map((board, index) => {
+          {boards.map((board, index) => {
             return (
               <li className={css.item} key={index}>
                 <div className={css.containerBoard}>
