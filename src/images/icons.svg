@@ -29,7 +29,7 @@
 <path fill="none" stroke="#fff" style="stroke: var(--color1, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.5" d="M4 24h24"></path>
 </symbol>
 <symbol id="icon-chevron-down" viewBox="0 0 30 32">
-<path fill="none" stroke="#bedbb0" style="stroke: var(--color2, #bedbb0)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.3684" d="M7.579 12.211l7.579 7.579 7.579-7.579"></path>
+<path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.3684" d="M7.579 12.211l7.579 7.579 7.579-7.579"></path>
 </symbol>
 <symbol id="icon-colors-ovals" viewBox="0 0 32 32">
 <path fill="none" stroke="#fff" style="stroke: var(--color1, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 27.296c1.415 1.267 3.284 2.037 5.333 2.037 4.418 0 8-3.582 8-8 0-3.689-2.497-6.795-5.893-7.72M8.56 13.614c-3.396 0.925-5.894 4.031-5.894 7.72 0 4.418 3.582 8 8 8s8-3.582 8-8c0-1.041-0.199-2.035-0.56-2.947M24 10.667c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8c4.418 0 8 3.582 8 8z"></path>

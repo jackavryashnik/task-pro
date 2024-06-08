@@ -30,8 +30,9 @@
 .chevronIcon {
   width: 16px;
   height: 16px;
-  /* fill: rgba(255, 255, 255, 0.8);
-  stroke: rgba(255, 255, 255, 0.8); */
+  margin-left: 4px;
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: rgba(255, 255, 255, 0.8);
 }
 
 .rightSection {

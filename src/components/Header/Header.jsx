@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import css from './Header.module.css';
+import icons from '../../images/icons.svg';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Header = () => {
       <div className={css.menuBtnContainer}>
         <button onClick={handleMenuToggle} className={css.menuButton}>
           <svg className={css.menuIcon}>
-            <use href="#icon-burger-menu"></use>
+            <use href={`${icons}#icon-burger-menu`}></use>
           </svg>
         </button>
       </div>
@@ -30,7 +31,7 @@ const Header = () => {
           >
             Theme
             <svg className={css.chevronIcon}>
-              <use href="#icon-chevron-down"></use>
+              <use href={`${icons}#icon-chevron-down`}></use>
             </svg>
           </button>
           {selectorOpen && (
