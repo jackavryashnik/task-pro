@@ -1,9 +1,5 @@
-import Header from '../../components/Header/Header'
-
 const HomePage = () => {
-  return <div>
-    <Header/>
-    HomePage</div>;
+  return <div>HomePage</div>;
 };
 
 export default HomePage;
