@@ -139,7 +139,8 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = [];
-      });
+      })
+      .addCase(logout.rejected, handleRejected);
   },
 });
 
