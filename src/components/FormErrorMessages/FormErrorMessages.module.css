@@ -1,0 +1,21 @@
+.description {
+    width: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    margin-top: 10px;
+
+    background-color: var(--form-error-red);
+    color: var(--dull-black);;
+}
+
+@media screen and (min-width: 375px) {
+    .description {
+      width: 287px;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .description {
+      width: 334px;
+    }
+  }
