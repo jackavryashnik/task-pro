@@ -59,7 +59,7 @@ export const EditProfile = () => {
           errors={errors}
           register={register}
         />
-        <Button>Send</Button>
+        <Button type={"submit"}>Send</Button>
       </form>
     </div>
   );
