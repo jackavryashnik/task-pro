@@ -10,7 +10,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   --white: #fdfdfd;
   --white-text: #fff;
   --black: #121212;
@@ -71,10 +70,6 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-}
-
-body {
-  padding: 10px;
 }
 
 input {
