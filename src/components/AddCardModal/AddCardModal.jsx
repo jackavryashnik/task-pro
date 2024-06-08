@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { Calendar } from '../Calendar/Calendar';
 import { Icon } from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
-import { editCard } from '../../redux/tasks';
-import css from './EditCardModal.module.css';
+import { addCard } from '../../redux/tasks';
+import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 
-export default function EditCardModal({ card, onClose }) {
+export default function AddCardModal({ card, onClose }) {
   const { _id: cardId, title, text, deadline, priority } = card;
   const [selectedDate, setSelectedDate] = useState(deadline);
   const [selectedPriority, setSelectedPriority] = useState(priority);
@@ -23,7 +23,7 @@ export default function EditCardModal({ card, onClose }) {
   });
 
   const onSubmit = values => {
-    dispatch(editCard({ values, cardId }));
+    dispatch(addCard({ values, cardId }));
     onClose();
   };
 
@@ -35,7 +35,7 @@ export default function EditCardModal({ card, onClose }) {
 
   return (
     <div className={css.container}>
-      <h2 className={css.titleModal}>Edit card</h2>
+      <h2 className={css.titleModal}>Add card</h2>
       <div className={css.closeModal}>
         <button type="button" onClick={onClose}>
           <Icon
@@ -106,7 +106,7 @@ export default function EditCardModal({ card, onClose }) {
           <div className={css.stylePlus}>
             <Icon name="icon-plus" width="14" height="14" stroke="var(--white)" />
           </div>
-          <span className={css.buttonText}>Edit</span>
+          <span className={css.buttonText}>Add</span>
         </button>
       </form>
     </div>
