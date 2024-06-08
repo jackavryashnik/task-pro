@@ -1,4 +1,3 @@
-import React from 'react';
 import css from './WelcomePage.module.css';
 import { Link } from 'react-router-dom';
 import startMob from '../../images/start-page/start-mob.png';
@@ -8,7 +7,7 @@ import startTab2x from '../../images/start-page/start-tab@2x.png';
 import startDes from '../../images/start-page/start-des.png';
 import startDes2x from '../../images/start-page/start-des@2x.png';
 
-import icon from '../../img/icons.svg';
+import icon from '../../images/icons.svg';
 
 const WelcomePage = () => {
 
