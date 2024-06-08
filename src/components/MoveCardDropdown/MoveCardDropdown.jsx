@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { MoveCardItem } from 'components/MoveCardItem/MoveCardItem';
+import { MoveCardItem } from '../EditCardModal/EditCardModal';
 import { nanoid } from '@reduxjs/toolkit';
 import css from './MoveCardDropdown.module.css';
 
