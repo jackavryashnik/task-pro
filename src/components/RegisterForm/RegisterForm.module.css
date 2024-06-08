@@ -30,10 +30,10 @@
   color: var(--white-text);
 }
 
-.emailField {
+.field {
   margin-bottom: 14px;
 }
 
-.passwordField {
+.lastField {
   margin-bottom: 24px;
 }
