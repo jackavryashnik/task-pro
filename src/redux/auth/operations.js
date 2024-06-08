@@ -1,14 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api/users';
 
 const setAuthHeader = token => {
-	axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-}
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
 
 const clearAuthHeader = () => {
-	axios.defaults.headers.common['Authorization'] = ''
-}
+  axios.defaults.headers.common['Authorization'] = '';
+};
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -18,17 +19,18 @@ export const register = createAsyncThunk(
       if (data.token) {
         const loginData = await axios.post('/auth/login', {
           email: credentials.email,
-          password: credentials.password,});
+          password: credentials.password,
+        });
 
-          setAuthHeader(loginData.data.token);
-          return loginData.data;
+        setAuthHeader(loginData.data.token);
+        return loginData.data;
       }
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -37,28 +39,23 @@ export const login = createAsyncThunk(
       const { data } = await axios.post('/auth/login', credentials);
       setAuthHeader(data.token);
       localStorage.setItem('token', data.token);
-      
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
-
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      await axios.post('/auth/logout');
-      localStorage.removeItem('token');
-      clearAuthHeader();
-
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post('/auth/logout');
+    localStorage.removeItem('token');
+    clearAuthHeader();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
-)
+});
 
 export const updateUser = createAsyncThunk(
   'auth/updateUser',
@@ -70,15 +67,14 @@ export const updateUser = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
-
+);
 
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, thunkAPI) => {
     const accessToken = localStorage.getItem('token');
     if (!accessToken) {
-      return thunkAPI.rejectWithValue("");
+      return thunkAPI.rejectWithValue('');
     }
     setAuthHeader(accessToken);
     try {
@@ -89,7 +85,7 @@ export const getCurrentUser = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const changeTheme = createAsyncThunk(
   'auth/userTheme',
@@ -100,5 +96,5 @@ export const changeTheme = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  } 
-)
+  }
+);
