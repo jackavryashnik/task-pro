@@ -18,9 +18,9 @@ const Header = () => {
     <header className={css.header}>
       <div className={css.menuBtnContainer}>
         <button onClick={handleMenuToggle} className={css.menuButton}>
-          <svg className={css.menuIcon}>
-            <use href={`${icons}#icon-burger-menu`}></use>
-          </svg>
+          <svg className={css.svgMenu} width={24} height={24}>
+          <use href={`${icons}#icon-burger-menu`}></use>
+        </svg>
         </button>
       </div>
       <div className={css.rightSection}>
@@ -30,9 +30,9 @@ const Header = () => {
             className={css.themeButton}
           >
             Theme
-            <svg className={css.chevronIcon}>
-              <use href={`${icons}#icon-chevron-down`}></use>
-            </svg>
+            <svg className={css.chevronIcon} width={16} height={16}>
+          <use href={`${icons}#icon-chevron-down`}></use>
+        </svg>
           </button>
           {selectorOpen && (
             <div className={css.themeSelector}>
@@ -47,7 +47,8 @@ const Header = () => {
         <div className={css.userInfo}>
           <span className={css.userName}>Ivetta</span>
           <img
-            src="/src/images/bg-mobile/cloudy.webp"
+          // заглушка
+            src="/src/images/cactus.png"
             alt="User Avatar"
             className={css.avatar}
           />
