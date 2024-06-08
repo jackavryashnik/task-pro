@@ -4,10 +4,12 @@ import css from './Sidebar.module.css';
 import icon from '../../images/icons.svg';
 import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
+import clsx from 'clsx';
 
-export default function Sidebar() {
+export default function Sidebar({isHidden}) {
+
   return (
-    <div className={css.containerBackground}>
+    <div className={clsx([css.containerBackground, isHidden && css.hidden])}>
       <div className={css.container}>
         <LogoComponent />
 

@@ -2,12 +2,11 @@ import { useState } from 'react';
 import css from './Header.module.css';
 import icons from '../../images/icons.svg';
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Header = ({isHidden, setter}) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
 
   const handleMenuToggle = () => {
-    setMenuOpen(!menuOpen);
+    setter(!isHidden);
   };
 
   const handleThemeSelectorToggle = () => {
