@@ -5,6 +5,7 @@ import Board from '../Board/Board';
 
 export default function BoardList() {
   const { boards } = useTasks();
+  console.log(boards);
   return (
     <>
       {boards.length > 0 && (
