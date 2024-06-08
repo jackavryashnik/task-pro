@@ -25,7 +25,7 @@ const handleRejected = (state, action) => {
 const slice = createSlice({
   name: 'tasks',
   initialState: {
-    boards: [],
+    board: [],
     selectedBoard: null,
     columns: [],
     tasks: [],
@@ -38,7 +38,7 @@ const slice = createSlice({
       .addCase(fetchBoards.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.boards = action.payload.board;
+        state.board = action.payload.board;
         state.columns = action.payload.columns;
         state.tasks = action.payload.tasks;
       })
@@ -56,24 +56,24 @@ const slice = createSlice({
       .addCase(addBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.boards = state.boards.push(action.payload.board);
+        state.board = state.board.push(action.payload.board);
       })
       .addCase(addBoard.rejected, handleRejected)
       .addCase(editBoard.pending, handlePending)
       .addCase(editBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const itemIndex = state.boards.findIndex(board => {
+        const itemIndex = state.board.findIndex(board => {
           board.id === action.payload.id;
         });
-        state.boards[itemIndex] = action.payload;
+        state.board[itemIndex] = action.payload;
       })
       .addCase(editBoard.rejected, handleRejected)
       .addCase(deleteBoard.pending, handlePending)
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.boards = state.boards.filter(board => {
+        state.board = state.board.filter(board => {
           board.id !== action.payload.id;
           state.columns = [];
           state.tasks = [];
@@ -104,7 +104,7 @@ const slice = createSlice({
         state.columns = state.columns.filter(column => {
           column.id !== action.payload.id;
         });
-        // state.tasks = [];
+        state.tasks = [];
       })
       .addCase(deleteColumn.rejected, handleRejected)
       .addCase(createTask.pending, handlePending)
