@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 70px;
+}
+.logo {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  color: var(--white-text);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    margin-bottom: 60px;
+  }
+}

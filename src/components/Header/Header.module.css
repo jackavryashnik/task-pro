@@ -1,0 +1,158 @@
+/* MOBILE FIRST */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #161616;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menuBtnContainer {
+  display: flex;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+.menuIcon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.chevronIcon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: rgba(255, 255, 255, 0.8);
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* THEME */
+
+.themeSelectorContainer {
+  position: relative;
+  margin-right: 14px;
+}
+
+.themeButton {
+  border: none;
+  cursor: pointer;
+  background-color: #161616;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+}
+
+.themeSelector {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #161616;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.themeSelector ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.themeSelector li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.themeSelector li:hover {
+  color: #bedbb0;
+}
+/* THEME END*/
+
+/* UserInfo */
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+.userName {
+  font-size: 14px;
+  color: #fff;
+  padding: 8px;
+}
+
+/* Responsive Styles */
+
+/* Mobile First */
+@media (max-width: 374px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Mobile Adapted */
+@media (min-width: 375px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 375px;
+    min-height: 60px;
+  }
+  
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 768px;
+    min-height: 68px;
+  }
+
+  /* SVG Burger Menu */
+  .svgMenu{
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 1180px;
+  }
+
+  /* HIDE ICON MENU for Desktop */
+  .menuBtnContainer {
+    display: none;
+  }
+}

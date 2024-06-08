@@ -12,19 +12,9 @@
   color: var(--white-text);
 }
 
-.input:hover,
-.input:focus {
-  border-color: var(--green-btn-hover);
-}
-
-@media screen and (min-width: 375px) {
-  .input {
-    width: 287px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .input {
-    width: 334px;
+@media screen and (min-width: 1024px) {
+  .input:hover,
+  .input:focus {
+    border-color: var(--green-btn-hover);
   }
 }
