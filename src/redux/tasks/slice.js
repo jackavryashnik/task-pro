@@ -12,6 +12,7 @@ import {
   fetchBoards,
   fetchOneBoard,
 } from './operations';
+import { logout } from '../auth/operations';
 
 const handlePending = state => {
   state.loading = true;
@@ -132,7 +133,13 @@ const slice = createSlice({
           task.id !== action.payload.id;
         });
       })
-      .addCase(deleteTask.rejected, handleRejected);
+      .addCase(deleteTask.rejected, handleRejected)
+      .addCase(logout.pending, handlePending)
+      .addCase(logout.fulfilled, state => {
+        state.loading = false;
+        state.error = null;
+        state.board = [];
+      });
   },
 });
 
