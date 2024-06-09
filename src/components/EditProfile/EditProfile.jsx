@@ -8,16 +8,54 @@ import { useForm } from 'react-hook-form';
 
 import icons from '../../images/icons.svg';
 import avatar from '../../images/bg-mobile/abstraction.webp';
+import { useEffect, useState } from 'react';
+import user from '../../user.json';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../redux/auth/operations.js'
 
 export const EditProfile = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const dispatch = useDispatch();
+
+  const [currentUser, setCurrentUser] = useState(user);
+  const {register, formState: { errors }, handleSubmit, setValue} = useForm(currentUser);
+  const [updatedAvatar, setUpdatedAvatar] = useState(null);
+
+  useEffect(() => {
+    // запит на поточного юзера
+
+    // записуємо юзера в стан
+    setCurrentUser(user);
+
+    // записуємо дані з бекенду в поля форми
+    setValue('name', currentUser.name);
+    setValue('email', currentUser.email);
+    setValue('password', '');
+  }, [setValue, currentUser]);
+
+
+  const handleChange = (event) => {
+    setUpdatedAvatar(event.target.file[0]);
+  }
+
 
   const submitForm = data => {
-    console.log(data);
+    // Створення об'єкта для збереження змінених даних
+    const changedData = {};
+
+    // Перевірка полів форми на зміни порівняно з оригінальними даними користувача
+    if (data.name !== currentUser.name) {
+      changedData.name = data.name;
+    }
+    if (data.email !== currentUser.email) {
+      changedData.email = data.email;
+    }
+    if (data.password) {
+      changedData.password = data.password;
+    }
+
+    console.log(changedData);
+
+    dispatch(updateUser(updatedAvatar));
   };
 
   return (
@@ -37,7 +75,11 @@ export const EditProfile = () => {
             <svg className={css.icon} width={10} height={10}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
-            <input className={css.input} type="file" aria-label="Add an avatar" />
+            <input onChange={handleChange}
+              className={css.input}
+              type="file"
+              aria-label="Add an avatar"
+            />
           </label>
         </div>
 
@@ -54,12 +96,12 @@ export const EditProfile = () => {
           register={register}
         />
         <PasswordInput
-          placeholder={'ivetta1999.23'}
+          placeholder={'Enter a new password'}
           ariaLabel={'Enter a new password'}
           errors={errors}
           register={register}
         />
-        <Button type={"submit"}>Send</Button>
+        <Button type={'submit'}>Send</Button>
       </form>
     </div>
   );
