@@ -9,16 +9,10 @@ const HomePage = () => {
 
   return (
     <div className={css.homePage}>
-      <div>
-        <Sidebar isHidden={isHidden} />
-      </div>
-      <div>
-        <div>
-          <Header isHidden={isHidden} setter={setIsVisible} />
-        </div>
-        <div>
-          <ScreenPage />
-        </div>
+      <Sidebar isHidden={isHidden} />
+      <div className={css.main}>
+        <Header isHidden={isHidden} setter={setIsVisible} />
+        <ScreenPage />
       </div>
     </div>
   );
