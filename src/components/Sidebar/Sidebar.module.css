@@ -1,4 +1,7 @@
 .containerBackground {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   max-width: 225px;
   background-color: var(--black);
 }

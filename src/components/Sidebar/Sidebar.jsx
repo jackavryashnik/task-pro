@@ -20,9 +20,9 @@ export default function Sidebar() {
             </svg>
           </button>
         </div>
+        <BoardList />
       </div>
 
-      <BoardList />
       <div className={css.container}>
         <CustomSupport />
         <Logout />

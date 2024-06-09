@@ -23,17 +23,16 @@ function App() {
           <Routes>
             <Route path="/welcome" element={<WelcomePage />} />
             <Route
-              path="/contacts"
+              path="/auth/:authType"
               element={
-                <RestrictedRoute redirectTo="/login" component={<HomePage />} />
+                <RestrictedRoute redirectTo="/home" component={<AuthPage />} />
               }
             />
-            <Route path="/auth/:authType" element={<AuthPage />} />
             <Route
               path="/home"
               element={
                 <PrivateRout
-                  redirectTo="/auth/login"
+                  redirectTo="/welcome"
                   component={<HomePage />}
                 />
               }
@@ -41,7 +40,7 @@ function App() {
               <Route
                 path="/home/:boardID"
                 element={
-                  <PrivateRout redirectTo="/login" component={<TaskBoard />} />
+                  <PrivateRout redirectTo="/welcome" component={<TaskBoard />} />
                 }
               />
             </Route>
