@@ -4,12 +4,10 @@ import css from './Sidebar.module.css';
 import icon from '../../images/icons.svg';
 import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
-import clsx from 'clsx';
 
-export default function Sidebar({isHidden}) {
-
+export default function Sidebar() {
   return (
-    <div className={clsx([css.containerBackground, isHidden && css.hidden])}>
+    <div className={css.containerBackground}>
       <div className={css.container}>
         <LogoComponent />
 
@@ -22,9 +20,9 @@ export default function Sidebar({isHidden}) {
             </svg>
           </button>
         </div>
+        <BoardList />
       </div>
 
-      <BoardList />
       <div className={css.container}>
         <CustomSupport />
         <Logout />

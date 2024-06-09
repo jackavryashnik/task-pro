@@ -1,0 +1,44 @@
+.homePage {
+  display: flex;
+  position: relative;
+}
+
+.sidebarWrapper {
+  display: flex;
+}
+
+.main {
+  flex: 1;
+}
+
+@media (max-width: 1440px) {
+  .sidebarWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+  }
+
+  .sidebarWrapper.show {
+    transform: translateX(0);
+  }
+
+  .main::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .main.showSidebar::before {
+    display: block;
+  }
+}

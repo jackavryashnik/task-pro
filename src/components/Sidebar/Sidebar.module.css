@@ -1,4 +1,7 @@
 .containerBackground {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   max-width: 225px;
   background-color: var(--black);
 }
@@ -36,10 +39,6 @@
 .btnPlus:hover,
 .btnPlus:focus {
   background-color: var(--green-btn-hover);
-}
-
-.hidden {
-  display: none;
 }
 
 @media screen and (min-width: 768px) {
