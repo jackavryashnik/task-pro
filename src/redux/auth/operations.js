@@ -15,9 +15,9 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/auth/register', credentials);
+      const { data } = await axios.post('/register', credentials);
       if (data.token) {
-        const loginData = await axios.post('/auth/login', {
+        const loginData = await axios.post('/login', {
           email: credentials.email,
           password: credentials.password,
         });
@@ -36,7 +36,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/auth/login', credentials);
+      const { data } = await axios.post('/login', credentials);
       setAuthHeader(data.token);
       localStorage.setItem('token', data.token);
 
@@ -49,7 +49,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/auth/logout');
+    await axios.post('/logout');
     localStorage.removeItem('token');
     clearAuthHeader();
   } catch (error) {
@@ -61,7 +61,7 @@ export const updateUser = createAsyncThunk(
   'auth/updateUser',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/auth/update', credentials);
+      const { data } = await axios.patch('/update', credentials);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -79,7 +79,7 @@ export const getCurrentUser = createAsyncThunk(
     setAuthHeader(accessToken);
     try {
       setAuthHeader(accessToken);
-      const { data } = await axios.get('/auth/current');
+      const { data } = await axios.get('/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -91,7 +91,7 @@ export const changeTheme = createAsyncThunk(
   'auth/userTheme',
   async (userTheme, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/auth', userTheme);
+      const { data } = await axios.patch('/update', userTheme);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
