@@ -1,14 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api/tasks';
-
-//Boards
-// taskRouter.get('/boards', taskCtrls.getAllBoards);
-// taskRouter.get('/boards/:id', taskCtrls.getOneBoard);
-// taskRouter.post('/boards', taskCtrls.createBoard);
-// taskRouter.patch('/boards/:id', taskCtrls.editBoard);
-// taskRouter.delete('/boards/:id', taskCtrls.deleteBoard);
+axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
 
 export const fetchBoards = createAsyncThunk(
   'boards/fetchBoards',
@@ -75,11 +68,6 @@ export const deleteBoard = createAsyncThunk(
   }
 );
 
-//Columns
-// taskRouter.post('/columns', taskCtrls.createColumn);
-// taskRouter.patch('/columns/:id', taskCtrls.editColumn);
-// taskRouter.delete('/columns/:id', taskCtrls.deleteColumn);
-
 export const createColumn = createAsyncThunk(
   'columns/createColumn',
   async (newColumn, thunkAPI) => {
@@ -115,11 +103,6 @@ export const deleteColumn = createAsyncThunk(
     }
   }
 );
-
-//Tasks
-// taskRouter.post('/tasks', taskCtrls.createTask);
-// taskRouter.patch('/tasks/:id', taskCtrls.editTask);
-// taskRouter.delete('/tasks/:id', taskCtrls.deleteTask);
 
 export const createTask = createAsyncThunk(
   'tasks/createTask',

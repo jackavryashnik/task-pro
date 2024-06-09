@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api/users';
+axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -15,9 +15,9 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/register', credentials);
+      const { data } = await axios.post('/users/register', credentials);
       if (data.token) {
-        const loginData = await axios.post('/login', {
+        const loginData = await axios.post('/users/login', {
           email: credentials.email,
           password: credentials.password,
         });
@@ -36,7 +36,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/login', credentials);
+      const { data } = await axios.post('/users/login', credentials);
       setAuthHeader(data.token);
       localStorage.setItem('token', data.token);
 
@@ -49,7 +49,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/logout');
+    await axios.post('/users/logout');
     localStorage.removeItem('token');
     clearAuthHeader();
   } catch (error) {
@@ -61,7 +61,7 @@ export const updateUser = createAsyncThunk(
   'auth/updateUser',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/update', credentials);
+      const { data } = await axios.patch('/users/update', credentials);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -79,7 +79,7 @@ export const getCurrentUser = createAsyncThunk(
     setAuthHeader(accessToken);
     try {
       setAuthHeader(accessToken);
-      const { data } = await axios.get('/current');
+      const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -91,7 +91,7 @@ export const changeTheme = createAsyncThunk(
   'auth/userTheme',
   async (userTheme, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/update', userTheme);
+      const { data } = await axios.patch('/users/update', userTheme);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
