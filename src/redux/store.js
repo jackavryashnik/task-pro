@@ -22,24 +22,27 @@ const tasksPersistConfig = {
 const persistedBoardsReducer = persistReducer(tasksPersistConfig, tasksReducer);
 
 const authPersistConfig = {
-  key: 'selectedBoard',
+  key: 'auth',
   storage,
-  whitelist: ['selectedBoard'],
+  whitelist: ['token', 'user', 'theme'],
 };
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 const filtersPersistConfig = {
-  key: 'selectedBoard',
+  key: 'filter',
   storage,
-  whitelist: ['selectedBoard'],
+  whitelist: ['filter'],
 };
-const persistedFiltersReducer = persistReducer(filtersPersistConfig, filtersReducer);
+const persistedFiltersReducer = persistReducer(
+  filtersPersistConfig,
+  filtersReducer
+);
 
 export const store = configureStore({
   reducer: {
     tasks: persistedBoardsReducer,
     auth: persistedAuthReducer,
-    filter: persistedFiltersReducer
+    filter: persistedFiltersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

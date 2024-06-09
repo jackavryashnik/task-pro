@@ -8,6 +8,8 @@ const CustomSupport = () => {
     <div className={css.component}>
       <img
         src={cactus}
+        width={54}
+        height={78}
         srcSet={`${cactus} 1x, ${cactus2x} 2x`}
         alt="Cactus"
         className={css.cactus}

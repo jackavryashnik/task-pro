@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import css from './MoveCardItem.module.css';
-import { chengeColumnsCard } from '../../redux/cards/cardsOperations';
-import { Icon } from '../../img/icons.svg';
+import { chengeColumnsCard } from '../../redux/tasks';
+import { Icon } from '../../images/icons.svg';
 
 export const MoveCardItem = ({ column, cardId, currentId }) => {
   const dispatch = useDispatch();

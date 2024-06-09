@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-const selectBoards = state => state.tasks.boards;
+const selectBoards = state => state.tasks.board;
 const selectColumns = state => state.tasks.columns;
 const selectTasks = state => state.tasks.tasks;
 const selectSelectedBoard = state => state.tasks.selectedBoard;

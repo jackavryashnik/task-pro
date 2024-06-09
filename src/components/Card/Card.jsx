@@ -1,4 +1,4 @@
-import { Icon } from '../../img/icons.svg';
+import { Icon } from '../../images/icons.svg';
 import Modal from 'react-modal';
 import { useState } from 'react';
 import css from './Card.module.css'; 
