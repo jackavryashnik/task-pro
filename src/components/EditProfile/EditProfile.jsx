@@ -9,36 +9,38 @@ import { Button } from '../Button/Button.jsx';
 
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getCurrentUser } from '../../redux/auth/operations.js';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/selectors.js';
+
 
 export const EditProfile = () => {
-  const dispatch = useDispatch();
+  const currentDataUser = useSelector(selectUser);
+  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
   const [currentUser, setCurrentUser] = useState(null);
-  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
   const [changedInputData, setChangedInputData] = useState({name: false, email: false, password: false})
 
   // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
-    const fetchData = async () => {
-      const user = await dispatch(getCurrentUser());
-      setCurrentUser(user.payload.data.user);
-      console.log(user.payload.data.user);
+    setCurrentUser(currentDataUser);
+    console.log(currentDataUser);
 
-      setValue('name', user.payload.data.user.name);
-      setValue('email', user.payload.data.user.email);
-      setValue('password', '');
-    }
-    fetchData();
-  }, [dispatch, setValue])
+    setValue('name', currentDataUser.name);
+    setValue('email', currentDataUser.email);
+    setValue('password', '');
+  }, [currentDataUser, setValue])
 
   const handleFileChange = (event) => {
+    setIsChangedInput(false);
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
     console.log('Selected file:', selectedFile);
+
+    if (selectedFile) {
+      setIsChangedInput(false);
+    }
   }
 
   const handleInputChange = (event) => {
@@ -64,9 +66,14 @@ export const EditProfile = () => {
           ...changedInputData,
           [inputName]: true,
         });
+        setCurrentUser({
+          ...currentUser,
+          inputName: inputValue
+        })
       }
     }
   }
+
 
   const submitForm = data => {
     // Створення об'єкта для збереження змінених даних
@@ -84,6 +91,8 @@ export const EditProfile = () => {
     }
 
     try {
+      setIsChangedInput(false);
+
       if (file) {
         const data = new FormData();
         if (changedData.name) {
@@ -100,9 +109,12 @@ export const EditProfile = () => {
 
         data.append('file', file);
 
-        console.log(`form-data: ${data}`);
+        console.log(data);
+        setIsChangedInput(true);
       } else {
+
         console.log(changedData);
+        setIsChangedInput(true);
       }
 
     } catch (error) {
@@ -171,10 +183,3 @@ export const EditProfile = () => {
     </div>
   );
 };
-
-
-  // отримання даних юзера
-  // const user = useSelector(selectUser);
-  // console.log(user);
-
-  // currentUser ? currentUser.name : 'Enter a new name'
