@@ -1,14 +1,14 @@
 import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
 
-export default function Board({ board }) {
+export default function Board({ board: { name } }) {
   return (
     <li className={css.item}>
       <div className={css.containerBoard}>
         <svg className={css.icon} width={18} height={18}>
           <use href={`${Icon}#icon-puzzle`}></use>
         </svg>
-        <p className={css.text}>{board}</p>
+        <p className={css.text}>{name}</p>
       </div>
 
       <div className={css.containerIcons}>
