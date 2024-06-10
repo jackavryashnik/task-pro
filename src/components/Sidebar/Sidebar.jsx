@@ -5,7 +5,13 @@ import icon from '../../images/icons.svg';
 import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
 
-export default function Sidebar() {
+export default function Sidebar({ toggleModal }) {
+  const onClose = () => {
+    toggleModal('');
+  };
+  const handleClick = () => {
+    toggleModal(<CustomSupport onClose={onClose} />);
+  };
   return (
     <div className={css.containerBackground}>
       <div className={css.container}>
@@ -14,7 +20,7 @@ export default function Sidebar() {
         <p className={css.boardsText}>My boards</p>
         <div className={css.createBoardBox}>
           <p className={css.createBoardText}>Create a new board</p>
-          <button className={css.btnPlus}>
+          <button className={css.btnPlus} onClick={handleClick}>
             <svg width={40} height={36}>
               <use href={`${icon}#icon-plus-with-border`}></use>
             </svg>
