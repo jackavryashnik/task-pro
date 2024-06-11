@@ -22,7 +22,9 @@ const HomePage = () => {
   }, [dispatch]);
 
   const toggleSidebar = () => {
-    setIsHidden(!isHidden);
+    if (!isModalOpen) {
+      setIsHidden(!isHidden);
+    }
   };
 
   // const toggleModal = content => {
