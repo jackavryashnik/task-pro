@@ -32,7 +32,6 @@ export const addBoard = createAsyncThunk(
   async (newBoard, thunkAPI) => {
     try {
       const { data } = await axios.post('/boards', { ...newBoard });
-      console.log(data.data.board);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -49,7 +48,6 @@ export const editBoard = createAsyncThunk(
         icon,
         background,
       });
-      console.log(data.data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
