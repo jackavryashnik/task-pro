@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { createColumn } from '../../redux/tasks/operations';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 const AddColumnModal = ({ onClose }) => {
   const [columnName, setColumnName] = useState('');
