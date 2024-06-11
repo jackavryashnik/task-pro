@@ -43,3 +43,19 @@
 .item:focus .icon {
   stroke: var(--white-text);
 }
+
+.btn {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn:hover .focusIcon,
+.btn:focus .focusIcon,
+.btn:active .focusIcon {
+  stroke: var(--white-text);
+}

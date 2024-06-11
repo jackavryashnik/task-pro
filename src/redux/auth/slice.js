@@ -39,10 +39,10 @@ const authSlice = createSlice({
       .addCase(register.pending, handlePending)
       .addCase(register.rejected, handleRejected)
       .addCase(register.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.user.name = action.payload.name;
-        state.user.theme = action.payload.theme;
-        state.user.avatarUrl = action.payload.avatarUrl;
+        state.user.email = action.payload.data.user.email;
+        state.user.name = action.payload.data.user.name;
+        state.user.theme = action.payload.data.user.theme;
+        state.user.avatarUrl = action.payload.data.user.avatarUrl;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isLoading = false;
@@ -51,15 +51,15 @@ const authSlice = createSlice({
       .addCase(login.pending, handlePending)
       .addCase(login.rejected, handleRejected)
       .addCase(login.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.user.name = action.payload.name;
-        state.user.theme = action.payload.theme;
-        state.user.avatarUrl = action.payload.avatarUrl;
+        state.user.email = action.payload.data.user.email;
+        state.user.name = action.payload.data.user.name;
+        state.user.theme = action.payload.data.user.theme;
+        state.user.avatarUrl = action.payload.data.user.avatarUrl;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
-      })
+        })
       .addCase(logout.fulfilled, state => {
         state.user = { 
           name: null,
@@ -72,21 +72,21 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.pending, handlePending)
       .addCase(getCurrentUser.rejected, handleRejected)
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.user.email = action.payload.email;
-        state.user.name = action.payload.name;
-        state.user.theme = action.payload.theme;
-        state.user.avatarUrl = action.payload.avatarUrl;
+        state.user.email = action.payload.data.user.email;
+        state.user.name = action.payload.data.user.name;
+        state.user.theme = action.payload.data.user.theme;
+        state.user.avatarUrl = action.payload.data.user.avatarUrl;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
 })  
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.user.name = action.payload.name;
-        state.user.avatarUrl = action.payload.avatarUrl;
+        state.user.name = action.payload.data.user.name;
+        state.user.avatarUrl = action.payload.data.user.avatarUrl;
         state.isLoading = false;
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
-        state.user.theme = action.payload.theme;
+        state.user.theme = action.payload.data.user.theme;
       })
   },
 });
