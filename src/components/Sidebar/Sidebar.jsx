@@ -4,13 +4,16 @@ import css from './Sidebar.module.css';
 import icon from '../../images/icons.svg';
 import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
+import CreateBoard from '../CreateBoard/CreateBoard';
+
+// import { useState } from 'react';
 
 export default function Sidebar({ toggleModal }) {
   const onClose = () => {
     toggleModal('');
   };
   const handleClick = () => {
-    toggleModal(<CustomSupport onClose={onClose} />);
+    toggleModal(<CreateBoard onClose={onClose} />);
   };
   return (
     <div className={css.containerBackground}>
