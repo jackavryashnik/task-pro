@@ -1,4 +1,4 @@
-import { Icon } from '../../images/icons.svg';
+import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
 import { useState } from 'react';
 import css from './Card.module.css'; 
@@ -71,16 +71,32 @@ export default function Card({ card }) {
         </div>
         <div className={css.cardButtons}>
           <button type="button" className={`${css.bell} ${bell ? css.active : ''}`}>
-            <Icon name="icon-bell" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-bell`}></use> 
+             </svg> 
           </button>
           <button type="button" className={css.button} onClick={hendleMoveCardModalOpen}>
-            <Icon name="icon-arrow-circle-broken-right" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-arrow-circle-broken-right`}></use> 
+             </svg>
           </button>
           <button type="button" className={css.button} onClick={openCardModal}>
-            <Icon name="icon-pencil" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-pencil`}></use> 
+             </svg>
           </button>
           <button type="button" className={css.button} onClick={handleDeleteCard}>
-            <Icon name="icon-trash-can" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-trash-can`}></use> 
+             </svg> 
           </button>
         </div>
       </div>

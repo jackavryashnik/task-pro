@@ -2,3 +2,4 @@
 2. https://github.com/jackavryashnik/task-pro/pull/6
 3. https://github.com/jackavryashnik/task-pro/pull/9
 4. https://github.com/jackavryashnik/task-pro/pull/23
+5. https://github.com/jackavryashnik/task-pro/pull/32
