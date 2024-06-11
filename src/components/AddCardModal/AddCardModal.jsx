@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Calendar } from '../Calendar/Calendar';
 import { Icon } from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
-import { addCard } from '../../redux/tasks';
+import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 
@@ -23,7 +23,7 @@ export default function AddCardModal({ card, onClose }) {
   });
 
   const onSubmit = values => {
-    dispatch(addCard({ values, cardId }));
+    dispatch(createTask({ values, cardId }));
     onClose();
   };
 
