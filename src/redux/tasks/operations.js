@@ -131,6 +131,18 @@ export const editTask = createAsyncThunk(
   }
 );
 
+export const moveTask = createAsyncThunk(
+  'tasks/moveTask',
+  async ({ taskId, fromColumnId, toColumnId }) => {
+    try {
+      const { data } = await axios.patch(`/tasks/${taskId}/move`, { fromColumnId, toColumnId });
+      return data.data;
+    } catch (error) {
+      throw new Error(error.message); 
+    }
+  }
+);
+
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (id, thunkAPI) => {

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import css from './MoveCardItem.module.css';
-import { chengeColumnsCard } from '../../redux/tasks';
+import { moveTask } from '../../redux/tasks/operations.js';
 import { Icon } from '../../images/icons.svg';
 
 export const MoveCardItem = ({ column, cardId, currentId }) => {
@@ -9,7 +9,7 @@ export const MoveCardItem = ({ column, cardId, currentId }) => {
   const current = _id === currentId ? css.current : '';
 
   const handleMoveCard = () => {
-    dispatch(chengeColumnsCard({ cardId, toColumnId: _id }));
+    dispatch(moveTask({ cardId, toColumnId: _id }));
   };
 
   return (

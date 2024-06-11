@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import css from './Card.module.css'; 
 import { useDispatch } from 'react-redux';
-import { deleteCard } from '../../redux/tasks';
+import { deleteTask } from '../../redux/tasks/operations.js';
 import EditCardModal from '../EditCardModal/EditCardModal';
 import { MoveCardDropdown } from '../MoveCardDropdown/MoveCardDropdown';
 
@@ -38,7 +38,7 @@ export default function Card({ card }) {
   };
 
   const handleDeleteCard = () => {
-    dispatch(deleteCard({ cardId }));
+    dispatch(deleteTask({ cardId }));
   };
 
   const hendleMoveCardModalOpen = () => {
