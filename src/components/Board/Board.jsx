@@ -10,19 +10,22 @@ export default function Board({
   openModal,
   closeModal,
 }) {
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(true);
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    setIsEdit(true);
+    setIsEdit(false);
     openModal(
       <CreateBoard isEdit={isEdit} setter={setIsEdit} onClose={closeModal} />
     );
   };
 
   return (
-    <li className={css.item} onClick={() => dispatch(fetchOneBoard(id))}>
-      <div className={css.containerBoard}>
+    <li className={css.item}>
+      <div
+        className={css.containerBoard}
+        onClick={() => dispatch(fetchOneBoard(id))}
+      >
         <svg className={css.icon} width={18} height={18}>
           <use href={Icon + icon}></use>
         </svg>

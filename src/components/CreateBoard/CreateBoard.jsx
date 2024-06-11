@@ -18,7 +18,7 @@ const icons = [
   '#icon-hexagon',
 ];
 
-export default function CreateBoard({ onClose, isEdit }) {
+export default function CreateBoard({ onClose, isEdit, setter }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
   const inputBgId = useId();
@@ -28,6 +28,7 @@ export default function CreateBoard({ onClose, isEdit }) {
 
   const [selectedIcon, setSelectedIcon] = useState(icons[0]);
   const [selectedBackground, setSelectedBackground] = useState(backgrounds[0]);
+
   const handleSubmitCreate = e => {
     e.preventDefault();
     if (!boardName) {
@@ -46,12 +47,20 @@ export default function CreateBoard({ onClose, isEdit }) {
     e.preventDefault();
     dispatch(
       editBoard({
+        id: selectedBoard.id,
         name: boardName,
         icon: selectedIcon,
         background: selectedBackground,
       })
     );
 
+    onClose();
+  };
+
+  const handleClick = () => {
+    if (isEdit) {
+      setter(true);
+    }
     onClose();
   };
 
@@ -63,7 +72,7 @@ export default function CreateBoard({ onClose, isEdit }) {
         <h2 className={css.title}>New board</h2>
       )}
 
-      <button className={css.btnClose} type="button" onClick={onClose}>
+      <button className={css.btnClose} type="button" onClick={handleClick}>
         <svg className={css.iconX} width={18} height={18}>
           <use href={`${Icon}#icon-x-close`}></use>
         </svg>
