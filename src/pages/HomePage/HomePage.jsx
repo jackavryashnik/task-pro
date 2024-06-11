@@ -3,14 +3,21 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import ScreenPage from '../ScreensPage/ScreensPage';
 import Modal from 'react-modal';
 import css from './HomePage.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { fetchBoards } from '../../redux/tasks/operations';
 Modal.setAppElement('#root');
 
 const HomePage = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBoards());
+  }, [dispatch]);
 
   const toggleSidebar = () => {
     if (!isModalOpen) {

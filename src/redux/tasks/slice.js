@@ -39,16 +39,16 @@ const slice = createSlice({
       .addCase(fetchBoards.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.board = action.payload.board;
-        state.columns = action.payload.columns;
-        state.tasks = action.payload.tasks;
+        state.board = action.payload.boards;
+        state.columns = action.payload.column;
+        state.tasks = action.payload.task;
       })
       .addCase(fetchBoards.rejected, handleRejected)
       .addCase(fetchOneBoard.pending, handlePending)
       .addCase(fetchOneBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.selectedBoard = action.payload.board;
+        state.selectedBoard = action.payload.boardData;
         state.columns = action.payload.columns;
         state.tasks = action.payload.tasks;
       })
@@ -57,54 +57,54 @@ const slice = createSlice({
       .addCase(addBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.board = state.board.push(action.payload.board);
+        state.board.push(action.payload.board);
       })
       .addCase(addBoard.rejected, handleRejected)
       .addCase(editBoard.pending, handlePending)
       .addCase(editBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const itemIndex = state.board.findIndex(board => {
-          board.id === action.payload.id;
-        });
-        state.board[itemIndex] = action.payload;
+        const itemIndex = state.board.findIndex(
+          board => board.id === action.payload.board.id
+        );
+        state.board[itemIndex] = action.payload.board;
       })
       .addCase(editBoard.rejected, handleRejected)
       .addCase(deleteBoard.pending, handlePending)
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.board = state.board.filter(board => {
-          board.id !== action.payload.id;
-          state.columns = [];
-          state.tasks = [];
-        });
+        state.board = state.board.filter(
+          item => item.id !== action.payload.board.id
+        );
+        state.columns = [];
+        state.tasks = [];
       })
       .addCase(deleteBoard.rejected, handleRejected)
       .addCase(createColumn.pending, handlePending)
       .addCase(createColumn.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.columns = state.columns.push(action.payload);
+        state.columns.push(action.payload.column);
       })
       .addCase(createColumn.rejected, handleRejected)
       .addCase(editColumn.pending, handlePending)
       .addCase(editColumn.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const columnIndex = state.columns.findIndex(column => {
-          column.id === action.payload.id;
-        });
-        state.columns[columnIndex] = action.payload;
+        const columnIndex = state.columns.findIndex(
+          column => column.id === action.payload.column.id
+        );
+        state.columns[columnIndex] = action.payload.column;
       })
       .addCase(editColumn.rejected, handleRejected)
       .addCase(deleteColumn.pending, handlePending)
       .addCase(deleteColumn.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.columns = state.columns.filter(column => {
-          column.id !== action.payload.id;
-        });
+        state.columns = state.columns.filter(
+          column => column.id !== action.payload.column.id
+        );
         state.tasks = [];
       })
       .addCase(deleteColumn.rejected, handleRejected)
@@ -112,26 +112,26 @@ const slice = createSlice({
       .addCase(createTask.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.tasks = state.tasks.push(action.payload);
+        state.tasks.push(action.payload.task);
       })
       .addCase(createTask.rejected, handleRejected)
       .addCase(editTask.pending, handlePending)
       .addCase(editTask.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const taskIndex = state.tasks.findIndex(task => {
-          task.id === action.payload.id;
-        });
-        state.tasks[taskIndex] = action.payload;
+        const taskIndex = state.tasks.findIndex(
+          task => task.id === action.payload.task.id
+        );
+        state.tasks[taskIndex] = action.payload.task;
       })
       .addCase(editTask.rejected, handleRejected)
       .addCase(deleteTask.pending, handlePending)
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.tasks = state.tasks.filter(task => {
-          task.id !== action.payload.id;
-        });
+        state.tasks = state.tasks.filter(
+          task => task.id !== action.payload.task.id
+        );
       })
       .addCase(deleteTask.rejected, handleRejected)
       .addCase(logout.pending, handlePending)
@@ -139,6 +139,8 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = [];
+        state.columns = [];
+        state.tasks = [];
       })
       .addCase(logout.rejected, handleRejected);
   },
