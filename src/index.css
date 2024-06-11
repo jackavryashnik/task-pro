@@ -75,3 +75,33 @@ img {
 input {
   outline: none;
 }
+
+body.dark {
+  --main-text-color: #fff;
+  --header-background: #161616;
+  --sidebar-background: #121212;
+  --taskboard-background: #1f1f1f;
+  --header-text-color: #ffffffcc;
+  --other-text-color: #ffffff80;
+  --accent-text-color: #bedbb0;
+}
+
+body.light {
+  --main-text-color: #161616;
+  --header-background: #fcfcfc;
+  --sidebar-background: #fff;
+  --taskboard-background: #f6f6f7;
+  --header-text-color: #161616cc;
+  --other-text-color: #16161680;
+  --accent-text-color: #bedbb0;
+}
+
+body.violet {
+  --main-text-color: #fff;
+  --header-background: #fff;
+  --sidebar-background: #5255bc;
+  --taskboard-background: #ecedfd66;
+  --header-text-color: #161616cc;
+  --other-text-color: #ffffff80;
+  --accent-text-color: #5255bc;
+}

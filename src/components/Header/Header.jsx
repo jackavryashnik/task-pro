@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import css from './Header.module.css';
 import icons from '../../images/icons.svg';
+import { useDispatch } from 'react-redux';
+import { changeTheme } from '../../redux/auth/operations';
 
-const Header = ({isHidden, setter}) => {
+const Header = ({ isHidden, setter }) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleThemeChange = theme => {
+    dispatch(changeTheme(theme));
+  };
 
   const handleMenuToggle = () => {
     setter(!isHidden);
@@ -18,8 +25,8 @@ const Header = ({isHidden, setter}) => {
       <div className={css.menuBtnContainer}>
         <button onClick={handleMenuToggle} className={css.menuButton}>
           <svg className={css.svgMenu} width={24} height={24}>
-          <use href={`${icons}#icon-burger-menu`}></use>
-        </svg>
+            <use href={`${icons}#icon-burger-menu`}></use>
+          </svg>
         </button>
       </div>
       <div className={css.rightSection}>
@@ -30,15 +37,15 @@ const Header = ({isHidden, setter}) => {
           >
             Theme
             <svg className={css.chevronIcon} width={16} height={16}>
-          <use href={`${icons}#icon-chevron-down`}></use>
-        </svg>
+              <use href={`${icons}#icon-chevron-down`}></use>
+            </svg>
           </button>
           {selectorOpen && (
             <div className={css.themeSelector}>
               <ul>
-                <li>Light</li>
-                <li>Violet</li>
-                <li>Dark</li>
+                <li onClick={handleThemeChange('light')}>Light</li>
+                <li onClick={handleThemeChange('violet')}>Violet</li>
+                <li onClick={handleThemeChange('dark')}>Dark</li>
               </ul>
             </div>
           )}
@@ -46,7 +53,7 @@ const Header = ({isHidden, setter}) => {
         <div className={css.userInfo}>
           <span className={css.userName}>Ivetta</span>
           <img
-          // заглушка
+            // заглушка
             src="/src/images/cactus.png"
             alt="User Avatar"
             className={css.avatar}
