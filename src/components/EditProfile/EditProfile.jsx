@@ -1,6 +1,5 @@
 import css from './EditProfile.module.css';
 import icons from '../../images/icons.svg';
-import avatar from '../../images/bg-mobile/abstraction.webp';
 
 import { NameInput } from '../NameInput/NameInput.jsx';
 import { EmailInput } from '../EmailInput/EmailInput.jsx';
@@ -12,17 +11,21 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToken, selectUser } from '../../redux/auth/selectors.js';
 import { updateUser } from '../../redux/auth/operations.js';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 export const EditProfile = () => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
   const token = useSelector(selectToken);
-
+  
   const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
   const [currentUser, setCurrentUser] = useState(null);
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
+
+  const avatarUrl = `https://task-pro-app-0x3n.onrender.com${currentDataUser.avatar}`;
+  console.log(avatarUrl);
 
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
@@ -31,7 +34,7 @@ export const EditProfile = () => {
   useEffect(() => {
     setCurrentUser(currentDataUser);
 
-    if (currentUser !== null) {
+    if (currentUser) {
       setValue('name', currentUser.name);
       setValue('email', currentUser.email);
       setValue('password', '');
@@ -113,12 +116,11 @@ export const EditProfile = () => {
           formData.append('password', changedData.password);
         }
 
-        formData.append('file', file);
-
-        console.log(file);
+        formData.append('avatar', file);
 
         // відправка у форматі form-data
-        await dispatch(updateUser({credentials: formData, isFormData: true, token: token}));
+        const result = await dispatch(updateUser({credentials: formData, isFormData: true, token: token}));
+        unwrapResult(result);
         setIsChangedInput(true);
 
       } else {
@@ -126,7 +128,8 @@ export const EditProfile = () => {
         console.log(changedData);
 
         // відправка у форматі JSON
-        await dispatch(updateUser({credentials: changedData, isFormData: false, token: token}));
+        const result = await dispatch(updateUser({credentials: changedData, isFormData: false, token: token}));
+        unwrapResult(result);
         setIsChangedInput(true);
       }
     } catch (error) {
@@ -146,7 +149,7 @@ export const EditProfile = () => {
       </div>
       <form className={css.form} onSubmit={handleSubmit(submitForm)}>
         <div className={css.avatarContainer}>
-          <img className={css.avatar} src={currentUser ? currentUser.avatar : avatar} />
+          <img className={css.avatar} src={currentUser ? avatarUrl : null} />
           <label className={css.label}>
             <svg className={css.icon} width={10} height={10}>
               <use href={`${icons}#icon-plus`}></use>
@@ -155,7 +158,7 @@ export const EditProfile = () => {
               onChange={handleFileChange}
               className={css.input}
               type="file"
-              aria-label="Add an avatar"
+              aria-label="Add a new avatar"
             />
           </label>
         </div>

@@ -51,7 +51,6 @@ const authSlice = createSlice({
       .addCase(login.pending, handlePending)
       .addCase(login.rejected, handleRejected)
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload.data);
         state.user.email = action.payload.data.user.email;
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
