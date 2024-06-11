@@ -51,6 +51,7 @@ export default function LoginForm() {
           ariaLabel="User password"
           errors={errors}
           register={register}
+          required={true}
         />
       </div>
 

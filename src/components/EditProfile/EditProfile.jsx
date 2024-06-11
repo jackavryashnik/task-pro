@@ -9,51 +9,61 @@ import { Button } from '../Button/Button.jsx';
 
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors.js';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { selectToken, selectUser } from '../../redux/auth/selectors.js';
+import { updateUser } from '../../redux/auth/operations.js';
 
 export const EditProfile = () => {
+  const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
+  const token = useSelector(selectToken);
+
   const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
   const [currentUser, setCurrentUser] = useState(null);
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
-  const [changedInputData, setChangedInputData] = useState({name: false, email: false, password: false})
+
+  const initialValues = { name: false, email: false, password: false };
+  const [changedInputData, setChangedInputData] = useState(initialValues);
 
   // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
     setCurrentUser(currentDataUser);
-    console.log(currentDataUser);
 
-    setValue('name', currentDataUser.name);
-    setValue('email', currentDataUser.email);
-    setValue('password', '');
-  }, [currentDataUser, setValue])
-
-  const handleFileChange = (event) => {
+    if (currentUser !== null) {
+      setValue('name', currentUser.name);
+      setValue('email', currentUser.email);
+      setValue('password', '');
+    }
+  }, [currentDataUser, currentUser, setValue]);
+  
+  const handleFileChange = event => {
     setIsChangedInput(false);
+    setChangedInputData(initialValues);
+
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
-    console.log('Selected file:', selectedFile);
 
     if (selectedFile) {
       setIsChangedInput(false);
     }
-  }
+  };
 
-  const handleInputChange = (event) => {
-    const inputName = event.target.name
+  // відслідковування змін в інпутах (додавання зірочки, disabled кнопки)
+  const handleInputChange = event => {
+    const inputName = event.target.name;
     const inputValue = event.target.value;
 
-    if (!inputValue) {
+    // якщо рядок пустий
+    if (inputValue === '') {
       setIsChangedInput(true);
       setChangedInputData({
         ...changedInputData,
         [inputName]: false,
       });
     } else {
+      // якщо поле поточного користувача дорівнює полю форми
       if (currentUser[inputName] === inputValue) {
         setIsChangedInput(true);
         setChangedInputData({
@@ -66,16 +76,11 @@ export const EditProfile = () => {
           ...changedInputData,
           [inputName]: true,
         });
-        setCurrentUser({
-          ...currentUser,
-          inputName: inputValue
-        })
       }
     }
-  }
+  };
 
-
-  const submitForm = data => {
+  const submitForm = async data => {
     // Створення об'єкта для збереження змінених даних
     const changedData = {};
 
@@ -92,33 +97,40 @@ export const EditProfile = () => {
 
     try {
       setIsChangedInput(false);
+      setChangedInputData(initialValues);
 
       if (file) {
-        const data = new FormData();
+        const formData = new FormData();
         if (changedData.name) {
-          data.append('name', changedData.name)
+          formData.append('name', changedData.name);
         }
 
         if (changedData.email) {
-          data.append('email', changedData.email)
+          formData.append('email', changedData.email);
         }
 
         if (changedData.password) {
-          data.append('password', changedData.password)
+          formData.append('password', changedData.password);
         }
 
-        data.append('file', file);
+        formData.append('file', file);
 
-        console.log(data);
+        console.log(file);
+
+        // відправка у форматі form-data
+        await dispatch(updateUser({credentials: formData, isFormData: true, token: token}));
         setIsChangedInput(true);
-      } else {
 
+      } else {
+        
         console.log(changedData);
+
+        // відправка у форматі JSON
+        await dispatch(updateUser({credentials: changedData, isFormData: false, token: token}));
         setIsChangedInput(true);
       }
-
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -134,12 +146,13 @@ export const EditProfile = () => {
       </div>
       <form className={css.form} onSubmit={handleSubmit(submitForm)}>
         <div className={css.avatarContainer}>
-          <img className={css.avatar} src={avatar} />
+          <img className={css.avatar} src={currentUser ? currentUser.avatar : avatar} />
           <label className={css.label}>
             <svg className={css.icon} width={10} height={10}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
-            <input onChange={handleFileChange}
+            <input
+              onChange={handleFileChange}
               className={css.input}
               type="file"
               aria-label="Add an avatar"
@@ -176,9 +189,13 @@ export const EditProfile = () => {
             register={register}
             onChange={handleInputChange}
           />
-          {changedInputData.password ? <span className={css.span}>*</span> : null}
+          {changedInputData.password ? (
+            <span className={css.span}>*</span>
+          ) : null}
         </div>
-        <Button type={'submit'} disabled={isChangedInput}>Send</Button>
+        <Button type={'submit'} disabled={isChangedInput}>
+          Send
+        </Button>
       </form>
     </div>
   );
