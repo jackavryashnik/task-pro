@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import css from './MoveCardItem.module.css';
 import { moveTask } from '../../redux/tasks/operations.js';
-import { Icon } from '../../images/icons.svg';
+import icons from '../../images/icons.svg';
 
 export const MoveCardItem = ({ column, cardId, currentId }) => {
   const dispatch = useDispatch();
@@ -17,12 +17,11 @@ export const MoveCardItem = ({ column, cardId, currentId }) => {
       <button className={css.button} onClick={handleMoveCard}>
         {title}
       </button>
-      <Icon
-        name="icon-arrow-circle-broken-right"
-        width="16px"
-        height="16px"
-        stroke="var()"
-      />
+        <svg
+        width={16}
+        height={16}>
+            <use href={`${icons}#icon-arrow-circle-broken-right`}></use> 
+        </svg>
     </li>
   );
 };
