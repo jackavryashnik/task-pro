@@ -1,0 +1,59 @@
+.column {
+  margin-bottom: 20px;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.columnTitle {
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
+
+.columnButtons {
+  display: flex;
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  fill: #000;
+  width: 20px;
+  height: 20px;
+}
+
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.addCardButton {
+  display: flex;
+  align-items: center;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.addIcon {
+  fill: #fff;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+/* @media (max-width: 375px) {
+} */
