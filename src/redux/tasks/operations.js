@@ -20,7 +20,6 @@ export const fetchOneBoard = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const { data } = await axios.get(`/boards/${id}`);
-      console.log(data.data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

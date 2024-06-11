@@ -48,7 +48,7 @@ const slice = createSlice({
       .addCase(fetchOneBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.selectedBoard = action.payload.boardData;
+        state.selectedBoard = action.payload.board;
         state.columns = action.payload.columns;
         state.tasks = action.payload.tasks;
       })
