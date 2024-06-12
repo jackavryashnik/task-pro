@@ -24,9 +24,10 @@ export default function Sidebar({ openModal, closeModal }) {
             </svg>
           </button>
         </div>
+      </div>
+      <div className={css.listBox}>
         <BoardList openModal={openModal} closeModal={closeModal} />
       </div>
-
       <div className={css.container}>
         <CustomSupport />
         <Logout />

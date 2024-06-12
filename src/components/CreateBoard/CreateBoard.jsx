@@ -83,6 +83,7 @@ export default function CreateBoard({ onClose, isEdit, setter }) {
         type="text"
         name="title"
         placeholder="Title"
+        autoFocus
         value={boardName}
         onChange={e => {
           setBoardName(e.target.value);
