@@ -2,10 +2,10 @@ import { useId, useState } from 'react';
 import Icon from '../../images/icons.svg';
 import css from './CreateBoard.module.css';
 import { backgrounds } from '../../images/bgImages';
-import { addBoard } from '../../redux/tasks/operations';
-
+import { addBoard, editBoard } from '../../redux/tasks/operations';
 import { Button } from '../Button/Button';
 import { useDispatch } from 'react-redux';
+import { useTasks } from '../../redux/tasks/selectors';
 
 const icons = [
   '#icon-Project',
@@ -18,31 +18,61 @@ const icons = [
   '#icon-hexagon',
 ];
 
-export default function CreateBoard({ onClose }) {
+export default function CreateBoard({ onClose, isEdit, setter }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
   const inputBgId = useId();
-  const [boardName, setBoardName] = useState('');
+  const { selectedBoard } = useTasks();
+
+  const [boardName, setBoardName] = useState(isEdit ? selectedBoard.name : '');
+
   const [selectedIcon, setSelectedIcon] = useState(icons[0]);
   const [selectedBackground, setSelectedBackground] = useState(backgrounds[0]);
 
-  const handleSubmit = e => {
+  const handleSubmitCreate = e => {
     e.preventDefault();
+    if (!boardName) {
+      return alert('Required');
+    }
     dispatch(
       addBoard({
-        name: boardName,
+        name: boardName.trim(),
         icon: selectedIcon,
         background: selectedBackground,
       })
     );
     onClose();
   };
+  const handleSubmitEdit = e => {
+    e.preventDefault();
+    dispatch(
+      editBoard({
+        id: selectedBoard.id,
+        name: boardName,
+        icon: selectedIcon,
+        background: selectedBackground,
+      })
+    );
+
+    onClose();
+  };
+
+  const handleClick = () => {
+    if (isEdit) {
+      setter(true);
+    }
+    onClose();
+  };
 
   return (
     <div className={css.container}>
-      <h2 className={css.title}>New board</h2>
+      {isEdit ? (
+        <h2 className={css.title}>Edit board</h2>
+      ) : (
+        <h2 className={css.title}>New board</h2>
+      )}
 
-      <button className={css.btnClose} type="button" onClick={onClose}>
+      <button className={css.btnClose} type="button" onClick={handleClick}>
         <svg className={css.iconX} width={18} height={18}>
           <use href={`${Icon}#icon-x-close`}></use>
         </svg>
@@ -53,6 +83,7 @@ export default function CreateBoard({ onClose }) {
         type="text"
         name="title"
         placeholder="Title"
+        autoFocus
         value={boardName}
         onChange={e => {
           setBoardName(e.target.value);
@@ -118,14 +149,35 @@ export default function CreateBoard({ onClose }) {
             );
           })}
       </ul>
-      <Button type="submit" onClick={handleSubmit} className={css.btnPlus}>
-        <div className={css.svgBox}>
-          <svg className={css.iconPlus}>
-            <use href={`${Icon}#icon-plus`}></use>
-          </svg>
-        </div>
-        <p className={css.text}>Create</p>
-      </Button>
+      {isEdit ? (
+        <Button
+          type="submit"
+          onClick={handleSubmitEdit}
+          className={css.btnPlus}
+        >
+          <div className={css.svgBox}>
+            <svg className={css.iconPlus}>
+              <use href={`${Icon}#icon-plus`}></use>
+            </svg>
+          </div>
+
+          <p className={css.text}>Edit</p>
+        </Button>
+      ) : (
+        <Button
+          type="submit"
+          onClick={handleSubmitCreate}
+          className={css.btnPlus}
+        >
+          <div className={css.svgBox}>
+            <svg className={css.iconPlus}>
+              <use href={`${Icon}#icon-plus`}></use>
+            </svg>
+          </div>
+
+          <p className={css.text}>Create</p>
+        </Button>
+      )}
     </div>
   );
 }

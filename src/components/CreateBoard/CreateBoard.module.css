@@ -32,8 +32,13 @@
   border: 1px solid var(--green-btn);
   border-radius: 8px;
   box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
-  /* opacity: 0.4; */
   margin-bottom: 24px;
+  opacity: 0.4;
+  transition: opacity 250ms ease-in;
+}
+.input:hover,
+.input:focus {
+  opacity: 1;
 }
 .subheader {
   font-weight: 500;
@@ -74,8 +79,6 @@
   padding: 0;
   background-color: inherit;
   border-radius: 4px;
-
-  /* background-image: url(../../images/bg-mobile/abstraction.webp); */
 }
 
 .bg {
@@ -83,8 +86,13 @@
   border-radius: 4px;
   transition: transform 250ms ease-in;
 }
+
 .selectedBg {
-  transform: scale(1.2);
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
+    0px 0px 2px 0px rgba(232, 249, 237, 0.12),
+    0px 0px 2px 0px rgba(179, 245, 206, 0.1);
+  transform: scale(1.6);
 }
 
 .iconItem {
@@ -97,6 +105,7 @@
   position: absolute;
   opacity: 0;
 }
+
 .iconPlus {
   width: 14px;
   height: 14px;

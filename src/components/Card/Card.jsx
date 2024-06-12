@@ -1,9 +1,9 @@
-import { Icon } from '../../images/icons.svg';
+import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
 import { useState } from 'react';
 import css from './Card.module.css'; 
 import { useDispatch } from 'react-redux';
-import { deleteCard } from '../../redux/tasks';
+import { deleteTask } from '../../redux/tasks/operations.js';
 import EditCardModal from '../EditCardModal/EditCardModal';
 import { MoveCardDropdown } from '../MoveCardDropdown/MoveCardDropdown';
 
@@ -38,7 +38,7 @@ export default function Card({ card }) {
   };
 
   const handleDeleteCard = () => {
-    dispatch(deleteCard({ cardId }));
+    dispatch(deleteTask({ cardId }));
   };
 
   const hendleMoveCardModalOpen = () => {
@@ -71,16 +71,32 @@ export default function Card({ card }) {
         </div>
         <div className={css.cardButtons}>
           <button type="button" className={`${css.bell} ${bell ? css.active : ''}`}>
-            <Icon name="icon-bell" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-bell`}></use> 
+             </svg> 
           </button>
           <button type="button" className={css.button} onClick={hendleMoveCardModalOpen}>
-            <Icon name="icon-arrow-circle-broken-right" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-arrow-circle-broken-right`}></use> 
+             </svg>
           </button>
           <button type="button" className={css.button} onClick={openCardModal}>
-            <Icon name="icon-pencil" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-pencil`}></use> 
+             </svg>
           </button>
           <button type="button" className={css.button} onClick={handleDeleteCard}>
-            <Icon name="icon-trash-can" width="16" height="16" />
+             <svg
+             width={16}
+             height={16}>
+                 <use href={`${icons}#icon-trash-can`}></use> 
+             </svg> 
           </button>
         </div>
       </div>

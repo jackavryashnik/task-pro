@@ -6,14 +6,9 @@ import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
 import CreateBoard from '../CreateBoard/CreateBoard';
 
-// import { useState } from 'react';
-
-export default function Sidebar({ toggleModal }) {
-  const onClose = () => {
-    toggleModal('');
-  };
+export default function Sidebar({ openModal, closeModal }) {
   const handleClick = () => {
-    toggleModal(<CreateBoard onClose={onClose} />);
+    openModal(<CreateBoard onClose={closeModal} />);
   };
   return (
     <div className={css.containerBackground}>
@@ -29,9 +24,10 @@ export default function Sidebar({ toggleModal }) {
             </svg>
           </button>
         </div>
-        <BoardList />
       </div>
-
+      <div className={css.listBox}>
+        <BoardList openModal={openModal} closeModal={closeModal} />
+      </div>
       <div className={css.container}>
         <CustomSupport />
         <Logout />

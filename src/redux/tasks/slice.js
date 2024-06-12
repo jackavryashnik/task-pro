@@ -11,6 +11,7 @@ import {
   editTask,
   fetchBoards,
   fetchOneBoard,
+  moveTask,
 } from './operations';
 import { logout } from '../auth/operations';
 
@@ -35,6 +36,12 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(moveTask.pending, handlePending)
+      .addCase(moveTask.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(moveTask.rejected, handleRejected)
       .addCase(fetchBoards.pending, handlePending)
       .addCase(fetchBoards.fulfilled, (state, action) => {
         state.loading = false;
@@ -48,7 +55,7 @@ const slice = createSlice({
       .addCase(fetchOneBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.selectedBoard = action.payload.boardData;
+        state.selectedBoard = action.payload.board;
         state.columns = action.payload.columns;
         state.tasks = action.payload.tasks;
       })
