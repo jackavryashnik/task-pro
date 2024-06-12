@@ -67,7 +67,7 @@
   width: 68px;
   height: 68px;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .label {
@@ -92,6 +92,22 @@
 
 .input {
   display: none;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--white-text);
 }
 
 @media screen and (min-width: 375px) {

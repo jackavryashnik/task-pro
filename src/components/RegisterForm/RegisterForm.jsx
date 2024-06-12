@@ -61,6 +61,7 @@ export default function RegisterForm() {
           ariaLabel="Your password"
           errors={errors}
           register={register}
+          required={true}
         />
       </div>
 
