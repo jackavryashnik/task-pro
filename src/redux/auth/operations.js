@@ -59,15 +59,19 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 
 export const updateUser = createAsyncThunk(
   'auth/updateUser',
-  async ({ credentials, isFormData, token }, thunkAPI) => {
+  async ({ credentials, isFormData }, thunkAPI) => {
     try {
+      const accessToken = localStorage.getItem('token');
+
+      if (!accessToken) {
+        return thunkAPI.rejectWithValue('');
+      }
+
       const config = isFormData
         ? { headers: { 'Content-Type': 'multipart/form-data'} }
         : { headers: { 'Content-Type': 'application/json'} };
 
-      setAuthHeader(token);
-
-      console.log(credentials);
+      setAuthHeader(accessToken);
       
       const { data } = await axios.patch('/users/update', credentials, config);
       return data;

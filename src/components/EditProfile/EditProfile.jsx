@@ -1,5 +1,6 @@
 import css from './EditProfile.module.css';
 import icons from '../../images/icons.svg';
+import defaultAvatar from '../../images/user.jpg'
 
 import { NameInput } from '../NameInput/NameInput.jsx';
 import { EmailInput } from '../EmailInput/EmailInput.jsx';
@@ -9,38 +10,31 @@ import { Button } from '../Button/Button.jsx';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToken, selectUser } from '../../redux/auth/selectors.js';
+import { selectUser } from '../../redux/auth/selectors.js';
 import { updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 
 export const EditProfile = () => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
-  const token = useSelector(selectToken);
-  
+
   const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
-  const [currentUser, setCurrentUser] = useState(null);
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
-
-  const avatarUrl = `https://task-pro-app-0x3n.onrender.com${currentDataUser.avatar}`;
-  console.log(avatarUrl);
-
   const initialValues = { name: false, email: false, password: false };
-  const [changedInputData, setChangedInputData] = useState(initialValues);
-
+  const [changedInputData, setChangedInputData] = useState(initialValues);  
+  
   // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
-    setCurrentUser(currentDataUser);
-
-    if (currentUser) {
-      setValue('name', currentUser.name);
-      setValue('email', currentUser.email);
+    if (currentDataUser) {
+      setValue('name', currentDataUser.name);
+      setValue('email', currentDataUser.email);
       setValue('password', '');
     }
-  }, [currentDataUser, currentUser, setValue]);
-  
+
+  }, [currentDataUser, setValue]);
+
   const handleFileChange = event => {
     setIsChangedInput(false);
     setChangedInputData(initialValues);
@@ -67,7 +61,7 @@ export const EditProfile = () => {
       });
     } else {
       // якщо поле поточного користувача дорівнює полю форми
-      if (currentUser[inputName] === inputValue) {
+      if (currentDataUser[inputName] === inputValue) {
         setIsChangedInput(true);
         setChangedInputData({
           ...changedInputData,
@@ -88,10 +82,10 @@ export const EditProfile = () => {
     const changedData = {};
 
     // Перевірка полів форми на зміни порівняно з оригінальними даними користувача
-    if (data.name !== currentUser.name) {
+    if (data.name !== currentDataUser.name) {
       changedData.name = data.name;
     }
-    if (data.email !== currentUser.email) {
+    if (data.email !== currentDataUser.email) {
       changedData.email = data.email;
     }
     if (data.password) {
@@ -119,16 +113,13 @@ export const EditProfile = () => {
         formData.append('avatar', file);
 
         // відправка у форматі form-data
-        const result = await dispatch(updateUser({credentials: formData, isFormData: true, token: token}));
+        const result = await dispatch(updateUser({ credentials: formData, isFormData: true }));
         unwrapResult(result);
         setIsChangedInput(true);
-
       } else {
-        
-        console.log(changedData);
 
         // відправка у форматі JSON
-        const result = await dispatch(updateUser({credentials: changedData, isFormData: false, token: token}));
+        const result = await dispatch(updateUser({credentials: changedData, isFormData: false }));
         unwrapResult(result);
         setIsChangedInput(true);
       }
@@ -149,7 +140,7 @@ export const EditProfile = () => {
       </div>
       <form className={css.form} onSubmit={handleSubmit(submitForm)}>
         <div className={css.avatarContainer}>
-          <img className={css.avatar} src={currentUser ? avatarUrl : null} />
+          <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} alt={"Profile avatar"} />
           <label className={css.label}>
             <svg className={css.icon} width={10} height={10}>
               <use href={`${icons}#icon-plus`}></use>
@@ -165,7 +156,7 @@ export const EditProfile = () => {
 
         <div className={css.inputContainer}>
           <NameInput
-            placeholder={currentUser ? currentUser.name : 'Enter a new name'}
+            placeholder={currentDataUser ? currentDataUser.name : 'Enter a new name'}
             ariaLabel={'Enter a new name'}
             errors={errors}
             register={register}
@@ -175,7 +166,7 @@ export const EditProfile = () => {
         </div>
         <div className={css.inputContainer}>
           <EmailInput
-            placeholder={currentUser ? currentUser.email : 'Enter a new email'}
+            placeholder={currentDataUser ? currentDataUser.email : 'Enter a new email'}
             ariaLabel={'Enter a new email'}
             errors={errors}
             register={register}
