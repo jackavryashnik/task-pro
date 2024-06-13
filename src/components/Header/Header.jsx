@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import css from './Header.module.css';
 import icons from '../../images/icons.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/selectors.js';
 import { changeTheme } from '../../redux/auth/operations';
+import defaultAvatar from '../../images/user.jpg'
+import defaultAvatar2x from '../../images/user@2x.jpg'
 
 const Header = ({ isHidden, setter }) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const currentDataUser = useSelector(selectUser);
 
   const handleThemeChange = theme => {
     dispatch(changeTheme(theme));
@@ -51,13 +56,9 @@ const Header = ({ isHidden, setter }) => {
           )}
         </div>
         <div className={css.userInfo}>
-          <span className={css.userName}>Ivetta</span>
-          <img
-            // заглушка
-            src="/src/images/cactus.png"
-            alt="User Avatar"
-            className={css.avatar}
-          />
+          <span className={css.userName}>{currentDataUser.name}</span>
+          <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} srcSet={`${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`} alt={"Profile avatar"} />
+
         </div>
       </div>
     </header>
