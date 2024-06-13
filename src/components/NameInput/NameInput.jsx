@@ -2,7 +2,7 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './NameInput.module.css';
 import { useId } from 'react';
 
-export const NameInput = ({ placeholder, ariaLabel, errors, register }) => {
+export const NameInput = ({ placeholder, ariaLabel, errors, register, ...props }) => {
   const inputId = useId();
 
   return (
@@ -24,6 +24,7 @@ export const NameInput = ({ placeholder, ariaLabel, errors, register }) => {
             message: "Name cannot exceed 32 characters",
           },
         })}
+        {...props}
       />
       {errors?.name && (
         <FormErrorMessages>{errors.name.message}</FormErrorMessages>

@@ -7,15 +7,3 @@
     background-color: var(--form-error-red);
     color: var(--dull-black);;
 }
-
-@media screen and (min-width: 375px) {
-    .description {
-      width: 287px;
-    }
-  }
-  
-  @media screen and (min-width: 768px) {
-    .description {
-      width: 334px;
-    }
-  }
