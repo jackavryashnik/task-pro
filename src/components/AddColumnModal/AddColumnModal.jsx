@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createColumn } from '../../redux/tasks/operations';
+import { useTasks } from '../../redux/tasks/selectors';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
 const AddColumnModal = ({ onClose }) => {
+  const { selectedBoard } = useTasks();
   const [columnName, setColumnName] = useState('');
   const dispatch = useDispatch();
 
   const handleCreateColumn = () => {
     if (columnName.trim()) {
-      dispatch(createColumn({ name: columnName }));
+      dispatch(createColumn({ name: columnName, boardId: selectedBoard.id }));
       onClose();
       setColumnName('');
     }

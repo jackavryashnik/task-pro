@@ -2,18 +2,25 @@ import Column from '../Column/Column';
 import css from './MainDashboard.module.css';
 import { useTasks } from '../../redux/tasks/selectors';
 import icons from '../../images/icons.svg';
+import AddColumnModal from '../AddColumnModal/AddColumnModal';
 
-const MainDashboard = ({ handleClick }) => {
+const MainDashboard = ({ openModal, closeModal }) => {
   const { columns = [] } = useTasks();
 
   return (
     <div className={css.dashboard}>
       <div className={css.columns}>
         {columns.map(column => (
-          <Column key={column.id} column={column} tasks={column.tasks} />
+          <Column
+            openModal={openModal}
+            closeModal={closeModal}
+            key={column.id}
+            column={column}
+            tasks={column.tasks}
+          />
         ))}
         <button
-          onClick={() => handleClick('addColumn')}
+          onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}
           className={css.addColumnButton}
         >
           <svg className={css.addIcon} width={28} height={28}>

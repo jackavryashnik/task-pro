@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import { editColumn } from '../../redux/tasks/operations';
 import css from './EditColumnModal.module.css';
 import icons from '../../images/icons.svg';
-import Modal from 'react-modal';
-Modal.setAppElement('#root');
 
 const EditColumnModal = ({ column, onClose }) => {
   const [columnName, setColumnName] = useState(column ? column.name : '');
@@ -15,9 +13,9 @@ const EditColumnModal = ({ column, onClose }) => {
   };
 
   const handleSubmit = () => {
-    if (column && column.id) {
-      dispatch(editColumn({ id: column.id, name: columnName }));
-    }
+    // if (column && column.id) {
+    dispatch(editColumn({ id: column.id, name: columnName }));
+    // }
     onClose();
   };
 

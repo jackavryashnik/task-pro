@@ -1,12 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { deleteColumn } from '../../redux/tasks/operations';
-import Card from '../Card/Card';
+// import Card from '../Card/Card';
 import css from './Column.module.css';
 import icons from '../../images/icons.svg';
+import EditColumnModal from '../EditColumnModal/EditColumnModal';
+import AddCardModal from '../AddCardModal/AddCardModal';
+import { useTasks } from '../../redux/tasks/selectors';
 
-// исправить переменные, что такое таскиф
-const Column = ({ column, tasks, handleClick }) => {
+const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
+  const { selectedBoard } = useTasks();
+  console.log(selectedBoard);
 
   const handleDeleteColumn = () => {
     if (window.confirm('Are you sure you want to delete this column?')) {
@@ -20,7 +24,7 @@ const Column = ({ column, tasks, handleClick }) => {
         <h3 className={css.columnTitle}>{column && column.name}</h3>
         <div className={css.columnButtons}>
           <button
-            onClick={() => handleClick('editColumn')}
+            onClick={() => openModal(<EditColumnModal onClose={closeModal} />)}
             className={css.button}
           >
             <svg className={css.icon} width={24} height={24}>
@@ -35,9 +39,18 @@ const Column = ({ column, tasks, handleClick }) => {
         </div>
       </div>
       <div className={css.tasks}>
-        {tasks && tasks.map(task => <Card key={task.id} task={task} />)}
+        <ul>
+          {/* {tasks.length > 0 &&
+            tasks.map(({ ...task }) => {
+              console.log(task);
+              return <Card key={task.id} task={task} />;
+            })} */}
+        </ul>
       </div>
-      <button onClick={handleClick} className={css.addCardButton}>
+      <button
+        onClick={() => openModal(<AddCardModal onClose={closeModal} />)}
+        className={css.addCardButton}
+      >
         <svg className={css.iconPlus} width={24} height={24}>
           <use href={`${icons}#icon-plus`}></use>
         </svg>
