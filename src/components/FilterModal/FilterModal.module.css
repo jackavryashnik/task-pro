@@ -5,7 +5,7 @@
   padding: 24px;
   position: relative;
 
-  background: #151515;
+  background: var(--modal-background);
 }
 
 .closeBtn {
@@ -14,7 +14,7 @@
   top: 14px;
   background-color: transparent;
   border: none;
-  color: #fff;
+  color: var(--close-icon-color);
 }
 
 .title {
@@ -23,14 +23,14 @@
   letter-spacing: -0.02em;
   margin-bottom: 14px;
 
-  color: #fff;
+  color: var(--modal-title-color);
 }
 
 .line {
   width: 252px;
   height: 1px;
 
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--border-color);
 }
 
 .container {
@@ -44,7 +44,7 @@
   font-size: 14px;
   letter-spacing: -0.02em;
 
-  color: #fff;
+  color: var(--modal-title-color);
 }
 
 .showAll {
@@ -56,7 +56,7 @@
   background-color: transparent;
   border: none;
 
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--label-text-color);
 }
 
 .options {
@@ -70,7 +70,7 @@
 .priorityOpt {
   font-size: 12px;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--label-text-color);
 }
 
 input[type='radio'] {

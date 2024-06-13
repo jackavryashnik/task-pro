@@ -4,7 +4,7 @@
   border-radius: 8px;
   padding: 14px;
 
-  background: var(--dark);
+  background: var(--help-component-background);
 }
 
 .cactus {
@@ -17,11 +17,11 @@
   letter-spacing: -0.02em;
   margin-bottom: 18px;
 
-  color: #fff;
+  color: var(--main-text-color);
 }
 
 .brandName {
-  color: var(--green-btn);
+  color: var(--btn-background);
 }
 
 .help {
@@ -34,7 +34,7 @@
   font-weight: 500;
   font-size: 12px;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--main-text-color);
 }
 
 @media screen and (min-width: 768px) {

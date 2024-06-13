@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 225px;
-  background-color: var(--black);
+  background-color: var(--sidebar-background);
 }
 .container {
   padding: 14px;
@@ -12,25 +12,25 @@
   font-weight: 400;
   font-size: 12px;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--other-text-color);
   margin-bottom: 8px;
 }
 .createBoardBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding-top: 14px;
   padding-bottom: 14px;
 }
 .createBoardText {
-  color: var(--white-text);
+  color: var(--main-text-color);
   font-weight: 500;
   max-width: 76px;
 }
 .btnPlus {
-  background-color: var(--green-btn);
+  background-color: var(--btn-background);
   width: 40px;
   height: 36px;
   border-radius: 4px;
@@ -38,7 +38,7 @@
 }
 .btnPlus:hover,
 .btnPlus:focus {
-  background-color: var(--green-btn-hover);
+  background-color: var(--btn-hover-background);
 }
 
 @media screen and (min-width: 768px) {

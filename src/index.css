@@ -81,9 +81,23 @@ body.dark {
   --header-background: #161616;
   --sidebar-background: #121212;
   --taskboard-background: #1f1f1f;
-  --header-text-color: #ffffffcc;
-  --other-text-color: #ffffff80;
-  --accent-text-color: #bedbb0;
+  --header-text-color: rgba(255, 255, 255, 0.8);
+  --other-text-color: rgba(255, 255, 255, 0.5);
+  --btn-background: #bedbb0;
+  --btn-hover-background: #9dc888;
+  --icon-stroke-color: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --modal-background: #161616;
+  --modal-title-color: #fff;
+  --label-text-color: rgba(255, 255, 255, 0.5);
+  --btn-text-color: #161616;
+  --disabled-text-color: rgba(255, 255, 255, 0.2);
+  --calendar-border-color: rgba(255, 255, 255, 0.2);
+  --card-background: #121212;
+  --card-desc-text-color: rgba(255, 255, 255, 0.5);
+  --card-btn-color: rgba(255, 255, 255, 0.5);
+  --help-component-background: #1f1f1f;
+  --close-icon-color: #fff;
 }
 
 body.light {
@@ -92,8 +106,22 @@ body.light {
   --sidebar-background: #fff;
   --taskboard-background: #f6f6f7;
   --header-text-color: #161616cc;
-  --other-text-color: #16161680;
-  --accent-text-color: #bedbb0;
+  --other-text-color: rgba(22, 22, 22, 0.5);
+  --btn-background: #bedbb0;
+  --btn-hover-background: #9dc888;
+  --icon-stroke-color: rgba(22, 22, 22, 0.8);
+  --border-color: rgba(22, 22, 22, 0.1);
+  --modal-background: #fff;
+  --modal-title-color: #161616;
+  --label-text-color: rgba(22, 22, 22, 0.5);
+  --btn-text-color: #161616;
+  --disabled-text-color: rgba(22, 22, 22, 0.2);
+  --calendar-border-color: rgba(22, 22, 22, 0.2);
+  --card-background: #ffffff;
+  --card-desc-text-color: rgba(22, 22, 22, 0.7);
+  --card-btn-color: rgba(22, 22, 22, 0.5);
+  --help-component-background: #f6f6f7;
+  --close-icon-color: #161616;
 }
 
 body.violet {
@@ -103,5 +131,19 @@ body.violet {
   --taskboard-background: #ecedfd66;
   --header-text-color: #161616cc;
   --other-text-color: #ffffff80;
-  --accent-text-color: #5255bc;
+  --btn-background: #5255bc;
+  --btn-hover-background: #7b7ede;
+  --icon-stroke-color: rgba(22, 22, 22, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --modal-background: #fff;
+  --modal-title-color: #161616;
+  --label-text-color: rgba(22, 22, 22, 0.5);
+  --btn-text-color: #ffffff;
+  --disabled-text-color: rgba(22, 22, 22, 0.2);
+  --calendar-border-color: rgba(22, 22, 22, 0.2);
+  --card-background: #ffffff;
+  --card-desc-text-color: rgba(22, 22, 22, 0.7);
+  --card-btn-color: rgba(22, 22, 22, 0.5);
+  --help-component-background: rgba(236, 237, 253, 0.4);
+  --close-icon-color: #161616;
 }
