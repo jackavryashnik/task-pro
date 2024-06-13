@@ -1,12 +1,14 @@
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import ScreenPage from '../ScreensPage/ScreensPage';
+
 import Modal from 'react-modal';
 import css from './HomePage.module.css';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { fetchBoards } from '../../redux/tasks/operations';
+
 Modal.setAppElement('#root');
 
 const HomePage = () => {
@@ -55,7 +57,7 @@ const HomePage = () => {
         onClick={toggleSidebar}
       >
         <Header isHidden={isHidden} setter={setIsHidden} />
-        <ScreenPage />
+        <ScreenPage openModal={openModal} closeModal={closeModal} />
         <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}

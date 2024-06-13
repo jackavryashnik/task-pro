@@ -1,0 +1,67 @@
+/* Mobile First */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 39px 20px;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.addColumnButton {
+  display: flex;
+  align-items: center;
+  padding: 14px 78px;
+  background-color: #121212;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.addColumnButton:hover {
+  background-color: #bedbb0;
+}
+
+.addIcon {
+  margin-right: 8px;
+}
+
+/* Mobile Adapted */
+@media (min-width: 375px) {
+  .addColumnButton {
+    min-width: 335px;
+    height: 56px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .addColumnButton {
+    min-width: 334px;
+  }
+
+  .dashboard {
+    align-items: flex-start;
+    padding: 26px 32px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .addColumnButton {
+    min-width: 333px;
+  }
+
+  .dashboard {
+    align-items: flex-start;
+    padding: 10px 24px;
+  }
+}
