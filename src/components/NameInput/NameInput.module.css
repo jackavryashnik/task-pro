@@ -1,13 +1,19 @@
+.input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-box-shadow: inset 0 0 0 50px var(--noir-black);
+  -webkit-text-fill-color: var(--white-text);
+}
+
 .input {
   width: 100%;
   height: 49px;
   padding: 0 18px;
-  border: 1px solid var(--green-btn);
+  border: 1px solid var(--green-input);
   border-radius: 8px;
   outline: transparent;
 
   background-color: transparent;
-  transition: border-color, 250ms ease-in;
+  transition: border-color 250ms ease-in, outline 250ms ease-in;
 
   color: var(--white-text);
 }

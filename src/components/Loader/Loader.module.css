@@ -3,12 +3,14 @@
   justify-content: center;
   align-items: center; 
 
-  width: 100%;
-  height: 100%;
-  
-  position: fixed;
-  top: 0;
-  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: linear-gradient(
+    180deg,
+    rgba(196, 196, 196, 0) 25%,
+    #bedbb0 92.19%
+  );
 }
 
 .tripleSpinner {

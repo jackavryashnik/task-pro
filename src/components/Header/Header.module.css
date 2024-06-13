@@ -80,6 +80,9 @@
 .userInfo {
   display: flex;
   align-items: center;
+
+  background-color: inherit;
+  border: inherit;
 }
 
 .avatar {
