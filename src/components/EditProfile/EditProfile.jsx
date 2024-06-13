@@ -123,7 +123,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setIsChangedInput(true);
 
-        // closeModal();
+        closeModal();
       } else {
 
         // відправка у форматі JSON
@@ -135,10 +135,10 @@ export const EditProfile = ({ closeModal }) => {
 
         setIsChangedInput(true);
 
-        // closeModal();
+        closeModal();
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       toast.error("Error! Try again")
     }
   };
