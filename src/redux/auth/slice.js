@@ -6,6 +6,7 @@ import {
   updateUser,
   getCurrentUser,
   changeTheme,
+  needHelp
 } from './operations.js'
 
 const handlePending = state => {
@@ -43,7 +44,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
         state.user.avatar = action.payload.data.user.avatar;
-        state.token = action.payload.data.token;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -55,7 +56,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
         state.user.avatar = action.payload.data.user.avatar;
-        state.token = action.payload.data.token;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -76,7 +77,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
         state.user.avatar = action.payload.data.user.avatar;
-        state.token = action.payload.data.token;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
 })  
@@ -88,6 +89,9 @@ const authSlice = createSlice({
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.user.theme;
+      })
+      .addCase(needHelp.fulfilled, state => {
+        state.isLoading = false;
       })
   },
 });
