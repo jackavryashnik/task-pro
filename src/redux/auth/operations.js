@@ -3,8 +3,8 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
 
-const setAuthHeader = token => {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+const setAuthHeader = accessToken => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 };
 
 const clearAuthHeader = () => {
@@ -16,13 +16,13 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/register', credentials);
-      if (data.token) {
+      if (data.accessToken) {
         const loginData = await axios.post('/users/login', {
           email: credentials.email,
           password: credentials.password,
         });
 
-        setAuthHeader(loginData.data.token);
+        setAuthHeader(loginData.data.accessToken);
         return loginData.data;
       }
       return data;
@@ -37,8 +37,8 @@ export const login = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/login', credentials);
-      setAuthHeader(data.data.token);
-      localStorage.setItem('token', data.data.token);
+      setAuthHeader(data.data.accessToken);
+      localStorage.setItem('token', data.data.accessToken);
 
       return data;
     } catch (error) {
@@ -72,7 +72,7 @@ export const updateUser = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, thunkAPI) => {
-    const accessToken = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
       return thunkAPI.rejectWithValue('');
     }
