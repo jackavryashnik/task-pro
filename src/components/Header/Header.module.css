@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #161616;
+  background-color: var(--header-background);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -30,8 +30,8 @@
   width: 16px;
   height: 16px;
   margin-left: 4px;
-  fill: rgba(255, 255, 255, 0.8);
-  stroke: rgba(255, 255, 255, 0.8);
+  fill: var(--icon-stroke-color);
+  stroke: var(--icon-stroke-color);
 }
 
 .rightSection {
@@ -50,10 +50,10 @@
 .themeButton {
   border: none;
   cursor: pointer;
-  background-color: #161616;
+  background-color: none;
   font-weight: 500;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--header-text-color);
   display: flex;
   align-items: center;
 }
@@ -62,11 +62,10 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #161616;
+  /* background-color: #161616; */
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-
+  color: var(--other-text-color);
   border-radius: 4px;
   z-index: 1;
 }
@@ -83,7 +82,7 @@
 }
 
 .themeSelector li:hover {
-  color: #bedbb0;
+  color: var(--btn-background);
 }
 /* THEME END*/
 
@@ -102,7 +101,7 @@
 
 .userName {
   font-size: 14px;
-  color: #fff;
+  color: var(--main-text-color);
   padding: 8px;
 }
 
@@ -124,7 +123,6 @@
     min-width: 375px;
     min-height: 60px;
   }
-  
 }
 
 /* Tablet */
@@ -137,7 +135,7 @@
   }
 
   /* SVG Burger Menu */
-  .svgMenu{
+  .svgMenu {
     width: 32px;
     height: 32px;
   }

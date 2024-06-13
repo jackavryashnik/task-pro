@@ -1,145 +1,145 @@
 .cardBody {
-border-radius: 8px;
-width: 335px; /* змінити на width: 100%; коли стане у колонку */
-height: 154px;
-background-color: var();
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-position: relative;
-padding: 14px 20px 14px 24px;
+  border-radius: 8px;
+  width: 335px; /* змінити на width: 100%; коли стане у колонку */
+  height: 154px;
+  background-color: var(--card-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  padding: 14px 20px 14px 24px;
 }
-  
+
 .cardColor {
-position: absolute;
-border-radius: 4px 0 0 4px;
-width: 4px;
-height: 154px;
-top: 0px;
-left: 0px;
+  position: absolute;
+  border-radius: 4px 0 0 4px;
+  width: 4px;
+  height: 154px;
+  top: 0px;
+  left: 0px;
 }
-  
+
 .cardTitle {
-text-align: left;
-font-family: 'Poppins-SemiBold';
-font-size: 14px;
-letter-spacing: -0.02em;
-color: var();
-margin-bottom: 8px;
+  text-align: left;
+  font-family: 'Poppins-SemiBold';
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--modal-title-color);
+  margin-bottom: 8px;
 }
-  
+
 .cardDescription {
-text-align: left;
-font-size: 12px;
-line-height: 1.33333;
-letter-spacing: -0.02em;
-color: var();
-width: 290px;
-height: 38px;
-overflow: hidden; 
-text-overflow: ellipsis; 
-margin-bottom: 14px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.33333;
+  letter-spacing: -0.02em;
+  color: var(--card-desc-text-color);
+  width: 290px;
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 14px;
 }
-  
+
 .cardSolid {
-border: 1px solid var();
-margin-bottom: 14px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 14px;
 }
 
 .cardDetals {
-display: flex;
-align-items: center;
-justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cardInformation {
-display: flex;
+  display: flex;
 }
 
 .priority {
-display: flex;
-flex-direction: column;
-margin-right: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 14px;
 }
 
 .priorityDetals {
-display: flex;
+  display: flex;
 }
 
 .priorityTitle {
-text-align: left;
-font-size: 8px;
-letter-spacing: -0.02em;
-color: var();
-margin-bottom: 4px;
+  text-align: left;
+  font-size: 8px;
+  letter-spacing: -0.02em;
+  color: var(--label-text-color);
+  margin-bottom: 4px;
 }
 
 .priorityColor {
-border-radius: 100%;
-width: 12px;
-height: 12px;
-margin-right: 4px;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
 }
 
 .priorityTipe {
-font-size: 10px;
-letter-spacing: -0.02em;
-color: var();
+  font-size: 10px;
+  letter-spacing: -0.02em;
+  color: var(--modal-title-color);
 }
 
 .priorityTipe:first-letter {
-text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .deadline {
-display: flex;
-flex-direction: column;
-margin-right: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 14px;
 }
 
 .deadlineTitle {
-text-align: left;
-font-size: 8px;
-letter-spacing: -0.02em;
-color: var();
-margin-bottom: 4px;
+  text-align: left;
+  font-size: 8px;
+  letter-spacing: -0.02em;
+  color: var(--label-text-color);
+  margin-bottom: 4px;
 }
 
 .deadlineDate {
-text-align: left;
-font-size: 10px;
-letter-spacing: -0.02em;
-color: var();
+  text-align: left;
+  font-size: 10px;
+  letter-spacing: -0.02em;
+  color: var(--modal-title-color);
 }
 
 .cardButtons {
-display: flex;
-gap: 8px;
-stroke: var(); 
+  display: flex;
+  gap: 8px;
+  stroke: var(--card-btn-color);
 }
 
 .cardButtons button {
-margin: 0;
-padding: 0;
-border: none;
-background: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .bell {
-stroke: none;
+  stroke: none;
 }
 
 .bell.active {
-stroke: var();
+  stroke: var(--btn-background);
 }
 
 .button {
-cursor: pointer;
-transition: var();
-stroke: var();
+  cursor: pointer;
+  transition: var();
+  stroke: var(--card-btn-color);
 }
 
 .button:hover,
 .button:focus {
-stroke: var();
+  stroke: var(--btn-background);
 }

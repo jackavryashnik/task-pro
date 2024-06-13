@@ -1,8 +1,8 @@
 .moveList {
-display: flex;
-flex-direction: column;
-justify-content: center;
-border-radius: 8px;
-background-color: var();
-padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var();
+  padding: 10px;
 }

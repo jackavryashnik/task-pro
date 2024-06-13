@@ -8,15 +8,15 @@
 }
 .text {
   font-weight: 500;
-  color: var(--white-text);
+  color: var(--main-text-color);
 }
 .icon {
-  stroke: var(--green-btn);
+  stroke: var(--btn-background);
   transition: transform 200ms ease;
 }
 .icon:hover,
 .icon:focus {
-  stroke: var(--green-btn-hover);
+  stroke: var(--btn-hover-background);
 }
 .button {
   display: flex;
