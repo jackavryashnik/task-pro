@@ -14,6 +14,7 @@ const AddColumnModal = ({ onClose }) => {
     if (columnName.trim()) {
       dispatch(createColumn({ name: columnName }));
       onClose();
+      setColumnName('');
     }
   };
 

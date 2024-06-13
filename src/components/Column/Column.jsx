@@ -1,20 +1,12 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteColumn, createTask } from '../../redux/tasks/operations';
+import { deleteColumn } from '../../redux/tasks/operations';
 import Card from '../Card/Card';
-import AddCardModal from '../AddCardModal/AddCardModal';
-import EditColumnModal from '../EditColumnModal/EditColumnModal';
 import css from './Column.module.css';
 import icons from '../../images/icons.svg';
 
-const Column = ({ column, tasks }) => {
+// исправить переменные, что такое таскиф
+const Column = ({ column, tasks, handleClick }) => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditColumn = () => {
-    setIsEditModalOpen(true);
-  };
 
   const handleDeleteColumn = () => {
     if (window.confirm('Are you sure you want to delete this column?')) {
@@ -22,28 +14,15 @@ const Column = ({ column, tasks }) => {
     }
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCloseEditModal = () => {
-    setIsEditModalOpen(false);
-  };
-
-  const handleAddTask = values => {
-    dispatch(createTask({ ...values, columnId: column.id }));
-  };
-
   return (
     <div className={css.column}>
       <div className={css.columnHeader}>
-        <h3 className={css.columnTitle}>{column.name}</h3>
+        <h3 className={css.columnTitle}>{column && column.name}</h3>
         <div className={css.columnButtons}>
-          <button onClick={handleEditColumn} className={css.button}>
+          <button
+            onClick={() => handleClick('editColumn')}
+            className={css.button}
+          >
             <svg className={css.icon} width={24} height={24}>
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
@@ -56,22 +35,14 @@ const Column = ({ column, tasks }) => {
         </div>
       </div>
       <div className={css.tasks}>
-        {tasks.map(task => (
-          <Card key={task.id} task={task} />
-        ))}
+        {tasks && tasks.map(task => <Card key={task.id} task={task} />)}
       </div>
-      <button onClick={handleOpenModal} className={css.addCardButton}>
+      <button onClick={handleClick} className={css.addCardButton}>
         <svg className={css.iconPlus} width={24} height={24}>
           <use href={`${icons}#icon-plus`}></use>
         </svg>
         Add another card
       </button>
-      {isModalOpen && (
-        <AddCardModal onAddTask={handleAddTask} onClose={handleCloseModal} />
-      )}
-      {isEditModalOpen && (
-        <EditColumnModal column={column} onClose={handleCloseEditModal} />
-      )}
     </div>
   );
 };
