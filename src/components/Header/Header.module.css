@@ -1,5 +1,3 @@
-/* MOBILE FIRST */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -20,15 +18,7 @@
   display: block;
 }
 
-.menuIcon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-}
-
 .chevronIcon {
-  width: 16px;
-  height: 16px;
   margin-left: 4px;
   fill: var(--icon-stroke-color);
   stroke: var(--icon-stroke-color);
