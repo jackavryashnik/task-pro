@@ -55,7 +55,7 @@ const HomePage = () => {
         onClick={toggleSidebar}
       >
         <Header isHidden={isHidden} setter={setIsHidden} />
-        <ScreenPage toggleModal={toggleModal} />
+        <ScreenPage openModal={openModal} />
         <Modal
           isOpen={isModalOpen}
           onRequestClose={closeModal}

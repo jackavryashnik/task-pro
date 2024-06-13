@@ -8,11 +8,11 @@ import EditColumnModal from '../../components/EditColumnModal/EditColumnModal';
 // import Card from '../../components/Card/Card';
 import Column from '../../components/Column/Column';
 
-const ScreensPage = ({ toggleModal }) => {
+const ScreensPage = ({ openModal }) => {
   const { boardName } = useParams();
 
   const onClose = () => {
-    toggleModal('');
+    openModal('');
   };
 
   // нужно добавить сюда AddCardModal и EditCardModal через switch
@@ -23,7 +23,7 @@ const ScreensPage = ({ toggleModal }) => {
     } else if (modalType === 'editColumn') {
       content = <EditColumnModal onClose={onClose} />;
     }
-    toggleModal(content);
+    openModal(content);
   };
 
   return (
