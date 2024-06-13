@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import PrivateRout from './PrivateRoute/PrivateRoute';
 import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 import { selectIsRefreshing, selectUserTheme } from '../redux/auth/selectors';
+import { Loader } from './Loader/Loader';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
@@ -25,9 +26,9 @@ function App() {
   return (
     <>
       {isRefreshing ? (
-        <p>Loading...</p>
+        <Loader />
       ) : (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<RestrictedRoute redirectTo="/home" component={<WelcomePage />} />} />
             <Route path="/welcome" element={<WelcomePage />} />

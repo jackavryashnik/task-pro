@@ -4,6 +4,7 @@ import { Button } from '../../components/Button/Button';
 import cactus from '../../images/cactus.png';
 import cactus2x from '../../images/cactus@2x.png';
 import css from './NotFoundPage.module.css';
+import { EditProfile } from '../../components/EditProfile/EditProfile';
 
 const NotFoundPage = () => {
   const [counter, setCounter] = useState(10);
@@ -16,11 +17,11 @@ const NotFoundPage = () => {
 
   return (
     <div className={css.page}>
-      
       <h2 className={css.subtitle}>
         Oops! The page you requested could not be found.
       </h2>
       <div className={css.titleContainer}>
+        <EditProfile />
         <h1 className={css.title}>
           4
           <img
