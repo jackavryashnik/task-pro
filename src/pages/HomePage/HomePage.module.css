@@ -1,6 +1,7 @@
 .homePage {
   display: flex;
   position: relative;
+  height: 100vh;
 }
 
 .sidebarWrapper {
@@ -13,7 +14,7 @@
 
 .overlay {
   position: fixed;
-  z-index: 999;
+  z-index: 9999;
   width: 100%;
   height: 100%;
   top: 0;
@@ -21,6 +22,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 .modal {
+  z-index: 999999;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -30,7 +32,7 @@
   outline: none;
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 768px) {
   .sidebarWrapper {
     position: fixed;
     top: 0;
@@ -59,5 +61,12 @@
 
   .main.showSidebar::before {
     display: block;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebarWrapper {
+    transform: none;
+    position: relative;
   }
 }

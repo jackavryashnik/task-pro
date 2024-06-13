@@ -1,0 +1,132 @@
+.container {
+  background-color: var(--noir-black);
+  position: relative;
+  max-width: 335px;
+  padding: 24px;
+  border: 1px solid rgba(190, 219, 176, 0.5);
+  border-radius: 8px;
+}
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--white-text);
+  margin-bottom: 24px;
+}
+.btnClose {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-color: inherit;
+  border: none;
+  outline: none;
+}
+.iconX {
+  stroke: var(--white);
+}
+.input {
+  background-color: var(--dark);
+  width: 287px;
+  height: 49px;
+  color: var(--white-text);
+  padding: 14px 0 14px 18px;
+  border: 1px solid var(--green-btn);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
+  margin-bottom: 24px;
+  opacity: 0.4;
+  transition: opacity 250ms ease-in;
+}
+.input:hover,
+.input:focus {
+  opacity: 1;
+}
+.subheader {
+  font-weight: 500;
+  color: var(--white-text);
+  margin-bottom: 14px;
+}
+.iconList {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.icon {
+  stroke: rgba(255, 255, 255, 0.5);
+}
+
+.selected {
+  stroke: var(--white);
+}
+.bgList {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 40px;
+  max-width: 252px;
+}
+.bgItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc((100% - 28px) / 8);
+  height: 28px;
+  padding: 0;
+  background-color: inherit;
+  border-radius: 4px;
+}
+
+.bg {
+  height: 28px;
+  border-radius: 4px;
+  transition: transform 250ms ease-in;
+}
+
+.selectedBg {
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
+    0px 0px 2px 0px rgba(232, 249, 237, 0.12),
+    0px 0px 2px 0px rgba(179, 245, 206, 0.1);
+  transform: scale(1.6);
+}
+
+.iconItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputRadio {
+  position: absolute;
+  opacity: 0;
+}
+
+.iconPlus {
+  width: 14px;
+  height: 14px;
+  stroke: var(--white-text);
+}
+.svgBox {
+  width: 28px;
+  height: 28px;
+  background-color: var(--dull-black);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnPlus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.btnPlus:hover,
+.btnPlus:focus {
+  background-color: var(--green-btn-hover);
+}

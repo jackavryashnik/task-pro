@@ -2,7 +2,7 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './EmailInput.module.css';
 import { useId } from 'react';
 
-export const EmailInput = ({ placeholder, ariaLabel, errors, register }) => {
+export const EmailInput = ({ placeholder, ariaLabel, errors, register, ...props }) => {
   const inputId = useId();
 
   return (
@@ -20,6 +20,7 @@ export const EmailInput = ({ placeholder, ariaLabel, errors, register }) => {
             message: "Enter a valid email",
           },
         })}
+        {...props}
       />
       {errors?.email && <FormErrorMessages>{errors.email.message}</FormErrorMessages>}
     </div>

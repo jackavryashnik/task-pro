@@ -3,7 +3,7 @@ import css from './PasswordInput.module.css';
 import { useId, useState } from 'react';
 import icons from '../../images/icons.svg';
 
-export const PasswordInput = ({ placeholder, ariaLabel, errors, register }) => {
+export const PasswordInput = ({ placeholder, ariaLabel, required, errors, register, ...props }) => {
   const passwordInputId = useId();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -21,7 +21,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, errors, register }) => {
           placeholder={placeholder}
           aria-label={ariaLabel}
           {...register('password', {
-            required: 'This field is required',
+            required: required ? 'This field is required' : false,
             minLength: {
               value: 8,
               message: 'The password must be at least 8 characters',
@@ -33,6 +33,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, errors, register }) => {
             validate: value =>
               !/\s/.test(value) || 'Password cannot contain spaces',
           })}
+          {...props}
         />
         <button
           className={css.button}

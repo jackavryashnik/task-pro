@@ -7,8 +7,8 @@ export const fetchBoards = createAsyncThunk(
   'boards/fetchBoards',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/boards');
-      return response.data;
+      const { data } = await axios.get('/boards');
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -19,8 +19,8 @@ export const fetchOneBoard = createAsyncThunk(
   'boards/fetchOneBoard',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.get(`/boards/${id}`);
-      return response.data;
+      const { data } = await axios.get(`/boards/${id}`);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -31,8 +31,8 @@ export const addBoard = createAsyncThunk(
   'boards/addBoard',
   async (newBoard, thunkAPI) => {
     try {
-      const response = await axios.post('/boards', { ...newBoard });
-      return response.data;
+      const { data } = await axios.post('/boards', { ...newBoard });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -41,15 +41,14 @@ export const addBoard = createAsyncThunk(
 
 export const editBoard = createAsyncThunk(
   'boards/editBoard',
-  async ({ id, name, icon, background, filter }, thunkAPI) => {
+  async ({ id, name, icon, background }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/boards/${id}`, {
+      const { data } = await axios.patch(`/boards/${id}`, {
         name,
         icon,
         background,
-        filter,
       });
-      return response.data;
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -60,8 +59,8 @@ export const deleteBoard = createAsyncThunk(
   'boards/deleteBoard',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/boards/${id}`);
-      return response.data;
+      const { data } = await axios.delete(`/boards/${id}`);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -72,8 +71,8 @@ export const createColumn = createAsyncThunk(
   'columns/createColumn',
   async (newColumn, thunkAPI) => {
     try {
-      const response = await axios.post('/columns', { ...newColumn });
-      return response.data;
+      const { data } = await axios.post('/columns', { ...newColumn });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -84,8 +83,8 @@ export const editColumn = createAsyncThunk(
   'columns/editColumn',
   async ({ id, name }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/columns/${id}`, { name });
-      return response.data;
+      const { data } = await axios.patch(`/columns/${id}`, { name });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -96,8 +95,8 @@ export const deleteColumn = createAsyncThunk(
   'columns/deleteColumn',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/columns/${id}`);
-      return response.data;
+      const { data } = await axios.delete(`/columns/${id}`);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -108,8 +107,8 @@ export const createTask = createAsyncThunk(
   'tasks/createTask',
   async (newTask, thunkAPI) => {
     try {
-      const response = await axios.post('/tasks', { ...newTask });
-      return response.data;
+      const { data } = await axios.post('/tasks', { ...newTask });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -118,12 +117,30 @@ export const createTask = createAsyncThunk(
 
 export const editTask = createAsyncThunk(
   'tasks/editTask',
-  async (updateTask, thunkAPI) => {
+  async ({ id, name, description, priority, deadline }, thunkAPI) => {
     try {
-      const response = await axios.patch(`/tasks/${updateTask.id}`, updateTask);
-      return response.data;
+      const { data } = await axios.patch(`/tasks/${id}`, {
+        id,
+        name,
+        description,
+        priority,
+        deadline,
+      });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const moveTask = createAsyncThunk(
+  'tasks/moveTask',
+  async ({ taskId, fromColumnId, toColumnId }) => {
+    try {
+      const { data } = await axios.patch(`/tasks/${taskId}/move`, { fromColumnId, toColumnId });
+      return data.data;
+    } catch (error) {
+      throw new Error(error.message); 
     }
   }
 );
@@ -132,8 +149,8 @@ export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/tasks/${id}`);
-      return response.data;
+      const { data } = await axios.delete(`/tasks/${id}`);
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
