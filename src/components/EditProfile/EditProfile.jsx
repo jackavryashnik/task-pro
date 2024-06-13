@@ -1,6 +1,8 @@
 import css from './EditProfile.module.css';
 import icons from '../../images/icons.svg';
 import defaultAvatar from '../../images/user.jpg'
+import defaultAvatar2x from '../../images/user@2x.jpg'
+
 
 import { NameInput } from '../NameInput/NameInput.jsx';
 import { EmailInput } from '../EmailInput/EmailInput.jsx';
@@ -13,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import { updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const EditProfile = () => {
   const dispatch = useDispatch();
@@ -115,16 +118,23 @@ export const EditProfile = () => {
         // відправка у форматі form-data
         const result = await dispatch(updateUser({ credentials: formData, isFormData: true }));
         unwrapResult(result);
+
+        toast.success("Changed");
+
         setIsChangedInput(true);
       } else {
 
         // відправка у форматі JSON
         const result = await dispatch(updateUser({credentials: changedData, isFormData: false }));
         unwrapResult(result);
+
+        toast.success("Changed");
+
         setIsChangedInput(true);
       }
     } catch (error) {
       console.log(error.message);
+      toast.error("Error! Try again")
     }
   };
 
@@ -140,7 +150,7 @@ export const EditProfile = () => {
       </div>
       <form className={css.form} onSubmit={handleSubmit(submitForm)}>
         <div className={css.avatarContainer}>
-          <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} alt={"Profile avatar"} />
+          <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} srcSet={`${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`} alt={"Profile avatar"} />
           <label className={css.label}>
             <svg className={css.icon} width={10} height={10}>
               <use href={`${icons}#icon-plus`}></use>
@@ -191,6 +201,8 @@ export const EditProfile = () => {
           Send
         </Button>
       </form>
+
+      <div><Toaster /></div>
     </div>
   );
 };

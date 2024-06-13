@@ -16,7 +16,6 @@ const NotFoundPage = () => {
 
   return (
     <div className={css.page}>
-      
       <h2 className={css.subtitle}>
         Oops! The page you requested could not be found.
       </h2>
