@@ -6,6 +6,7 @@ import {
   updateUser,
   getCurrentUser,
   changeTheme,
+  needHelp
 } from './operations.js'
 
 const handlePending = state => {
@@ -87,6 +88,9 @@ const authSlice = createSlice({
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.user.theme;
+      })
+      .addCase(needHelp.fulfilled, state => {
+        state.isLoading = false;
       })
   },
 });
