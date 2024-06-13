@@ -2,8 +2,13 @@ import css from './CustomSupport.module.css';
 import cactus from '../../images/cactus.png';
 import cactus2x from '../../images/cactus@2x.png';
 import icons from '../../images/icons.svg';
+import NeedHelp from '../NeedHelp/NeedHelp';
 
-const CustomSupport = () => {
+const CustomSupport = ({ openModal }) => {
+  const handleHelpClick = () => {
+    openModal(<NeedHelp closeModal={() => openModal(null)} />);
+  };
+
   return (
     <div className={css.component}>
       <img
@@ -23,10 +28,12 @@ const CustomSupport = () => {
         <svg width={20} height={20}>
           <use href={`${icons}#icon-help-circle`}></use>
         </svg>
-        <p className={css.helpText}>Need help?</p>
+        <p className={css.helpText} onClick={handleHelpClick} style={{ cursor: 'pointer' }}>Need help?</p>
       </div>
     </div>
   );
 };
 
 export default CustomSupport;
+
+

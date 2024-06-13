@@ -110,3 +110,15 @@ export const changeTheme = createAsyncThunk(
     }
   }
 );
+
+export const needHelp = createAsyncThunk(
+  'auth/needHelp',
+  async ({ email, comment }, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/support', { email, comment });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
