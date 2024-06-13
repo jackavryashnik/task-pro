@@ -13,7 +13,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
 
   return (
     <>
-      <div className={css.container}>
+      <label className={css.container} htmlFor={passwordInputId} >
         <input
           className={css.input}
           type={showPassword ? 'text' : 'password'}
@@ -45,7 +45,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
             <use className={showPassword ? css.iconShow : css.iconHide} href={`${icons}#icon-eye`}></use>
           </svg>
         </button>
-      </div>
+      </label>
       {errors?.password && (
         <FormErrorMessages>{errors.password.message}</FormErrorMessages>
       )}

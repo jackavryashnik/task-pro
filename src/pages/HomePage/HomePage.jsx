@@ -54,7 +54,7 @@ const HomePage = () => {
         className={clsx([css.main, !isHidden && css.showSidebar])}
         onClick={toggleSidebar}
       >
-        <Header isHidden={isHidden} setter={setIsHidden} />
+        <Header openModal={openModal} closeModal={closeModal} isHidden={isHidden} setter={setIsHidden} />
         <ScreenPage />
         <Modal
           isOpen={isModalOpen}

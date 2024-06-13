@@ -17,7 +17,7 @@ import { updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import toast, { Toaster } from 'react-hot-toast';
 
-export const EditProfile = () => {
+export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
 
@@ -122,6 +122,8 @@ export const EditProfile = () => {
         toast.success("Changed");
 
         setIsChangedInput(true);
+
+        // closeModal();
       } else {
 
         // відправка у форматі JSON
@@ -131,6 +133,8 @@ export const EditProfile = () => {
         toast.success("Changed");
 
         setIsChangedInput(true);
+
+        // closeModal();
       }
     } catch (error) {
       console.log(error.message);
@@ -142,7 +146,7 @@ export const EditProfile = () => {
     <div className={css.container}>
       <div className={css.descriptionContainer}>
         <h3 className={css.description}>Edit profile</h3>
-        <button className={css.buttonClose} type="button" aria-label="Close">
+        <button onClick={() => closeModal()} className={css.buttonClose} type="button" aria-label="Close">
           <svg width={18} height={18}>
             <use href={`${icons}#icon-x-close`}></use>
           </svg>

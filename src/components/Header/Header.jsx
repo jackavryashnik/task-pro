@@ -6,8 +6,9 @@ import { selectUser } from '../../redux/auth/selectors.js';
 import { changeTheme } from '../../redux/auth/operations';
 import defaultAvatar from '../../images/user.jpg'
 import defaultAvatar2x from '../../images/user@2x.jpg'
+import { EditProfile } from '../EditProfile/EditProfile.jsx';
 
-const Header = ({ isHidden, setter }) => {
+const Header = ({ isHidden, setter, openModal, closeModal }) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -55,11 +56,10 @@ const Header = ({ isHidden, setter }) => {
             </div>
           )}
         </div>
-        <div className={css.userInfo}>
+        <button className={css.userInfo} onClick={() => openModal(<EditProfile closeModal={closeModal} />)}>
           <span className={css.userName}>{currentDataUser.name}</span>
           <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} srcSet={`${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`} alt={"Profile avatar"} />
-
-        </div>
+        </button>
       </div>
     </header>
   );
