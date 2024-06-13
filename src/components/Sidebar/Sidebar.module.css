@@ -1,12 +1,11 @@
 .containerBackground {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   max-width: 225px;
   background-color: var(--black);
 }
 .container {
-  padding: 14px;
+  padding: 14px 14px 20px 14px;
 }
 .boardsText {
   font-weight: 400;
@@ -40,12 +39,34 @@
 .btnPlus:focus {
   background-color: var(--green-btn-hover);
 }
+.listBox {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 146px;
+  overflow-y: auto;
+  margin-bottom: auto;
+}
 
+.listBox::-webkit-scrollbar {
+  width: 4px;
+}
+.listBox::-webkit-scrollbar {
+  height: 10px;
+}
+.listBox::-webkit-scrollbar-thumb {
+  background-color: var(--green-btn);
+  border-radius: 4px;
+}
 @media screen and (min-width: 768px) {
   .containerBackground {
     max-width: 260px;
   }
   .container {
-    padding: 24px;
+    padding: 24px 24px 20px 24px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .listBox {
+    min-height: 126px;
   }
 }

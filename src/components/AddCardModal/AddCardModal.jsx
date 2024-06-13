@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Calendar } from '../Calendar/Calendar';
-import { Icon } from '../../images/icons.svg';
+import Calendar from '../Calendar/Calendar';
+import icons from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
@@ -38,12 +38,11 @@ export default function AddCardModal({ card, onClose }) {
       <h2 className={css.titleModal}>Add card</h2>
       <div className={css.closeModal}>
         <button type="button" onClick={onClose}>
-          <Icon
-            name="icon-x-close"
-            width="18"
-            height="18"
-            stroke="var()"
-          />
+          <svg
+            width={18}
+            height={18}>
+            <use href={`${icons}#icon-x-close`}></use>
+            </svg>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -104,7 +103,11 @@ export default function AddCardModal({ card, onClose }) {
 
         <button className={css.addButton} type="submit">
           <div className={css.stylePlus}>
-            <Icon name="icon-plus" width="14" height="14" stroke="var(--white)" />
+             <svg
+             width={14}
+             height={14}>
+                 <use href={`${icons}#icon-plus`}></use> 
+             </svg> 
           </div>
           <span className={css.buttonText}>Add</span>
         </button>

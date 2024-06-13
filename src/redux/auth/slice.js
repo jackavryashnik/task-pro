@@ -6,6 +6,7 @@ import {
   updateUser,
   getCurrentUser,
   changeTheme,
+  needHelp
 } from './operations.js'
 
 const handlePending = state => {
@@ -22,7 +23,7 @@ const initialState = {
     name: null,
     email: null,
     theme: 'null',
-    avatarUrl: null,},
+    avatar: null,},
   token: null,
   isRefreshing: false,
   isLoggedIn: false,
@@ -42,8 +43,8 @@ const authSlice = createSlice({
         state.user.email = action.payload.data.user.email;
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
-        state.user.avatarUrl = action.payload.data.user.avatarUrl;
-        state.token = action.payload.token;
+        state.user.avatar = action.payload.data.user.avatar;
+        state.token = action.payload.data.token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -54,8 +55,8 @@ const authSlice = createSlice({
         state.user.email = action.payload.data.user.email;
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
-        state.user.avatarUrl = action.payload.data.user.avatarUrl;
-        state.token = action.payload.token;
+        state.user.avatar = action.payload.data.user.avatar;
+        state.token = action.payload.data.token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -64,7 +65,7 @@ const authSlice = createSlice({
         state.user = { 
           name: null,
           email: null,
-          avatarUrl: null
+          avatar: null
         },
         state.token = null;
         state.isLoggedIn = false;
@@ -75,18 +76,22 @@ const authSlice = createSlice({
         state.user.email = action.payload.data.user.email;
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
-        state.user.avatarUrl = action.payload.data.user.avatarUrl;
-        state.token = action.payload.token;
+        state.user.avatar = action.payload.data.user.avatar;
+        state.token = action.payload.data.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
 })  
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user.name = action.payload.data.user.name;
-        state.user.avatarUrl = action.payload.data.user.avatarUrl;
+        state.user.email = action.payload.data.user.email;
+        state.user.avatar = action.payload.data.user.avatar;
         state.isLoading = false;
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload.data.user.theme;
+      })
+      .addCase(needHelp.fulfilled, state => {
+        state.isLoading = false;
       })
   },
 });

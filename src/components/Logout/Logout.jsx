@@ -14,9 +14,8 @@ export default function Logout() {
         <svg className={css.icon} width={32} height={32}>
           <use href={`${icon}#icon-login`}></use>
         </svg>
+        <p className={css.text}>Log out</p>
       </button>
-
-      <p className={css.text}>Logout</p>
     </div>
   );
 }
