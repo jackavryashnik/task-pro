@@ -89,13 +89,9 @@ export const updateUser = createAsyncThunk(
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, thunkAPI) => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-      return thunkAPI.rejectWithValue('');
-    }
     try {
-      setAuthHeader(accessToken);
       const { data } = await axios.get('/users/current');
+      
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
