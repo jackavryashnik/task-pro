@@ -127,7 +127,6 @@ export const EditProfile = ({ closeModal }) => {
       } else {
 
         // відправка у форматі JSON
-        console.log(changedData);
         const result = await dispatch(updateUser({credentials: changedData, isFormData: false }));
         unwrapResult(result);
 
