@@ -6,6 +6,7 @@
 
 .sidebarWrapper {
   display: flex;
+  height: 100%;
 }
 
 .main {
