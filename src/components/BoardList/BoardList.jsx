@@ -2,6 +2,7 @@ import { useTasks } from '../../redux/tasks/selectors';
 import css from './BoardList.module.css';
 
 import Board from '../Board/Board';
+import { NavLink } from 'react-router-dom';
 
 export default function BoardList({ openModal, closeModal }) {
   const { boards } = useTasks();
@@ -12,12 +13,17 @@ export default function BoardList({ openModal, closeModal }) {
         <ul className={css.list}>
           {boards.map(({ ...board }) => {
             return (
-              <Board
+              <NavLink
+                className={css.link}
                 key={board.id}
-                board={board}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+                to={`/home/${board.id}`}
+              >
+                <Board
+                  board={board}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              </NavLink>
             );
           })}
         </ul>

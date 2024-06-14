@@ -1,50 +1,54 @@
 .modal {
-  background-color: #1f1f1f;
+  background-color: var(--modal-background);
   border-radius: 8px;
   padding: 20px;
   width: 300px;
   max-width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  color: #fff;
 }
 
 .modal h2 {
   margin-top: 0;
   font-weight: 500;
   font-size: 18px;
-  color: #fff;
+  color: var(--modal-title-color);
 }
 
 .input {
   width: 100%;
   padding: 10px;
   margin: 20px 0;
-  background-color: #333;
-  border: 1px solid #444;
+  background-color: transparent;
+  border: 1px solid var(--btn-background);
   border-radius: 4px;
-  color: #fff;
+  color: var(--modal-title-color);
+  opacity: 0.4;
+  transition: var(--transition);
 }
 
-.saveButton {
-  background-color: #a0d468;
+@media screen and (min-width: 1024px) {
+  .input:hover,
+  .input:focus {
+    opacity: 1;
+  }
+}
+
+.addButton {
+  /* background-color: #a0d468;
   color: #000;
   border: none;
   padding: 10px;
   border-radius: 4px;
-  width: 100%;
+  width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
-.saveButton svg {
+.addButton svg {
   margin-right: 8px;
-}
-
-.saveButton:hover {
-  background-color: #8cc153;
 }
 
 .closeButton {
@@ -53,7 +57,6 @@
   right: 10px;
   background: none;
   border: none;
-  color: #fff;
   cursor: pointer;
   font-size: 16px;
 }
