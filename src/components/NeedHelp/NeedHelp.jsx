@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { needHelp } from '../../redux/auth/operations'; 
+import { selectUserEmail } from '../../redux/auth/selectors';
 import { Button } from '../Button/Button';
 import { toast } from 'react-hot-toast';
 import icons from '../../images/icons.svg';
 import css from './NeedHelp.module.css';
 
 export default function NeedHelp({ closeModal }) {  
-  const userEmail = useSelector(state => state.auth.user.email);
+  const userEmail = useSelector(selectUserEmail);
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
