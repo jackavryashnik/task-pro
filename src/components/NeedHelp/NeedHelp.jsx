@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { needHelp } from '../../redux/auth/operations'; 
 import { Button } from '../Button/Button';
 import { toast } from 'react-hot-toast';
@@ -7,9 +7,16 @@ import icons from '../../images/icons.svg';
 import css from './NeedHelp.module.css';
 
 export default function NeedHelp({ closeModal }) {  
+  const userEmail = useSelector(state => state.auth.user.email);
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userEmail) {
+      setEmail(userEmail);
+    }
+  }, [userEmail]);
 
   const validateEmail = (email) => {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -35,7 +42,7 @@ export default function NeedHelp({ closeModal }) {
       try {
         await dispatch(needHelp({ email, comment }));
         toast.success('Your request has been sent successfully');
-        setEmail('');
+        setEmail(email);
         setComment('');
         closeModal();
       } catch (error) {
@@ -63,6 +70,7 @@ export default function NeedHelp({ closeModal }) {
           value={email}
           onChange={event => setEmail(event.target.value)}
           className={css.inputCardTitle}
+          required
         />
         <textarea
           type="text"
@@ -70,6 +78,7 @@ export default function NeedHelp({ closeModal }) {
           value={comment}
           onChange={event => setComment(event.target.value)}
           className={css.inputCardDescription}
+          required
         />
         <Button className={css.needHelpButton} type="submit">Send</Button>
       </form>
