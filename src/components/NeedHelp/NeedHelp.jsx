@@ -80,6 +80,7 @@ export default function NeedHelp({ closeModal }) {
           onChange={event => setComment(event.target.value)}
           className={css.inputCardDescription}
           required
+          autoFocus
         />
         <Button className={css.needHelpButton} type="submit">Send</Button>
       </form>
