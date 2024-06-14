@@ -5,3 +5,13 @@
   align-items: start;
   justify-content: start;
 }
+
+.link {
+  display: inline-flex;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
