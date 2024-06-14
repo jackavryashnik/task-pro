@@ -27,7 +27,7 @@ export const DeleteModal = ({ closeModal, id }) => {
 
             setTimeout(() => {
               closeModal();
-            }, 1000)
+            }, 2000)
           }}
         >
           Yes
