@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
 import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
-import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
+import { fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useState } from 'react';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 export default function Board({
   board: { name, icon, id },
@@ -42,9 +43,7 @@ export default function Board({
         <button
           type="button"
           className={css.btn}
-          onClick={() => {
-            dispatch(deleteBoard(id));
-          }}
+          onClick={() => openModal(<DeleteModal closeModal={closeModal} id={id} />)}
         >
           <svg className={css.focusIcon} width={16} height={16}>
             <use href={`${Icon}#icon-trash-can`}></use>

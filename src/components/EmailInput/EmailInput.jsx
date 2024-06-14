@@ -1,14 +1,15 @@
+import clsx from 'clsx';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './EmailInput.module.css';
 import { useId } from 'react';
 
-export const EmailInput = ({ placeholder, ariaLabel, errors, register, ...props }) => {
+export const EmailInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
   const inputId = useId();
 
   return (
     <div className={css.container}>
       <input
-        className={css.input}
+        className={clsx(css.input, className)}
         type="email"
         id={inputId}
         placeholder={placeholder}

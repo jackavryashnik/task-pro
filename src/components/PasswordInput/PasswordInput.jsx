@@ -2,8 +2,9 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './PasswordInput.module.css';
 import { useId, useState } from 'react';
 import icons from '../../images/icons.svg';
+import clsx from 'clsx';
 
-export const PasswordInput = ({ placeholder, ariaLabel, required, errors, register, ...props }) => {
+export const PasswordInput = ({ placeholder, ariaLabel, required, errors, register, className, ...props }) => {
   const passwordInputId = useId();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -15,7 +16,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
     <>
       <label className={css.container} htmlFor={passwordInputId} >
         <input
-          className={css.input}
+          className={clsx(css.input, className)}
           type={showPassword ? 'text' : 'password'}
           id={passwordInputId}
           placeholder={placeholder}
