@@ -11,3 +11,5 @@ export default function LogoComponent() {
     </div>
   );
 }
+
+

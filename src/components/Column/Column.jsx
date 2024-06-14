@@ -24,15 +24,19 @@ const Column = ({ column, openModal, closeModal }) => {
         <h3 className={css.columnTitle}>{column && column.name}</h3>
         <div className={css.columnButtons}>
           <button
-            onClick={() => openModal(<EditColumnModal onClose={closeModal} />)}
+            onClick={() =>
+              openModal(
+                <EditColumnModal column={column} onClose={closeModal} />
+              )
+            }
             className={css.button}
           >
-            <svg className={css.icon} width={24} height={24}>
+            <svg className={css.iconEdit} width={24} height={24}>
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
           </button>
           <button onClick={handleDeleteColumn} className={css.button}>
-            <svg className={css.icon} width={24} height={24}>
+            <svg className={css.iconDel} width={24} height={24}>
               <use href={`${icons}#icon-trash-can`}></use>
             </svg>
           </button>

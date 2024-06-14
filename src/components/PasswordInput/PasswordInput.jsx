@@ -1,7 +1,7 @@
-import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './PasswordInput.module.css';
-import { useId, useState } from 'react';
 import icons from '../../images/icons.svg';
+import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
+import { useId, useState } from 'react';
 import clsx from 'clsx';
 
 export const PasswordInput = ({ placeholder, ariaLabel, required, errors, register, className, ...props }) => {

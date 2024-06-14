@@ -44,6 +44,7 @@ export default function LoginForm() {
           ariaLabel="User email"
           errors={errors}
           register={register}
+          className={css.color}
         />
       </div>
 
@@ -54,6 +55,7 @@ export default function LoginForm() {
           errors={errors}
           register={register}
           required={true}
+          className={css.color}
         />
       </div>
 

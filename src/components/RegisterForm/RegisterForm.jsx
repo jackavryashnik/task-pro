@@ -46,6 +46,7 @@ export default function RegisterForm() {
           ariaLabel="Your name"
           errors={errors}
           register={register}
+          className={css.color}
         />
       </div>
 
@@ -55,6 +56,7 @@ export default function RegisterForm() {
           ariaLabel="Your email"
           errors={errors}
           register={register}
+          className={css.color}
         />
       </div>
 
@@ -65,6 +67,7 @@ export default function RegisterForm() {
           errors={errors}
           register={register}
           required={true}
+          className={css.color}
         />
       </div>
 

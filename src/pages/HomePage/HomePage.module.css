@@ -67,7 +67,6 @@
 
 @media (min-width: 1440px) {
   .sidebarWrapper {
-    width: calc(100% - 260px);
     transform: none;
     position: relative;
   }
