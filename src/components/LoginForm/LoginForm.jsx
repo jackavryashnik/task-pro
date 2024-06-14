@@ -55,7 +55,9 @@ export default function LoginForm() {
         />
       </div>
 
-      <Button type="submit">Log In Now</Button>
+      <Button type="submit" className={css.loginButton}>
+        Log In Now
+      </Button>
     </form>
   );
 }

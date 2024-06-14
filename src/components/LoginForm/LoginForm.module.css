@@ -37,3 +37,12 @@
 .passwordField {
   margin-bottom: 24px;
 }
+
+.loginButton {
+  background-color: var(--green-btn);
+  color: #161616;
+}
+
+.loginButton:hover {
+  background-color: var(--green-btn-hover);
+}

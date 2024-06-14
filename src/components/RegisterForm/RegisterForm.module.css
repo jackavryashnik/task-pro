@@ -37,3 +37,12 @@
 .lastField {
   margin-bottom: 24px;
 }
+
+.registerButton {
+  background-color: var(--green-btn);
+  color: #161616;
+}
+
+.registerButton:hover {
+  background-color: var(--green-btn-hover);
+}

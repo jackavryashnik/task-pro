@@ -30,7 +30,15 @@ function App() {
       ) : (
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<RestrictedRoute redirectTo="/home" component={<WelcomePage />} />} />
+            <Route
+              path="/"
+              element={
+                <RestrictedRoute
+                  redirectTo="/home"
+                  component={<WelcomePage />}
+                />
+              }
+            />
             <Route path="/welcome" element={<WelcomePage />} />
             <Route
               path="/auth/:authType"

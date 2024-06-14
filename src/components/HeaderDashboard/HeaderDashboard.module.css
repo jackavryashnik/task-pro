@@ -3,14 +3,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  background-color: #161616;
+  background-color: var(--taskboard-background);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .filterButton {
   background: none;
   border: none;
-  color: #fff;
+  color: var(--header-text-color);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
 .boardName {
   font-weight: 500;
   font-size: 14px;
-  color: #fff;
+  color: var(--modal-title-color);
 }
 
 .icon {

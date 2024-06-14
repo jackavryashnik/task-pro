@@ -29,7 +29,7 @@
   max-width: 76px;
 }
 .btnPlus {
-  background-color: var(--btn-background);
+  background-color: var(--plus-btn-background);
   width: 40px;
   height: 36px;
   border-radius: 4px;
@@ -37,8 +37,9 @@
 }
 .btnPlus:hover,
 .btnPlus:focus {
-  background-color: var(--btn-hover-background);
+  background-color: var(--plus-btn-hover-background);
 }
+
 .listBox {
   padding-top: 20px;
   padding-bottom: 20px;
