@@ -90,7 +90,7 @@
   border-radius: 50%;
   background-color: var(--btn-background);
   color: var(--btn-text-color);
-  transition: background-color var();
+  transition: background-color var(--transition);
 }
 .react-datepicker__week {
   display: flex;

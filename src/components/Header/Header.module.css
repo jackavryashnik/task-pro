@@ -52,12 +52,13 @@
   position: absolute;
   top: 100%;
   left: 0;
-  /* background-color: #161616; */
+  background-color: var(--modal-background);
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: var(--other-text-color);
+  color: var(--theme-selector-text-color);
   border-radius: 4px;
   z-index: 1;
+  border: 1px solid var(--modal-border-color);
 }
 
 .themeSelector ul {
@@ -94,7 +95,7 @@
 
 .userName {
   font-size: 14px;
-  color: var(--main-text-color);
+  color: var(--username-text-color);
   padding: 8px;
 }
 

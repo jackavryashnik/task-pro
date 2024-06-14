@@ -24,7 +24,7 @@
   border-radius: 4px;
   color: var(--modal-title-color);
   opacity: 0.4;
-  transition: var(--transition);
+  transition: opacity var(--transition);
 }
 
 @media screen and (min-width: 1024px) {
