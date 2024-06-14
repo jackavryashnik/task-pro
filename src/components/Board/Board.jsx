@@ -4,6 +4,8 @@ import css from './Board.module.css';
 import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useTasks } from '../../redux/tasks/selectors';
 
 export default function Board({
   board: { name, icon, id },
@@ -12,6 +14,10 @@ export default function Board({
 }) {
   const [isEdit, setIsEdit] = useState(true);
   const dispatch = useDispatch();
+  const { selectedBoard, boards } = useTasks();
+
+  localStorage.setItem('activeBoardId', selectedBoard.id);
+  const activeBoardId = localStorage.getItem('activeBoardId');
 
   const handleClick = () => {
     setIsEdit(false);
@@ -20,37 +26,42 @@ export default function Board({
     );
   };
 
+  const handleDelete = () => {
+    const index = boards.findIndex(board => board.id === id);
+    const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
+    const nextBoard = boards[nextIndex];
+    dispatch(deleteBoard(id));
+    dispatch(fetchOneBoard(nextBoard.id));
+  };
+
   return (
-    <li className={css.item}>
-      <div
-        className={css.containerBoard}
-        onClick={() => dispatch(fetchOneBoard(id))}
-      >
-        <svg className={css.icon} width={18} height={18}>
-          <use href={Icon + icon}></use>
-        </svg>
-        <p className={css.text}>{name}</p>
-      </div>
-
-      <div className={css.containerIcons}>
-        <button type="button" className={css.btn} onClick={handleClick}>
-          <svg className={css.focusIcon} width={16} height={16}>
-            <use href={`${Icon}#icon-pencil`}></use>
+    <li
+      className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
+      onClick={() => dispatch(fetchOneBoard(id))}
+    >
+      <NavLink to={`/home/${id}`}>
+        <div className={css.containerBoard}>
+          <svg className={css.icon} width={18} height={18}>
+            <use href={Icon + icon}></use>
           </svg>
-        </button>
+          <p className={css.text}>{name}</p>
+        </div>
+      </NavLink>
+      {id === activeBoardId && (
+        <div className={css.containerIcons}>
+          <button type="button" className={css.btn} onClick={handleClick}>
+            <svg className={css.focusIcon} width={16} height={16}>
+              <use href={`${Icon}#icon-pencil`}></use>
+            </svg>
+          </button>
 
-        <button
-          type="button"
-          className={css.btn}
-          onClick={() => {
-            dispatch(deleteBoard(id));
-          }}
-        >
-          <svg className={css.focusIcon} width={16} height={16}>
-            <use href={`${Icon}#icon-trash-can`}></use>
-          </svg>
-        </button>
-      </div>
+          <button type="button" className={css.btn} onClick={handleDelete}>
+            <svg className={css.focusIcon} width={16} height={16}>
+              <use href={`${Icon}#icon-trash-can`}></use>
+            </svg>
+          </button>
+        </div>
+      )}
     </li>
   );
 }
