@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export const DeleteModal = ({ closeModal, id }) => {
   const dispatch = useDispatch();
   return (
-    <>
+    <div className={css.wrapper}>
       <div className={css.container}>
       <button onClick={() => closeModal()} className={css.buttonClose} type="button" aria-label="Close">
           <svg width={18} height={18}>
@@ -24,7 +24,10 @@ export const DeleteModal = ({ closeModal, id }) => {
           onClick={() => {
             dispatch(deleteBoard(id));
             toast.success("Success");
-            closeModal();
+
+            setTimeout(() => {
+              closeModal();
+            }, 1000)
           }}
         >
           Yes
@@ -34,8 +37,8 @@ export const DeleteModal = ({ closeModal, id }) => {
         </Button>
         </div>
 
-        <Toaster />
+        <Toaster position="top-center" />
       </div>
-    </>
+    </div>
   );
 };
