@@ -4,7 +4,7 @@ import css from './Board.module.css';
 import { fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+
 import { useTasks } from '../../redux/tasks/selectors';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 
@@ -48,14 +48,13 @@ export default function Board({
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
       onClick={() => dispatch(fetchOneBoard(id))}
     >
-      <NavLink to={`/home/${id}`}>
-        <div className={css.containerBoard}>
-          <svg className={css.icon} width={18} height={18}>
-            <use href={Icon + icon}></use>
-          </svg>
-          <p className={css.text}>{name}</p>
-        </div>
-      </NavLink>
+      <div className={css.containerBoard}>
+        <svg className={css.icon} width={18} height={18}>
+          <use href={Icon + icon}></use>
+        </svg>
+        <p className={css.text}>{name}</p>
+      </div>
+
       {id === activeBoardId && (
         <div className={css.containerIcons}>
           <button type="button" className={css.btn} onClick={handleClick}>
