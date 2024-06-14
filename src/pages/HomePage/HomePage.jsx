@@ -16,23 +16,15 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const dispatch = useDispatch();
-  // const isOpen = useSelector(selectIsOpen);
-  // const modalContent = useSelector(selectModalContent);
 
   useEffect(() => {
     dispatch(fetchBoards());
   }, [dispatch]);
 
-  const toggleSidebar = () => {
-    if (!isModalOpen) {
-      setIsHidden(!isHidden);
-    }
-  };
+  const handleCloseSidebar = () => {
+    if(!isHidden && !isModalOpen) setIsHidden(true)
+  }
 
-  // const toggleModal = content => {
-  //   setIsModalOpen(!isModalOpen);
-  //   setModalContent(content ? content : '');
-  // };
   const openModal = content => {
     setModalContent(content);
     setIsModalOpen(true);
@@ -45,16 +37,14 @@ const HomePage = () => {
     <div className={css.homePage}>
       <div className={clsx([css.sidebarWrapper, !isHidden && css.show])}>
         <Sidebar
-          // isHidden={isHidden}
           className={css.sidebar}
-          // toggleModal={toggleModal}
           openModal={openModal}
           closeModal={closeModal}
         />
       </div>
       <div
         className={clsx([css.main, !isHidden && css.showSidebar])}
-        onClick={toggleSidebar}
+        onClick={handleCloseSidebar}
       >
         <Header openModal={openModal} closeModal={closeModal} isHidden={isHidden} setter={setIsHidden} />
         <ScreenPage openModal={openModal} closeModal={closeModal} />

@@ -1,8 +1,7 @@
 import css from './EditProfile.module.css';
 import icons from '../../images/icons.svg';
-import defaultAvatar from '../../images/user.jpg'
-import defaultAvatar2x from '../../images/user@2x.jpg'
-
+import defaultAvatar from '../../images/user.jpg';
+import defaultAvatar2x from '../../images/user@2x.jpg';
 
 import { NameInput } from '../NameInput/NameInput.jsx';
 import { EmailInput } from '../EmailInput/EmailInput.jsx';
@@ -26,8 +25,8 @@ export const EditProfile = ({ closeModal }) => {
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
   const initialValues = { name: false, email: false, password: false };
-  const [changedInputData, setChangedInputData] = useState(initialValues);  
-  
+  const [changedInputData, setChangedInputData] = useState(initialValues);
+
   // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
     if (currentDataUser) {
@@ -35,7 +34,6 @@ export const EditProfile = ({ closeModal }) => {
       setValue('email', currentDataUser.email);
       setValue('password', '');
     }
-
   }, [currentDataUser, setValue]);
 
   const handleFileChange = event => {
@@ -116,97 +114,135 @@ export const EditProfile = ({ closeModal }) => {
         formData.append('avatar', file);
 
         // відправка у форматі form-data
-        const result = await dispatch(updateUser({ credentials: formData, isFormData: true }));
+        const result = await dispatch(
+          updateUser({ credentials: formData, isFormData: true })
+        );
         unwrapResult(result);
 
-        toast.success("Changed");
+        toast.success('Changed');
 
         setIsChangedInput(true);
 
-        closeModal();
+        setTimeout(() => {
+          closeModal();
+        }, 1000)
       } else {
-
         // відправка у форматі JSON
-        const result = await dispatch(updateUser({credentials: changedData, isFormData: false }));
+        const result = await dispatch(
+          updateUser({ credentials: changedData, isFormData: false })
+        );
         unwrapResult(result);
 
-        toast.success("Changed");
+        toast.success('Changed');
 
         setIsChangedInput(true);
 
-        closeModal();
+        setTimeout(() => {
+          closeModal();
+        }, 1000)
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error! Try again")
+      toast.error('Error! Try again');
     }
   };
 
   return (
-    <div className={css.container}>
-      <div className={css.descriptionContainer}>
-        <h3 className={css.description}>Edit profile</h3>
-        <button onClick={() => closeModal()} className={css.buttonClose} type="button" aria-label="Close">
-          <svg width={18} height={18}>
-            <use href={`${icons}#icon-x-close`}></use>
-          </svg>
-        </button>
-      </div>
-      <form className={css.form} onSubmit={handleSubmit(submitForm)}>
-        <div className={css.avatarContainer}>
-          <img className={css.avatar} src={currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} srcSet={`${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`} alt={"Profile avatar"} />
-          <label className={css.label}>
-            <svg className={css.icon} width={10} height={10}>
-              <use href={`${icons}#icon-plus`}></use>
+    <div className={css.wrapper}>
+      <div className={css.container}>
+        <div className={css.descriptionContainer}>
+          <h3 className={css.description}>Edit profile</h3>
+          <button
+            onClick={() => closeModal()}
+            className={css.buttonClose}
+            type="button"
+            aria-label="Close"
+          >
+            <svg width={18} height={18}>
+              <use href={`${icons}#icon-x-close`}></use>
             </svg>
-            <input
-              onChange={handleFileChange}
-              className={css.input}
-              type="file"
-              aria-label="Add a new avatar"
+          </button>
+        </div>
+        <form className={css.form} onSubmit={handleSubmit(submitForm)}>
+          <div className={css.avatarContainer}>
+            <img
+              className={css.avatar}
+              src={
+                currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar
+              }
+              srcSet={`${
+                currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar
+              } 1x, ${
+                currentDataUser.avatar
+                  ? currentDataUser.avatar
+                  : defaultAvatar2x
+              } 2x`}
+              alt={'Profile avatar'}
             />
-          </label>
-        </div>
+            <label className={css.label}>
+              <svg className={css.icon} width={10} height={10}>
+                <use href={`${icons}#icon-plus`}></use>
+              </svg>
+              <input
+                onChange={handleFileChange}
+                className={css.input}
+                type="file"
+                aria-label="Add a new avatar"
+              />
+            </label>
+          </div>
 
-        <div className={css.inputContainer}>
-          <NameInput
-            placeholder={currentDataUser ? currentDataUser.name : 'Enter a new name'}
-            ariaLabel={'Enter a new name'}
-            errors={errors}
-            register={register}
-            onChange={handleInputChange}
-          />
-          {changedInputData.name ? <span className={css.span}>*</span> : null}
-        </div>
-        <div className={css.inputContainer}>
-          <EmailInput
-            placeholder={currentDataUser ? currentDataUser.email : 'Enter a new email'}
-            ariaLabel={'Enter a new email'}
-            errors={errors}
-            register={register}
-            onChange={handleInputChange}
-          />
-          {changedInputData.email ? <span className={css.span}>*</span> : null}
-        </div>
-        <div className={css.inputContainer}>
-          <PasswordInput
-            placeholder={'Enter a new password'}
-            ariaLabel={'Enter a new password'}
-            required={false}
-            errors={errors}
-            register={register}
-            onChange={handleInputChange}
-          />
-          {changedInputData.password ? (
-            <span className={css.span}>*</span>
-          ) : null}
-        </div>
-        <Button type={'submit'} disabled={isChangedInput}>
-          Send
-        </Button>
-      </form>
+          <div className={css.inputContainer}>
+            <NameInput
+              placeholder={
+                currentDataUser ? currentDataUser.name : 'Enter a new name'
+              }
+              ariaLabel={'Enter a new name'}
+              errors={errors}
+              register={register}
+              className={css.color}
+              onChange={handleInputChange}
+            />
+            {changedInputData.name ? <span className={css.span}>*</span> : null}
+          </div>
+          <div className={css.inputContainer}>
+            <EmailInput
+              placeholder={
+                currentDataUser ? currentDataUser.email : 'Enter a new email'
+              }
+              ariaLabel={'Enter a new email'}
+              errors={errors}
+              register={register}
+              className={css.color}
+              onChange={handleInputChange}
+            />
+            {changedInputData.email ? (
+              <span className={css.span}>*</span>
+            ) : null}
+          </div>
+          <div className={css.inputContainer}>
+            <PasswordInput
+              placeholder={'Enter a new password'}
+              ariaLabel={'Enter a new password'}
+              required={false}
+              errors={errors}
+              register={register}
+              className={css.color}
+              onChange={handleInputChange}
+            />
+            {changedInputData.password ? (
+              <span className={css.span}>*</span>
+            ) : null}
+          </div>
+          <Button type={'submit'} disabled={isChangedInput}>
+            Send
+          </Button>
+        </form>
 
-      <div><Toaster /></div>
+        <div>
+          <Toaster position="top-center" />
+        </div>
+      </div>
     </div>
   );
 };
