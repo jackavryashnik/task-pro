@@ -24,7 +24,7 @@
   border: 1px solid var(--btn-background);
   background-color: transparent;
   opacity: 0.4;
-  transition: var(--transition);
+  transition: opacity var(--transition);
   color: var(--modal-title-color);
 }
 
@@ -38,7 +38,7 @@
   resize: none;
   background-color: transparent;
   opacity: 0.4;
-  transition: var(--transition);
+  transition: opacity var(--transition);
   color: var(--modal-title-color);
 }
 
