@@ -13,10 +13,10 @@ const EditColumnModal = ({ column, onClose }) => {
   };
 
   const handleSubmit = () => {
-    // if (column && column.id) {
-    dispatch(editColumn({ id: column.id, name: columnName }));
-    // }
-    onClose();
+    if (column && column.id) {
+      dispatch(editColumn({ id: column.id, name: columnName }));
+      onClose();
+    }
   };
 
   return (

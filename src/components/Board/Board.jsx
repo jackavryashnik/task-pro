@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux';
 import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
-import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
+import { fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTasks } from '../../redux/tasks/selectors';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 export default function Board({
   board: { name, icon, id },

@@ -6,7 +6,6 @@ import startTab from '../../images/start-page/start-tab.png';
 import startTab2x from '../../images/start-page/start-tab@2x.png';
 import startDes from '../../images/start-page/start-des.png';
 import startDes2x from '../../images/start-page/start-des@2x.png';
-
 import icon from '../../images/icons.svg';
 
 const WelcomePage = () => {
@@ -35,13 +34,12 @@ const WelcomePage = () => {
             className={css.welcomePage_user}
           />
         </picture>
-          <div className={css.logo}>
-            <svg className={css.logo_icon}>
-              <use href={`${icon}#icon-lightning`}></use>
-            </svg>
-
-            <p>Task Pro</p>
-          </div>
+        <div className={css.logo} >
+        <svg width={40} height={40} className={css.logo_icon} >
+        <use href={`${icon}#icon-lightning-01`}></use>
+        </svg>
+        <h2 className={css.logoTitle}>Task Pro</h2>
+        </div>
           <p className={css.welcomePage_desc}>
             Supercharge your productivity and take control of your tasks with
             Task Pro - Don&apos;t wait, start achieving your goals now!
