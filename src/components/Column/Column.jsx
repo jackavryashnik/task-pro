@@ -6,6 +6,7 @@ import icons from '../../images/icons.svg';
 import EditColumnModal from '../EditColumnModal/EditColumnModal';
 import AddCardModal from '../AddCardModal/AddCardModal';
 import { useTasks } from '../../redux/tasks/selectors';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
@@ -13,9 +14,7 @@ const Column = ({ column, openModal, closeModal }) => {
   console.log(selectedBoard);
 
   const handleDeleteColumn = () => {
-    if (window.confirm('Are you sure you want to delete this column?')) {
       dispatch(deleteColumn(column.id));
-    }
   };
 
   return (
@@ -35,7 +34,7 @@ const Column = ({ column, openModal, closeModal }) => {
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
           </button>
-          <button onClick={handleDeleteColumn} className={css.button}>
+          <button onClick={() => openModal(<DeleteModal closeModal={closeModal} callback={handleDeleteColumn}>Are you sure you want to delete this column?</DeleteModal>)} className={css.button}>
             <svg className={css.iconDel} width={24} height={24}>
               <use href={`${icons}#icon-trash-can`}></use>
             </svg>
