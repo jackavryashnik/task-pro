@@ -78,7 +78,7 @@ export const updateUser = createAsyncThunk(
 
       setAuthHeader(accessToken);
       
-      const { data } = await axios.patch('/users/profile', credentials, config);
+      const { data } = await axios.patch('/users/update', credentials, config);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

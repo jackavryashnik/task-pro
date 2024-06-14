@@ -1,3 +1,12 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100vw;
+  height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -8,6 +17,7 @@
   width: 100%;
   padding: 24px;
   border-radius: 8px;
+
   background-color: var(--modal-background);
 }
 
@@ -53,6 +63,8 @@
 
   border: hidden;
   background-color: transparent;
+  stroke: var(--dull-black);
+  fill: var(--dull-black);
 }
 
 .avatarContainer {
@@ -94,8 +106,19 @@
   display: none;
 }
 
+input.color:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-box-shadow: inset 0 0 0 50px var(--white-text);
+  -webkit-text-fill-color: var(--noir-black);
+}
+
+input.color {
+  color: var(--dull-black);
+}
+
 button:disabled {
   background-color: gray;
+  color: #4a4a4a;
   cursor: not-allowed;
 }
 
@@ -111,7 +134,7 @@ button:disabled:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: var(--white-text);
+  color: var(--dull-black);
 }
 
 @media screen and (min-width: 375px) {

@@ -1,5 +1,6 @@
 .column {
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .columnHeader {
@@ -25,10 +26,16 @@
   cursor: pointer;
 }
 
-.icon {
-  fill: #000;
+.iconEdit {
+  stroke: #000;
   width: 20px;
   height: 20px;
+}
+
+.iconDel {
+  width: 20px;
+  height: 20px;
+  stroke: #000;
 }
 
 .tasks {
