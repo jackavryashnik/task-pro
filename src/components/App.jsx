@@ -5,6 +5,7 @@ import PrivateRout from './PrivateRoute/PrivateRoute';
 import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 import { selectIsRefreshing, selectUserTheme } from '../redux/auth/selectors';
 import { Loader } from './Loader/Loader';
+import { Navigate } from 'react-router-dom';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
@@ -30,7 +31,7 @@ function App() {
       ) : (
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<RestrictedRoute redirectTo="/home" component={<WelcomePage />} />} />
+            <Route path="/" element={<Navigate to="/welcome" /> } />
             <Route path="/welcome" element={<WelcomePage />} />
             <Route
               path="/auth/:authType"
