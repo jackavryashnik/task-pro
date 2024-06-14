@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import { deleteBoard } from '../../redux/tasks/operations';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export const DeleteModal = ({ closeModal, id }) => {
   const dispatch = useDispatch();
   return (
@@ -15,12 +17,13 @@ export const DeleteModal = ({ closeModal, id }) => {
             <use href={`${icons}#icon-x-close`}></use>
           </svg>
         </button>
-        <p className={css.description}>Delete this board?</p>
+        <p className={css.description}>Are you sure?</p>
         <div className={css.buttonContainer}>
         <Button
           type={'button'}
           onClick={() => {
             dispatch(deleteBoard(id));
+            toast.success("Success");
             closeModal();
           }}
         >
@@ -30,6 +33,8 @@ export const DeleteModal = ({ closeModal, id }) => {
           No
         </Button>
         </div>
+
+        <Toaster />
       </div>
     </>
   );

@@ -175,6 +175,7 @@ export const EditProfile = ({ closeModal }) => {
             ariaLabel={'Enter a new name'}
             errors={errors}
             register={register}
+            className={css.color}
             onChange={handleInputChange}
           />
           {changedInputData.name ? <span className={css.span}>*</span> : null}
@@ -185,6 +186,7 @@ export const EditProfile = ({ closeModal }) => {
             ariaLabel={'Enter a new email'}
             errors={errors}
             register={register}
+            className={css.color}
             onChange={handleInputChange}
           />
           {changedInputData.email ? <span className={css.span}>*</span> : null}
@@ -196,6 +198,7 @@ export const EditProfile = ({ closeModal }) => {
             required={false}
             errors={errors}
             register={register}
+            className={css.color}
             onChange={handleInputChange}
           />
           {changedInputData.password ? (
