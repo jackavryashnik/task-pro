@@ -5,6 +5,7 @@ import { useTasks } from '../../redux/tasks/selectors';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
+import { Button } from '../Button/Button';
 Modal.setAppElement('#root');
 
 const AddColumnModal = ({ onClose }) => {
@@ -30,12 +31,18 @@ const AddColumnModal = ({ onClose }) => {
         placeholder="Title"
         className={css.input}
       />
-      <button onClick={handleCreateColumn} className={css.addButton}>
+      {/* <button onClick={handleCreateColumn} className={css.addButton}>
         <svg className={css.iconPlus} width={28} height={28}>
           <use href={`${icons}#icon-plus`}></use>
         </svg>
         Add
-      </button>
+      </button> */}
+      <Button onClick={handleCreateColumn} className={css.addButton}>
+        <svg className={css.iconPlus} width={28} height={28}>
+          <use href={`${icons}#icon-plus`}></use>
+        </svg>
+        Add
+      </Button>
       <button onClick={onClose} className={css.closeButton}>
         <svg className={css.iconClose} width={16} height={16}>
           <use href={`${icons}#icon-x-close`}></use>

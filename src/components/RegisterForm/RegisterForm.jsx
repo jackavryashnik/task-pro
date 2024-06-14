@@ -68,7 +68,9 @@ export default function RegisterForm() {
         />
       </div>
 
-      <Button type="submit">Register Now</Button>
+      <Button type="submit" className={css.registerButton}>
+        Register Now
+      </Button>
     </form>
   );
 }
