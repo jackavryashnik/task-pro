@@ -3,7 +3,7 @@ import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
 import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTasks } from '../../redux/tasks/selectors';
 
@@ -33,6 +33,14 @@ export default function Board({
     dispatch(deleteBoard(id));
     dispatch(fetchOneBoard(nextBoard.id));
   };
+  useEffect(() => {
+    if (activeBoardId) {
+      const activeElement = document.getElementById(activeBoardId);
+      if (activeElement) {
+        activeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [activeBoardId]);
 
   return (
     <li
