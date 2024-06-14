@@ -26,7 +26,7 @@ export default function RegisterForm() {
       .then(() => {
         toast.success('Success register');
         navigate('/home', { replace: true });
-      }).catch(error => toast.error('Error register'));
+      }).catch(error => toast.error(error.message));
   };
 
   return (
