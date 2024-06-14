@@ -6,6 +6,7 @@ import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 import { selectIsRefreshing, selectUserTheme } from '../redux/auth/selectors';
 import { Loader } from './Loader/Loader';
 import { Navigate } from 'react-router-dom';
+import {Toaster} from 'react-hot-toast';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
@@ -57,8 +58,11 @@ function App() {
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+
         </Suspense>
       )}
+
+      <Toaster position="top-center" />
     </>
   );
 }

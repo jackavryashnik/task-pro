@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { login } from '../../redux/auth/operations';
+import toast from 'react-hot-toast';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -19,10 +20,11 @@ export default function LoginForm() {
 
   const submitForm = data => {
     dispatch(login(data))
-      .unwrap()
+    .unwrap()
       .then(() => {
+        toast.success('Welcome!')
         navigate('/home', { replace: true });
-      });
+      }).catch(error => toast.error(error.message));
   };
 
   return (
@@ -56,6 +58,7 @@ export default function LoginForm() {
       </div>
 
       <Button type="submit">Log In Now</Button>
+
     </form>
   );
 }
