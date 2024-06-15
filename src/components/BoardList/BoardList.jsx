@@ -2,7 +2,7 @@ import { useTasks } from '../../redux/tasks/selectors';
 import css from './BoardList.module.css';
 
 import Board from '../Board/Board';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchOneBoard } from '../../redux/tasks/operations';
 
@@ -22,7 +22,7 @@ export default function BoardList({ openModal, closeModal }) {
                 to={`/home/${board.id}`}
                 onClick={e => {
                   if (selectedBoard.id !== board.id) {
-                    dispatch(fetchOneBoard(board.id));
+                    return dispatch(fetchOneBoard(board.id));
                   }
                   e.preventDefault();
                 }}
@@ -35,8 +35,10 @@ export default function BoardList({ openModal, closeModal }) {
               </NavLink>
             );
           })}
+
         </ul>
       )}
+      <Navigate to={selectedBoard.id}/>
     </>
   );
 }
