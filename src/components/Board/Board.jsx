@@ -17,8 +17,11 @@ export default function Board({
   const dispatch = useDispatch();
   const { selectedBoard, boards } = useTasks();
 
-  localStorage.setItem('activeBoardId', selectedBoard.id);
+  if (selectedBoard) {
+    localStorage.setItem('activeBoardId', selectedBoard.id);
+  }
   const activeBoardId = localStorage.getItem('activeBoardId');
+
   useEffect(() => {
     if (activeBoardId) {
       const activeElement = document.getElementById(activeBoardId);
@@ -27,13 +30,6 @@ export default function Board({
       }
     }
   }, [activeBoardId]);
-
-  // const handleClickFetchBoard = e => {
-  //   if (selectedBoard.id !== id) {
-  //     dispatch(fetchOneBoard(id));
-  //   }
-  //   e.preventDefault();
-  // };
 
   const handleClick = () => {
     setIsEdit(false);
@@ -45,14 +41,9 @@ export default function Board({
   const handleDeleteBoard = id => {
     if (boards.length > 1) {
       const index = boards.findIndex(board => board.id === id);
-      const nextIndex =
-        index === boards.length - 1 && boards.length > 1
-          ? index - 1
-          : index + 1;
+      const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
       const nextBoard = boards[nextIndex];
-      if (nextBoard.id) {
-        dispatch(fetchOneBoard(nextBoard.id));
-      }
+      dispatch(fetchOneBoard(nextBoard.id));
     }
 
     dispatch(deleteBoard(id));
@@ -61,7 +52,6 @@ export default function Board({
   return (
     <li
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
-      // onClick={handleClickFetchBoard}
       id={id}
     >
       <div className={css.containerBoard}>
