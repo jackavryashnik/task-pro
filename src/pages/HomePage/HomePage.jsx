@@ -22,12 +22,14 @@ const HomePage = () => {
   }, [dispatch]);
 
   const handleCloseSidebar = () => {
-    if(!isHidden && !isModalOpen) setIsHidden(true)
-  }
+    if (!isHidden && !isModalOpen) setIsHidden(true);
+  };
 
   const openModal = content => {
-    setModalContent(content);
-    setIsModalOpen(true);
+    if (content) {
+      setModalContent(content);
+      setIsModalOpen(true);
+    }
   };
   const closeModal = () => {
     setModalContent('');
@@ -46,7 +48,12 @@ const HomePage = () => {
         className={clsx([css.main, !isHidden && css.showSidebar])}
         onClick={handleCloseSidebar}
       >
-        <Header openModal={openModal} closeModal={closeModal} isHidden={isHidden} setter={setIsHidden} />
+        <Header
+          openModal={openModal}
+          closeModal={closeModal}
+          isHidden={isHidden}
+          setter={setIsHidden}
+        />
         <ScreenPage openModal={openModal} closeModal={closeModal} />
         <Modal
           isOpen={isModalOpen}
