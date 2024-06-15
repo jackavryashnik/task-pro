@@ -24,7 +24,7 @@ const persistedBoardsReducer = persistReducer(tasksPersistConfig, tasksReducer);
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'user', 'theme'],
+  whitelist: ['token'],
 };
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
