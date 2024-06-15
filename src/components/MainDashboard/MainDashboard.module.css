@@ -35,6 +35,27 @@
   margin-right: 8px;
 }
 
+.textContainer {
+  display: flex;
+  margin: 241px 347px;
+  /* text-align: center; */
+}
+
+.text {
+  /* display: flex; */
+  font-size: 12px;
+  line-height: 1.33333;
+  text-align: center;
+  /* color: rgba(255, 255, 255, 0.5); */
+}
+
+.spanCreateBoard {
+  color: #bedbb0;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 /* Mobile Adapted */
 @media (min-width: 375px) {
   .addColumnButton {
@@ -52,6 +73,12 @@
   .dashboard {
     align-items: flex-start;
     padding: 26px 32px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.28571;
+    /* color: rgba(255, 255, 255, 0.5); */
   }
 }
 
