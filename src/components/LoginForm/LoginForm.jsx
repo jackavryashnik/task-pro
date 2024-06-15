@@ -29,6 +29,10 @@ export default function LoginForm() {
       .catch(() => toast.error(`Email or password is incorrect`));
   };
 
+  const handleLoginClick = () => {
+    console.log('Login with Google button clicked');
+  };
+
   return (
     <form onSubmit={handleSubmit(submitForm)} className={css.form}>
       <div className={css.nav}>
@@ -65,7 +69,7 @@ export default function LoginForm() {
         Log In Now
       </Button>
       <div className={css.spacer}>Or</div>
-      <GoogleButton />
+      <GoogleButton text="Login with Google" onClick={handleLoginClick} />
     </form>
   );
 }
