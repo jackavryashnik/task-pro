@@ -1,6 +1,9 @@
 import { useParams } from 'react-router-dom';
 import HeaderDashboard from '../../components/HeaderDashboard/HeaderDashboard';
 import MainDashboard from '../../components/MainDashboard/MainDashboard';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchOneBoard } from '../../redux/tasks/operations';
 // import AddColumnModal from '../../components/AddColumnModal/AddColumnModal';
 // import AddCardModal from '../../components/AddCardModal/AddCardModal';
 // import EditColumnModal from '../../components/EditColumnModal/EditColumnModal';
@@ -9,6 +12,12 @@ import MainDashboard from '../../components/MainDashboard/MainDashboard';
 
 const ScreensPage = ({ openModal, closeModal }) => {
   const { boardName } = useParams();
+  const dispatch = useDispatch();
+  const selectedBoardId = localStorage.getItem('activeBoardId');
+
+  useEffect(() => {
+    dispatch(fetchOneBoard(selectedBoardId));
+  }, [selectedBoardId, dispatch]);
 
   return (
     <div>

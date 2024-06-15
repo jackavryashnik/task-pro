@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   padding: 39px 20px;
+  background-color: var(--taskboard-background);
 }
 
 .columns {

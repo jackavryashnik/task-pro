@@ -16,9 +16,9 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/register', credentials);
-      if(data.accessToken && data.refreshToken) {
+      if (data.accessToken && data.refreshToken) {
         localStorage.setItem('token', data.data.refreshToken);
-      
+
         const loginData = await axios.post('/users/login', {
           email: credentials.email,
           password: credentials.password,
@@ -56,7 +56,6 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     clearAuthHeader();
-    
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -73,11 +72,11 @@ export const updateUser = createAsyncThunk(
       }
 
       const config = isFormData
-        ? { headers: { 'Content-Type': 'multipart/form-data'} }
-        : { headers: { 'Content-Type': 'application/json'} };
+        ? { headers: { 'Content-Type': 'multipart/form-data' } }
+        : { headers: { 'Content-Type': 'application/json' } };
 
       setAuthHeader(accessToken);
-      
+
       const { data } = await axios.patch('/users/update', credentials, config);
       return data;
     } catch (error) {
@@ -91,7 +90,7 @@ export const getCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.get('/users/current');
-      
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -101,9 +100,9 @@ export const getCurrentUser = createAsyncThunk(
 
 export const changeTheme = createAsyncThunk(
   'auth/userTheme',
-  async (userTheme, thunkAPI) => {
+  async (theme, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/users/update', userTheme);
+      const { data } = await axios.patch('/users/update', { theme });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -121,4 +120,4 @@ export const needHelp = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);

@@ -10,7 +10,6 @@ import { register as authRegister } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 
-
 export default function RegisterForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +25,8 @@ export default function RegisterForm() {
       .then(() => {
         toast.success('Success register');
         navigate('/home', { replace: true });
-      }).catch(toast.error(`Email or password is incorrect`));
+      })
+      .catch(toast.error(`Email or password is incorrect`));
   };
 
   return (
@@ -71,8 +71,9 @@ export default function RegisterForm() {
         />
       </div>
 
-      <Button type="submit">Register Now</Button>
-
+      <Button type="submit" className={css.registerButton}>
+        Register Now
+      </Button>
       <Toaster position="top-center" />
     </form>
   );

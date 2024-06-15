@@ -18,7 +18,7 @@ const icons = [
   '#icon-hexagon',
 ];
 
-export default function CreateBoard({ onClose, isEdit, setter }) {
+export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
   const inputBgId = useId();
@@ -40,9 +40,15 @@ export default function CreateBoard({ onClose, isEdit, setter }) {
         icon: selectedIcon,
         background: selectedBackground,
       })
-    );
+    )
+      .unwrap()
+      .then(createdBoard => {
+        localStorage.setItem('activeBoardId', createdBoard.board.id);
+      });
+
     onClose();
   };
+
   const handleSubmitEdit = e => {
     e.preventDefault();
     dispatch(
@@ -59,7 +65,7 @@ export default function CreateBoard({ onClose, isEdit, setter }) {
 
   const handleClick = () => {
     if (isEdit) {
-      setter(true);
+      setIsEdit(true);
     }
     onClose();
   };
