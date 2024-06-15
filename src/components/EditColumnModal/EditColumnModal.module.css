@@ -1,18 +1,18 @@
 .modal {
-  background-color: #1f1f1f;
+  background-color: var(--modal-background);
   border-radius: 8px;
   padding: 20px;
   width: 300px;
   max-width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  color: #fff;
+  border: 1px solid var(--modal-border-color);
 }
 
 .modal h2 {
   margin-top: 0;
   font-size: 18px;
-  color: #fff;
+  color: var(--modal-title-color);
 }
 
 .input {

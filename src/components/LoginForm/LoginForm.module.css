@@ -43,7 +43,8 @@
   color: #161616;
 }
 
-.loginButton:hover {
+.loginButton:hover,
+.loginButton:focus {
   background-color: var(--green-btn-hover);
 }
 
