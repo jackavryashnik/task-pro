@@ -26,14 +26,14 @@ export default function Board({
         activeElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, [activeBoardId, selectedBoard]);
+  }, [activeBoardId]);
 
-  const handleClickFetchBoard = e => {
-    if (selectedBoard.id !== id) {
-      dispatch(fetchOneBoard(id));
-    }
-    e.preventDefault();
-  };
+  // const handleClickFetchBoard = e => {
+  //   if (selectedBoard.id !== id) {
+  //     dispatch(fetchOneBoard(id));
+  //   }
+  //   e.preventDefault();
+  // };
 
   const handleClick = () => {
     setIsEdit(false);
@@ -42,7 +42,7 @@ export default function Board({
     );
   };
 
-  const handleDelete = () => {
+  const handleDeleteBoard = id => {
     const index = boards.findIndex(board => board.id === id);
     const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
     const nextBoard = boards[nextIndex];
@@ -55,7 +55,7 @@ export default function Board({
   return (
     <li
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
-      onClick={handleClickFetchBoard}
+      // onClick={handleClickFetchBoard}
       id={id}
     >
       <div className={css.containerBoard}>
@@ -76,15 +76,15 @@ export default function Board({
           <button
             type="button"
             className={css.btn}
-            onClick={() =>
+            onClick={() => {
               openModal(
                 <DeleteModal
                   id={id}
                   closeModal={closeModal}
-                  handleDelete={handleDelete}
+                  handleDeleteBoard={handleDeleteBoard}
                 />
-              )
-            }
+              );
+            }}
           >
             <svg className={css.focusIcon} width={16} height={16}>
               <use href={`${Icon}#icon-trash-can`}></use>

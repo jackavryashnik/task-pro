@@ -1,13 +1,9 @@
 import css from './DeleteModal.module.css';
 import icons from '../../images/icons.svg';
-
-// import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
-
 import toast, { Toaster } from 'react-hot-toast';
 
-export const DeleteModal = ({ closeModal, handleDelete }) => {
-  // const dispatch = useDispatch();
+export const DeleteModal = ({ id, closeModal, handleDeleteBoard }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.container}>
@@ -26,7 +22,7 @@ export const DeleteModal = ({ closeModal, handleDelete }) => {
           <Button
             type={'button'}
             onClick={() => {
-              handleDelete();
+              handleDeleteBoard(id);
               toast.success('Success');
 
               setTimeout(() => {
