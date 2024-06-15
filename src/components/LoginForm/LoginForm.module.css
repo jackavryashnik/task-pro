@@ -54,6 +54,18 @@ input.color:-webkit-autofill {
   -webkit-text-fill-color: var(--white-text);
 }
 
+input.color {
+  border-color: rgba(190, 219, 176, 0.4);
+  color: #fff;
+}
+
+@media screen and (min-width: 1024px) {
+  input.color:hover,
+  input.color:focus {
+    border-color: rgb(190, 219, 176);
+  }
+}
+
 .spacer {
   font-size: 1.125rem;
   line-height: 1.375rem;
