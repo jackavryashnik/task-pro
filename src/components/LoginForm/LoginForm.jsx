@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { login } from '../../redux/auth/operations';
+import { GoogleButton } from '../GoogleButton/GoogleButton';
 import toast from 'react-hot-toast';
 
 export default function LoginForm() {
@@ -20,11 +21,12 @@ export default function LoginForm() {
 
   const submitForm = data => {
     dispatch(login(data))
-    .unwrap()
+      .unwrap()
       .then(() => {
-        toast.success('Welcome!')
+        toast.success('Welcome!');
         navigate('/home', { replace: true });
-      }).catch(() => toast.error(`Email or password is incorrect`));
+      })
+      .catch(() => toast.error(`Email or password is incorrect`));
   };
 
   return (
@@ -62,6 +64,8 @@ export default function LoginForm() {
       <Button type="submit" className={css.loginButton}>
         Log In Now
       </Button>
+      <div className={css.spacer}>Or</div>
+      <GoogleButton />
     </form>
   );
 }
