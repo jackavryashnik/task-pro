@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { needHelp } from '../../redux/auth/operations'; 
-import { selectUserEmail } from '../../redux/auth/selectors';
+import { selectUserEmail, selectToken } from '../../redux/auth/selectors';
 import { Button } from '../Button/Button';
 import { toast } from 'react-hot-toast';
 import icons from '../../images/icons.svg';
@@ -9,6 +9,7 @@ import css from './NeedHelp.module.css';
 
 export default function NeedHelp({ closeModal }) {  
   const userEmail = useSelector(selectUserEmail);
+  const token = useSelector(selectToken);
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
@@ -41,22 +42,23 @@ export default function NeedHelp({ closeModal }) {
 
     if (!hasError) {
       try {
-        await dispatch(needHelp({ email, comment }));
+        await dispatch(needHelp({ email, comment, token }));
         toast.success('Your request has been sent successfully');
-        setEmail(email);
+        setEmail('');
         setComment('');
-        closeModal();
+        closeModal(); 
       } catch (error) {
         toast.error('There was an error sending your request');
       }
     }
   };
 
+
   return (
     <div className={css.needHelpBlock}>
       <h3 className={css.modalTitle}>Need help</h3>
       <div className={css.closeModal}>
-        <button type="button" onClick={closeModal}>
+        <button type="button" onClick={()=>closeModal()}>
           <svg
             width={18}
             height={18}>
