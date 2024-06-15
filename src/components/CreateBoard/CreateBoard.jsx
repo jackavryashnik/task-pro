@@ -48,8 +48,6 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
       .unwrap()
       .then(createdBoard => {
         dispatch(fetchOneBoard(createdBoard.board.id));
-        // localStorage.setItem('activeBoardId', createdBoard.board.id);
-        console.log(createdBoard.board.id);
         onClose();
       });
   };
