@@ -28,6 +28,7 @@ const EditColumnModal = ({ column, onClose }) => {
         value={columnName}
         onChange={handleChange}
         className={css.input}
+        autoFocus
       />
       <Button onClick={handleSubmit} className={css.button}>
         <div className={css.iconPlus}>
