@@ -11,7 +11,7 @@ import {Toaster} from 'react-hot-toast';
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage/AuthPage'));
-const TaskBoard = lazy(() => import('./TaskBoard/TaskBoard'));
+const ScreensPage = lazy(() => import('../pages/ScreensPage/ScreensPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 const THEMES = ['light', 'dark', 'violet'];
@@ -51,7 +51,7 @@ function App() {
                 element={
                   <PrivateRout
                     redirectTo="/welcome"
-                    component={<TaskBoard />}
+                    component={<ScreensPage />}
                   />
                 }
               />
