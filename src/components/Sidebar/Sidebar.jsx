@@ -29,7 +29,7 @@ export default function Sidebar({ openModal, closeModal }) {
         <BoardList openModal={openModal} closeModal={closeModal} />
       </div>
       <div className={css.container}>
-        <CustomSupport openModal={openModal} />
+        <CustomSupport openModal={openModal} closeModal={closeModal}/>
         <Logout />
       </div>
     </div>

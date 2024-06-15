@@ -4,9 +4,9 @@ import cactus2x from '../../images/cactus@2x.png';
 import icons from '../../images/icons.svg';
 import NeedHelp from '../NeedHelp/NeedHelp';
 
-const CustomSupport = ({ openModal }) => {
+const CustomSupport = ({ openModal, closeModal }) => {
   const handleHelpClick = () => {
-    openModal(<NeedHelp closeModal={() => openModal(null)} />);
+    openModal(<NeedHelp closeModal={closeModal} />);
   };
 
   return (

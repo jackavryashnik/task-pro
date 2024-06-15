@@ -111,13 +111,17 @@ export const changeTheme = createAsyncThunk(
     }
   }
 );
-
 export const needHelp = createAsyncThunk(
   'auth/needHelp',
-  async ({ email, comment }, thunkAPI) => {
+  async ({ email, comment, token }, thunkAPI) => {
     try {
-      const { data } = await axios.post('/users/support', { email, comment });
-      return data;
+      await axios.post('/users/need-help', { email, comment }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return { email, comment };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
