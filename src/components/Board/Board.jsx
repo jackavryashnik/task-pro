@@ -50,7 +50,6 @@ export default function Board({
       dispatch(fetchOneBoard(nextBoard.id));
     }
     dispatch(deleteBoard(id));
-    closeModal();
   };
 
   return (
@@ -81,7 +80,7 @@ export default function Board({
               openModal(
                 <DeleteModal
                   id={id}
-                  // closeModal={closeModal}
+                  closeModal={closeModal}
                   handleDelete={handleDelete}
                 />
               )

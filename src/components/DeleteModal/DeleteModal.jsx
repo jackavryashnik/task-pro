@@ -27,17 +27,17 @@ export const DeleteModal = ({ closeModal, id, handleDelete }) => {
           <Button
             type={'button'}
             onClick={() => {
-              dispatch(deleteBoard(id));
+              handleDelete();
               toast.success('Success');
 
               setTimeout(() => {
                 closeModal();
-              }, 2000);
+              }, 500);
             }}
           >
             Yes
           </Button>
-          <Button type={'button'} onClick={handleDelete}>
+          <Button type={'button'} onClick={() => closeModal()}>
             No
           </Button>
         </div>
