@@ -43,12 +43,18 @@ export default function Board({
   };
 
   const handleDeleteBoard = id => {
-    const index = boards.findIndex(board => board.id === id);
-    const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
-    const nextBoard = boards[nextIndex];
-    if (nextBoard.id) {
-      dispatch(fetchOneBoard(nextBoard.id));
+    if (boards.length > 1) {
+      const index = boards.findIndex(board => board.id === id);
+      const nextIndex =
+        index === boards.length - 1 && boards.length > 1
+          ? index - 1
+          : index + 1;
+      const nextBoard = boards[nextIndex];
+      if (nextBoard.id) {
+        dispatch(fetchOneBoard(nextBoard.id));
+      }
     }
+
     dispatch(deleteBoard(id));
   };
 
