@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   width: 100vw;
   height: 100vh;
 }
@@ -15,8 +15,9 @@
   padding: 24px;
   border-radius: 8px;
 
-  background-color: var(--white-modal);
-  color: var(--dull-black);
+  background-color: var(--modal-background);
+  color: var(--modal-title-color);
+  border: 1px solid var(--modal-border-color);
 }
 
 .descriptionContainer {
@@ -37,8 +38,8 @@
 
   border: hidden;
   background-color: transparent;
-  fill: var(--white-text);
-  stroke: var(--white-text);
+  fill: var(--close-icon-color);
+  stroke: var(--close-icon-color);
 }
 
 .description {

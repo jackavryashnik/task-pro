@@ -5,17 +5,16 @@
   align-items: center;
   width: 100%;
   padding: 20px 14px;
-  color: var(--label-text-color);
+  color: var(--manage-board-icons-color);
 }
 .item.active {
   color: var(--main-text-color);
-
-  background-color: var(--dark);
+  background-color: var(--active-board-background);
   border-radius: 4px;
 }
 
 .item.active::after {
-  background-color: var(--green-btn);
+  background-color: var(--board-line-color);
 }
 .item.active .containerIcons {
   display: flex;
@@ -23,6 +22,10 @@
 .item.active .focusIcon {
   display: inline-block;
   opacity: 1;
+}
+
+.item.active .icon {
+  stroke: var(--board-icon-color);
 }
 
 .item::after {
@@ -39,13 +42,13 @@
 
 .item:hover,
 .item:focus {
-  color: var(--modal-title-color);
-  background-color: var(--taskboard-background);
+  color: var(--main-text-color);
+  background-color: var(--active-board-background);
   border-radius: 4px;
 }
 .item:hover::after,
 .item:focus::after {
-  background-color: var(--green-btn);
+  background-color: var(--board-line-color);
 }
 
 .text {
@@ -64,15 +67,15 @@
 
 .focusIcon {
   opacity: 0;
-  stroke: rgba(255, 255, 255, 0.5);
+  stroke: var(--manage-board-icons-color);
   transition: opacity 200ms ease;
 }
 .icon {
-  stroke: rgba(255, 255, 255, 0.5);
+  stroke: var(--manage-board-icons-color);
 }
 .item:hover .icon,
 .item:focus .icon {
-  stroke: var(--white-text);
+  stroke: var(--board-icon-color);
 }
 
 .btn {
@@ -88,5 +91,5 @@
 .btn:hover .focusIcon,
 .btn:focus .focusIcon,
 .btn:active .focusIcon {
-  stroke: var(--white-text);
+  stroke: var(--manage-board-icons-hover-color);
 }

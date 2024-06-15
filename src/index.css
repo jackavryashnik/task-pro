@@ -118,6 +118,11 @@ body.dark {
   --edit-profile-plus-background: #bedbb0;
   --radio-background: rgba(255, 255, 255, 0.3);
   --theme-modal-border-color: #BEDBB0;
+  --active-board-background: #1f1f1f;
+  --board-line-color: #bedbb0;
+  --board-icon-color: #fff;
+  --manage-board-icons-color: rgba(255, 255, 255, 0.5);
+  --manage-board-icons-hover-color: #fff;
 }
 
 body.light {
@@ -157,6 +162,11 @@ body.light {
   --edit-profile-plus-background: #bedbb0;
   --radio-background: rgba(22, 22, 22, 0.3);
   --theme-modal-border-color: #BEDBB0;
+  --active-board-background: #F6F6F7;
+  --board-line-color: #bedbb0;
+  --board-icon-color: #161616;
+  --manage-board-icons-color: rgba(22, 22, 22, 0.5);
+  --manage-board-icons-hover-color: #161616;
 }
 
 body.violet {
@@ -196,4 +206,9 @@ body.violet {
   --edit-profile-plus-background: #ecedfd;
   --radio-background: rgba(22, 22, 22, 0.3);
   --theme-modal-border-color: #ECEDFD;
+  --active-board-background: #7477C9;
+  --board-line-color: #fff;
+  --board-icon-color: #fff;
+  --manage-board-icons-color: rgba(255, 255, 255, 0.5);
+  --manage-board-icons-hover-color: #fff;
 }
