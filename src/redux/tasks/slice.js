@@ -28,7 +28,7 @@ const slice = createSlice({
   name: 'tasks',
   initialState: {
     board: [],
-    selectedBoard: null,
+    selectedBoard: [],
     columns: [],
     tasks: [],
     loading: false,
