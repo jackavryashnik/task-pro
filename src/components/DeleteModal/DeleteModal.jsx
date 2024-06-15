@@ -28,7 +28,6 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
             className={css.button}
             type={'button'}
             onClick={() => {
-
               onDelete();
               toast.success('Success');
 

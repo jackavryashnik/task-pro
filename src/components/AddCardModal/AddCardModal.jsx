@@ -1,29 +1,47 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Calendar from '../Calendar/Calendar';
+// import Calendar from '../Calendar/Calendar';
 import icons from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 
-export default function AddCardModal({ card, onClose }) {
-  const { _id: cardId, title, text, deadline, priority } = card;
-  const [selectedDate, setSelectedDate] = useState(deadline);
-  const [selectedPriority, setSelectedPriority] = useState(priority);
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { enGB } from 'date-fns/locale';
+import { format } from 'date-fns';
+
+export default function AddCardModal({ onClose, id, board }) {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      title,
-      text,
-      priority,
-      deadline: selectedDate,
+      name: '',
+      description: '',
+      priority: 'without',
+      deadline: '',
     },
   });
 
-  const onSubmit = values => {
-    dispatch(createTask({ values, cardId }));
+  const onSubmit = data => {
+    dispatch(
+      createTask({
+        boardId: board,
+        columnId: id,
+        name: data.name,
+        description: data.description,
+        priority: data.priority,
+        deadline: data.deadline,
+      })
+    );
     onClose();
   };
 
@@ -38,11 +56,9 @@ export default function AddCardModal({ card, onClose }) {
       <h2 className={css.titleModal}>Add card</h2>
       <div className={css.closeModal}>
         <button type="button" onClick={onClose}>
-          <svg
-            width={18}
-            height={18}>
+          <svg width={18} height={18}>
             <use href={`${icons}#icon-x-close`}></use>
-            </svg>
+          </svg>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,7 +66,8 @@ export default function AddCardModal({ card, onClose }) {
           className={css.titleCard}
           type="text"
           placeholder="Title"
-          {...register('title', { required: true })}
+          autoFocus
+          {...register('name', { required: 'This field is required' })}
         />
         {errors.title && <p className={css.errorMessage}>Title is required</p>}
 
@@ -59,7 +76,7 @@ export default function AddCardModal({ card, onClose }) {
             className={css.styledDescription}
             rows={4}
             placeholder="Description"
-            {...register('text')}
+            {...register('description')}
           />
         </label>
 
@@ -90,24 +107,30 @@ export default function AddCardModal({ card, onClose }) {
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
           <span className={css.span}>Today,</span>
-          <Calendar
-            selectedDate={selectedDate}
-            onDateChange={date => {
+          <DatePicker
+            selected={selectedDate}
+            onChange={date => {
+              const formatData = format(date, 'yyyy-MM-dd');
+              console.log(formatData);
               setSelectedDate(date);
-              setValue('deadline', date);
+              setValue('deadline', formatData);
             }}
+            dateFormat="yyyy-MM-dd"
+            minDate={new Date()}
+            locale={enGB}
+            weekStartsOn={1}
           />
         </div>
 
-        {errors.deadline && <p className={css.errorMessage}>Please select a date</p>}
+        {errors.deadline && (
+          <p className={css.errorMessage}>Please select a date</p>
+        )}
 
         <button className={css.addButton} type="submit">
           <div className={css.stylePlus}>
-             <svg
-             width={14}
-             height={14}>
-                 <use href={`${icons}#icon-plus`}></use> 
-             </svg> 
+            <svg width={14} height={14}>
+              <use href={`${icons}#icon-plus`}></use>
+            </svg>
           </div>
           <span className={css.buttonText}>Add</span>
         </button>

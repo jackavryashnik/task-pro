@@ -1,15 +1,13 @@
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
 import { useState } from 'react';
-import css from './Card.module.css'; 
+import css from './Card.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../redux/tasks/operations.js';
 import EditCardModal from '../EditCardModal/EditCardModal';
 import { MoveCardDropdown } from '../MoveCardDropdown/MoveCardDropdown';
 
-export default function Card({ card }) {
-  const [modalCardIsOpen, setmodalCardIsOpen] = useState(false);
-  const [isOpenMoveCardModal, setIsOpenMoveCardModal] = useState(false);
+export default function Card({ openModal, closeModal }) {
   const dispatch = useDispatch();
   const {
     _id: cardId,
@@ -28,7 +26,7 @@ export default function Card({ card }) {
   const cardTextDescription = text.substring(0, 90) + '...';
 
   const bell = new Date() > dateDeadline;
-  
+
   const openCardModal = () => {
     setmodalCardIsOpen(true);
   };
@@ -70,33 +68,36 @@ export default function Card({ card }) {
           </div>
         </div>
         <div className={css.cardButtons}>
-          <button type="button" className={`${css.bell} ${bell ? css.active : ''}`}>
-             <svg
-             width={16}
-             height={16}>
-                 <use href={`${icons}#icon-bell`}></use> 
-             </svg> 
+          <button
+            type="button"
+            className={`${css.bell} ${bell ? css.active : ''}`}
+          >
+            <svg width={16} height={16}>
+              <use href={`${icons}#icon-bell`}></use>
+            </svg>
           </button>
-          <button type="button" className={css.button} onClick={hendleMoveCardModalOpen}>
-             <svg
-             width={16}
-             height={16}>
-                 <use href={`${icons}#icon-arrow-circle-broken-right`}></use> 
-             </svg>
+          <button
+            type="button"
+            className={css.button}
+            onClick={hendleMoveCardModalOpen}
+          >
+            <svg width={16} height={16}>
+              <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
+            </svg>
           </button>
           <button type="button" className={css.button} onClick={openCardModal}>
-             <svg
-             width={16}
-             height={16}>
-                 <use href={`${icons}#icon-pencil`}></use> 
-             </svg>
+            <svg width={16} height={16}>
+              <use href={`${icons}#icon-pencil`}></use>
+            </svg>
           </button>
-          <button type="button" className={css.button} onClick={handleDeleteCard}>
-             <svg
-             width={16}
-             height={16}>
-                 <use href={`${icons}#icon-trash-can`}></use> 
-             </svg> 
+          <button
+            type="button"
+            className={css.button}
+            onClick={handleDeleteCard}
+          >
+            <svg width={16} height={16}>
+              <use href={`${icons}#icon-trash-can`}></use>
+            </svg>
           </button>
         </div>
       </div>
