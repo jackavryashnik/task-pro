@@ -1,28 +1,35 @@
 import css from './DeleteModal.module.css';
 import icons from '../../images/icons.svg';
-import { Button } from '../Button/Button';
-import toast, { Toaster } from 'react-hot-toast';
 
-export const DeleteModal = ({ id, closeModal, handleDeleteBoard }) => {
+import { Button } from '../Button/Button';
+import toast from 'react-hot-toast';
+
+export const DeleteModal = ({ closeModal, onDelete, children }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.container}>
-        <button
-          onClick={() => closeModal()}
-          className={css.buttonClose}
-          type="button"
-          aria-label="Close"
-        >
-          <svg width={18} height={18}>
-            <use href={`${icons}#icon-x-close`}></use>
-          </svg>
-        </button>
-        <p className={css.description}>Are you sure?</p>
+        <div className={css.descriptionContainer}>
+          <p className={css.description}>{children}</p>
+          <button
+            onClick={() => closeModal()}
+            className={css.buttonClose}
+            type="button"
+            aria-label="Close"
+          >
+            <div className={css.iconContainer}>
+              <svg width={18} height={18}>
+                <use href={`${icons}#icon-x-close`}></use>
+              </svg>
+            </div>
+          </button>
+        </div>
         <div className={css.buttonContainer}>
           <Button
+            className={css.button}
             type={'button'}
             onClick={() => {
-              handleDeleteBoard(id);
+
+              onDelete();
               toast.success('Success');
 
               setTimeout(() => {
@@ -32,12 +39,14 @@ export const DeleteModal = ({ id, closeModal, handleDeleteBoard }) => {
           >
             Yes
           </Button>
-          <Button type={'button'} onClick={() => closeModal()}>
+          <Button
+            className={css.button}
+            type={'button'}
+            onClick={() => closeModal()}
+          >
             No
           </Button>
         </div>
-
-        <Toaster position="top-center" />
       </div>
     </div>
   );

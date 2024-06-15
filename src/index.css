@@ -10,8 +10,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --white-modal: #fcfcfc;
   --white: #fdfdfd;
   --white-text: #fff;
+  --scroll: #e8e8e8;
   --black: #121212;
   --dull-black: #161616;
   --noir-black: #151515;

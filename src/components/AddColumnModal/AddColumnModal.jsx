@@ -34,21 +34,17 @@ const AddColumnModal = ({ onClose }) => {
         placeholder="Title"
         className={css.input}
       />
-      {/* <button onClick={handleCreateColumn} className={css.addButton}>
-        <svg className={css.iconPlus} width={28} height={28}>
-          <use href={`${icons}#icon-plus`}></use>
-        </svg>
-        Add
-      </button> */}
-      <Button onClick={handleCreateColumn} className={css.addButton}>
-        <svg className={css.iconPlus} width={28} height={28}>
-          <use href={`${icons}#icon-plus`}></use>
-        </svg>
+      <Button onClick={handleCreateColumn} className={css.button}>
+        <div className={css.iconPlus}>
+          <svg width={14} height={14}>
+            <use href={`${icons}#icon-plus`}></use>
+          </svg>
+        </div>
         Add
       </Button>
-      <button onClick={onClose} className={css.closeButton}>
-        <svg className={css.iconClose} width={16} height={16}>
-          <use href={`${icons}#icon-x-close`}></use>
+      <button onClick={() => onClose()} className={css.closeButton}>
+        <svg className={css.iconClose} width={18} height={18}>
+          <use className={css.iconClose} href={`${icons}#icon-x-close`}></use>
         </svg>
       </button>
     </div>

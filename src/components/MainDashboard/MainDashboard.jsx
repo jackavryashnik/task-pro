@@ -3,6 +3,8 @@ import css from './MainDashboard.module.css';
 import { useTasks } from '../../redux/tasks/selectors';
 import icons from '../../images/icons.svg';
 import AddColumnModal from '../AddColumnModal/AddColumnModal';
+
+import { Button } from '../Button/Button';
 import CreateBoard from '../CreateBoard/CreateBoard';
 
 const MainDashboard = ({ openModal, closeModal }) => {
@@ -21,17 +23,13 @@ const MainDashboard = ({ openModal, closeModal }) => {
               tasks={column.tasks}
             />
           ))}
-          <button
-            onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}
-            className={css.addColumnButton}
-          >
-            <div className={css.svgColumnBtn}>
-              <svg className={css.addIcon} width={28} height={28}>
-                <use href={`${icons}#icon-plus-with-border`}></use>
-              </svg>
-            </div>
-            Add another column
-          </button>
+           <Button className={css.addColumnButton} onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}>
+        <div className={css.iconPlus}>
+          <svg width={14} height={14}>
+            <use href={`${icons}#icon-plus`}></use>
+          </svg>
+        </div>
+        Add another column</Button>
         </div>
       ) : (
         <div className={css.textContainer}>
@@ -54,3 +52,28 @@ const MainDashboard = ({ openModal, closeModal }) => {
 };
 
 export default MainDashboard;
+
+
+
+      //     );
+      //   })}
+      //   <Button className={css.addColumnButton} onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}>
+      //   <div className={css.iconPlus}>
+      //     <svg width={14} height={14}>
+      //       <use href={`${icons}#icon-plus`}></use>
+      //     </svg>
+      //   </div>
+      //   Add another column</Button>
+      // </div>
+
+      // <button
+      //       onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}
+      //       className={css.addColumnButton}
+      //     >
+      //       <div className={css.svgColumnBtn}>
+      //         <svg className={css.addIcon} width={28} height={28}>
+      //           <use href={`${icons}#icon-plus-with-border`}></use>
+      //         </svg>
+      //       </div>
+      //       Add another column
+      //     </button>

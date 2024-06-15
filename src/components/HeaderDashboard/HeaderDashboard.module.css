@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  padding: 14px 20px 0 20px;
   background-color: var(--taskboard-background);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -18,7 +18,7 @@
 
 .boardName {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 18px;
   color: var(--modal-title-color);
 }
 
@@ -26,5 +26,14 @@
   margin-right: 5px;
 }
 
-@media (max-width: 375px) {
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 26px 32px 0 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    padding: 10px 24px 0 24px;
+  }
 }

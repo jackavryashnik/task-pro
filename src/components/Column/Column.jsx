@@ -6,19 +6,24 @@ import icons from '../../images/icons.svg';
 import EditColumnModal from '../EditColumnModal/EditColumnModal';
 import AddCardModal from '../AddCardModal/AddCardModal';
 import { useTasks } from '../../redux/tasks/selectors';
+import { DeleteModal } from '../DeleteModal/DeleteModal';
 import toast from 'react-hot-toast';
+import { Button } from '../Button/Button';
+import clsx from 'clsx';
+
 
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
   const { tasks } = useTasks();
 
   const handleDeleteColumn = () => {
-    if (window.confirm('Are you sure you want to delete this column?')) {
+    try {
       dispatch(deleteColumn(column.id));
       return toast.success('Column deleted successfully');
+    } catch (error) {
+      toast.error(`Column wasn't deleted`);
     }
-    toast.error(`Column wasn't deleted`);
-  };
+  }
 
   return (
     <div className={css.column}>
@@ -26,25 +31,26 @@ const Column = ({ column, openModal, closeModal }) => {
         <h3 className={css.columnTitle}>{column && column.name}</h3>
         <div className={css.columnButtons}>
           <button
+          className={css.buttonItem}
             onClick={() =>
               openModal(
                 <EditColumnModal column={column} onClose={closeModal} />
               )
             }
-            className={css.button}
+
           >
-            <svg className={css.iconEdit} width={24} height={24}>
+            <svg className={css.icon} width={16} height={16}>
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
           </button>
-          <button onClick={handleDeleteColumn} className={css.button}>
-            <svg className={css.iconDel} width={24} height={24}>
+          <button className={css.buttonItem} onClick={() => openModal(<DeleteModal closeModal={closeModal} onDelete={handleDeleteColumn}>Are you sure you want to delete this column?</DeleteModal>)}>
+            <svg className={css.icon} width={16} height={16}>
               <use href={`${icons}#icon-trash-can`}></use>
             </svg>
           </button>
         </div>
       </div>
-      <div className={css.tasks}>
+      <div className={clsx(css.tasks, tasks.length === 0 ? css.anything : null)}>
         <ul>
           {tasks.length > 0 &&
             tasks.map(({ ...task }) => {
@@ -53,15 +59,15 @@ const Column = ({ column, openModal, closeModal }) => {
             })}
         </ul>
       </div>
-      <button
-        onClick={() => openModal(<AddCardModal onClose={closeModal} />)}
-        className={css.addCardButton}
-      >
-        <svg className={css.iconPlus} width={24} height={24}>
-          <use href={`${icons}#icon-plus`}></use>
-        </svg>
+
+      <Button className={css.addCardButton} onClick={() => openModal(<AddCardModal onClose={closeModal} />)}>
+        <div className={css.iconPlus}>
+          <svg width={14} height={14}>
+            <use href={`${icons}#icon-plus`}></use>
+          </svg>
+        </div>
         Add another card
-      </button>
+      </Button>
     </div>
   );
 };
