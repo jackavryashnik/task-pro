@@ -36,33 +36,35 @@ const HomePage = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className={css.homePage}>
-      <div className={clsx([css.sidebarWrapper, !isHidden && css.show])}>
-        <Sidebar
-          className={css.sidebar}
-          openModal={openModal}
-          closeModal={closeModal}
-        />
-      </div>
-      <div
-        className={clsx([css.main, !isHidden && css.showSidebar])}
-        onClick={handleCloseSidebar}
-      >
-        <Header
-          openModal={openModal}
-          closeModal={closeModal}
-          isHidden={isHidden}
-          setter={setIsHidden}
-        />
-        <ScreenPage openModal={openModal} closeModal={closeModal} />
-        <Modal
-          isOpen={isModalOpen}
-          onRequestClose={closeModal}
-          className={css.modal}
-          overlayClassName={css.overlay}
+    <div className={css.homeWrapper}>
+      <div className={css.homePage}>
+        <div className={clsx([css.sidebarWrapper, !isHidden && css.show])}>
+          <Sidebar
+            className={css.sidebar}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        </div>
+        <div
+          className={clsx([css.main, !isHidden && css.showSidebar])}
+          onClick={handleCloseSidebar}
         >
-          {modalContent}
-        </Modal>
+          <Header
+            openModal={openModal}
+            closeModal={closeModal}
+            isHidden={isHidden}
+            setter={setIsHidden}
+          />
+          <ScreenPage openModal={openModal} closeModal={closeModal} />
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            className={css.modal}
+            overlayClassName={css.overlay}
+          >
+            {modalContent}
+          </Modal>
+        </div>
       </div>
     </div>
   );
