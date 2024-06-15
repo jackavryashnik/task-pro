@@ -37,7 +37,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(moveTask.pending, handlePending)
-      .addCase(moveTask.fulfilled, (state) => {
+      .addCase(moveTask.fulfilled, state => {
         state.loading = false;
         state.error = null;
       })
@@ -47,8 +47,6 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = action.payload.boards;
-        state.columns = action.payload.column;
-        state.tasks = action.payload.task;
       })
       .addCase(fetchBoards.rejected, handleRejected)
       .addCase(fetchOneBoard.pending, handlePending)
@@ -65,6 +63,7 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board.push(action.payload.board);
+        state.selectedBoard = action.payload.board;
       })
       .addCase(addBoard.rejected, handleRejected)
       .addCase(editBoard.pending, handlePending)
@@ -75,6 +74,7 @@ const slice = createSlice({
           board => board.id === action.payload.board.id
         );
         state.board[itemIndex] = action.payload.board;
+        state.selectedBoard = action.payload.board;
       })
       .addCase(editBoard.rejected, handleRejected)
       .addCase(deleteBoard.pending, handlePending)

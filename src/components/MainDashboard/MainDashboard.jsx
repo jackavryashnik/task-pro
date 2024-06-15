@@ -5,20 +5,22 @@ import icons from '../../images/icons.svg';
 import AddColumnModal from '../AddColumnModal/AddColumnModal';
 
 const MainDashboard = ({ openModal, closeModal }) => {
-  const { columns = [] } = useTasks();
+  const { columns } = useTasks();
 
   return (
     <div className={css.dashboard}>
       <div className={css.columns}>
-        {columns.map(column => (
-          <Column
-            openModal={openModal}
-            closeModal={closeModal}
-            key={column.id}
-            column={column}
-            tasks={column.tasks}
-          />
-        ))}
+        {columns.map(column => {
+          return (
+            <Column
+              openModal={openModal}
+              closeModal={closeModal}
+              key={column.id}
+              column={column}
+              tasks={column.tasks}
+            />
+          );
+        })}
         <button
           onClick={() => openModal(<AddColumnModal onClose={closeModal} />)}
           className={css.addColumnButton}

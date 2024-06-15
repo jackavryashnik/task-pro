@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
-import { fetchOneBoard } from '../../redux/tasks/operations';
+import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useEffect, useState } from 'react';
 
@@ -19,21 +19,6 @@ export default function Board({
 
   localStorage.setItem('activeBoardId', selectedBoard.id);
   const activeBoardId = localStorage.getItem('activeBoardId');
-
-  const handleClick = () => {
-    setIsEdit(false);
-    openModal(
-      <CreateBoard isEdit={isEdit} setter={setIsEdit} onClose={closeModal} />
-    );
-  };
-
-  const handleDelete = () => {
-    const index = boards.findIndex(board => board.id === id);
-    const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
-    const nextBoard = boards[nextIndex];
-    dispatch(deleteBoard(id));
-    dispatch(fetchOneBoard(nextBoard.id));
-  };
   useEffect(() => {
     if (activeBoardId) {
       const activeElement = document.getElementById(activeBoardId);
@@ -41,12 +26,37 @@ export default function Board({
         activeElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, [activeBoardId]);
+  }, [activeBoardId, selectedBoard]);
+
+  const handleClickFetchBoard = e => {
+    if (selectedBoard.id !== id) {
+      dispatch(fetchOneBoard(id));
+    }
+    e.preventDefault();
+  };
+
+  const handleClick = () => {
+    setIsEdit(false);
+    openModal(
+      <CreateBoard isEdit={isEdit} setIsEdit={setIsEdit} onClose={closeModal} />
+    );
+  };
+
+  const handleDelete = () => {
+    const index = boards.findIndex(board => board.id === id);
+    const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
+    const nextBoard = boards[nextIndex];
+    if (nextBoard.id) {
+      dispatch(fetchOneBoard(nextBoard.id));
+    }
+    dispatch(deleteBoard(id));
+  };
 
   return (
     <li
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
-      onClick={() => dispatch(fetchOneBoard(id))}
+      onClick={handleClickFetchBoard}
+      id={id}
     >
       <div className={css.containerBoard}>
         <svg className={css.icon} width={18} height={18}>
@@ -63,7 +73,19 @@ export default function Board({
             </svg>
           </button>
 
-          <button type="button" className={css.btn} onClick={handleDelete}>
+          <button
+            type="button"
+            className={css.btn}
+            onClick={() =>
+              openModal(
+                <DeleteModal
+                  id={id}
+                  closeModal={closeModal}
+                  handleDelete={handleDelete}
+                />
+              )
+            }
+          >
             <svg className={css.focusIcon} width={16} height={16}>
               <use href={`${Icon}#icon-trash-can`}></use>
             </svg>
