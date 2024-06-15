@@ -24,7 +24,7 @@ export default function LoginForm() {
       .then(() => {
         toast.success('Welcome!')
         navigate('/home', { replace: true });
-      }).catch(toast.error(`Email or password is incorrect`));
+      }).catch(() => toast.error(`Email or password is incorrect`));
   };
 
   return (
