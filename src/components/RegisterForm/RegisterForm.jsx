@@ -30,6 +30,10 @@ export default function RegisterForm() {
       .catch(() => toast.error(`Email already registered`));
   };
 
+  const handleRegisterClick = () => {
+    console.log('Register with Google button clicked');
+  };
+
   return (
     <form onSubmit={handleSubmit(submitForm)} className={css.form}>
       <div className={css.nav}>
@@ -74,7 +78,7 @@ export default function RegisterForm() {
 
       <Button type="submit">Register Now</Button>
       <div className={css.spacer}>Or</div>
-      <GoogleButton />
+      <GoogleButton text="Register with Google" onClick={handleRegisterClick} />
 
       <Toaster position="top-center" />
     </form>
