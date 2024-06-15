@@ -146,6 +146,7 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = [];
+        state.selectedBoard = [];
         state.columns = [];
         state.tasks = [];
       })
