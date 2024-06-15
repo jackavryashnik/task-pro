@@ -43,7 +43,8 @@
   color: #161616;
 }
 
-.registerButton:hover {
+.registerButton:hover,
+.registerButton:focus {
   background-color: var(--green-btn-hover);
 }
 

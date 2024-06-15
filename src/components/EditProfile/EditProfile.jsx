@@ -20,7 +20,12 @@ export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
 
-  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm();
 
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
@@ -125,7 +130,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 2000);
       } else {
         // відправка у форматі JSON
         const result = await dispatch(
@@ -139,7 +144,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 2000);
       }
     } catch (error) {
       console.log(error);

@@ -6,6 +6,7 @@
   position: relative;
 
   background: var(--modal-background);
+  border: 1px solid var(--modal-border-color);
 }
 
 .closeBtn {
@@ -89,90 +90,17 @@ input[type='radio'] {
   display: none;
 }
 
-.modal {
-  border-radius: 8px;
-  width: 300px;
-  height: 234px;
-  padding: 24px;
-  position: relative;
-  background: #151515;
-}
-
-.closeBtn {
-  position: absolute;
-  right: 14px;
-  top: 14px;
-  background-color: transparent;
-  border: none;
-  color: #fff;
-}
-
-.title {
-  font-weight: 500;
-  font-size: 18px;
-  letter-spacing: -0.02em;
-  margin-bottom: 14px;
-  color: #fff;
-}
-
-.line {
-  width: 252px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  margin: 14px 0;
-}
-
-.subtitle {
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-
-.showAll {
-  font-size: 12px;
-  letter-spacing: -0.02em;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  background-color: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.options {
-  width: 110px;
-  height: 96px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.priorityOpt {
-  font-size: 12px;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .radioWrapper {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.radioInput {
-  display: none;
-}
-
 .radioButton {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: var(--label-color-grey);
+  background-color: var(--radio-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +116,7 @@ input[type='radio'] {
 }
 
 .radioInput:checked + .radioButton .innerCircle {
-  border: 2px solid black;
+  border: 2px solid var(--modal-background);
 }
 
 .priorityOpt:nth-of-type(2) .radioButton {
