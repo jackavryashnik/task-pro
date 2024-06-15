@@ -6,6 +6,7 @@ import icons from '../../images/icons.svg';
 import EditColumnModal from '../EditColumnModal/EditColumnModal';
 import AddCardModal from '../AddCardModal/AddCardModal';
 import { useTasks } from '../../redux/tasks/selectors';
+import toast from 'react-hot-toast';
 
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const Column = ({ column, openModal, closeModal }) => {
   const handleDeleteColumn = () => {
     if (window.confirm('Are you sure you want to delete this column?')) {
       dispatch(deleteColumn(column.id));
-    }
+      toast.success('Column deleted successfully');
+    } 
+    toast.error(`Column can't be deleted`);
   };
 
   return (

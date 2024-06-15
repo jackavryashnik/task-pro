@@ -26,7 +26,7 @@ export default function RegisterForm() {
       .then(() => {
         toast.success('Success register');
         navigate('/home', { replace: true });
-      }).catch(error => toast.error(error.message));
+      }).catch(toast.error(`Email or password is incorrect`));
   };
 
   return (
