@@ -17,6 +17,7 @@
 .addColumnButton {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 14px 78px;
   background-color: #121212;
   color: #fff;
@@ -31,18 +32,25 @@
   background-color: #bedbb0;
 }
 
-.addIcon {
+.svgColumnBtn {
+  display: flex;
+  align-items: center;
   margin-right: 8px;
+}
+
+.addIcon {
+  fill: #fff;
+  stroke: #fff;
 }
 
 .textContainer {
   display: flex;
-  margin: 241px 347px;
+  /* марджины как заглушки, надо исправить */
+  margin: 292px 20px;
   /* text-align: center; */
 }
 
 .text {
-  /* display: flex; */
   font-size: 12px;
   line-height: 1.33333;
   text-align: center;
@@ -80,6 +88,12 @@
     line-height: 1.28571;
     /* color: rgba(255, 255, 255, 0.5); */
   }
+
+  .textContainer {
+    /* марджины как заглушки, надо исправить */
+
+    margin: 368px 141px;
+  }
 }
 
 /* Desktop */
@@ -91,5 +105,10 @@
   .dashboard {
     align-items: flex-start;
     padding: 10px 24px;
+  }
+  .textContainer {
+    /* марджины как заглушки, надо исправить */
+
+    margin: 241px 347px;
   }
 }

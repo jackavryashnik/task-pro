@@ -27,7 +27,7 @@ const MainDashboard = ({ openModal, closeModal }) => {
           >
             <div className={css.svgColumnBtn}>
               <svg className={css.addIcon} width={28} height={28}>
-                <use href={`${icons}#icon-plus`}></use>
+                <use href={`${icons}#icon-plus-with-border`}></use>
               </svg>
             </div>
             Add another column
