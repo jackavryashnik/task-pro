@@ -71,7 +71,9 @@ button.addColumnButton > .iconPlus {
   background-color: #bedbb0;
 }
 
-.addIcon {
+.svgColumnBtn {
+  display: flex;
+  align-items: center;
   margin-right: 8px;
 }
 
@@ -85,6 +87,36 @@ button.addColumnButton > .iconPlus {
     width: 347px;
   }
 
+
+  .addIcon {
+    fill: #fff;
+    stroke: #fff;
+  }
+
+  .textContainer {
+    display: flex;
+    /* марджины как заглушки, надо исправить */
+    margin: 292px 20px;
+    /* text-align: center; */
+  }
+
+  .text {
+    font-size: 12px;
+    line-height: 1.33333;
+    text-align: center;
+    /* color: rgba(255, 255, 255, 0.5); */
+  }
+
+  .spanCreateBoard {
+    color: #bedbb0;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+}
+
+/* Mobile Adapted */
+@media (min-width: 375px) {
   .addColumnButton {
     min-width: 334px;
   }
@@ -97,10 +129,23 @@ button.addColumnButton > .iconPlus {
     padding: 26px 32px;
   }
 
+
   .columns {
     gap: 18px;
     width: 704px;
     padding-bottom: 52px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.28571;
+    /* color: rgba(255, 255, 255, 0.5); */
+  }
+
+  .textContainer {
+    /* марджины как заглушки, надо исправить */
+
+    margin: 368px 141px;
   }
 }
 
@@ -114,5 +159,12 @@ button.addColumnButton > .iconPlus {
   .columns {
     width: 1132px;
     padding-bottom: 16px;
+  }
+
+  .textContainer {
+    /* марджины как заглушки, надо исправить */
+
+    margin: 241px 347px;
+
   }
 }

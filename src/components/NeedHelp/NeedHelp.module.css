@@ -6,6 +6,7 @@
   background-color: var(--modal-background);
   padding: 24px;
   margin: 0 14px;
+  border: 1px solid var(--modal-border-color);
 }
 
 .modalTitle {

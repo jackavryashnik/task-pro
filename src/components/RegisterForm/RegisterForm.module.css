@@ -43,7 +43,8 @@
   color: #161616;
 }
 
-.registerButton:hover {
+.registerButton:hover,
+.registerButton:focus {
   background-color: var(--green-btn-hover);
 }
 
@@ -51,4 +52,35 @@ input.color:-webkit-autofill {
   box-shadow: 0 0 0px 1000px transparent inset;
   -webkit-box-shadow: inset 0 0 0 50px var(--noir-black);
   -webkit-text-fill-color: var(--white-text);
+}
+
+.spacer {
+  font-size: 1.125rem;
+  line-height: 1.375rem;
+  color: var(--label-color-grey);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.spacer::before {
+  display: block;
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  margin-right: 12px;
+  border-bottom: 1px solid var(--label-color-grey);
+}
+
+.spacer::after {
+  display: block;
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  margin-left: 12px;
+  border-bottom: 1px solid var(--label-color-grey);
 }

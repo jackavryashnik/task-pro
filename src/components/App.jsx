@@ -7,11 +7,12 @@ import { selectIsRefreshing, selectUserTheme } from '../redux/auth/selectors';
 import { Loader } from './Loader/Loader';
 import { Navigate } from 'react-router-dom';
 import {Toaster} from 'react-hot-toast';
+import Layout from './Layout/Layout';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
 const AuthPage = lazy(() => import('../pages/AuthPage/AuthPage'));
-const TaskBoard = lazy(() => import('./TaskBoard/TaskBoard'));
+const ScreensPage = lazy(() => import('../pages/ScreensPage/ScreensPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 const THEMES = ['light', 'dark', 'violet'];
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <>
+    <Layout>
       {isRefreshing ? (
         <Loader />
       ) : (
@@ -51,18 +53,17 @@ function App() {
                 element={
                   <PrivateRout
                     redirectTo="/welcome"
-                    component={<TaskBoard />}
+                    component={<ScreensPage />}
                   />
                 }
               />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-
         </Suspense>
       )}
-
       <Toaster position="top-center" />
+      </Layout>
     </>
   );
 }

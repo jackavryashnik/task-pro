@@ -26,14 +26,14 @@ export default function Board({
         activeElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, [activeBoardId, selectedBoard]);
+  }, [activeBoardId]);
 
-  const handleClickFetchBoard = e => {
-    if (selectedBoard.id !== id) {
-      dispatch(fetchOneBoard(id));
-    }
-    e.preventDefault();
-  };
+  // const handleClickFetchBoard = e => {
+  //   if (selectedBoard.id !== id) {
+  //     dispatch(fetchOneBoard(id));
+  //   }
+  //   e.preventDefault();
+  // };
 
   const handleClick = () => {
     setIsEdit(false);
@@ -42,20 +42,26 @@ export default function Board({
     );
   };
 
-  const handleDelete = () => {
-    const index = boards.findIndex(board => board.id === id);
-    const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
-    const nextBoard = boards[nextIndex];
-    if (nextBoard.id) {
-      dispatch(fetchOneBoard(nextBoard.id));
+  const handleDeleteBoard = id => {
+    if (boards.length > 1) {
+      const index = boards.findIndex(board => board.id === id);
+      const nextIndex =
+        index === boards.length - 1 && boards.length > 1
+          ? index - 1
+          : index + 1;
+      const nextBoard = boards[nextIndex];
+      if (nextBoard.id) {
+        dispatch(fetchOneBoard(nextBoard.id));
+      }
     }
+
     dispatch(deleteBoard(id));
   };
 
   return (
     <li
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
-      onClick={handleClickFetchBoard}
+      // onClick={handleClickFetchBoard}
       id={id}
     >
       <div className={css.containerBoard}>
@@ -76,7 +82,7 @@ export default function Board({
           <button
             type="button"
             className={css.btn}
-            onClick={() => openModal(<DeleteModal closeModal={closeModal} onDelete={handleDelete}>
+            onClick={() => openModal(<DeleteModal closeModal={closeModal} onDelete={handleDeleteBoard}>
                 Delete this board?
               </DeleteModal>)}>
             <svg className={css.focusIcon} width={16} height={16}>

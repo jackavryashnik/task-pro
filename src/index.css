@@ -111,7 +111,13 @@ body.dark {
   --logout-icon-hover-color: #9dc888;
   --username-text-color: #fff;
   --theme-selector-text-color: rgba(255, 255, 255, 0.5);
-  --modal-border-color: #bedbb0;
+  --modal-border-color: rgba(190, 219, 176, 0.5);
+  --input-text-color: #fff;
+  --input-border-color: rgba(190, 219, 176, 0.4);
+  --input-hover-border-color: rgb(190, 219, 176);
+  --edit-profile-plus-background: #bedbb0;
+  --radio-background: rgba(255, 255, 255, 0.3);
+  --theme-modal-border-color: #BEDBB0;
 }
 
 body.light {
@@ -144,7 +150,13 @@ body.light {
   --logout-icon-hover-color: #9dc888;
   --username-text-color: #161616;
   --theme-selector-text-color: #161616;
-  --modal-border-color: #bedbb0;
+  --modal-border-color: transparent;
+  --input-text-color: #161616;
+  --input-border-color: rgba(190, 219, 176, 0.4);
+  --input-hover-border-color: rgb(190, 219, 176);
+  --edit-profile-plus-background: #bedbb0;
+  --radio-background: rgba(22, 22, 22, 0.3);
+  --theme-modal-border-color: #BEDBB0;
 }
 
 body.violet {
@@ -177,5 +189,11 @@ body.violet {
   --logout-icon-hover-color: #b8bcfd;
   --username-text-color: #161616;
   --theme-selector-text-color: #161616;
-  --modal-border-color: #ecedfd;
+  --modal-border-color: transparent
+  --input-text-color: #161616;
+  --input-border-color: rgba(82, 85, 188, 0.4);
+  --input-hover-border-color: rgb(82, 85, 188);
+  --edit-profile-plus-background: #ecedfd;
+  --radio-background: rgba(22, 22, 22, 0.3);
+  --theme-modal-border-color: #ECEDFD;
 }

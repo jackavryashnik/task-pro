@@ -2,7 +2,11 @@ import { useId, useState } from 'react';
 import Icon from '../../images/icons.svg';
 import css from './CreateBoard.module.css';
 import { backgrounds } from '../../images/bgImages';
-import { addBoard, editBoard } from '../../redux/tasks/operations';
+import {
+  addBoard,
+  editBoard,
+  fetchOneBoard,
+} from '../../redux/tasks/operations';
 import { Button } from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { useTasks } from '../../redux/tasks/selectors';
@@ -43,10 +47,9 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
     )
       .unwrap()
       .then(createdBoard => {
-        localStorage.setItem('activeBoardId', createdBoard.board.id);
+        dispatch(fetchOneBoard(createdBoard.board.id));
+        onClose();
       });
-
-    onClose();
   };
 
   const handleSubmitEdit = e => {

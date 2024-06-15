@@ -2,8 +2,7 @@ import css from './DeleteModal.module.css';
 import icons from '../../images/icons.svg';
 
 import { Button } from '../Button/Button';
-
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const DeleteModal = ({ closeModal, onDelete, children }) => {
   return (
@@ -29,8 +28,8 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
             className={css.button}
             type={'button'}
             onClick={() => {
-              onDelete();
 
+              onDelete();
               toast.success('Success');
 
               setTimeout(() => {
@@ -48,7 +47,6 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
             No
           </Button>
         </div>
-        <Toaster position="top-center" />
       </div>
     </div>
   );
