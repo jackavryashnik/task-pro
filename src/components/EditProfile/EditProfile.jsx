@@ -125,7 +125,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 500)
       } else {
         // відправка у форматі JSON
         const result = await dispatch(
@@ -139,7 +139,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 500)
       }
     } catch (error) {
       console.log(error);

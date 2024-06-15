@@ -76,16 +76,9 @@ export default function Board({
           <button
             type="button"
             className={css.btn}
-            onClick={() =>
-              openModal(
-                <DeleteModal
-                  id={id}
-                  closeModal={closeModal}
-                  handleDelete={handleDelete}
-                />
-              )
-            }
-          >
+            onClick={() => openModal(<DeleteModal closeModal={closeModal} onDelete={handleDelete}>
+                Delete this board?
+              </DeleteModal>)}>
             <svg className={css.focusIcon} width={16} height={16}>
               <use href={`${Icon}#icon-trash-can`}></use>
             </svg>

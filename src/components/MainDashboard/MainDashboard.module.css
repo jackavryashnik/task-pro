@@ -4,27 +4,67 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
   padding: 39px 20px;
   background-color: var(--taskboard-background);
 }
 
 .columns {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 34px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  padding-bottom: 24px;
 }
+
+.columns::-webkit-scrollbar {
+  height: 12px;
+}
+
+.columns::-webkit-scrollbar-track {
+  background: var(--scroll);
+  border-radius: 10px;
+}
+
+.columns::-webkit-scrollbar-thumb {
+  background-color: rgba(22, 22, 22, 0.10);
+  border-radius: 10px;
+}
+
+.columns::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(22, 22, 22, 0.20);
+}
+
 
 .addColumnButton {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 14px 78px;
-  background-color: #121212;
-  color: #fff;
-  border: none;
+  gap: 8px;
+
+  width: 335px;
+  height: 56px;
+
+  background-color: var(--white-text);
+  color: var(--dull-black);
+}
+
+button.addColumnButton > .iconPlus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
+
+  background: var(--dull-black);
+  stroke: var(--white-text);
+  fill: var(--white-text);
 }
 
 .addColumnButton:hover {
@@ -35,34 +75,44 @@
   margin-right: 8px;
 }
 
-/* Mobile Adapted */
-@media (min-width: 375px) {
+.addColumnButton:hover,
+.addColumnButton:focus {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (min-width: 375px) {
+  .columns {
+    width: 347px;
+  }
+
   .addColumnButton {
-    min-width: 335px;
-    height: 56px;
+    min-width: 334px;
   }
 }
 
 /* Tablet */
-@media (min-width: 768px) {
-  .addColumnButton {
-    min-width: 334px;
-  }
-
+@media screen and (min-width: 768px){
   .dashboard {
     align-items: flex-start;
     padding: 26px 32px;
   }
+
+  .columns {
+    gap: 18px;
+    width: 704px;
+    padding-bottom: 52px;
+  }
 }
 
 /* Desktop */
-@media (min-width: 1440px) {
-  .addColumnButton {
-    min-width: 333px;
-  }
-
+@media screen and (min-width: 1440px) {
   .dashboard {
     align-items: flex-start;
     padding: 10px 24px;
+  }
+
+  .columns {
+    width: 1132px;
+    padding-bottom: 16px;
   }
 }
