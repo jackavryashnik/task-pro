@@ -14,11 +14,14 @@ const AddColumnModal = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleCreateColumn = () => {
-    if (columnName.trim()) {
-      dispatch(createColumn({ name: columnName, boardId: selectedBoard.id }));
-      onClose();
-      setColumnName('');
+    if (columnName === '') {
+      alert('Required');
     }
+    dispatch(
+      createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
+    );
+    onClose();
+    setColumnName('');
   };
 
   return (
