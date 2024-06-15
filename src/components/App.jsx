@@ -7,7 +7,6 @@ import { selectIsRefreshing, selectUserTheme } from '../redux/auth/selectors';
 import { Loader } from './Loader/Loader';
 import { Navigate } from 'react-router-dom';
 import {Toaster} from 'react-hot-toast';
-import Layout from './Layout/Layout';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('../pages/WelcomePage/WelcomePage'));
@@ -28,7 +27,6 @@ function App() {
 
   return (
     <>
-    <Layout>
       {isRefreshing ? (
         <Loader />
       ) : (
@@ -63,7 +61,6 @@ function App() {
         </Suspense>
       )}
       <Toaster position="top-center" />
-      </Layout>
     </>
   );
 }

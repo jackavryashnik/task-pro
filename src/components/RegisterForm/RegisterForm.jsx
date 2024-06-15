@@ -75,9 +75,7 @@ export default function RegisterForm() {
       <Button type="submit">Register Now</Button>
       <div className={css.spacer}>Or</div>
       <GoogleButton />
-      <Button type="submit" className={css.registerButton}>
-        Register Now
-      </Button>
+
       <Toaster position="top-center" />
     </form>
   );

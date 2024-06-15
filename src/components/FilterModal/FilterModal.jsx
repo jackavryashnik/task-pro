@@ -3,8 +3,8 @@ import css from './FilterModal.module.css';
 import clsx from 'clsx';
 import icons from '../../images/icons.svg';
 
-const FilterModal = () => {
-  const [selectedPriority, setSelectedPriority] = useState('without');
+const FilterModal = ({onClose}) => {
+  const [selectedPriority, setSelectedPriority] = useState('none');
 
   const handlePriorityChange = event => {
     setSelectedPriority(event.target.value);
@@ -12,7 +12,7 @@ const FilterModal = () => {
 
   return (
     <div className={css.modal}>
-      <button type="button" className={css.closeBtn}>
+      <button type="button" className={css.closeBtn} onClick={onClose}>
         <svg width={18} height={18}>
         <use href={`${icons}#icon-x-close`}></use>
         </svg>
@@ -21,7 +21,7 @@ const FilterModal = () => {
       <div className={css.line}></div>
       <div className={css.container}>
         <h3 className={css.subtitle}>Label color</h3>
-        <button type="button" className={css.showAll}>
+        <button type="button" className={css.showAll} onClick={()=> setSelectedPriority('none')}>
           Show all
         </button>
       </div>
