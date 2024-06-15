@@ -5,6 +5,7 @@
   padding: 24px;
   width: 100%;
   background: var(--modal-background);
+  border: 1px solid var(--modal-border-color);
 }
 
 @media only screen and (min-width: 375px) {
@@ -55,7 +56,7 @@
   margin-bottom: 14px;
   background-color: transparent;
   color: var(--modal-title-color);
-  transition: var();
+  transition: opacity var(--transition);
 }
 
 .titleCard:hover,
@@ -112,7 +113,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: var();
+  transition: background-color var(--transition);
   cursor: pointer;
 }
 

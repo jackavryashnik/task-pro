@@ -2,7 +2,11 @@ import { useId, useState } from 'react';
 import Icon from '../../images/icons.svg';
 import css from './CreateBoard.module.css';
 import { backgrounds } from '../../images/bgImages';
-import { addBoard, editBoard } from '../../redux/tasks/operations';
+import {
+  addBoard,
+  editBoard,
+  fetchOneBoard,
+} from '../../redux/tasks/operations';
 import { Button } from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { useTasks } from '../../redux/tasks/selectors';
@@ -18,7 +22,7 @@ const icons = [
   '#icon-hexagon',
 ];
 
-export default function CreateBoard({ onClose, isEdit, setter }) {
+export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
   const inputBgId = useId();
@@ -40,9 +44,16 @@ export default function CreateBoard({ onClose, isEdit, setter }) {
         icon: selectedIcon,
         background: selectedBackground,
       })
-    );
-    onClose();
+    )
+      .unwrap()
+      .then(createdBoard => {
+        dispatch(fetchOneBoard(createdBoard.board.id));
+        // localStorage.setItem('activeBoardId', createdBoard.board.id);
+        console.log(createdBoard.board.id);
+        onClose();
+      });
   };
+
   const handleSubmitEdit = e => {
     e.preventDefault();
     dispatch(
@@ -59,7 +70,7 @@ export default function CreateBoard({ onClose, isEdit, setter }) {
 
   const handleClick = () => {
     if (isEdit) {
-      setter(true);
+      setIsEdit(true);
     }
     onClose();
   };

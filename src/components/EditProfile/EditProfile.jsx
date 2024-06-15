@@ -14,13 +14,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import { updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
 
-  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm();
 
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
@@ -125,7 +130,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 2000);
       } else {
         // відправка у форматі JSON
         const result = await dispatch(
@@ -139,7 +144,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 2000)
+        }, 2000);
       }
     } catch (error) {
       console.log(error);
@@ -240,7 +245,6 @@ export const EditProfile = ({ closeModal }) => {
         </form>
 
         <div>
-          <Toaster position="top-center" />
         </div>
       </div>
     </div>

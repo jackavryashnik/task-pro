@@ -2,9 +2,13 @@ import { useTasks } from '../../redux/tasks/selectors';
 import css from './BoardList.module.css';
 
 import Board from '../Board/Board';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchOneBoard } from '../../redux/tasks/operations';
 
 export default function BoardList({ openModal, closeModal }) {
-  const { boards } = useTasks();
+  const { boards, selectedBoard } = useTasks();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -12,12 +16,23 @@ export default function BoardList({ openModal, closeModal }) {
         <ul className={css.list}>
           {boards.map(({ ...board }) => {
             return (
-              <Board
+              <NavLink
+                className={css.link}
                 key={board.id}
-                board={board}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
+                to={`/home/${board.id}`}
+                onClick={e => {
+                  if (selectedBoard.id !== board.id) {
+                    dispatch(fetchOneBoard(board.id));
+                  }
+                  e.preventDefault();
+                }}
+              >
+                <Board
+                  board={board}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              </NavLink>
             );
           })}
         </ul>

@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { register as authRegister } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import { GoogleButton } from '../GoogleButton/GoogleButton';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -23,8 +24,10 @@ export default function RegisterForm() {
     dispatch(authRegister(data))
       .unwrap()
       .then(() => {
+        toast.success('Success register');
         navigate('/home', { replace: true });
-      });
+      })
+      .catch(() => toast.error(`Email already registered`));
   };
 
   return (
@@ -72,6 +75,10 @@ export default function RegisterForm() {
       <Button type="submit">Register Now</Button>
       <div className={css.spacer}>Or</div>
       <GoogleButton />
+      <Button type="submit" className={css.registerButton}>
+        Register Now
+      </Button>
+      <Toaster position="top-center" />
     </form>
   );
 }

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { login } from '../../redux/auth/operations';
 import { GoogleButton } from '../GoogleButton/GoogleButton';
+import toast from 'react-hot-toast';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -22,8 +23,10 @@ export default function LoginForm() {
     dispatch(login(data))
       .unwrap()
       .then(() => {
+        toast.success('Welcome!');
         navigate('/home', { replace: true });
-      });
+      })
+      .catch(() => toast.error(`Email or password is incorrect`));
   };
 
   return (
@@ -58,7 +61,9 @@ export default function LoginForm() {
         />
       </div>
 
-      <Button type="submit">Log In Now</Button>
+      <Button type="submit" className={css.loginButton}>
+        Log In Now
+      </Button>
       <div className={css.spacer}>Or</div>
       <GoogleButton />
     </form>

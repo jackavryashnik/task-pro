@@ -27,6 +27,7 @@
   --label-color-red: #e09cb5;
   --label-color-green: #bedbb0;
   --form-error-red: #e7b4ad;
+  --transition: 250ms ease-in;
 }
 
 *,
@@ -73,7 +74,8 @@ img {
   height: auto;
 }
 
-input {
+input,
+textarea {
   outline: none;
 }
 
@@ -88,7 +90,7 @@ body.dark {
   --btn-hover-background: #9dc888;
   --icon-stroke-color: rgba(255, 255, 255, 0.8);
   --border-color: rgba(255, 255, 255, 0.1);
-  --modal-background: #161616;
+  --modal-background: #151515;
   --modal-title-color: #fff;
   --label-text-color: rgba(255, 255, 255, 0.5);
   --btn-text-color: #161616;
@@ -97,8 +99,23 @@ body.dark {
   --card-background: #121212;
   --card-desc-text-color: rgba(255, 255, 255, 0.5);
   --card-btn-color: rgba(255, 255, 255, 0.5);
-  --help-component-background: #1f1f1f;
+  --support-component-background: #1f1f1f;
   --close-icon-color: #fff;
+  --logo-background: #1f1f1f;
+  --plus-btn-background: #bedbb0;
+  --plus-btn-hover-background: #9dc888;
+  --plus-icon-color: #121212;
+  --logout-icon-color: #bedbb0;
+  --logout-icon-hover-color: #9dc888;
+  --username-text-color: #fff;
+  --theme-selector-text-color: rgba(255, 255, 255, 0.5);
+  --modal-border-color: rgba(190, 219, 176, 0.5);
+  --input-text-color: #fff;
+  --input-border-color: rgba(190, 219, 176, 0.4);
+  --input-hover-border-color: rgb(190, 219, 176);
+  --edit-profile-plus-background: #bedbb0;
+  --radio-background: rgba(255, 255, 255, 0.3);
+  --theme-modal-border-color: #BEDBB0;
 }
 
 body.light {
@@ -106,13 +123,13 @@ body.light {
   --header-background: #fcfcfc;
   --sidebar-background: #fff;
   --taskboard-background: #f6f6f7;
-  --header-text-color: #161616cc;
+  --header-text-color: rgba(22, 22, 22, 0.8);
   --other-text-color: rgba(22, 22, 22, 0.5);
   --btn-background: #bedbb0;
   --btn-hover-background: #9dc888;
   --icon-stroke-color: rgba(22, 22, 22, 0.8);
   --border-color: rgba(22, 22, 22, 0.1);
-  --modal-background: #fff;
+  --modal-background: #fcfcfc;
   --modal-title-color: #161616;
   --label-text-color: rgba(22, 22, 22, 0.5);
   --btn-text-color: #161616;
@@ -121,22 +138,37 @@ body.light {
   --card-background: #ffffff;
   --card-desc-text-color: rgba(22, 22, 22, 0.7);
   --card-btn-color: rgba(22, 22, 22, 0.5);
-  --help-component-background: #f6f6f7;
+  --support-component-background: #f6f6f7;
   --close-icon-color: #161616;
+  --logo-background: #1f1f1f;
+  --plus-btn-background: #bedbb0;
+  --plus-btn-hover-background: #9dc888;
+  --plus-icon-color: #121212;
+  --logout-icon-color: #bedbb0;
+  --logout-icon-hover-color: #9dc888;
+  --username-text-color: #161616;
+  --theme-selector-text-color: #161616;
+  --modal-border-color: transparent;
+  --input-text-color: #161616;
+  --input-border-color: rgba(190, 219, 176, 0.4);
+  --input-hover-border-color: rgb(190, 219, 176);
+  --edit-profile-plus-background: #bedbb0;
+  --radio-background: rgba(22, 22, 22, 0.3);
+  --theme-modal-border-color: #BEDBB0;
 }
 
 body.violet {
   --main-text-color: #fff;
   --header-background: #fff;
   --sidebar-background: #5255bc;
-  --taskboard-background: #ecedfd66;
-  --header-text-color: #161616cc;
+  --taskboard-background: #ecedfd;
+  --header-text-color: rgba(22, 22, 22, 0.8);
   --other-text-color: #ffffff80;
   --btn-background: #5255bc;
   --btn-hover-background: #7b7ede;
   --icon-stroke-color: rgba(22, 22, 22, 0.8);
   --border-color: rgba(255, 255, 255, 0.1);
-  --modal-background: #fff;
+  --modal-background: #fcfcfc;
   --modal-title-color: #161616;
   --label-text-color: rgba(22, 22, 22, 0.5);
   --btn-text-color: #ffffff;
@@ -145,6 +177,21 @@ body.violet {
   --card-background: #ffffff;
   --card-desc-text-color: rgba(22, 22, 22, 0.7);
   --card-btn-color: rgba(22, 22, 22, 0.5);
-  --help-component-background: rgba(236, 237, 253, 0.4);
+  --support-component-background: rgba(236, 237, 253, 0.4);
   --close-icon-color: #161616;
+  --logo-background: #ecedfd;
+  --plus-btn-background: #b8bcfd;
+  --plus-btn-hover-background: #979cea;
+  --plus-icon-color: #ffffff;
+  --logout-icon-color: #ffffff;
+  --logout-icon-hover-color: #b8bcfd;
+  --username-text-color: #161616;
+  --theme-selector-text-color: #161616;
+  --modal-border-color: transparent
+  --input-text-color: #161616;
+  --input-border-color: rgba(82, 85, 188, 0.4);
+  --input-hover-border-color: rgb(82, 85, 188);
+  --edit-profile-plus-background: #ecedfd;
+  --radio-background: rgba(22, 22, 22, 0.3);
+  --theme-modal-border-color: #ECEDFD;
 }
