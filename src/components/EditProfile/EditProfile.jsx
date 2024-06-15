@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
 import { updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -240,7 +240,6 @@ export const EditProfile = ({ closeModal }) => {
         </form>
 
         <div>
-          <Toaster position="top-center" />
         </div>
       </div>
     </div>

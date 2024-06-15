@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { register as authRegister } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -22,8 +23,10 @@ export default function RegisterForm() {
     dispatch(authRegister(data))
       .unwrap()
       .then(() => {
+        toast.success('Success register');
         navigate('/home', { replace: true });
-      });
+      })
+      .catch(() => toast.error(`Email already registered`));
   };
 
   return (
@@ -71,6 +74,7 @@ export default function RegisterForm() {
       <Button type="submit" className={css.registerButton}>
         Register Now
       </Button>
+      <Toaster position="top-center" />
     </form>
   );
 }

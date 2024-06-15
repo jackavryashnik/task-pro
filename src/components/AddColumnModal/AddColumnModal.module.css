@@ -34,8 +34,7 @@
   background-color: transparent;
   color: var(--modal-title-color);
   opacity: 0.4;
-  
-  transition: var(--transition);
+  transition: opacity var(--transition);
 }
 
 .closeButton {

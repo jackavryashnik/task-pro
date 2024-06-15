@@ -5,7 +5,7 @@ import { Button } from '../Button/Button';
 
 import toast, { Toaster } from 'react-hot-toast';
 
-export const DeleteModal = ({ closeModal, callback, children }) => {
+export const DeleteModal = ({ closeModal, onDelete, children }) => {
   return (
     <div className={css.wrapper}>
       <div className={css.container}>
@@ -18,32 +18,36 @@ export const DeleteModal = ({ closeModal, callback, children }) => {
             aria-label="Close"
           >
             <div className={css.iconContainer}>
-            <svg width={18} height={18}>
-              <use href={`${icons}#icon-x-close`}></use>
-            </svg>
+              <svg width={18} height={18}>
+                <use href={`${icons}#icon-x-close`}></use>
+              </svg>
             </div>
           </button>
         </div>
         <div className={css.buttonContainer}>
           <Button
-          className={css.button}
+            className={css.button}
             type={'button'}
             onClick={() => {
-              callback();
+              onDelete();
+
               toast.success('Success');
 
               setTimeout(() => {
                 closeModal();
-              }, 2000);
+              }, 500);
             }}
           >
             Yes
           </Button>
-          <Button className={css.button} type={'button'} onClick={() => closeModal()}>
+          <Button
+            className={css.button}
+            type={'button'}
+            onClick={() => closeModal()}
+          >
             No
           </Button>
         </div>
-
         <Toaster position="top-center" />
       </div>
     </div>
