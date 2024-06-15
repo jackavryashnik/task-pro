@@ -28,7 +28,7 @@ const slice = createSlice({
   name: 'tasks',
   initialState: {
     board: [],
-    selectedBoard: [],
+    selectedBoard: null,
     columns: [],
     tasks: [],
     loading: false,
@@ -146,7 +146,7 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = [];
-        state.selectedBoard = [];
+        state.selectedBoard = null;
         state.columns = [];
         state.tasks = [];
       })
