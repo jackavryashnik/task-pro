@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { login } from '../../redux/auth/operations';
+import { GoogleButton } from '../GoogleButton/GoogleButton';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -58,6 +59,8 @@ export default function LoginForm() {
       </div>
 
       <Button type="submit">Log In Now</Button>
+      <div className={css.spacer}>Or</div>
+      <GoogleButton />
     </form>
   );
 }

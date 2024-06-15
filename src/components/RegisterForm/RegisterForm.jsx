@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { register as authRegister } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
+import { GoogleButton } from '../GoogleButton/GoogleButton';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -69,6 +70,8 @@ export default function RegisterForm() {
       </div>
 
       <Button type="submit">Register Now</Button>
+      <div className={css.spacer}>Or</div>
+      <GoogleButton />
     </form>
   );
 }
