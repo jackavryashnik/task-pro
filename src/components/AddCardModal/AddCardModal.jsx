@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-// import Calendar from '../Calendar/Calendar';
+import Calendar from '../Calendar/Calendar';
 import icons from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { enGB } from 'date-fns/locale';
 import { format } from 'date-fns';
 
 export default function AddCardModal({ onClose, id, board }) {
@@ -69,7 +65,7 @@ export default function AddCardModal({ onClose, id, board }) {
           autoFocus
           {...register('name', { required: 'This field is required' })}
         />
-        {errors.title && <p className={css.errorMessage}>Title is required</p>}
+        {errors.name && <p className={css.errorMessage}>Title is required</p>}
 
         <label className={css.label}>
           <textarea
@@ -107,18 +103,13 @@ export default function AddCardModal({ onClose, id, board }) {
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
           <span className={css.span}>Today,</span>
-          <DatePicker
-            selected={selectedDate}
+          <Calendar
+            selectedDate={selectedDate}
             onChange={date => {
               const formatData = format(date, 'yyyy-MM-dd');
-              console.log(formatData);
               setSelectedDate(date);
               setValue('deadline', formatData);
             }}
-            dateFormat="yyyy-MM-dd"
-            minDate={new Date()}
-            locale={enGB}
-            weekStartsOn={1}
           />
         </div>
 

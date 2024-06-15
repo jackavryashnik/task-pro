@@ -7,7 +7,7 @@ import { deleteTask } from '../../redux/tasks/operations.js';
 import EditCardModal from '../EditCardModal/EditCardModal';
 import { MoveCardDropdown } from '../MoveCardDropdown/MoveCardDropdown';
 
-export default function Card({ openModal, closeModal }) {
+export default function Card() {
   const dispatch = useDispatch();
   const {
     _id: cardId,
