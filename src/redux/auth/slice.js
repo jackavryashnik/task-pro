@@ -25,7 +25,8 @@ const initialState = {
     theme: null,
     avatar: null,
   },
-  token: null,
+  accessToken: null,
+  refreshToken: null,
   isRefreshing: false,
   isLoggedIn: false,
   isLoading: false,
@@ -35,6 +36,22 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+
+  reducers: {
+    addTokens: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
+    deleteTokensAndLogOff: state => {
+      state.user = initialState.user;
+      state.accessToken = initialState.accessToken;
+      state.refreshToken = initialState.refreshToken;
+      state.isRefreshing = false;
+      state.isLoggedIn = false;
+      state.isLoading = false;
+      state.error = null;
+    },
+  },
 
   extraReducers: builder => {
     builder
@@ -47,7 +64,8 @@ const authSlice = createSlice({
         // state.user.avatar = action.payload.data.user.avatar;
         // state.token = action.payload.data.accessToken;
         state.user = action.payload.user;
-        state.token = action.payload.accessToken;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -59,18 +77,21 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
         state.user.avatar = action.payload.data.user.avatar;
-        state.token = action.payload.data.accessToken;
+        state.accessToken = action.payload.data.accessToken;
+        state.refreshToken = action.payload.data.refreshToken;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(logout.fulfilled, state => {
-        (state.user = {
-          name: null,
-          email: null,
-          avatar: null,
-        }),
-          (state.token = null);
+        // state.user = {
+        //   name: null,
+        //   email: null,
+        //   avatar: null,
+        // };
+        state.user = initialState.user;
+        state.accessToken = initialState.accessToken;
+        state.refreshToken = initialState.refreshToken;
         state.isLoggedIn = false;
       })
       .addCase(getCurrentUser.pending, handlePending)
@@ -100,4 +121,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { addTokens, deleteTokensAndLogOff } = authSlice.actions;
 export default authSlice.reducer;

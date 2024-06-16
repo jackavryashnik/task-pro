@@ -10,6 +10,8 @@ export default function BoardList({ openModal, closeModal }) {
   const { boards, selectedBoard } = useTasks();
   const dispatch = useDispatch();
 
+  if (!selectedBoard) return <></>;
+
   return (
     <>
       {boards.length > 0 && (

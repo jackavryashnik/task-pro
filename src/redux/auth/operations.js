@@ -1,34 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
+import axios from '../../utils/backendAPI';
+import {
+  setAuthHeader,
+  clearAuthHeader,
+  checkRefreshAuthTokens,
+} from '../../utils/backendAPI';
 
-const setAuthHeader = token => {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-};
+// axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
 
-const clearAuthHeader = () => {
-  axios.defaults.headers.common['Authorization'] = '';
-};
+// const setAuthHeader = token => {
+//   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// };
+
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common['Authorization'] = '';
+// };
 
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/register', credentials);
-      // if (data.accessToken && data.refreshToken) {
-      //   // localStorage.setItem('token', data.data.refreshToken);
-
-      //   const loginData = await axios.post('/users/login', {
-      //     email: credentials.email,
-      //     password: credentials.password,
-      //   });
 
       setAuthHeader(data.data.accessToken);
 
       return data.data;
-      // }
-      // return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -41,11 +38,7 @@ export const login = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/login', credentials);
 
-      console.log(data);
-
       setAuthHeader(data.data.accessToken);
-      // localStorage.setItem('token', data.data.accessToken);
-      // localStorage.setItem('refreshToken', data.data.refreshToken);
 
       return data;
     } catch (error) {
@@ -56,9 +49,12 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
+    // check and refresh tokens
+    const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+    if (!isValidTokens.status) throw isValidTokens.error;
+
     await axios.post('/users/logout');
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('refreshToken');
+
     // localStorage.removeItem('selectedBoard');
     // localStorage.removeItem('activeBoardId');
     clearAuthHeader();
@@ -71,17 +67,13 @@ export const updateUser = createAsyncThunk(
   'auth/updateUser',
   async ({ credentials, isFormData }, thunkAPI) => {
     try {
-      // const accessToken = localStorage.getItem('token');
-
-      // if (!accessToken) {
-      //   return thunkAPI.rejectWithValue('');
-      // }
+      // check and refresh tokens
+      const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+      if (!isValidTokens.status) throw isValidTokens.error;
 
       const config = isFormData
         ? { headers: { 'Content-Type': 'multipart/form-data' } }
         : { headers: { 'Content-Type': 'application/json' } };
-
-      // setAuthHeader(accessToken);
 
       const { data } = await axios.patch('/users/update', credentials, config);
       return data;
@@ -95,8 +87,9 @@ export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
   async (_, thunkAPI) => {
     try {
-      const reduxState = thunkAPI.getState();
-      setAuthHeader(reduxState.auth.token);
+      // check and refresh tokens
+      const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+      if (!isValidTokens.status) throw isValidTokens.error;
 
       const { data } = await axios.get('/users/current');
 
@@ -111,6 +104,10 @@ export const changeTheme = createAsyncThunk(
   'auth/userTheme',
   async (theme, thunkAPI) => {
     try {
+      // check and refresh tokens
+      const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+      if (!isValidTokens.status) throw isValidTokens.error;
+
       const { data } = await axios.patch('/users/update', { theme });
       return data;
     } catch (error) {
@@ -118,20 +115,17 @@ export const changeTheme = createAsyncThunk(
     }
   }
 );
+
 export const needHelp = createAsyncThunk(
   'auth/needHelp',
-  async ({ email, comment, token }, thunkAPI) => {
+  async ({ email, comment }, thunkAPI) => {
     try {
-      await axios.post(
-        '/users/need-help',
-        { email, comment },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      // check and refresh tokens
+      const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+      if (!isValidTokens.status) throw isValidTokens.error;
+
+      await axios.post('/users/need-help', { email, comment });
+
       return { email, comment };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { needHelp } from '../../redux/auth/operations';
-import { selectUserEmail, selectToken } from '../../redux/auth/selectors';
+import { selectUserEmail } from '../../redux/auth/selectors';
 import { Button } from '../Button/Button';
 import { toast } from 'react-hot-toast';
 import icons from '../../images/icons.svg';
@@ -9,7 +9,7 @@ import css from './NeedHelp.module.css';
 
 export default function NeedHelp({ closeModal }) {
   const userEmail = useSelector(selectUserEmail);
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ export default function NeedHelp({ closeModal }) {
 
     if (!hasError) {
       try {
-        await dispatch(needHelp({ email, comment, token }));
+        await dispatch(needHelp({ email, comment }));
         toast.success('Your request has been sent successfully');
         setEmail('');
         setComment('');
