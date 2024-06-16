@@ -145,8 +145,6 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
             </svg>
           </div>
 
-          <span className={css.buttonText}>Edit</span>
-
           <span className={css.buttonText}>Add</span>
         </Button>
       </form>
