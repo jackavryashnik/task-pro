@@ -108,9 +108,3 @@ button.addCardButton > .iconPlus {
   }
 }
 
-@media screen and (min-width: 1440px) {
-  .tasks {
-    height: 62vh;
-    padding-right: 8px;
-  }
-}
