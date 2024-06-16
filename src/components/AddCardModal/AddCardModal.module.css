@@ -83,6 +83,7 @@
   }
 }
 
+
 .label {
   position: relative;
   display: block;
@@ -93,6 +94,7 @@
   height: 154px;
   resize: none;
 }
+
 
 .labelColorStyle,
 .deadlineStyle {
@@ -121,7 +123,7 @@
 .addButton:hover,
 .addButton:focus,
 .addButton:active {
-  background-color: var(-btn-hover-background);
+  background-color: var(--btn-hover-background);
 }
 
 @media only screen and (min-width: 375px) {
@@ -144,8 +146,8 @@
   justify-content: center;
   align-items: center;
   margin-right: 8px;
-  background-color: var(--plus-icon-color);
-  stroke: black;
+  background-color: var(--logo-background);
+  stroke: var(--close-icon-color);
 }
 
 
@@ -168,7 +170,7 @@
   height: 18px;
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .priorityOpt {
