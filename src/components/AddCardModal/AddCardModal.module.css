@@ -25,6 +25,7 @@
   font-family: 'Poppins-Medium';
   font-size: 18px;
   line-height: 1.5;
+  font-weight: 500;
   color: var(--modal-title-color);
 }
 
@@ -134,8 +135,7 @@
     width: 302px;
   }
 }
-
-.stylePlus {
+ .iconPlus {
   border: none;
   border-radius: 8px;
   width: 28px;
@@ -143,9 +143,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var();
   margin-right: 8px;
+  background-color: var(--plus-icon-color);
+  stroke: black;
 }
+
 
 .span {
   font-family: 'Poppins-Medium';
@@ -223,3 +225,4 @@
 .errorMessage {
   color: red;
 }
+

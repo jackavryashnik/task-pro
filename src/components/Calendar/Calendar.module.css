@@ -102,3 +102,29 @@
 .react-datepicker__day--disabled {
   visibility: visible;
 }
+
+.datePickerWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.calendarIcon {
+  margin-left: 8px;
+  stroke: var(--btn-background) ;
+}
+
+.dateText {
+  font-size: 16px;
+  color: var(--btn-background);
+}

@@ -7,6 +7,8 @@ import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 import { format } from 'date-fns';
+import { Button } from '../Button/Button';
+
 
 export default function AddCardModal({ onClose, columnId, boardId }) {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -102,8 +104,7 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
 
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
-          <span className={css.span}>Today,</span>
-          <Calendar
+          <Calendar className={css.span}
             selectedDate={selectedDate}
             onChange={date => {
               const formatData = format(date, 'yyyy-MM-dd');
@@ -117,14 +118,22 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
           <p className={css.errorMessage}>Please select a date</p>
         )}
 
-        <button className={css.addButton} type="submit">
+        {/* <button className={css.} type="submit">
           <div className={css.stylePlus}>
-            <svg width={14} height={14}>
+            <svg width={14} height={14} className={css.iconPlus} >
               <use href={`${icons}#icon-plus`}></use>
             </svg>
           </div>
           <span className={css.buttonText}>Add</span>
-        </button>
+        </button> */}
+        <Button className={css.addButton} type="submit">
+        <div className={css.iconPlus}>
+          <svg width={14} height={14}>
+            <use href={`${icons}#icon-plus`}></use>
+          </svg>
+        </div>
+          Add
+        </Button>
       </form>
     </div>
   );
