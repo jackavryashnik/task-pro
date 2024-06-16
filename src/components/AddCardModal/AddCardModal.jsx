@@ -10,9 +10,7 @@ import { format } from 'date-fns';
 import { Button } from '../Button/Button.jsx';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 
-
 export default function AddCardModal({ onClose, boardId, columnId }) {
-
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
@@ -34,7 +32,6 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
   const onSubmit = data => {
     dispatch(
       createTask({
-
         boardId,
         columnId,
 
@@ -124,7 +121,8 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
 
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
-          <Calendar className={css.span}
+          <Calendar
+            className={css.span}
             selectedDate={selectedDate}
             onChange={date => {
               const formatData = format(date, 'yyyy-MM-dd');
@@ -138,9 +136,9 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
           <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
         )}
 
-        <Button type="submit" className={css.btnPlus}>
-          <div className={css.svgBox}>
-            <svg width={14} height={14}>
+        <Button type="submit" className={css.addButton}>
+          <div className={css.stylePlus}>
+            <svg width={14} height={14} className={css.iconPlus}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
           </div>
