@@ -124,8 +124,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
 
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
-          <span className={css.span}>Today,</span>
-          <Calendar
+          <Calendar className={css.span}
             selectedDate={selectedDate}
             onChange={date => {
               const formatData = format(date, 'yyyy-MM-dd');
@@ -145,8 +144,6 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
               <use href={`${icons}#icon-plus`}></use>
             </svg>
           </div>
-
-          <span className={css.buttonText}>Edit</span>
 
           <span className={css.buttonText}>Add</span>
         </Button>
