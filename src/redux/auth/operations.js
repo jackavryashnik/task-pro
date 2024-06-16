@@ -122,12 +122,16 @@ export const needHelp = createAsyncThunk(
   'auth/needHelp',
   async ({ email, comment, token }, thunkAPI) => {
     try {
-      await axios.post('/users/need-help', { email, comment }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      await axios.post(
+        '/users/need-help',
+        { email, comment },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       return { email, comment };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

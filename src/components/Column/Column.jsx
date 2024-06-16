@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { deleteColumn } from '../../redux/tasks/operations';
-// import Card from '../Card/Card';
+import Card from '../Card/Card';
 import css from './Column.module.css';
 import icons from '../../images/icons.svg';
 import EditColumnModal from '../EditColumnModal/EditColumnModal';
@@ -66,23 +66,28 @@ const Column = ({ column, openModal, closeModal }) => {
         <ul>
           {tasks.length > 0 &&
             tasks.map(({ ...task }) => {
-              console.log(task);
-              // return <Card key={task.id} task={task} />;
+              return (
+                <Card
+                  key={task.id}
+                  task={task}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              );
             })}
         </ul>
       </div>
 
       <Button
         className={css.addCardButton}
-        onClick={e => {
+        onClick={() => {
           openModal(
             <AddCardModal
               onClose={closeModal}
-              id={column.id}
-              board={column.boardId}
+              columnId={column.id}
+              boardId={column.boardId}
             />
           );
-          console.log(e.target);
         }}
       >
         <div className={css.iconPlus}>
