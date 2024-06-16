@@ -24,7 +24,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     defaultValues: {
       name: '',
       description: '',
-      priority: 'none',
+      priority: 'without',
       deadline: '',
     },
   });
