@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 const selectBoards = state => state.tasks.board;
+const selectbackgroundLogos = state => state.tasks.backgroundLogos;
 const selectColumns = state => state.tasks.columns;
 const selectTasks = state => state.tasks.tasks;
 const selectSelectedBoard = state => state.tasks.selectedBoard;
@@ -14,5 +15,14 @@ export const useTasks = () => {
   const selectedBoard = useSelector(selectSelectedBoard);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  return { boards, columns, tasks, selectedBoard, loading, error };
+  const backgroundLogos = useSelector(selectbackgroundLogos);
+  return {
+    boards,
+    backgroundLogos,
+    columns,
+    tasks,
+    selectedBoard,
+    loading,
+    error,
+  };
 };
