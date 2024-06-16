@@ -14,6 +14,7 @@ import clsx from 'clsx';
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
   const { tasks } = useTasks();
+  const filterTasks = tasks.filter(task => task.columnId === column.id);
 
   const handleDeleteColumn = () => {
     try {
@@ -63,8 +64,8 @@ const Column = ({ column, openModal, closeModal }) => {
         className={clsx(css.tasks, tasks.length === 0 ? css.anything : null)}
       >
         <ul>
-          {tasks.length > 0 &&
-            tasks.map(({ ...task }) => {
+          {filterTasks.length > 0 &&
+            filterTasks.map(({ ...task }) => {
               return (
                 <Card
                   key={task.id}
