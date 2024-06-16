@@ -137,7 +137,6 @@ export default function EditCardModal({
 
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
-          <span className={css.span}>Today,</span>
           <Calendar
             selectedDate={selectedDate}
             onChange={date => {
@@ -152,8 +151,8 @@ export default function EditCardModal({
           <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
         )}
 
-        <Button type="submit" className={css.btnPlus}>
-          <div className={css.svgBox}>
+        <Button type="submit" className={css.addButton}>
+          <div className={css.iconPlus}>
             <svg width={14} height={14}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
