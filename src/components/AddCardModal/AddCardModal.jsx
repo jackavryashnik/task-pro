@@ -8,7 +8,7 @@ import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 
-export default function AddCardModal({ onClose, id, board }) {
+export default function AddCardModal({ onClose, columnId, boardId }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ export default function AddCardModal({ onClose, id, board }) {
   const onSubmit = data => {
     dispatch(
       createTask({
-        boardId: board,
-        columnId: id,
+        boardId: boardId,
+        columnId: columnId,
         name: data.name,
         description: data.description,
         priority: data.priority,

@@ -78,8 +78,8 @@ const Column = ({ column, openModal, closeModal }) => {
           openModal(
             <AddCardModal
               onClose={closeModal}
-              id={column.id}
-              board={column.boardId}
+              columnId={column.id}
+              boardId={column.boardId}
             />
           );
           console.log(e.target);
