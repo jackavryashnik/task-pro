@@ -60,6 +60,7 @@ export const deleteBoard = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const { data } = await axios.delete(`/boards/${id}`);
+      localStorage.removeItem('activeBoardId');
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

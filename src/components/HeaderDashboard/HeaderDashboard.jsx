@@ -1,30 +1,23 @@
-import { useState } from 'react';
 import css from './HeaderDashboard.module.css';
 import FilterModal from '../FilterModal/FilterModal';
 import icons from '../../images/icons.svg';
+import { useTasks } from '../../redux/tasks/selectors';
 
-const HeaderDashboard = ({ boardName }) => {
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-
-  const handleFilterClick = () => {
-    setIsFilterModalOpen(true);
-  };
-
-  const handleCloseFilterModal = () => {
-    setIsFilterModalOpen(false);
-  };
+const HeaderDashboard = ({ openModal, closeModal }) => {
+  const { selectedBoard } = useTasks();
 
   return (
     <div className={css.header}>
-      {/* название заглушка */}
-      <h1 className={css.boardName}>{boardName}boardName</h1>
-      <button onClick={handleFilterClick} className={css.filterButton}>
+      <h1 className={css.boardName}>{selectedBoard.name}</h1>
+      <button
+        onClick={() => openModal(<FilterModal onClose={closeModal} />)}
+        className={css.filterButton}
+      >
         <svg className={css.icon} width={16} height={16}>
           <use href={`${icons}#icon-filter`}></use>
         </svg>
         Filters
       </button>
-      {isFilterModalOpen && <FilterModal onClose={handleCloseFilterModal} />}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import HeaderDashboard from '../../components/HeaderDashboard/HeaderDashboard';
 import MainDashboard from '../../components/MainDashboard/MainDashboard';
 import { useEffect } from 'react';
@@ -7,8 +6,6 @@ import { fetchOneBoard } from '../../redux/tasks/operations';
 import { useTasks } from '../../redux/tasks/selectors';
 
 const ScreensPage = ({ openModal, closeModal }) => {
-  const { boardName } = useParams();
-
   const { boards } = useTasks();
   const dispatch = useDispatch();
 
@@ -25,7 +22,7 @@ const ScreensPage = ({ openModal, closeModal }) => {
 
   return (
     <div>
-      <HeaderDashboard title={boardName} />
+      <HeaderDashboard openModal={openModal} closeModal={closeModal} />
       <MainDashboard openModal={openModal} closeModal={closeModal} />
     </div>
   );
