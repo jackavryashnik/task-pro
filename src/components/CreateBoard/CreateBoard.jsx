@@ -65,7 +65,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
         background: selectedBackground.name,
       })
     );
-
+    setIsEdit(true);
     onClose();
   };
 
