@@ -2,15 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-
-  position: relative;
 }
 
 .tasks {
-  height: 478px;
+  height: 60vh;
   overflow-y: auto;
   padding-right: 4px;
-  position: relative;
 }
 
 .tasks::-webkit-scrollbar {
@@ -99,28 +96,21 @@ button.addCardButton > .iconPlus {
 }
 
 @media screen and (min-width: 375px) {
-  .column {
-    /* width: 347px; */
-  }
-
   .columnHeader {
     width: 334px;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .column {
-    /* width: 350px; */
-  }
-  
   .tasks {
-    height: 640px;
+    height: 63vh;
     padding-right: 8px;
   }
 }
 
-@media screen and (min-width: 1440px) {  
+@media screen and (min-width: 1440px) {
   .tasks {
-    height: 478px;
+    height: 62vh;
+    padding-right: 8px;
   }
 }
