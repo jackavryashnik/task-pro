@@ -4,6 +4,7 @@
   max-width: 225px;
   background-color: var(--sidebar-background);
   height: 100vh;
+  overflow-y: scroll;
 }
 .container {
   padding: 14px 14px 20px 14px;

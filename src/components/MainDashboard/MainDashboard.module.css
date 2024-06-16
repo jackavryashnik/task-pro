@@ -6,6 +6,7 @@
   align-items: center;
 
   width: 100%;
+  min-height: calc(100vh - 60px);
   padding: 39px 20px;
   background-color: var(--taskboard-background);
 }
@@ -31,14 +32,13 @@
 }
 
 .columns::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.10);
+  background-color: rgba(22, 22, 22, 0.1);
   border-radius: 10px;
 }
 
 .columns::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.20);
+  background-color: rgba(22, 22, 22, 0.2);
 }
-
 
 .addColumnButton {
   display: flex;
@@ -57,7 +57,7 @@ button.addColumnButton > .iconPlus {
   display: flex;
   justify-content: center;
   align-items: center;
- 
+
   width: 28px;
   height: 28px;
   border-radius: 8px;
@@ -86,7 +86,6 @@ button.addColumnButton > .iconPlus {
   .columns {
     width: 347px;
   }
-
 
   .addIcon {
     fill: #fff;
@@ -123,12 +122,12 @@ button.addColumnButton > .iconPlus {
 }
 
 /* Tablet */
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   .dashboard {
     align-items: flex-start;
     padding: 26px 32px;
+    min-height: calc(100vh - 68px);
   }
-
 
   .columns {
     gap: 18px;
@@ -165,6 +164,5 @@ button.addColumnButton > .iconPlus {
     /* марджины как заглушки, надо исправить */
 
     margin: 241px 347px;
-
   }
 }
