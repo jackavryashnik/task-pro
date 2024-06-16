@@ -30,7 +30,7 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
             onClick={() => {
 
               onDelete();
-              toast.success('Success');
+              toast.success('Successfuly deleted');
 
               setTimeout(() => {
                 closeModal();

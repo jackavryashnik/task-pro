@@ -19,7 +19,6 @@ const Column = ({ column, openModal, closeModal }) => {
   const handleDeleteColumn = () => {
     try {
       dispatch(deleteColumn(column.id));
-      return toast.success('Column deleted successfully');
     } catch (error) {
       toast.error(`Column wasn't deleted`);
     }
