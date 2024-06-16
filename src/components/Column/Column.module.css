@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 14px;
 
-  width: 100%;
+  /* width: 100%; */
 }
 
 .tasks {
@@ -39,7 +39,7 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
+  /* width: 100%; */
   height: 56px;
   padding: 20px;
   border-radius: 8px;
@@ -93,17 +93,17 @@ button.addCardButton > .iconPlus {
 
 @media screen and (min-width: 375px) {
   .column {
-    width: 347px;
+    /* width: 347px; */
   }
 
   .columnHeader {
-    width: 334px;
+    /* width: 334px; */
   }
 }
 
 @media screen and (min-width: 768px) {
   .column {
-    width: 350px;
+    /* width: 350px; */
   }
   
   .tasks {
