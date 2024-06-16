@@ -61,9 +61,9 @@ const Column = ({ column, openModal, closeModal }) => {
         </div>
       </div>
       <div
-        className={clsx(css.tasks, tasks.length === 0 ? css.anything : null)}
+        className={clsx(css.tasks, tasks.length === 0 ? css.nothing : null)}
       >
-        <ul>
+        <ul className={css.list}>
           {filterTasks.length > 0 &&
             filterTasks.map(({ ...task }) => {
               return (
