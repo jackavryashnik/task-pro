@@ -1,7 +1,6 @@
 import { useId, useState } from 'react';
 import Icon from '../../images/icons.svg';
 import css from './CreateBoard.module.css';
-import { backgrounds } from '../../images/bgImages';
 import {
   addBoard,
   editBoard,
@@ -27,12 +26,15 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
   const inputBgId = useId();
-  const { selectedBoard } = useTasks();
+  const { selectedBoard, backgroundLogos } = useTasks();
 
   const [boardName, setBoardName] = useState(isEdit ? selectedBoard.name : '');
 
   const [selectedIcon, setSelectedIcon] = useState(icons[0]);
-  const [selectedBackground, setSelectedBackground] = useState(backgrounds[0]);
+  const [selectedBackground, setSelectedBackground] = useState({
+    name: 'default',
+    mini: `${Icon}#icon-background`,
+  });
 
   const handleSubmitCreate = e => {
     e.preventDefault();
@@ -43,7 +45,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
       addBoard({
         name: boardName.trim(),
         icon: selectedIcon,
-        background: selectedBackground,
+        background: selectedBackground.name,
       })
     )
       .unwrap()
@@ -60,7 +62,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
         id: selectedBoard.id,
         name: boardName,
         icon: selectedIcon,
-        background: selectedBackground,
+        background: selectedBackground.name,
       })
     );
 
@@ -130,29 +132,55 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
       <h4 className={css.subheader}>Background</h4>
       <ul className={css.bgList}>
-        {backgrounds.length > 0 &&
-          backgrounds.map((bg, index) => {
+        <li className={css.bgItem}>
+          <svg className={css.iconBg} width={28} height={28}>
+            <use href={`${Icon}#icon-background`} />
+          </svg>
+          <input
+            className={css.inputRadio}
+            type="radio"
+            name="bg"
+            value="default"
+            onChange={() =>
+              setSelectedBackground({
+                name: 'default',
+                mini: `${Icon}#icon-background`,
+              })
+            }
+            checked={selectedBackground.name === 'default'}
+            id={inputBgId}
+          />
+          <label htmlFor={inputBgId} />
+        </li>
+        {backgroundLogos.length > 0 &&
+          backgroundLogos.map((bg, index) => {
             return (
               <li className={css.bgItem} key={index}>
                 <input
                   className={css.inputRadio}
                   type="radio"
                   name="bg"
-                  value={bg}
+                  value={bg.name}
                   onChange={() => setSelectedBackground(bg)}
-                  checked={selectedBackground === bg}
+                  checked={selectedBackground.name === bg.name}
                   id={inputBgId}
                 />
                 <label htmlFor={inputBgId} />
+
                 <picture>
-                  <source srcSet={bg} media="(min-width: 375px)" />
+                  <source
+                    srcSet={`${bg.mini2x} 2x`}
+                    media="(min-width: 375px)"
+                  />
 
                   <img
                     className={
-                      selectedBackground === bg ? css.selectedBg : css.bg
+                      selectedBackground.name === bg.name
+                        ? css.selectedBg
+                        : css.bg
                     }
-                    src={bg}
-                    alt="user select background for screenspage"
+                    src={bg.mini}
+                    alt={bg.name}
                   />
                 </picture>
               </li>
