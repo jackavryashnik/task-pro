@@ -30,8 +30,9 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
             className={css.button}
             type={'button'}
             onClick={() => {
-              onDelete(boardID);
-              toast.success('Success');
+
+              onDelete();
+              toast.success('Successfuly deleted');
 
               setTimeout(() => {
                 closeModal();
