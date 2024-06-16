@@ -13,7 +13,7 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 
 export default function AddCardModal({ onClose, boardId, columnId }) {
 
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
 
