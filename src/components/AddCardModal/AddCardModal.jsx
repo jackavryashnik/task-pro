@@ -6,24 +6,38 @@ import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
+import { format } from 'date-fns';
 
-export default function AddCardModal({ card, onClose }) {
-  const { _id: cardId, title, text, deadline, priority } = card;
-  const [selectedDate, setSelectedDate] = useState(deadline);
-  const [selectedPriority, setSelectedPriority] = useState(priority);
+export default function AddCardModal({ onClose, columnId, boardId }) {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      title,
-      text,
-      priority,
-      deadline: selectedDate,
+      name: '',
+      description: '',
+      priority: 'without',
+      deadline: '',
     },
   });
 
-  const onSubmit = values => {
-    dispatch(createTask({ values, cardId }));
+  const onSubmit = data => {
+    dispatch(
+      createTask({
+        boardId: boardId,
+        columnId: columnId,
+        name: data.name,
+        description: data.description,
+        priority: data.priority,
+        deadline: data.deadline,
+      })
+    );
     onClose();
   };
 
@@ -38,11 +52,9 @@ export default function AddCardModal({ card, onClose }) {
       <h2 className={css.titleModal}>Add card</h2>
       <div className={css.closeModal}>
         <button type="button" onClick={onClose}>
-          <svg
-            width={18}
-            height={18}>
+          <svg width={18} height={18}>
             <use href={`${icons}#icon-x-close`}></use>
-            </svg>
+          </svg>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,16 +62,17 @@ export default function AddCardModal({ card, onClose }) {
           className={css.titleCard}
           type="text"
           placeholder="Title"
-          {...register('title', { required: true })}
+          autoFocus
+          {...register('name', { required: 'This field is required' })}
         />
-        {errors.title && <p className={css.errorMessage}>Title is required</p>}
+        {errors.name && <p className={css.errorMessage}>Title is required</p>}
 
         <label className={css.label}>
           <textarea
             className={css.styledDescription}
             rows={4}
             placeholder="Description"
-            {...register('text')}
+            {...register('description')}
           />
         </label>
 
@@ -92,22 +105,23 @@ export default function AddCardModal({ card, onClose }) {
           <span className={css.span}>Today,</span>
           <Calendar
             selectedDate={selectedDate}
-            onDateChange={date => {
+            onChange={date => {
+              const formatData = format(date, 'yyyy-MM-dd');
               setSelectedDate(date);
-              setValue('deadline', date);
+              setValue('deadline', formatData);
             }}
           />
         </div>
 
-        {errors.deadline && <p className={css.errorMessage}>Please select a date</p>}
+        {errors.deadline && (
+          <p className={css.errorMessage}>Please select a date</p>
+        )}
 
         <button className={css.addButton} type="submit">
           <div className={css.stylePlus}>
-             <svg
-             width={14}
-             height={14}>
-                 <use href={`${icons}#icon-plus`}></use> 
-             </svg> 
+            <svg width={14} height={14}>
+              <use href={`${icons}#icon-plus`}></use>
+            </svg>
           </div>
           <span className={css.buttonText}>Add</span>
         </button>

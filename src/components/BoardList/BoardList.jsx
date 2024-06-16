@@ -35,10 +35,9 @@ export default function BoardList({ openModal, closeModal }) {
               </NavLink>
             );
           })}
-
         </ul>
       )}
-      <Navigate to={selectedBoard.id}/>
+      <Navigate to={selectedBoard && selectedBoard.id} />
     </>
   );
 }
