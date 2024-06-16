@@ -28,12 +28,16 @@ const CustomSupport = ({ openModal, closeModal }) => {
         <svg width={20} height={20}>
           <use href={`${icons}#icon-help-circle`}></use>
         </svg>
-        <p className={css.helpText} onClick={handleHelpClick} style={{ cursor: 'pointer' }}>Need help?</p>
+        <p
+          className={css.helpText}
+          onClick={handleHelpClick}
+          style={{ cursor: 'pointer' }}
+        >
+          Need help?
+        </p>
       </div>
     </div>
   );
 };
 
 export default CustomSupport;
-
-
