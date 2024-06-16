@@ -10,7 +10,9 @@ import { format } from 'date-fns';
 import { Button } from '../Button/Button.jsx';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 
+
 export default function AddCardModal({ onClose, boardId, columnId }) {
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
@@ -32,8 +34,10 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
   const onSubmit = data => {
     dispatch(
       createTask({
+
         boardId,
         columnId,
+
         name: data.name,
         description: data.description,
         priority: data.priority,

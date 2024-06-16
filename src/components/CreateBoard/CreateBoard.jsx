@@ -10,6 +10,7 @@ import {
 import { Button } from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { useTasks } from '../../redux/tasks/selectors';
+import toast from 'react-hot-toast';
 
 const icons = [
   '#icon-Project',
@@ -36,7 +37,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const handleSubmitCreate = e => {
     e.preventDefault();
     if (!boardName) {
-      return alert('Required');
+      return toast.success('Please write a title for the board');
     }
     dispatch(
       addBoard({

@@ -6,6 +6,7 @@ import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
 import { Button } from '../Button/Button';
+import toast from 'react-hot-toast';
 Modal.setAppElement('#root');
 
 const AddColumnModal = ({ onClose }) => {
@@ -15,7 +16,7 @@ const AddColumnModal = ({ onClose }) => {
 
   const handleCreateColumn = () => {
     if (columnName === '') {
-      alert('Required');
+      return toast.success('Please write a title for the column');
     }
     dispatch(
       createColumn({ name: columnName.trim(), boardId: selectedBoard.id })

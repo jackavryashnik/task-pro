@@ -4,6 +4,7 @@ import css from './Board.module.css';
 import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useTasks } from '../../redux/tasks/selectors';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
@@ -16,6 +17,7 @@ export default function Board({
   const [isEdit, setIsEdit] = useState(true);
   const dispatch = useDispatch();
   const { selectedBoard, boards } = useTasks();
+  const { boardID } = useParams();
 
   if (selectedBoard) {
     localStorage.setItem('activeBoardId', selectedBoard.id);
@@ -76,8 +78,8 @@ export default function Board({
               openModal(
                 <DeleteModal
                   closeModal={closeModal}
-                  id={id}
-                  onDelete={handleDeleteBoard}
+                  id={boardID}
+                  onDelete={()=>handleDeleteBoard(boardID)}
                 >
                   Delete this board?
                 </DeleteModal>
