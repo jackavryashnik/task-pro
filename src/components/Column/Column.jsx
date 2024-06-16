@@ -74,7 +74,7 @@ const Column = ({ column, openModal, closeModal }) => {
 
       <Button
         className={css.addCardButton}
-        onClick={e => {
+        onClick={() => {
           openModal(
             <AddCardModal
               onClose={closeModal}
@@ -82,7 +82,6 @@ const Column = ({ column, openModal, closeModal }) => {
               boardId={column.boardId}
             />
           );
-          console.log(e.target);
         }}
       >
         <div className={css.iconPlus}>
