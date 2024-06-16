@@ -24,7 +24,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     defaultValues: {
       name: '',
       description: '',
-      priority: 'without',
+      priority: 'none',
       deadline: '',
     },
   });
@@ -97,7 +97,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
-          {['without', 'low', 'medium', 'high'].map(priority => (
+          {['low', 'medium', 'high', 'without'].map(priority => (
             <label
               key={priority}
               className={clsx([css.priorityOpt, css.customRadio])}
