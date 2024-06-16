@@ -174,7 +174,7 @@
 .priorityOpt {
   font-size: 12px;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--radio-background);
 }
 
 .radioWrapper {
@@ -191,7 +191,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: var(--label-color-grey);
+  background-color: var(--label-color-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,19 +207,19 @@
 }
 
 .radioInput:checked + .radioButton .innerCircle {
-  background-color: transparent;
+  border: 2px solid var(--modal-background);
 }
 
 .priorityOpt:nth-of-type(2) .radioButton {
-  background-color: var(--label-color-blue);
-}
-
-.priorityOpt:nth-of-type(3) .radioButton {
   background-color: var(--label-color-red);
 }
 
-.priorityOpt:nth-of-type(4) .radioButton {
+.priorityOpt:nth-of-type(3) .radioButton {
   background-color: var(--label-color-green);
+}
+
+.priorityOpt:nth-of-type(4) .radioButton {
+  background-color: var(--radio-background);
 }
 
 .errorMessage {
