@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { addTokens, deleteTokensAndLogOff } from '../redux/auth/slice';
 
-// axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
-axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.baseURL = 'https://task-pro-app-0x3n.onrender.com/api';
+// axios.defaults.baseURL = 'http://localhost:8000/api';
 
 export const setAuthHeader = token => {
   let authHeader;
