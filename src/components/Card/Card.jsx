@@ -1,56 +1,55 @@
 import icons from '../../images/icons.svg';
-import Modal from 'react-modal';
-import { useState } from 'react';
 import css from './Card.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../redux/tasks/operations.js';
-import EditCardModal from '../EditCardModal/EditCardModal';
-import { MoveCardDropdown } from '../MoveCardDropdown/MoveCardDropdown';
+import { DeleteModal } from '../DeleteModal/DeleteModal.jsx';
+import EditCardModal from '../EditCardModal/EditCardModal.jsx';
 
-export default function Card() {
+export default function Card({
+  task: { id, name, description, priority, deadline },
+  openModal,
+  closeModal,
+}) {
   const dispatch = useDispatch();
-  const {
-    _id: cardId,
-    title,
-    text,
-    deadline,
-    priority,
-    column: { _id: columnId },
-  } = card;
   const dateDeadline = new Date(deadline);
   const formatedDate = `${dateDeadline.getUTCDate()}/${(
     dateDeadline.getUTCMonth() + 1
   )
     .toString()
     .padStart(2, '0')}/${dateDeadline.getFullYear()}`;
-  const cardTextDescription = text.substring(0, 90) + '...';
+  const cardTextDescription = description.substring(0, 90) + '...';
 
   const bell = new Date() > dateDeadline;
 
-  const openCardModal = () => {
-    setmodalCardIsOpen(true);
-  };
-
-  const closeCardModal = () => {
-    setmodalCardIsOpen(false);
+  const handleClickEdit = () => {
+    openModal(
+      <EditCardModal
+        id={id}
+        name={name}
+        description={description}
+        priority={priority}
+        deadline={deadline}
+        onClose={closeModal}
+      />
+    );
   };
 
   const handleDeleteCard = () => {
-    dispatch(deleteTask({ cardId }));
+    dispatch(deleteTask(id));
   };
 
-  const hendleMoveCardModalOpen = () => {
-    setIsOpenMoveCardModal(true);
-  };
+  // const hendleMoveCardModalOpen = () => {
+  //   setIsOpenMoveCardModal(true);
+  // };
 
-  const hendleMoveCardModalClose = () => {
-    setIsOpenMoveCardModal(false);
-  };
+  // const hendleMoveCardModalClose = () => {
+  //   setIsOpenMoveCardModal(false);
+  // };
 
   return (
     <li className={css.cardBody}>
       <div className={css.cardColor}></div>
-      <h2 className={css.cardTitle}>{title}</h2>
+      <h2 className={css.cardTitle}>{name}</h2>
       <p className={css.cardDescription}>{cardTextDescription}</p>
       <div className={css.cardSolid}></div>
       <div className={css.cardDetals}>
@@ -79,13 +78,17 @@ export default function Card() {
           <button
             type="button"
             className={css.button}
-            onClick={hendleMoveCardModalOpen}
+            // onClick={hendleMoveCardModalOpen}
           >
             <svg width={16} height={16}>
               <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
             </svg>
           </button>
-          <button type="button" className={css.button} onClick={openCardModal}>
+          <button
+            type="button"
+            className={css.button}
+            onClick={handleClickEdit}
+          >
             <svg width={16} height={16}>
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
@@ -93,7 +96,16 @@ export default function Card() {
           <button
             type="button"
             className={css.button}
-            onClick={handleDeleteCard}
+            onClick={() =>
+              openModal(
+                <DeleteModal
+                  closeModal={closeModal}
+                  onDelete={handleDeleteCard}
+                >
+                  Delete this task?
+                </DeleteModal>
+              )
+            }
           >
             <svg width={16} height={16}>
               <use href={`${icons}#icon-trash-can`}></use>
@@ -101,22 +113,14 @@ export default function Card() {
           </button>
         </div>
       </div>
-      <Modal
-        isOpen={modalCardIsOpen}
-        onRequestClose={closeCardModal}
-        className={'modal-content'}
-        overlayClassName={'modal-overlay'}
-      >
-        <EditCardModal card={card} onClose={closeCardModal} />
-      </Modal>
-      <Modal
+      {/* <Modal
         isOpen={isOpenMoveCardModal}
         onRequestClose={hendleMoveCardModalClose}
         className={'modal-content'}
         overlayClassName={'modal-overlay'}
       >
         <MoveCardDropdown currColumnId={columnId} cardId={cardId} />
-      </Modal>
+      </Modal> */}
     </li>
   );
 }
