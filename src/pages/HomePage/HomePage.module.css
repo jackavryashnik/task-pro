@@ -91,5 +91,7 @@
   .sidebarWrapper {
     transform: none;
     position: relative;
+    left: 0;
+    opacity: 1;
   }
 }
