@@ -6,24 +6,41 @@ import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
+import { format } from 'date-fns';
+import { Button } from '../Button/Button.jsx';
+import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 
-export default function AddCardModal({ card, onClose }) {
-  const { _id: cardId, title, text, deadline, priority } = card;
-  const [selectedDate, setSelectedDate] = useState(deadline);
-  const [selectedPriority, setSelectedPriority] = useState(priority);
+export default function AddCardModal({ onClose, boardId, columnId }) {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      title,
-      text,
-      priority,
-      deadline: selectedDate,
+      name: '',
+      description: '',
+      priority: 'without',
+      deadline: '',
     },
   });
 
-  const onSubmit = values => {
-    dispatch(createTask({ values, cardId }));
+  const onSubmit = data => {
+    dispatch(
+      createTask({
+        boardId,
+        columnId,
+
+        name: data.name,
+        description: data.description,
+        priority: data.priority,
+        deadline: data.deadline || format(new Date(), 'yyyy-MM-dd'),
+      })
+    );
     onClose();
   };
 
@@ -36,13 +53,12 @@ export default function AddCardModal({ card, onClose }) {
   return (
     <div className={css.container}>
       <h2 className={css.titleModal}>Add card</h2>
+
       <div className={css.closeModal}>
-        <button type="button" onClick={onClose}>
-          <svg
-            width={18}
-            height={18}>
+        <button type="button" onClick={() => onClose()}>
+          <svg width={18} height={18}>
             <use href={`${icons}#icon-x-close`}></use>
-            </svg>
+          </svg>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -50,22 +66,38 @@ export default function AddCardModal({ card, onClose }) {
           className={css.titleCard}
           type="text"
           placeholder="Title"
-          {...register('title', { required: true })}
+          autoFocus
+          onChange={e => {
+            setValue('name', e.target.value);
+          }}
+          {...register('name', {
+            required: 'Required field',
+            minLength: {
+              value: 2,
+              message: 'Title must be at least 2 characters',
+            },
+            maxLength: {
+              value: 32,
+              message: 'Title cannot exceed 32 characters',
+            },
+          })}
         />
-        {errors.title && <p className={css.errorMessage}>Title is required</p>}
+        {errors?.name && (
+          <FormErrorMessages>{errors.name.message}</FormErrorMessages>
+        )}
 
         <label className={css.label}>
           <textarea
             className={css.styledDescription}
             rows={4}
             placeholder="Description"
-            {...register('text')}
+            {...register('description')}
           />
         </label>
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
-          {['without', 'low', 'medium', 'high'].map(priority => (
+          {['low', 'medium', 'high', 'without'].map(priority => (
             <label
               key={priority}
               className={clsx([css.priorityOpt, css.customRadio])}
@@ -89,28 +121,30 @@ export default function AddCardModal({ card, onClose }) {
 
         <p className={css.deadlineStyle}>Deadline</p>
         <div>
-          <span className={css.span}>Today,</span>
           <Calendar
+            className={css.span}
             selectedDate={selectedDate}
-            onDateChange={date => {
+            onChange={date => {
+              const formatData = format(date, 'yyyy-MM-dd');
               setSelectedDate(date);
-              setValue('deadline', date);
+              setValue('deadline', formatData);
             }}
           />
         </div>
 
-        {errors.deadline && <p className={css.errorMessage}>Please select a date</p>}
+        {errors?.deadline && (
+          <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
+        )}
 
-        <button className={css.addButton} type="submit">
-          <div className={css.stylePlus}>
-             <svg
-             width={14}
-             height={14}>
-                 <use href={`${icons}#icon-plus`}></use> 
-             </svg> 
+        <Button type="submit" className={css.addButton}>
+          <div className={css.iconPlus}>
+            <svg width={14} height={14}>
+              <use href={`${icons}#icon-plus`}></use>
+            </svg>
           </div>
+
           <span className={css.buttonText}>Add</span>
-        </button>
+        </Button>
       </form>
     </div>
   );

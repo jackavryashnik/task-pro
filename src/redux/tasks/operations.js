@@ -82,6 +82,7 @@ export const deleteBoard = createAsyncThunk(
       if (!isValidTokens.status) throw isValidTokens.error;
 
       const { data } = await axios.delete(`/boards/${id}`);
+      localStorage.removeItem('activeBoardId');
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -162,7 +163,6 @@ export const editTask = createAsyncThunk(
       if (!isValidTokens.status) throw isValidTokens.error;
 
       const { data } = await axios.patch(`/tasks/${id}`, {
-        id,
         name,
         description,
         priority,

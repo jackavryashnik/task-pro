@@ -125,6 +125,7 @@ export const needHelp = createAsyncThunk(
       if (!isValidTokens.status) throw isValidTokens.error;
 
       await axios.post('/users/need-help', { email, comment });
+
       return { email, comment };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

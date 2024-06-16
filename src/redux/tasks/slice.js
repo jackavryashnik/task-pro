@@ -28,6 +28,7 @@ const slice = createSlice({
   name: 'tasks',
   initialState: {
     board: [],
+    backgroundLogos: [],
     selectedBoard: null,
     columns: [],
     tasks: [],
@@ -47,6 +48,7 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = action.payload.boards;
+        state.backgroundLogos = action.payload.backgroundLogos;
       })
       .addCase(fetchBoards.rejected, handleRejected)
       .addCase(fetchOneBoard.pending, handlePending)

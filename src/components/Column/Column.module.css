@@ -3,13 +3,14 @@
   flex-direction: column;
   gap: 14px;
 
-  width: 100%;
+  position: relative;
 }
 
 .tasks {
   height: 478px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 4px;
+  position: relative;
 }
 
 .tasks::-webkit-scrollbar {
@@ -32,6 +33,12 @@
 
 .tasks.anything {
   height: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .columnHeader {
@@ -93,7 +100,7 @@ button.addCardButton > .iconPlus {
 
 @media screen and (min-width: 375px) {
   .column {
-    width: 347px;
+    /* width: 347px; */
   }
 
   .columnHeader {
@@ -103,11 +110,12 @@ button.addCardButton > .iconPlus {
 
 @media screen and (min-width: 768px) {
   .column {
-    width: 350px;
+    /* width: 350px; */
   }
   
   .tasks {
     height: 640px;
+    padding-right: 8px;
   }
 }
 

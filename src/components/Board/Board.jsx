@@ -4,6 +4,7 @@ import css from './Board.module.css';
 import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useTasks } from '../../redux/tasks/selectors';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
@@ -16,6 +17,7 @@ export default function Board({
   const [isEdit, setIsEdit] = useState(true);
   const dispatch = useDispatch();
   const { selectedBoard, boards } = useTasks();
+  const { boardID } = useParams();
 
   if (selectedBoard) {
     localStorage.setItem('activeBoardId', selectedBoard.id);
@@ -72,9 +74,18 @@ export default function Board({
           <button
             type="button"
             className={css.btn}
-            onClick={() => openModal(<DeleteModal closeModal={closeModal} onDelete={handleDeleteBoard}>
-                Delete this board?
-              </DeleteModal>)}>
+            onClick={() =>
+              openModal(
+                <DeleteModal
+                  closeModal={closeModal}
+                  id={boardID}
+                  onDelete={()=>handleDeleteBoard(boardID)}
+                >
+                  Delete this board?
+                </DeleteModal>
+              )
+            }
+          >
             <svg className={css.focusIcon} width={16} height={16}>
               <use href={`${Icon}#icon-trash-can`}></use>
             </svg>

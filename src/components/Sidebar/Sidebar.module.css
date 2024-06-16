@@ -4,9 +4,10 @@
   max-width: 225px;
   background-color: var(--sidebar-background);
   height: 100vh;
+  overflow-y: auto;
 }
 .container {
-  padding: 14px 14px 20px 14px;
+  padding: 14px 14px 0 14px;
 }
 .boardsText {
   font-weight: 400;
@@ -62,7 +63,7 @@
     max-width: 260px;
   }
   .container {
-    padding: 24px 24px 20px 24px;
+    padding: 24px 24px 0 24px;
   }
 }
 @media screen and (min-width: 1440px) {
