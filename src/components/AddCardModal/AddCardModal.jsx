@@ -138,7 +138,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
 
         <Button type="submit" className={css.addButton}>
           <div className={css.iconPlus}>
-            <svg width={14} height={14} >
+            <svg width={14} height={14}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
           </div>
