@@ -3,18 +3,19 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 
   width: 100%;
-  min-height: calc(100vh - 60px);
-  padding: 39px 20px;
+  min-height: calc(100vh - 95px);
+  padding: 40px 20px;
   background-color: var(--taskboard-background);
 }
 
 .columns {
   display: flex;
   justify-content: flex-start;
-  gap: 34px;
+  gap: 18px;
 
   width: 100%;
 
@@ -82,6 +83,22 @@ button.addColumnButton > .iconPlus {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+.textContainer {
+  position: absolute;
+  top: 50%;
+}
+
+.dashboard > .textContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text {
+  font-size: 12px;
+  line-height: 1.33333;
+  text-align: center;
+}
+
 @media screen and (min-width: 375px) {
   .columns {
     width: 347px;
@@ -92,45 +109,32 @@ button.addColumnButton > .iconPlus {
     stroke: #fff;
   }
 
-  .textContainer {
-    display: flex;
-    /* марджины как заглушки, надо исправить */
-    margin: 292px 20px;
-    /* text-align: center; */
-  }
-
-  .text {
-    font-size: 12px;
-    line-height: 1.33333;
-    text-align: center;
-    /* color: rgba(255, 255, 255, 0.5); */
-  }
-
   .spanCreateBoard {
     color: #bedbb0;
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;
   }
-}
 
-/* Mobile Adapted */
-@media (min-width: 375px) {
   .addColumnButton {
     min-width: 334px;
+  }
+
+  .text {
+    width: 335px;
   }
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) {
   .dashboard {
-    align-items: flex-start;
-    padding: 26px 32px;
-    min-height: calc(100vh - 68px);
+    flex-direction: row;
+    justify-content: center;
+    padding: 26px 32px 0 32px;
+    min-height: calc(100vh - 115px);
   }
 
   .columns {
-    gap: 18px;
     width: 704px;
     padding-bottom: 52px;
   }
@@ -140,19 +144,14 @@ button.addColumnButton > .iconPlus {
     line-height: 1.28571;
     /* color: rgba(255, 255, 255, 0.5); */
   }
-
-  .textContainer {
-    /* марджины как заглушки, надо исправить */
-
-    margin: 368px 141px;
-  }
 }
 
 /* Desktop */
 @media screen and (min-width: 1440px) {
   .dashboard {
     align-items: flex-start;
-    padding: 10px 24px;
+    padding: 10px 24px 0 24px;
+    min-height: calc(100vh - 99px);
   }
 
   .columns {
@@ -160,9 +159,7 @@ button.addColumnButton > .iconPlus {
     padding-bottom: 16px;
   }
 
-  .textContainer {
-    /* марджины как заглушки, надо исправить */
-
-    margin: 241px 347px;
+  .text {
+    width: 486px;
   }
 }
