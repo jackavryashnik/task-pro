@@ -7,18 +7,22 @@ const HeaderDashboard = ({ openModal, closeModal }) => {
   const { selectedBoard } = useTasks();
 
   return (
-    <div className={css.header}>
-      <h1 className={css.boardName}>{selectedBoard.name}</h1>
-      <button
-        onClick={() => openModal(<FilterModal onClose={closeModal} />)}
-        className={css.filterButton}
-      >
-        <svg className={css.icon} width={16} height={16}>
-          <use href={`${icons}#icon-filter`}></use>
-        </svg>
-        Filters
-      </button>
-    </div>
+    <>
+      {selectedBoard && (
+        <div className={css.header}>
+          <h1 className={css.boardName}>{selectedBoard.name}</h1>
+          <button
+            onClick={() => openModal(<FilterModal onClose={closeModal} />)}
+            className={css.filterButton}
+          >
+            <svg className={css.icon} width={16} height={16}>
+              <use href={`${icons}#icon-filter`}></use>
+            </svg>
+            Filters
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
