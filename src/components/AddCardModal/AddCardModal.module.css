@@ -22,7 +22,6 @@
 
 .titleModal {
   margin-bottom: 24px;
-  font-family: 'Poppins-Medium';
   font-size: 18px;
   line-height: 1.5;
   font-weight: 500;
@@ -152,14 +151,12 @@
 
 
 .span {
-  font-family: 'Poppins-Medium';
   font-size: 14px;
   letter-spacing: -0.02em;
   color: var(--btn-background);
 }
 
 .buttonText {
-  font-family: 'Poppins-Medium';
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
