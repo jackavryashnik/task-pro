@@ -188,7 +188,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: var(--label-color-grey);
+  background-color: var(--label-color-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,15 +208,15 @@
 }
 
 .priorityOpt:nth-of-type(2) .radioButton {
-  background-color: var(--label-color-blue);
-}
-
-.priorityOpt:nth-of-type(3) .radioButton {
   background-color: var(--label-color-red);
 }
 
-.priorityOpt:nth-of-type(4) .radioButton {
+.priorityOpt:nth-of-type(3) .radioButton {
   background-color: var(--label-color-green);
+}
+
+.priorityOpt:nth-of-type(4) .radioButton {
+  background-color: var(--radio-background);
 }
 
 .errorMessage {

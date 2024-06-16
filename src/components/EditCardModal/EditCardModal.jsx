@@ -19,7 +19,7 @@ export default function EditCardModal({
   onClose,
 }) {
   const [selectedDate, setSelectedDate] = useState(parseISO(deadline));
-  const [selectedPriority, setSelectedPriority] = useState('none');
+  const [selectedPriority, setSelectedPriority] = useState(priority);
   const dispatch = useDispatch();
 
   const {
@@ -113,7 +113,7 @@ export default function EditCardModal({
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
-          {['without', 'low', 'medium', 'high'].map(priority => (
+          {['low', 'medium', 'high', 'without'].map(priority => (
             <label
               key={priority}
               className={clsx([css.priorityOpt, css.customRadio])}
