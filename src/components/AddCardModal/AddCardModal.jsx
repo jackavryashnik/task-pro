@@ -7,9 +7,13 @@ import { createTask } from '../../redux/tasks/operations.js';
 import css from './AddCardModal.module.css';
 import clsx from 'clsx';
 import { format } from 'date-fns';
+import { Button } from '../Button/Button.jsx';
+import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 
-export default function AddCardModal({ onClose, columnId, boardId }) {
-  const [selectedDate, setSelectedDate] = useState(null);
+
+export default function AddCardModal({ onClose, boardId, columnId }) {
+
+  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
 
@@ -30,8 +34,10 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
   const onSubmit = data => {
     dispatch(
       createTask({
-        boardId: boardId,
-        columnId: columnId,
+
+        boardId,
+        columnId,
+
         name: data.name,
         description: data.description,
         priority: data.priority,
@@ -50,8 +56,9 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
   return (
     <div className={css.container}>
       <h2 className={css.titleModal}>Add card</h2>
+
       <div className={css.closeModal}>
-        <button type="button" onClick={onClose}>
+        <button type="button" onClick={() => onClose()}>
           <svg width={18} height={18}>
             <use href={`${icons}#icon-x-close`}></use>
           </svg>
@@ -63,9 +70,24 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
           type="text"
           placeholder="Title"
           autoFocus
-          {...register('name', { required: 'This field is required' })}
+          onChange={e => {
+            setValue('name', e.target.value);
+          }}
+          {...register('name', {
+            required: 'Required field',
+            minLength: {
+              value: 2,
+              message: 'Title must be at least 2 characters',
+            },
+            maxLength: {
+              value: 32,
+              message: 'Title cannot exceed 32 characters',
+            },
+          })}
         />
-        {errors.name && <p className={css.errorMessage}>Title is required</p>}
+        {errors?.name && (
+          <FormErrorMessages>{errors.name.message}</FormErrorMessages>
+        )}
 
         <label className={css.label}>
           <textarea
@@ -113,18 +135,21 @@ export default function AddCardModal({ onClose, columnId, boardId }) {
           />
         </div>
 
-        {errors.deadline && (
-          <p className={css.errorMessage}>Please select a date</p>
+        {errors?.deadline && (
+          <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
         )}
 
-        <button className={css.addButton} type="submit">
-          <div className={css.stylePlus}>
+        <Button type="submit" className={css.btnPlus}>
+          <div className={css.svgBox}>
             <svg width={14} height={14}>
               <use href={`${icons}#icon-plus`}></use>
             </svg>
           </div>
+
+          <span className={css.buttonText}>Edit</span>
+
           <span className={css.buttonText}>Add</span>
-        </button>
+        </Button>
       </form>
     </div>
   );
