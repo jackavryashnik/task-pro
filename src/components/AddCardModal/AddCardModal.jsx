@@ -38,7 +38,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
         name: data.name,
         description: data.description,
         priority: data.priority,
-        deadline: data.deadline,
+        deadline: data.deadline || format(new Date(), 'yyyy-MM-dd'),
       })
     );
     onClose();
