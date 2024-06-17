@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from 'date-fns/locale';
 import css from './Calendar.module.css';
 import './DatePickerStyles.css'; 
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import icons from '../../images/icons.svg';
 
 const Icon = () => (
@@ -12,12 +12,14 @@ const Icon = () => (
   </svg>
 );
 
-const CustomInput = ({ value, onClick }) => (
-  <div className={css.iconWrapper} onClick={onClick}>
+const CustomInput = forwardRef(({ value, onClick }, ref) => (
+  <div className={css.iconWrapper} onClick={onClick} ref={ref}>
     <span className={css.dateText}>{value}</span>
     <Icon name="calendar" />
   </div>
-);
+));
+
+CustomInput.displayName = 'CustomInput';
 
 const Calendar = ({ selectedDate, onChange }) => {
   const [startDate, setStartDate] = useState(selectedDate || new Date());
