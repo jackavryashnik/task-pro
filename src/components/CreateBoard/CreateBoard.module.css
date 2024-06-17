@@ -70,33 +70,10 @@
   margin-bottom: 40px;
   max-width: 252px;
 }
-.bgItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: calc((100% - 28px) / 8);
-  height: 28px;
-  padding: 0;
-  background-color: var(--dark);
-  border-radius: 8px;
-}
 
-.iconBg {
-  opacity: 0.1;
-  stroke: var(--white);
-}
 .bg {
   height: 28px;
   border-radius: 7px;
-  transition: transform 250ms ease-in;
-}
-
-.selectedBg {
-  border-radius: 6px;
-  box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
-    0px 0px 2px 0px rgba(232, 249, 237, 0.12),
-    0px 0px 2px 0px rgba(179, 245, 206, 0.1);
-  transform: scale(1.6);
 }
 
 .iconItem {
@@ -133,4 +110,60 @@
 .btnPlus:hover,
 .btnPlus:focus {
   background-color: var(--green-btn-hover);
+}
+.bgItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc((100% - 28px) / 8);
+  height: 28px;
+  padding: 0;
+  background-color: var(--dark);
+  border-radius: 7px;
+}
+
+.iconBg {
+  stroke: var(--white);
+  opacity: 0.1;
+}
+
+.bgItemIcon {
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  background-color: var(--dark);
+  border-radius: 7px;
+}
+
+.selectedBgItemIcon {
+  background-color: var(--dark);
+  width: 28px;
+  height: 28px;
+  padding: 7px;
+  border-radius: 7px;
+  transform: scale(1.4);
+  box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
+    0px 0px 2px 0px rgba(232, 249, 237, 0.12),
+    0px 0px 2px 0px rgba(179, 245, 206, 0.1);
+  transition: transform 250ms ease-in;
+}
+.selectedBgItemIcon .iconBg {
+  opacity: 1;
+}
+.bg {
+  height: 28px;
+  border-radius: 7px;
+  transition: transform 250ms ease-in;
+}
+
+.selectedBg {
+  border-radius: 6px;
+  box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
+    0px 0px 2px 0px rgba(232, 249, 237, 0.12),
+    0px 0px 2px 0px rgba(179, 245, 206, 0.1);
+  transform: scale(1.4);
+  transition: transform 250ms ease-in;
 }

@@ -21,7 +21,6 @@ const icons = [
   '#icon-colors-ovals',
   '#icon-hexagon',
 ];
-
 export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const dispatch = useDispatch();
   const inputIconId = useId();
@@ -32,7 +31,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const [selectedIcon, setSelectedIcon] = useState(icons[0]);
   const [selectedBackground, setSelectedBackground] = useState({
-    name: 'default',
+    name: '',
     mini: `${Icon}#icon-background`,
   });
 
@@ -132,22 +131,28 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
       <h4 className={css.subheader}>Background</h4>
       <ul className={css.bgList}>
-        <li className={css.bgItem}>
-          <svg className={css.iconBg} width={28} height={28}>
+        <li
+          className={
+            selectedBackground.name === ''
+              ? css.selectedBgItemIcon
+              : css.bgItemIcon
+          }
+        >
+          <svg className={css.iconBg} width={14} height={14}>
             <use href={`${Icon}#icon-background`} />
           </svg>
           <input
             className={css.inputRadio}
             type="radio"
             name="bg"
-            value="default"
+            value=""
             onChange={() =>
               setSelectedBackground({
-                name: 'default',
+                name: '',
                 mini: `${Icon}#icon-background`,
               })
             }
-            checked={selectedBackground.name === 'default'}
+            checked={selectedBackground.name === ''}
             id={inputBgId}
           />
           <label htmlFor={inputBgId} />

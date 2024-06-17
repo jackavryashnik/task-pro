@@ -45,15 +45,13 @@ export default function EditCardModal({
   }, [name, deadline, description, priority, setValue, setSelectedDate]);
 
   const onSubmit = data => {
-    dispatch(
-      editTask({
-        id,
-        name: data.name,
-        description: data.description,
-        priority: data.priority,
-        deadline: data.deadline,
-      })
-    );
+    const changes = {};
+    if (data.name !== name) changes.name = data.name;
+    if (data.description !== description)
+      changes.description = data.description;
+    if (data.priority !== priority) changes.priority = data.priority;
+    if (data.deadline !== deadline) changes.deadline = data.deadline;
+    dispatch(editTask({ id, ...changes }));
     onClose();
   };
 
