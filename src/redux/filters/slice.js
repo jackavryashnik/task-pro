@@ -14,7 +14,8 @@ const filterSlice = createSlice({
   },
 });
 
-export const selectPriority = state => state.filterPriority;
+// export const selectPriority = state => state.filterPriority;
+export const selectPriority = state => state.filter.filterPriority;
 
 export const { setFilterPriority } = filterSlice.actions;
 export default filterSlice.reducer;
