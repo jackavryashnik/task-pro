@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Calendar from '../Calendar/Calendar';
 import icons from '../../images/icons.svg';
@@ -13,12 +13,14 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 export default function AddCardModal({ onClose, boardId, columnId }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState('none');
+  const [descriptionLength, setDescriptionLength] = useState(0);
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -29,12 +31,17 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     },
   });
 
+   const descriptionValue = watch('description', '');
+
+   useEffect(() => {
+    setDescriptionLength(descriptionValue.length);
+  }, [descriptionValue]);
+
   const onSubmit = data => {
     dispatch(
       createTask({
         boardId,
         columnId,
-
         name: data.name,
         description: data.description,
         priority: data.priority,
@@ -48,6 +55,12 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     const newPriority = event.target.value;
     setSelectedPriority(newPriority || 'without');
     setValue('priority', newPriority);
+  };
+
+  const handleDescriptionChange = event => {
+    const newDescription = event.target.value;
+    setDescriptionLength(newDescription.length);
+    setValue('description', newDescription);
   };
 
   return (
@@ -86,14 +99,21 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
           <FormErrorMessages>{errors.name.message}</FormErrorMessages>
         )}
 
-        <label className={css.label}>
-          <textarea
-            className={css.styledDescription}
-            rows={4}
-            placeholder="Description"
-            {...register('description')}
-          />
-        </label>
+        <div className={css.textareaContainer}>
+          <label className={css.label}>
+            <textarea
+              className={css.styledDescription}
+              rows={4}
+              placeholder="Description"
+              onChange={handleDescriptionChange} 
+              {...register('description')}
+            />
+          </label>
+          <div className={css.charCount}>
+            {descriptionLength}/500
+          </div>
+        </div>
+      
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
