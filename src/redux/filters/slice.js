@@ -1,14 +1,20 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  filterPriority: 'none',
+};
 
 const filterSlice = createSlice({
   name: 'filter',
-  initialState: {'filter': ''},
+  initialState,
   reducers: {
-    addFilter(state, {payload}) {
-      state.filter = payload; 
+    setFilterPriority(state, action) {
+      state.filterPriority = action.payload;
     },
   },
 });
-    
+
+export const selectPriority = state => state.filterPriority;
+
+export const { setFilterPriority } = filterSlice.actions;
 export default filterSlice.reducer;
-export const {addFilter} = filterSlice.actions;

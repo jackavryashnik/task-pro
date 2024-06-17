@@ -7,6 +7,7 @@ const selectTasks = state => state.tasks.tasks;
 const selectSelectedBoard = state => state.tasks.selectedBoard;
 const selectLoading = state => state.tasks.loading;
 const selectError = state => state.tasks.error;
+const selectFilterPriority = state => state.filter.filterPriority;
 
 export const useTasks = () => {
   const boards = useSelector(selectBoards);
@@ -16,6 +17,8 @@ export const useTasks = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const backgroundLogos = useSelector(selectbackgroundLogos);
+  const filterPriority = useSelector(selectFilterPriority);
+
   return {
     boards,
     backgroundLogos,
@@ -24,5 +27,6 @@ export const useTasks = () => {
     selectedBoard,
     loading,
     error,
+    filterPriority,
   };
 };

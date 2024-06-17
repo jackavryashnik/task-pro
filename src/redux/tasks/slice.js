@@ -14,6 +14,7 @@ import {
   moveTask,
 } from './operations';
 import { logout } from '../auth/operations';
+import { setFilterPriority } from '../filters/slice';
 
 const handlePending = state => {
   state.loading = true;
@@ -37,6 +38,9 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(setFilterPriority, (state, action) => {
+        state.filterPriority = action.payload;
+      })
       .addCase(moveTask.pending, handlePending)
       .addCase(moveTask.fulfilled, state => {
         state.loading = false;

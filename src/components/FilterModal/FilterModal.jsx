@@ -2,31 +2,43 @@ import { useState } from 'react';
 import css from './FilterModal.module.css';
 import clsx from 'clsx';
 import icons from '../../images/icons.svg';
+import { useDispatch } from 'react-redux';
+import { setFilterPriority } from '../../redux/filters/slice';
 
-const FilterModal = ({onClose}) => {
+const FilterModal = ({ onClose }) => {
   const [selectedPriority, setSelectedPriority] = useState('none');
+  const dispatch = useDispatch();
 
   const handlePriorityChange = event => {
-    setSelectedPriority(event.target.value);
+    const priority = event.target.value;
+    setSelectedPriority(priority);
+    dispatch(setFilterPriority(priority));
   };
 
   return (
     <div className={css.modal}>
       <button type="button" className={css.closeBtn} onClick={onClose}>
         <svg width={18} height={18}>
-        <use href={`${icons}#icon-x-close`}></use>
+          <use href={`${icons}#icon-x-close`}></use>
         </svg>
       </button>
       <h2 className={css.title}>Filters</h2>
       <div className={css.line}></div>
       <div className={css.container}>
-        <h3 className={css.subtitle}>Label color</h3>
-        <button type="button" className={css.showAll} onClick={()=> setSelectedPriority('none')}>
+        <h3 className={css.subtitle}>Priority</h3>
+        <button
+          type="button"
+          className={css.showAll}
+          onClick={() => {
+            setSelectedPriority('none');
+            dispatch(setFilterPriority('none'));
+          }}
+        >
           Show all
         </button>
       </div>
       <div className={css.options}>
-        {['without', 'low', 'medium', 'high'].map((priority) => (
+        {['without', 'low', 'medium', 'high'].map(priority => (
           <label
             key={priority}
             className={clsx([css.priorityOpt, css.customRadio])}
@@ -44,7 +56,13 @@ const FilterModal = ({onClose}) => {
                 <span className={css.innerCircle}></span>
               </span>
             </div>
-            <span>{priority === 'without' ? 'Without priority' : priority.charAt(0).toUpperCase() + priority.slice(1)}</span>
+            <span>
+              {priority === 'none'
+                ? 'Show all'
+                : priority === 'without'
+                ? 'Without priority'
+                : priority.charAt(0).toUpperCase() + priority.slice(1)}
+            </span>
           </label>
         ))}
       </div>
