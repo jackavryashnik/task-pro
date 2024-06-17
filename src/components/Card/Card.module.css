@@ -19,7 +19,22 @@
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  background-color: red;
+}
+
+.cardBody.elemLow::before {
+  background-color: var(--label-color-blue);
+}
+
+.cardBody.elemMedium::before {
+  background-color: var(--label-color-red);
+}
+
+.cardBody.elemHigh::before {
+  background-color: var(--label-color-green);
+}
+
+.cardBody.elemWithout::before {
+  background-color: var(--label-color-grey);
 }
 
 .cardTitle {
@@ -77,7 +92,6 @@
   font-size: 8px;
   letter-spacing: -0.02em;
   color: var(--label-text-color);
-  /* margin-bottom: 4px; */
 }
 
 .priorityColor {
@@ -85,7 +99,22 @@
   width: 12px;
   height: 12px;
   margin-right: 4px;
-  background-color: red;
+}
+
+.circleLow {
+  background-color: var(--label-color-blue);
+}
+
+.circleMedium {
+  background-color: var(--label-color-red);
+}
+
+.circleHigh {
+  background-color: var(--label-color-green);
+}
+
+.circleWithout {
+  background-color: var(--label-color-grey);
 }
 
 .priorityTipe {
