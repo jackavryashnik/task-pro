@@ -6,6 +6,7 @@ import icons from '../../images/icons.svg';
 import EditColumnModal from '../EditColumnModal/EditColumnModal';
 import AddCardModal from '../AddCardModal/AddCardModal';
 import { useTasks } from '../../redux/tasks/selectors';
+
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 import toast from 'react-hot-toast';
 import { Button } from '../Button/Button';
@@ -13,8 +14,14 @@ import clsx from 'clsx';
 
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
-  const { tasks } = useTasks();
-  const filterTasks = tasks.filter(task => task.columnId === column.id);
+  const { tasks, filterPriority } = useTasks();
+
+  const filterTasks = tasks.filter(task => {
+    return (
+      task.columnId === column.id &&
+      (filterPriority === 'none' || task.priority === filterPriority)
+    );
+  });
 
   const handleDeleteColumn = () => {
     try {
@@ -60,9 +67,7 @@ const Column = ({ column, openModal, closeModal }) => {
           </button>
         </div>
       </div>
-      <div
-        className={clsx(css.tasks, tasks.length === 0 ? css.nothing : null)}
-      >
+      <div className={clsx(css.tasks, tasks.length === 0 ? css.nothing : null)}>
         <ul className={css.list}>
           {filterTasks.length > 0 &&
             filterTasks.map(({ ...task }) => {
