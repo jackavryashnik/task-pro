@@ -2,14 +2,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { enGB } from 'date-fns/locale';
 import css from './Calendar.module.css';
+import './DatePickerStyles.css'; 
 import { useState } from "react";
 import icons from '../../images/icons.svg';
 
-
 const Icon = () => (
   <svg width={18} height={18} className={css.calendarIcon}>
-<use href={`${icons}#icon-chevron-down`}></use>
-</svg>
+    <use href={`${icons}#icon-chevron-down`}></use>
+  </svg>
 );
 
 const CustomInput = ({ value, onClick }) => (
@@ -53,8 +53,9 @@ const Calendar = ({ selectedDate, onChange }) => {
     <div className={css.datePickerWrapper}>
       <DatePicker
         customInput={<CustomInput />}
-        className={css.reactDatepicker}
-        calendarClassName={css.reactDatepicker}
+        calendarClassName="react-datepicker"
+        wrapperClassName={css.datePickerWrapper}
+        popperClassName="react-datepicker-popper"
         selected={startDate}
         onChange={(date) => handleDateChange(date)}
         dateFormat={getDateFormat(startDate)}
