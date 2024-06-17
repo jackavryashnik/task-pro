@@ -50,8 +50,8 @@
   width: 335px;
   height: 56px;
 
-  background-color: var(--white-text);
-  color: var(--dull-black);
+  background-color: var(--add-card-btn-background);
+  color: var(--add-card-btn-text-color);
 }
 
 button.addColumnButton > .iconPlus {
@@ -63,13 +63,9 @@ button.addColumnButton > .iconPlus {
   height: 28px;
   border-radius: 8px;
 
-  background: var(--dull-black);
-  stroke: var(--white-text);
-  fill: var(--white-text);
-}
-
-.addColumnButton:hover {
-  background-color: #bedbb0;
+  background: var(--add-card-plus-icon-background);
+  stroke: var(--add-card-plus-icon-color);
+  fill: var(--add-card-plus-icon-color);
 }
 
 .svgColumnBtn {

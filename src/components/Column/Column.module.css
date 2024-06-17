@@ -23,12 +23,12 @@
 }
 
 .tasks::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.10);
+  background-color: rgba(22, 22, 22, 0.1);
   border-radius: 10px;
 }
 
 .tasks::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.20);
+  background-color: rgba(22, 22, 22, 0.2);
 }
 
 .tasks.anything {
@@ -50,13 +50,13 @@
   height: 56px;
   padding: 20px;
   border-radius: 8px;
-
-  background-color: var(--white-text);
+  background-color: var(--column-card-background);
 }
 
 .columnTitle {
   font-weight: 500;
   font-size: 14px;
+  color: var(--modal-title-color);
 }
 
 .columnButtons {
@@ -70,7 +70,11 @@
 }
 
 .icon {
-  stroke: #16161680;
+  stroke: var(--manage-column-icons-color);
+}
+
+.icon:hover {
+  stroke: var(--manage-column-icons-hover-color);
 }
 
 button.addCardButton {
@@ -90,12 +94,13 @@ button.addCardButton > .iconPlus {
   display: flex;
   justify-content: center;
   align-items: center;
- 
+
   width: 28px;
   height: 28px;
   border-radius: 8px;
 
-  background: var(--dull-black); 
+  background: var(--plus-icon-background);
+  stroke: var(--plus-icon-btn-color);
 }
 
 @media screen and (min-width: 375px) {
@@ -112,14 +117,14 @@ button.addCardButton > .iconPlus {
   .column {
     /* width: 350px; */
   }
-  
+
   .tasks {
     height: 640px;
     padding-right: 8px;
   }
 }
 
-@media screen and (min-width: 1440px) {  
+@media screen and (min-width: 1440px) {
   .tasks {
     height: 478px;
   }
