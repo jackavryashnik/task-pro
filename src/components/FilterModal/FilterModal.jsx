@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import css from './FilterModal.module.css';
 import clsx from 'clsx';
 import icons from '../../images/icons.svg';
-import { useDispatch } from 'react-redux';
-import { setFilterPriority } from '../../redux/filters/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilterPriority, selectPriority } from '../../redux/filters/slice';
 
 const FilterModal = ({ onClose }) => {
-  const [selectedPriority, setSelectedPriority] = useState('none');
   const dispatch = useDispatch();
+  const currentPriority = useSelector(selectPriority);
+  const [selectedPriority, setSelectedPriority] = useState(currentPriority);
+
+  useEffect(() => {
+    setSelectedPriority(currentPriority);
+  }, [currentPriority]);
 
   const handlePriorityChange = event => {
     const priority = event.target.value;
