@@ -8,7 +8,7 @@
 
   width: 100%;
   min-height: calc(100vh - 95px);
-  padding: 40px 20px;
+  padding: 39px 20px;
   background-color: var(--taskboard-background);
 }
 

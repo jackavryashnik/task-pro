@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import css from './Header.module.css';
 import icons from '../../images/icons.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,11 +11,13 @@ import { EditProfile } from '../EditProfile/EditProfile.jsx';
 const Header = ({ isHidden, setter, openModal, closeModal }) => {
   const [selectorOpen, setSelectorOpen] = useState(false);
   const dispatch = useDispatch();
+  const themeSelectorRef = useRef(null);
 
   const currentDataUser = useSelector(selectUser);
 
   const handleThemeChange = theme => {
     dispatch(changeTheme(theme));
+    setSelectorOpen(false);
   };
 
   const handleMenuToggle = () => {
@@ -25,6 +27,26 @@ const Header = ({ isHidden, setter, openModal, closeModal }) => {
   const handleThemeSelectorToggle = () => {
     setSelectorOpen(!selectorOpen);
   };
+
+  const handleClickOutside = event => {
+    if (
+      themeSelectorRef.current &&
+      !themeSelectorRef.current.contains(event.target)
+    ) {
+      setSelectorOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectorOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [selectorOpen]);
 
   return (
     <header className={css.header}>
@@ -36,7 +58,7 @@ const Header = ({ isHidden, setter, openModal, closeModal }) => {
         </button>
       </div>
       <div className={css.rightSection}>
-        <div className={css.themeSelectorContainer}>
+        <div className={css.themeSelectorContainer} ref={themeSelectorRef}>
           <button
             onClick={handleThemeSelectorToggle}
             className={css.themeButton}
