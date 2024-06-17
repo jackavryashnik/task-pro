@@ -42,7 +42,6 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
       createTask({
         boardId,
         columnId,
-
         name: data.name,
         description: data.description,
         priority: data.priority,
@@ -97,7 +96,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
           })}
         />
         {errors?.name && (
-          <FormErrorMessages className={css.errorMessage}>{errors.name.message}</FormErrorMessages>
+          <FormErrorMessages>{errors.name.message}</FormErrorMessages>
         )}
 
         <div className={css.textareaContainer}>
@@ -154,7 +153,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
         </div>
 
         {errors?.deadline && (
-          <FormErrorMessages className={css.errorMessage}>{errors.deadline.message}</FormErrorMessages>
+          <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
         )}
 
         <Button type="submit" className={css.addButton}>
