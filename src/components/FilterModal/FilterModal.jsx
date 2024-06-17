@@ -38,7 +38,7 @@ const FilterModal = ({ onClose }) => {
         </button>
       </div>
       <div className={css.options}>
-        {['none', 'low', 'medium', 'high'].map(priority => (
+        {['without', 'low', 'medium', 'high'].map(priority => (
           <label
             key={priority}
             className={clsx([css.priorityOpt, css.customRadio])}
@@ -59,6 +59,8 @@ const FilterModal = ({ onClose }) => {
             <span>
               {priority === 'none'
                 ? 'Show all'
+                : priority === 'without'
+                ? 'Without priority'
                 : priority.charAt(0).toUpperCase() + priority.slice(1)}
             </span>
           </label>
