@@ -14,7 +14,7 @@
 }
 .icon {
   stroke: var(--logout-icon-color);
-  transition: transform 200ms ease;
+  transition: border-color, 250ms ease-in;
 }
 .icon:hover,
 .icon:focus {

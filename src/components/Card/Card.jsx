@@ -21,14 +21,30 @@ export default function Card({
   const { columns } = useTasks();
 
   const dateDeadline = new Date(deadline);
+
   const formatedDate = `${dateDeadline.getUTCDate()}/${(
     dateDeadline.getUTCMonth() + 1
   )
     .toString()
     .padStart(2, '0')}/${dateDeadline.getFullYear()}`;
-  const cardTextDescription = description.substring(0, 90) + '...';
 
-  const bell = new Date() > dateDeadline;
+  const cardTextDescription =
+    description.length > 95
+      ? description.substring(0, 95) + '...'
+      : description;
+
+  // поточна дата
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+  dateDeadline.setHours(0, 0, 0, 0);
+
+  // перевірка, чи пройшов дедлайн
+  const passedDeadline = today > dateDeadline;
+
+  // перевірка, чи поточна дата рівна дедлайну
+  const isTodayDeadline = today.getTime() === dateDeadline.getTime();
+  const bell = isTodayDeadline || today > dateDeadline;
 
   const handleClickEdit = () => {
     openModal(
@@ -90,7 +106,7 @@ export default function Card({
   return (
     <li className={clsx(css.cardBody, getPriorityElem())}>
       <div className={css.cardColor}></div>
-      <h2 className={css.cardTitle}>{name}</h2>
+      <h4 className={css.cardTitle}>{name}</h4>
       <p className={css.cardDescription}>{cardTextDescription}</p>
       <div className={css.cardSolid}></div>
       <div className={css.cardDetals}>
@@ -112,7 +128,11 @@ export default function Card({
         <div className={css.cardButtons}>
           <button
             type="button"
-            className={`${css.bell} ${bell ? css.active : ''}`}
+            className={clsx(
+              css.bell,
+              bell ? css.active : '',
+              passedDeadline ? css.passed : ''
+            )}
           >
             <svg width={16} height={16}>
               <use href={`${icons}#icon-bell`}></use>

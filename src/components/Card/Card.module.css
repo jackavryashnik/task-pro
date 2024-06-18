@@ -17,8 +17,8 @@
   left: 0;
   width: 4px;
   height: 100%;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .cardBody.elemLow::before {
@@ -48,10 +48,10 @@
 .cardDescription {
   text-align: left;
   font-size: 12px;
-  line-height: 1.33333;
+  line-height: 1.3;
   color: var(--card-desc-text-color);
   width: 290px;
-  max-height: 38px;
+  max-height: 34px;
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -164,10 +164,15 @@
 
 .bell {
   stroke: none;
+  cursor: default;
 }
 
 .bell.active {
   stroke: var(--btn-background);
+}
+
+.bell.passed {
+  stroke: var(--label-color-red);
 }
 
 .button {
