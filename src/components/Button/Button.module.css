@@ -1,4 +1,4 @@
-.button {
+/* .button {
   width: 100%;
   height: 49px;
   border-radius: 8px;
@@ -16,9 +16,9 @@
   .button:focus {
     background-color: var(--green-btn-hover);
   }
-}
+} */
 
-/* .button {
+.button {
   width: 100%;
   height: 49px;
   border-radius: 8px;
@@ -37,4 +37,4 @@
   .button:focus {
     background-color: var(--btn-hover-background);
   }
-} */
+}

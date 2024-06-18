@@ -28,7 +28,11 @@ function App() {
 
   useEffect(() => {
     document.body.classList.remove(...THEMES);
-    if (theme) document.body.classList.add(theme);
+    if (theme) {
+      document.body.classList.add(theme);
+    } else {
+      document.body.classList.add('light');
+    }
   }, [theme]);
 
   return (

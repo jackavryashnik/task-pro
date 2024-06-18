@@ -123,6 +123,20 @@ body.dark {
   --board-icon-color: #fff;
   --manage-board-icons-color: rgba(255, 255, 255, 0.5);
   --manage-board-icons-hover-color: #fff;
+  --create-board-icons-color: rgba(255, 255, 255, 0.5);
+  --create-board-selected-icon-color: #fff;
+  --bg-icon-color: rgba(255, 255, 255, 0.1);
+  --bg-icon-background:#1f1f1f;
+  --plus-icon-background: #161616;
+  --plus-icon-btn-color: #FFFFFF;
+  --add-card-btn-background: #121212;
+  --add-card-btn-text-color: #fff;
+  --add-card-plus-icon-color: #121212;
+  --add-card-plus-icon-background: #fff;
+  --column-card-background: #121212;
+  --manage-column-icons-color: rgba(255, 255, 255, 0.5);
+  --manage-column-icons-hover-color: #fff;
+
 }
 
 body.light {
@@ -168,6 +182,20 @@ body.light {
   --board-icon-color: #161616;
   --manage-board-icons-color: rgba(22, 22, 22, 0.5);
   --manage-board-icons-hover-color: #161616;
+  --create-board-icons-color: rgba(22, 22, 22, 0.5);
+  --create-board-selected-icon-color: #161616;
+  --bg-icon-color: rgba(22, 22, 22, 0.1);
+  --bg-icon-background:#F6F6F7;
+  --plus-icon-background: #161616;
+  --plus-icon-btn-color: #FFFFFF;
+  --add-card-btn-background: #fff;
+  --add-card-btn-text-color: #161616;
+  --add-card-plus-icon-color: #FFFFFF;
+  --add-card-plus-icon-background: #161616;
+  --column-card-background: #fff;
+  --manage-column-icons-color: rgba(22, 22, 22, 0.5);
+  --manage-column-icons-hover-color: #161616;
+
 }
 
 body.violet {
@@ -213,4 +241,18 @@ body.violet {
   --board-icon-color: #fff;
   --manage-board-icons-color: rgba(255, 255, 255, 0.5);
   --manage-board-icons-hover-color: #fff;
+  --create-board-icons-color: rgba(22, 22, 22, 0.5);
+  --create-board-selected-icon-color: #161616;
+  --bg-icon-background: #ECEDFD;
+  --bg-icon-color: rgba(22, 22, 22, 0.1);
+  --plus-icon-background: #FFFFFF;
+  --plus-icon-btn-color: #161616;
+  --add-card-btn-background: #FFFFFF;
+  --add-card-btn-text-color: #161616;
+  --add-card-plus-icon-color: #FFFFFF;
+  --add-card-plus-icon-background: #161616;
+  --column-card-background: #fff;
+  --manage-column-icons-color: rgba(22, 22, 22, 0.5);
+  --manage-column-icons-hover-color: #161616;
+
 }
