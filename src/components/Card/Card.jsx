@@ -1,17 +1,25 @@
 import icons from '../../images/icons.svg';
 import css from './Card.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../../redux/tasks/operations.js';
+import { deleteTask, editTask } from '../../redux/tasks/operations.js';
 import { DeleteModal } from '../DeleteModal/DeleteModal.jsx';
 import EditCardModal from '../EditCardModal/EditCardModal.jsx';
 import clsx from 'clsx';
+import { useState } from 'react';
+import { useTasks } from '../../redux/tasks/selectors.js';
 
 export default function Card({
   task: { id, name, description, priority, deadline },
   openModal,
   closeModal,
+  columnId,
 }) {
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const dispatch = useDispatch();
+  // const popUpRef = useRef(null);
+
+  const { columns } = useTasks();
+
   const dateDeadline = new Date(deadline);
   const formatedDate = `${dateDeadline.getUTCDate()}/${(
     dateDeadline.getUTCMonth() + 1
@@ -65,13 +73,19 @@ export default function Card({
     }
   };
 
-  // const hendleMoveCardModalOpen = () => {
-  //   setIsOpenMoveCardModal(true);
-  // };
+  const handleTogglePopUp = () => {
+    setIsOpenPopUp(prev => !prev);
+  };
 
-  // const hendleMoveCardModalClose = () => {
-  //   setIsOpenMoveCardModal(false);
-  // };
+  const handleColumnSelect = newColumnId => {
+    dispatch(
+      editTask({
+        id,
+        columnId: newColumnId,
+      })
+    );
+    setIsOpenPopUp(false);
+  };
 
   return (
     <li className={clsx(css.cardBody, getPriorityElem())}>
@@ -84,7 +98,9 @@ export default function Card({
           <div className={css.priority}>
             <p className={css.priorityTitle}>Priority</p>
             <div className={css.priorityDetals}>
-              <div className={clsx(css.priorityColor, getPriorityCircle())}></div>
+              <div
+                className={clsx(css.priorityColor, getPriorityCircle())}
+              ></div>
               <p className={css.priorityTipe}>{priority}</p>
             </div>
           </div>
@@ -102,15 +118,17 @@ export default function Card({
               <use href={`${icons}#icon-bell`}></use>
             </svg>
           </button>
-          <button
-            type="button"
-            className={css.button}
-            // onClick={hendleMoveCardModalOpen}
-          >
-            <svg width={16} height={16}>
-              <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
-            </svg>
-          </button>
+          {columns.length > 1 && (
+            <button
+              type="button"
+              className={css.buttonPopUp}
+              onClick={handleTogglePopUp}
+            >
+              <svg width={16} height={16} className={css.popUpIcon}>
+                <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
+              </svg>
+            </button>
+          )}
           <button
             type="button"
             className={css.button}
@@ -140,14 +158,36 @@ export default function Card({
           </button>
         </div>
       </div>
-      {/* <Modal
-        isOpen={isOpenMoveCardModal}
-        onRequestClose={hendleMoveCardModalClose}
-        className={'modal-content'}
-        overlayClassName={'modal-overlay'}
-      >
-        <MoveCardDropdown currColumnId={columnId} cardId={cardId} />
-      </Modal> */}
+      {isOpenPopUp && (
+        <div
+          className={css.popUp}
+          // ref={popUpRef}
+        >
+          <ul className={css.popUpList}>
+            {columns.length > 0 &&
+              columns
+                .filter(column => column.id !== columnId)
+                .map(column => {
+                  return (
+                    <li
+                      className={css.popUpItem}
+                      key={column.id}
+                      onClick={() => handleColumnSelect(column.id)}
+                    >
+                      <div className={css.popUpBox}>
+                        <p className={css.textPopUp}> {column.name}</p>
+                        <svg width={16} height={16} className={css.popUpIcon}>
+                          <use
+                            href={`${icons}#icon-arrow-circle-broken-right`}
+                          ></use>
+                        </svg>
+                      </div>
+                    </li>
+                  );
+                })}
+          </ul>
+        </div>
+      )}
     </li>
   );
 }

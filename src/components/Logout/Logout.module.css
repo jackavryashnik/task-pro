@@ -9,6 +9,8 @@
 .text {
   font-weight: 500;
   color: var(--main-text-color);
+  min-width: 52px;
+  align-items: center;
 }
 .icon {
   stroke: var(--logout-icon-color);

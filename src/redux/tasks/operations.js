@@ -156,18 +156,13 @@ export const createTask = createAsyncThunk(
 
 export const editTask = createAsyncThunk(
   'tasks/editTask',
-  async ({ id, name, description, priority, deadline }, thunkAPI) => {
+  async ({ id, ...changes }, thunkAPI) => {
     try {
       // check and refresh tokens
       const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
       if (!isValidTokens.status) throw isValidTokens.error;
 
-      const { data } = await axios.patch(`/tasks/${id}`, {
-        name,
-        description,
-        priority,
-        deadline,
-      });
+      const { data } = await axios.patch(`/tasks/${id}`, { ...changes });
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

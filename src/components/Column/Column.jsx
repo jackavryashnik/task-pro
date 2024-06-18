@@ -15,7 +15,6 @@ import clsx from 'clsx';
 const Column = ({ column, openModal, closeModal }) => {
   const dispatch = useDispatch();
   const { tasks, filterPriority } = useTasks();
-
   const filterTasks = tasks.filter(task => {
     return (
       task.columnId === column.id &&
@@ -77,6 +76,7 @@ const Column = ({ column, openModal, closeModal }) => {
                   task={task}
                   openModal={openModal}
                   closeModal={closeModal}
+                  columnId={column.id}
                 />
               );
             })}
