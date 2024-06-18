@@ -23,7 +23,7 @@ const ScreensPage = ({ openModal, closeModal }) => {
 
   return (
     <div className={css.ScreensPage}>
-      {selectedBoard.background !== '' && (
+      {selectedBoard?.background !== '' && (
         <picture className={css.img}>
           <source
             srcSet={`

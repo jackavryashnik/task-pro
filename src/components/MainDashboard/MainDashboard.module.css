@@ -7,7 +7,6 @@
   position: relative;
 
   width: 100%;
-  /* min-height: calc(100vh - 95px); */
   padding: 39px 20px 24px;
 }
 
@@ -126,7 +125,6 @@ button.addColumnButton > .iconPlus {
     flex-direction: row;
     justify-content: center;
     padding: 26px 32px 0 32px;
-    /* min-height: calc(100vh - 115px); */
   }
 
   .columns {
@@ -137,7 +135,6 @@ button.addColumnButton > .iconPlus {
   .text {
     font-size: 14px;
     line-height: 1.28571;
-    /* color: rgba(255, 255, 255, 0.5); */
   }
 }
 
