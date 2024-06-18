@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteTask } from '../../redux/tasks/operations.js';
 import { DeleteModal } from '../DeleteModal/DeleteModal.jsx';
 import EditCardModal from '../EditCardModal/EditCardModal.jsx';
+import clsx from 'clsx';
 
 export default function Card({
   task: { id, name, description, priority, deadline },
@@ -38,6 +39,32 @@ export default function Card({
     dispatch(deleteTask(id));
   };
 
+  const getPriorityElem = () => {
+    switch (priority) {
+      case 'low':
+        return css.elemLow;
+      case 'medium':
+        return css.elemMedium;
+      case 'high':
+        return css.elemHigh;
+      default:
+        return css.elemWithout;
+    }
+  };
+
+  const getPriorityCircle = () => {
+    switch (priority) {
+      case 'low':
+        return css.circleLow;
+      case 'medium':
+        return css.circleMedium;
+      case 'high':
+        return css.circleHigh;
+      default:
+        return css.circleWithout;
+    }
+  };
+
   // const hendleMoveCardModalOpen = () => {
   //   setIsOpenMoveCardModal(true);
   // };
@@ -47,7 +74,7 @@ export default function Card({
   // };
 
   return (
-    <li className={css.cardBody}>
+    <li className={clsx(css.cardBody, getPriorityElem())}>
       <div className={css.cardColor}></div>
       <h2 className={css.cardTitle}>{name}</h2>
       <p className={css.cardDescription}>{cardTextDescription}</p>
@@ -57,7 +84,7 @@ export default function Card({
           <div className={css.priority}>
             <p className={css.priorityTitle}>Priority</p>
             <div className={css.priorityDetals}>
-              <div className={css.priorityColor}></div>
+              <div className={clsx(css.priorityColor, getPriorityCircle())}></div>
               <p className={css.priorityTipe}>{priority}</p>
             </div>
           </div>

@@ -138,6 +138,7 @@ body.light {
   --border-color: rgba(22, 22, 22, 0.1);
   --modal-background: #fcfcfc;
   --modal-title-color: #161616;
+  --label-color-grey: rgba(22, 22, 22, 0.3);
   --label-text-color: rgba(22, 22, 22, 0.5);
   --btn-text-color: #161616;
   --disabled-text-color: rgba(22, 22, 22, 0.2);
@@ -183,6 +184,7 @@ body.violet {
   --modal-background: #fcfcfc;
   --modal-title-color: #161616;
   --label-text-color: rgba(22, 22, 22, 0.5);
+  --label-color-grey: rgba(22, 22, 22, 0.3);
   --btn-text-color: #ffffff;
   --disabled-text-color: rgba(22, 22, 22, 0.2);
   --calendar-border-color: rgba(22, 22, 22, 0.2);
@@ -199,7 +201,7 @@ body.violet {
   --logout-icon-hover-color: #b8bcfd;
   --username-text-color: #161616;
   --theme-selector-text-color: #161616;
-  --modal-border-color: transparent
+  --modal-border-color: transparent;
   --input-text-color: #161616;
   --input-border-color: rgba(82, 85, 188, 0.4);
   --input-hover-border-color: rgb(82, 85, 188);
