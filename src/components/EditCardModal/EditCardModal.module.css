@@ -52,7 +52,6 @@
   height: 49px;
   box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
   opacity: 0.4;
-  margin-bottom: 14px;
   background-color: transparent;
   color: var(--modal-title-color);
   transition: var();
