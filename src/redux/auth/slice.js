@@ -41,6 +41,8 @@ const authSlice = createSlice({
     addTokens: (state, action) => {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
+
+      if (action.payload.isRefreshing) state.isRefreshing = true;
     },
     deleteTokensAndLogOff: state => {
       state.user = initialState.user;
