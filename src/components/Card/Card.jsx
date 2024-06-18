@@ -105,7 +105,6 @@ export default function Card({
 
   return (
     <li className={clsx(css.cardBody, getPriorityElem())}>
-      <div className={css.cardColor}></div>
       <h4 className={css.cardTitle}>{name}</h4>
       <p className={css.cardDescription}>{cardTextDescription}</p>
       <div className={css.cardSolid}></div>

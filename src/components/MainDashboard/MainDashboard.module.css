@@ -7,8 +7,8 @@
   position: relative;
 
   width: 100%;
-  min-height: calc(100vh - 95px);
-  padding: 39px 20px;
+  /* min-height: calc(100vh - 95px); */
+  padding: 39px 20px 24px;
 }
 
 .columns {
@@ -96,7 +96,7 @@ button.addColumnButton > .iconPlus {
 
 @media screen and (min-width: 375px) {
   .columns {
-    width: 347px;
+    width: 335px;
   }
 
   .addIcon {
@@ -126,7 +126,7 @@ button.addColumnButton > .iconPlus {
     flex-direction: row;
     justify-content: center;
     padding: 26px 32px 0 32px;
-    min-height: calc(100vh - 115px);
+    /* min-height: calc(100vh - 115px); */
   }
 
   .columns {
@@ -146,7 +146,7 @@ button.addColumnButton > .iconPlus {
   .dashboard {
     align-items: flex-start;
     padding: 10px 24px 0 24px;
-    min-height: calc(100vh - 99px);
+    height: calc(770px - 32.7px);
   }
 
   .columns {
