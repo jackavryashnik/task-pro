@@ -153,7 +153,7 @@
     width: 302px;
   }
 }
- .iconPlus {
+.iconPlus {
   border: none;
   border-radius: 8px;
   width: 28px;
@@ -162,10 +162,9 @@
   justify-content: center;
   align-items: center;
   margin-right: 8px;
-  background-color: var(--logo-background);
-  stroke: var(--close-icon-color);
+  background-color: var(--plus-icon-background);
+  stroke: var(--plus-icon-btn-color);
 }
-
 
 .span {
   font-size: 14px;
@@ -241,4 +240,3 @@
 .errorMessage {
   color: red;
 }
-
