@@ -245,3 +245,18 @@
 .errorMessage {
   color: red;
 }
+
+.inputContainer {
+  position: relative;
+}
+
+.errorForm {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: red;
+  position: absolute;
+  top: 100%; 
+  left: 5%;
+  width: 100%;
+}

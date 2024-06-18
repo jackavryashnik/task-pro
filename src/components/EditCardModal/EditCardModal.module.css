@@ -51,8 +51,8 @@
   width: 287px;
   height: 49px;
   box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
-  opacity: 0.4;
   margin-bottom: 14px;
+  opacity: 0.4;
   background-color: transparent;
   color: var(--modal-title-color);
   transition: var();
@@ -90,7 +90,10 @@
   padding-top: 14px;
   height: 154px;
   resize: none;
+
 }
+
+
 
 .labelColorStyle,
 .deadlineStyle {
@@ -221,4 +224,19 @@
 
 .errorMessage {
   color: red;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.errorForm {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: red;
+  position: absolute;
+  top: 100%; 
+  left: 5%;
+  width: 100%;
 }
