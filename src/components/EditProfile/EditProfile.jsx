@@ -32,7 +32,6 @@ export const EditProfile = ({ closeModal }) => {
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
 
-  // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
     if (currentDataUser) {
       setValue('name', currentDataUser.name);
@@ -53,12 +52,10 @@ export const EditProfile = ({ closeModal }) => {
     }
   };
 
-  // відслідковування змін в інпутах (додавання зірочки, disabled кнопки)
   const handleInputChange = event => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
 
-    // якщо рядок пустий
     if (inputValue === '') {
       setIsChangedInput(true);
       setChangedInputData({
@@ -66,7 +63,6 @@ export const EditProfile = ({ closeModal }) => {
         [inputName]: false,
       });
     } else {
-      // якщо поле поточного користувача дорівнює полю форми
       if (currentDataUser[inputName] === inputValue) {
         setIsChangedInput(true);
         setChangedInputData({
@@ -84,10 +80,8 @@ export const EditProfile = ({ closeModal }) => {
   };
 
   const submitForm = async data => {
-    // Створення об'єкта для збереження змінених даних
     const changedData = {};
 
-    // Перевірка полів форми на зміни порівняно з оригінальними даними користувача
     if (data.name !== currentDataUser.name) {
       changedData.name = data.name;
     }
@@ -118,7 +112,6 @@ export const EditProfile = ({ closeModal }) => {
 
         formData.append('avatar', file);
 
-        // відправка у форматі form-data
         const result = await dispatch(
           updateUser({ credentials: formData, isFormData: true })
         );
@@ -133,7 +126,6 @@ export const EditProfile = ({ closeModal }) => {
         }, 500)
 
       } else {
-        // відправка у форматі JSON
         const result = await dispatch(
           updateUser({ credentials: changedData, isFormData: false })
         );
@@ -202,7 +194,7 @@ export const EditProfile = ({ closeModal }) => {
             />
             {changedInputData.name ? <span className={css.span}>*</span> : null}
           </div>
-          <div className={css.inputContainer}>
+          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
             <EmailInput
               placeholder={
                 currentDataUser ? currentDataUser.email : 'Enter a new email'
@@ -216,8 +208,8 @@ export const EditProfile = ({ closeModal }) => {
             {changedInputData.email ? (
               <span className={css.span}>*</span>
             ) : null}
-          </div>
-          <div className={css.inputContainer}>
+          </div>}
+          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
             <PasswordInput
               placeholder={'Enter a new password'}
               ariaLabel={'Enter a new password'}
@@ -230,7 +222,7 @@ export const EditProfile = ({ closeModal }) => {
             {changedInputData.password ? (
               <span className={css.span}>*</span>
             ) : null}
-          </div>
+          </div>}
           <Button type={'submit'} disabled={isChangedInput}>
             Send
           </Button>
@@ -242,3 +234,5 @@ export const EditProfile = ({ closeModal }) => {
     </div>
   );
 };
+
+// oauth

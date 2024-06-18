@@ -28,17 +28,17 @@
 }
 
 .columns::-webkit-scrollbar-track {
-  background: var(--scroll);
+  background: var(--scroll-color);
   border-radius: 10px;
 }
 
 .columns::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.1);
+  background-color: var(--scroll-background-color);
   border-radius: 10px;
 }
 
 .columns::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.2);
+  background-color: var(--scroll-background-color-hover);
 }
 
 .addColumnButton {
