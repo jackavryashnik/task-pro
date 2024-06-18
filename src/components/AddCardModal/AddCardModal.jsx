@@ -77,6 +77,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.inputContainer}>
         <input
           className={css.titleCard}
           type="text"
@@ -98,8 +99,10 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
           })}
         />
         {errors?.name && (
-          <FormErrorMessages>{errors.name.message}</FormErrorMessages>
+          <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
         )}
+        </div>
+       
 
         <div className={css.textareaContainer}>
           <label className={css.label}>
@@ -156,7 +159,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
         </div>
 
         {errors?.deadline && (
-          <FormErrorMessages>{errors.deadline.message}</FormErrorMessages>
+          <FormErrorMessages className={clsx(css.errorForm)}>{errors.deadline.message}</FormErrorMessages>
         )}
 
         <Button type="submit" className={css.addButton}>
