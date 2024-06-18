@@ -53,11 +53,11 @@
   height: 49px;
   box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
   opacity: 0.4;
-  margin-bottom: 14px;
   background-color: transparent;
   color: var(--modal-title-color);
   transition: opacity var(--transition);
 }
+
 
 .titleCard:hover,
 .titleCard:focus,
@@ -89,8 +89,27 @@
 
 .styledDescription {
   padding-top: 14px;
+  margin-top: 14px;
   height: 154px;
   resize: none;
+  position: relative; 
+}
+
+.textareaContainer {
+  position: relative;
+}
+
+.charCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: var(--label-text-color);
+  pointer-events: none;
+}
+
+.labelColorStyle {
+  margin-top: 24px;
 }
 
 .labelColorStyle,

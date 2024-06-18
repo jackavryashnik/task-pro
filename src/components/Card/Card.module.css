@@ -1,27 +1,44 @@
 .cardBody {
   border-radius: 8px;
-  width: 335px; /* змінити на width: 100%; коли стане у колонку */
+  width: 334px; /* змінити на width: 100%; коли стане у колонку */
   height: 154px;
   background-color: var(--card-background);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   position: relative;
-  padding: 14px 20px 14px 24px;
+  padding: 14px 14px 14px 18px;
 }
 
-.cardColor {
+.cardBody::before {
+  content: "";
   position: absolute;
-  border-radius: 4px 0 0 4px;
+  top: 0;
+  left: 0;
   width: 4px;
-  height: 154px;
-  top: 0px;
-  left: 0px;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.cardBody.elemLow::before {
+  background-color: var(--label-color-blue);
+}
+
+.cardBody.elemMedium::before {
+  background-color: var(--label-color-red);
+}
+
+.cardBody.elemHigh::before {
+  background-color: var(--label-color-green);
+}
+
+.cardBody.elemWithout::before {
+  background-color: var(--label-color-grey);
 }
 
 .cardTitle {
   text-align: left;
-  font-family: 'Poppins-SemiBold';
   font-size: 14px;
   letter-spacing: -0.02em;
   color: var(--modal-title-color);
@@ -32,10 +49,10 @@
   text-align: left;
   font-size: 12px;
   line-height: 1.33333;
-  letter-spacing: -0.02em;
   color: var(--card-desc-text-color);
   width: 290px;
-  height: 38px;
+  max-height: 38px;
+  word-wrap: break-word; 
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 14px;
@@ -48,22 +65,26 @@
 
 .cardDetals {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
 .cardInformation {
   display: flex;
+  gap: 14px;
 }
 
 .priority {
   display: flex;
   flex-direction: column;
-  margin-right: 14px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .priorityDetals {
   display: flex;
+  align-items: center;
 }
 
 .priorityTitle {
@@ -71,7 +92,6 @@
   font-size: 8px;
   letter-spacing: -0.02em;
   color: var(--label-text-color);
-  margin-bottom: 4px;
 }
 
 .priorityColor {
@@ -79,6 +99,22 @@
   width: 12px;
   height: 12px;
   margin-right: 4px;
+}
+
+.circleLow {
+  background-color: var(--label-color-blue);
+}
+
+.circleMedium {
+  background-color: var(--label-color-red);
+}
+
+.circleHigh {
+  background-color: var(--label-color-green);
+}
+
+.circleWithout {
+  background-color: var(--label-color-grey);
 }
 
 .priorityTipe {
@@ -94,7 +130,9 @@
 .deadline {
   display: flex;
   flex-direction: column;
-  margin-right: 14px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .deadlineTitle {
@@ -102,7 +140,6 @@
   font-size: 8px;
   letter-spacing: -0.02em;
   color: var(--label-text-color);
-  margin-bottom: 4px;
 }
 
 .deadlineDate {
@@ -135,7 +172,7 @@
 
 .button {
   cursor: pointer;
-  transition: var();
+  transition: border-color, 250ms ease-in;
   stroke: var(--card-btn-color);
 }
 
