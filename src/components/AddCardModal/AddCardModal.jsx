@@ -59,8 +59,10 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
 
   const handleDescriptionChange = event => {
     const newDescription = event.target.value;
-    setDescriptionLength(newDescription.length);
-    setValue('description', newDescription);
+    if (newDescription.length <= 500) {
+      setDescriptionLength(newDescription.length);
+      setValue('description', newDescription);
+    }
   };
 
   return (
@@ -105,6 +107,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
               className={css.styledDescription}
               rows={4}
               placeholder="Description"
+              maxLength={500}
               onChange={handleDescriptionChange} 
               {...register('description')}
             />
