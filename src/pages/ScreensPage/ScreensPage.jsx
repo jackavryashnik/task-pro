@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchOneBoard } from '../../redux/tasks/operations';
 import { useTasks } from '../../redux/tasks/selectors';
+import css from './ScreensPage.module.css';
 
 const ScreensPage = ({ openModal, closeModal }) => {
-  const { boards } = useTasks();
+  const { boards, selectedBoard } = useTasks();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +22,36 @@ const ScreensPage = ({ openModal, closeModal }) => {
   }, [dispatch, boards]);
 
   return (
-    <div>
+    <div className={css.ScreensPage}>
+      {selectedBoard.background !== '' && (
+        <picture className={css.img}>
+          <source
+            srcSet={`
+            ${selectedBoard.background.desktop2x} 2x, 
+            ${selectedBoard.background.desktop} 1x
+          `}
+            media="(min-width: 1440px)"
+          />
+          <source
+            srcSet={`
+              ${selectedBoard.background.tablet2x} 2x, 
+              ${selectedBoard.background.tablet} 1x
+            `}
+            media="(min-width: 768px)"
+          />
+          <source
+            srcSet={`
+              ${selectedBoard.background.mobile2x} 2x, 
+              ${selectedBoard.background.mobile} 1x
+            `}
+            media="(max-width: 767px)"
+          />
+          <img
+            src={selectedBoard.background.mobile}
+            alt={selectedBoard.background.name}
+          />
+        </picture>
+      )}
       <HeaderDashboard openModal={openModal} closeModal={closeModal} />
       <MainDashboard openModal={openModal} closeModal={closeModal} />
     </div>
