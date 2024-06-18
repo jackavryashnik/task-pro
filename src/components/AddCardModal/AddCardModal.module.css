@@ -44,7 +44,7 @@
 
 .titleCard,
 .styledDescription {
-  padding-left: 18px;
+  padding: 0 18px;
   outline: transparent;
   outline-offset: -1px;
   border: 1px solid var(--btn-background);
@@ -56,6 +56,10 @@
   background-color: transparent;
   color: var(--modal-title-color);
   transition: opacity var(--transition);
+}
+
+.styledDescription {
+  padding: 14px;
 }
 
 

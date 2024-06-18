@@ -173,17 +173,8 @@ export const EditProfile = ({ closeModal }) => {
           <div className={css.avatarContainer}>
             <img
               className={css.avatar}
-              src={
-                currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar
-              }
-              srcSet={`${
-                currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar
-              } 1x, ${
-                currentDataUser.avatar
-                  ? currentDataUser.avatar
-                  : defaultAvatar2x
-              } 2x`}
-              alt={'Profile avatar'}
+              src={file ? URL.createObjectURL(file) : (currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar)}
+  srcSet={file ? `${URL.createObjectURL(file)} 1x, ${URL.createObjectURL(file)} 2x` : `${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`}
             />
             <label className={css.label}>
               <svg className={css.icon} width={10} height={10}>

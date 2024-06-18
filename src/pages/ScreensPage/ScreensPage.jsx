@@ -12,7 +12,6 @@ const ScreensPage = ({ openModal, closeModal }) => {
   useEffect(() => {
     if (boards.length > 0) {
       const activeBoardId = localStorage.getItem('activeBoardId');
-      console.log(activeBoardId);
       if (activeBoardId && activeBoardId !== 'undefined') {
         dispatch(fetchOneBoard(activeBoardId));
       } else {
