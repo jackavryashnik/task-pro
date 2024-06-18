@@ -26,6 +26,7 @@ export default function EditCardModal({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,6 +36,8 @@ export default function EditCardModal({
       deadline: '',
     },
   });
+
+  const watchedDescription = watch('description', description);
 
   useEffect(() => {
     setValue('name', name);
@@ -96,18 +99,24 @@ export default function EditCardModal({
         {errors?.name && (
           <FormErrorMessages>{errors.name.message}</FormErrorMessages>
         )}
-
+        <div className={css.textareaContainer}>
         <label className={css.label}>
           <textarea
             className={css.styledDescription}
             rows={4}
             placeholder="Description"
+            maxLength={500}
             {...register('description')}
             onChange={e => {
               setValue('description', e.target.value);
             }}
           />
         </label>
+        <div>
+        <p className={css.charCount}>{watchedDescription.length}/500</p>
+        </div>
+        </div>
+    
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
