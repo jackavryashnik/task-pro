@@ -38,6 +38,8 @@ export const EditProfile = ({ closeModal }) => {
       setValue('name', currentDataUser.name);
       setValue('email', currentDataUser.email);
       setValue('password', '');
+
+      console.log(currentDataUser);
     }
   }, [currentDataUser, setValue]);
 
@@ -202,7 +204,7 @@ export const EditProfile = ({ closeModal }) => {
             />
             {changedInputData.name ? <span className={css.span}>*</span> : null}
           </div>
-          <div className={css.inputContainer}>
+          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
             <EmailInput
               placeholder={
                 currentDataUser ? currentDataUser.email : 'Enter a new email'
@@ -216,8 +218,8 @@ export const EditProfile = ({ closeModal }) => {
             {changedInputData.email ? (
               <span className={css.span}>*</span>
             ) : null}
-          </div>
-          <div className={css.inputContainer}>
+          </div>}
+          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
             <PasswordInput
               placeholder={'Enter a new password'}
               ariaLabel={'Enter a new password'}
@@ -230,7 +232,7 @@ export const EditProfile = ({ closeModal }) => {
             {changedInputData.password ? (
               <span className={css.span}>*</span>
             ) : null}
-          </div>
+          </div>}
           <Button type={'submit'} disabled={isChangedInput}>
             Send
           </Button>
@@ -242,3 +244,5 @@ export const EditProfile = ({ closeModal }) => {
     </div>
   );
 };
+
+// oauth

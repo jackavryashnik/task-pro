@@ -13,7 +13,6 @@
   --white-modal: #fcfcfc;
   --white: #fdfdfd;
   --white-text: #fff;
-  --scroll: #e8e8e8;
   --black: #121212;
   --dull-black: #161616;
   --noir-black: #151515;
@@ -136,7 +135,9 @@ body.dark {
   --column-card-background: #121212;
   --manage-column-icons-color: rgba(255, 255, 255, 0.5);
   --manage-column-icons-hover-color: #fff;
-
+  --scroll-color: #121212;
+  --scroll-background-color: rgba(255, 255, 255, 0.3);
+  --scroll-background-color-hover: rgba(255, 255, 255, 0.4);
 }
 
 body.light {
@@ -195,7 +196,9 @@ body.light {
   --column-card-background: #fff;
   --manage-column-icons-color: rgba(22, 22, 22, 0.5);
   --manage-column-icons-hover-color: #161616;
-
+  --scroll-color: #e8e8e8;
+  --scroll-background-color: rgba(22, 22, 22, 0.1);
+  --scroll-background-color-hover: rgba(22, 22, 22, 0.2);
 }
 
 body.violet {
@@ -254,5 +257,7 @@ body.violet {
   --column-card-background: #fff;
   --manage-column-icons-color: rgba(22, 22, 22, 0.5);
   --manage-column-icons-hover-color: #161616;
-
+  --scroll-color: #b8bcfd;
+  --scroll-background-color: #fff;
+  --scroll-background-color-hover: #fbfcff;
 }

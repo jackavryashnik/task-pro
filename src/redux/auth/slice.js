@@ -24,6 +24,7 @@ const initialState = {
     email: null,
     theme: null,
     avatar: null,
+    oauth: false,
   },
   accessToken: null,
   refreshToken: null,

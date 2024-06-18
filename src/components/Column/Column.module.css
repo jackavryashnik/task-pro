@@ -5,7 +5,7 @@
 }
 
 .tasks {
-  height: 60vh;
+  max-height: 60vh;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -15,17 +15,17 @@
 }
 
 .tasks::-webkit-scrollbar-track {
-  background: var(--scroll);
+  background: var(--scroll-color);
   border-radius: 10px;
 }
 
 .tasks::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.1);
+  background-color: var(--scroll-background-color);
   border-radius: 10px;
 }
 
 .tasks::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.2);
+  background-color: var(--scroll-background-color-hover);
 }
 
 .tasks.anything {
@@ -108,7 +108,7 @@ button.addCardButton > .iconPlus {
 
 @media screen and (min-width: 768px) {
   .tasks {
-    height: 63vh;
+    max-height: 63vh;
     padding-right: 8px;
   }
 }
