@@ -32,14 +32,11 @@ export const EditProfile = ({ closeModal }) => {
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
 
-  // отримуємо дані користувача, записуємо їх в value інпутів
   useEffect(() => {
     if (currentDataUser) {
       setValue('name', currentDataUser.name);
       setValue('email', currentDataUser.email);
       setValue('password', '');
-
-      console.log(currentDataUser);
     }
   }, [currentDataUser, setValue]);
 
@@ -55,12 +52,10 @@ export const EditProfile = ({ closeModal }) => {
     }
   };
 
-  // відслідковування змін в інпутах (додавання зірочки, disabled кнопки)
   const handleInputChange = event => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
 
-    // якщо рядок пустий
     if (inputValue === '') {
       setIsChangedInput(true);
       setChangedInputData({
@@ -68,7 +63,6 @@ export const EditProfile = ({ closeModal }) => {
         [inputName]: false,
       });
     } else {
-      // якщо поле поточного користувача дорівнює полю форми
       if (currentDataUser[inputName] === inputValue) {
         setIsChangedInput(true);
         setChangedInputData({
@@ -86,10 +80,8 @@ export const EditProfile = ({ closeModal }) => {
   };
 
   const submitForm = async data => {
-    // Створення об'єкта для збереження змінених даних
     const changedData = {};
 
-    // Перевірка полів форми на зміни порівняно з оригінальними даними користувача
     if (data.name !== currentDataUser.name) {
       changedData.name = data.name;
     }
@@ -120,7 +112,6 @@ export const EditProfile = ({ closeModal }) => {
 
         formData.append('avatar', file);
 
-        // відправка у форматі form-data
         const result = await dispatch(
           updateUser({ credentials: formData, isFormData: true })
         );
@@ -135,7 +126,6 @@ export const EditProfile = ({ closeModal }) => {
         }, 500)
 
       } else {
-        // відправка у форматі JSON
         const result = await dispatch(
           updateUser({ credentials: changedData, isFormData: false })
         );
