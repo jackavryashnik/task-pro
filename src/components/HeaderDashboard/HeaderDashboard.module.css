@@ -2,9 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px 0 20px;
+  position: relative;
+  padding: 12px 18px 0;
+}
+
+.wrapper {
+  border-radius: 8px;
+  padding: 2px 2px;
   background-color: var(--taskboard-background);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .filterButton {
@@ -28,12 +33,18 @@
 
 @media screen and (min-width: 768px) {
   .header {
-    padding: 26px 32px 0 32px;
+    padding: 24px 30px 0;
+  }
+  .wrapper {
+    padding: 2px 2px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .header {
-    padding: 10px 24px 0 24px;
+    padding: 8px 22px 0;
+  }
+  .wrapper {
+    padding: 2px 2px;
   }
 }
