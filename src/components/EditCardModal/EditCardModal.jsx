@@ -26,6 +26,7 @@ export default function EditCardModal({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -35,6 +36,8 @@ export default function EditCardModal({
       deadline: '',
     },
   });
+
+  const watchedDescription = watch('description', description);
 
   useEffect(() => {
     setValue('name', name);
@@ -74,42 +77,49 @@ export default function EditCardModal({
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputContainer}>
-        <input
-          className={css.titleCard}
-          type="text"
-          placeholder="Title"
-          autoFocus
-          onChange={e => {
-            setValue('name', e.target.value);
-          }}
-          {...register('name', {
-            required: 'Required field',
-            minLength: {
-              value: 2,
-              message: 'Title must be at least 2 characters',
-            },
-            maxLength: {
-              value: 32,
-              message: 'Title cannot exceed 32 characters',
-            },
-          })}
-        />
-        {errors?.name && (
-          <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
-        )}
-        </div>
-       
-        <label className={css.label}>
-          <textarea
-            className={css.styledDescription}
-            rows={4}
-            placeholder="Description"
-            {...register('description')}
+          <input
+            className={css.titleCard}
+            type="text"
+            placeholder="Title"
+            autoFocus
             onChange={e => {
-              setValue('description', e.target.value);
+              setValue('name', e.target.value);
             }}
+            {...register('name', {
+              required: 'Required field',
+              minLength: {
+                value: 2,
+                message: 'Title must be at least 2 characters',
+              },
+              maxLength: {
+                value: 32,
+                message: 'Title cannot exceed 32 characters',
+              },
+            })}
           />
-        </label>
+          {errors?.name && (
+            <FormErrorMessages className={clsx(css.errorForm)}>
+              {errors.name.message}
+            </FormErrorMessages>
+          )}
+        </div>
+        <div className={css.textareaContainer}>
+          <label className={css.label}>
+            <textarea
+              className={css.styledDescription}
+              rows={4}
+              placeholder="Description"
+              maxLength={500}
+              {...register('description')}
+              onChange={e => {
+                setValue('description', e.target.value);
+              }}
+            />
+          </label>
+          <div>
+            <p className={css.charCount}>{watchedDescription.length}/500</p>
+          </div>
+        </div>
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
@@ -148,7 +158,9 @@ export default function EditCardModal({
         </div>
 
         {errors?.deadline && (
-          <FormErrorMessages className={clsx(css.errorForm)}>{errors.deadline.message}</FormErrorMessages>
+          <FormErrorMessages className={clsx(css.errorForm)}>
+            {errors.deadline.message}
+          </FormErrorMessages>
         )}
 
         <Button type="submit" className={css.addButton}>
