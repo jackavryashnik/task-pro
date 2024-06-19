@@ -14,27 +14,40 @@ const AddColumnModal = ({ onClose }) => {
   const [columnName, setColumnName] = useState('');
   const dispatch = useDispatch();
 
+  const maxColumnNameLength = 32; 
+
   const handleCreateColumn = () => {
-    if (columnName === '') {
-      return toast.success('Please write a title for the column');
+    const trimmedColumnName = columnName.trim();
+
+    if (trimmedColumnName === '') {
+      return toast.error('Please write a title for the column');
     }
-   
+
+    if (trimmedColumnName.length > maxColumnNameLength) {
+      return toast.error(`Column title must not exceed ${maxColumnNameLength} characters`);
+    }
+
     dispatch(
-      createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
-    );
-    onClose();
-    setColumnName('');
+      createColumn({ name: trimmedColumnName, boardId: selectedBoard.id })
+    ).then(() => {
+      onClose();
+      setColumnName('');
+    }).catch((error) => {
+      console.error('Error creating column:', error);
+      toast.error('Failed to create column. Please try again.');
+    });
   };
 
   const handleNameChange = event => {
     const inputValue = event.target.value;
 
-    if (inputValue.startsWith(' ')) {
-      toast.error('Title cannot contain spaces');
+    // Перевірка максимальної довжини введеного тексту
+    if (inputValue.length > maxColumnNameLength) {
+      toast.error(`Column title must not exceed ${maxColumnNameLength} characters`);
       return;
-    } else {
-      setColumnName(inputValue);
     }
+
+    setColumnName(inputValue);
   };
 
   return (

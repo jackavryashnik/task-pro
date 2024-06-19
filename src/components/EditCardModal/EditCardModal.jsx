@@ -49,23 +49,28 @@ export default function EditCardModal({
   }, [name, deadline, description, priority, setValue, setSelectedDate]);
 
   const onSubmit = data => {
-    if (data.name.includes(' ')) {
-      toast.error('Title cannot contain spaces');
-      return;
-    }
-    if (data.description.includes(' ')) {
-      toast.error('Description cannot contain spaces');
+    const trimmedName = data.name.trim();
+
+    if (trimmedName === '') {
+      toast.error('Title cannot be empty or contain only spaces');
       return;
     }
 
     const changes = {};
-    if (data.name !== name) changes.name = data.name;
-    if (data.description !== description)
+    if (trimmedName !== name) changes.name = trimmedName;
+    if (data.description !== description) 
       changes.description = data.description;
     if (data.priority !== priority) changes.priority = data.priority;
     if (data.deadline !== deadline) changes.deadline = data.deadline;
-    dispatch(editTask({ id, ...changes }));
-    onClose();
+
+    dispatch(editTask({ id, ...changes }))
+      .then(() => {
+        onClose();
+      })
+      .catch((error) => {
+        console.error('Error editing task:', error);
+        toast.error('Failed to edit task. Please try again.');
+      });
   };
 
   const handlePriorityChange = event => {
@@ -76,11 +81,11 @@ export default function EditCardModal({
 
   const handleDescriptionChange = event => {
     const newDescription = event.target.value;
-    setValue('description', newDescription.replace(/\s+/g, ''));
+    setValue('description', newDescription);
   };
 
   const handleNameChange = event => {
-    const newValue = event.target.value.replace(/\s+/g, '');
+    const newValue = event.target.value;
     setValue('name', newValue);
   };
 
@@ -105,10 +110,6 @@ export default function EditCardModal({
             onChange={handleNameChange}
             {...register('name', {
               required: 'Required field',
-              minLength: {
-                value: 2,
-                message: 'Title must be at least 2 characters',
-              },
               maxLength: {
                 value: 32,
                 message: 'Title cannot exceed 32 characters',

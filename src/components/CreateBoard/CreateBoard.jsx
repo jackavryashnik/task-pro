@@ -35,14 +35,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   });
 
   const handleChange = e => {
-    const inputValue = e.target.value;
-
-    if (inputValue.startsWith(' ')) {
-      toast.error('Title cannot contain spaces');
-      return;
-    } else {
-      setBoardName(inputValue);
-    }
+    setBoardName(e.target.value);
   };
 
   const handleSubmitCreate = e => {
