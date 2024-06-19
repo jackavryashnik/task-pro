@@ -7,9 +7,7 @@
   position: relative;
 
   width: 100%;
-  min-height: calc(100vh - 95px);
-  padding: 39px 20px;
-  background-color: var(--taskboard-background);
+  padding: 39px 20px 24px;
 }
 
 .columns {
@@ -28,17 +26,17 @@
 }
 
 .columns::-webkit-scrollbar-track {
-  background: var(--scroll);
+  background: var(--scroll-color);
   border-radius: 10px;
 }
 
 .columns::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.1);
+  background-color: var(--scroll-background-color);
   border-radius: 10px;
 }
 
 .columns::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.2);
+  background-color: var(--scroll-background-color-hover);
 }
 
 .addColumnButton {
@@ -93,11 +91,12 @@ button.addColumnButton > .iconPlus {
   font-size: 12px;
   line-height: 1.33333;
   text-align: center;
+  color: var(--taskboard-text-color);
 }
 
 @media screen and (min-width: 375px) {
   .columns {
-    width: 347px;
+    width: 335px;
   }
 
   .addIcon {
@@ -106,10 +105,15 @@ button.addColumnButton > .iconPlus {
   }
 
   .spanCreateBoard {
-    color: #bedbb0;
+    color: var(--taskboard-accent-text-color);
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;
+    transition: color var(--transition);
+  }
+
+  .spanCreateBoard:hover {
+    color: var(--taskboard-hover-accent-text-color);
   }
 
   .addColumnButton {
@@ -127,7 +131,6 @@ button.addColumnButton > .iconPlus {
     flex-direction: row;
     justify-content: center;
     padding: 26px 32px 0 32px;
-    min-height: calc(100vh - 115px);
   }
 
   .columns {
@@ -138,7 +141,6 @@ button.addColumnButton > .iconPlus {
   .text {
     font-size: 14px;
     line-height: 1.28571;
-    /* color: rgba(255, 255, 255, 0.5); */
   }
 }
 
@@ -147,7 +149,7 @@ button.addColumnButton > .iconPlus {
   .dashboard {
     align-items: flex-start;
     padding: 10px 24px 0 24px;
-    min-height: calc(100vh - 99px);
+    height: calc(770px - 32.7px);
   }
 
   .columns {

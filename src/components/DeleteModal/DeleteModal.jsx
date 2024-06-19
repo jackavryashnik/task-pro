@@ -3,10 +3,8 @@ import icons from '../../images/icons.svg';
 
 import { Button } from '../Button/Button';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
 
 export const DeleteModal = ({ closeModal, onDelete, children }) => {
-  const { boardID } = useParams();
   return (
     <div className={css.wrapper}>
       <div className={css.container}>

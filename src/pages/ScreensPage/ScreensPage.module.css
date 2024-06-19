@@ -1,0 +1,8 @@
+.ScreensPage {
+  background-color: var(--taskboard-background);
+  position: relative;
+}
+
+.img {
+    position: absolute;
+}

@@ -1,6 +1,6 @@
 .needHelpBlock {
   position: relative;
-  width: 400px;
+  width: 335px;
   height: 355px;
   border-radius: 8px;
   background-color: var(--modal-background);
@@ -19,7 +19,7 @@
 }
 
 .inputCardTitle {
-  width: 352px;
+  width: 287px;
   padding: 14px 0 14px 18px;
   border-radius: 8px;
   border: 1px solid var(--btn-background);
@@ -27,10 +27,11 @@
   opacity: 0.4;
   transition: opacity var(--transition);
   color: var(--modal-title-color);
+
 }
 
 .inputCardDescription {
-  width: 352px;
+  width: 287px;
   height: 120px;
   padding: 14px 0 0 18px;
   margin-top: 14px;
@@ -44,7 +45,7 @@
 }
 
 .needHelpButton {
-  width: 352px;
+  width: 287px;
   height: 49px;
   margin-top: 24px;
 }
@@ -69,5 +70,24 @@
   .inputCardTitle:hover,
   .inputCardTitle:focus {
     opacity: 1;
+    border-color: var( --input-hover-border-color);
+
   }
+}
+
+@media only screen and (min-width: 768px) {
+  .needHelpBlock {
+    width: 400px;
+  }
+  .needHelpButton,
+  .inputCardDescription,
+  .inputCardTitle {
+    width: 352px;
+  }
+
+  .needHelpButton:hover {
+  background-color: var( --btn-hover-background);
+
+  }
+  
 }

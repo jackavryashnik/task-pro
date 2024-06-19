@@ -5,9 +5,9 @@
 }
 
 .tasks {
-  height: 60vh;
   overflow-y: auto;
   padding-right: 4px;
+  max-height: calc(770px - 26px - 32.7px - 140px - 24px);
 }
 
 .tasks::-webkit-scrollbar {
@@ -15,17 +15,17 @@
 }
 
 .tasks::-webkit-scrollbar-track {
-  background: var(--scroll);
+  background: var(--scroll-color);
   border-radius: 10px;
 }
 
 .tasks::-webkit-scrollbar-thumb {
-  background-color: rgba(22, 22, 22, 0.1);
+  background-color: var(--scroll-background-color);
   border-radius: 10px;
 }
 
 .tasks::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(22, 22, 22, 0.2);
+  background-color: var(--scroll-background-color-hover);
 }
 
 .tasks.anything {
@@ -78,6 +78,7 @@ button.addCardButton {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   gap: 8px;
 
   width: 335px;
@@ -108,8 +109,14 @@ button.addCardButton > .iconPlus {
 
 @media screen and (min-width: 768px) {
   .tasks {
-    height: 63vh;
     padding-right: 8px;
+    max-height: calc(1024px - 96px - 48.7PX - 52px - 140px);
   }
 }
 
+@media screen and (min-width: 1440px) {
+  .tasks {
+    padding-right: 8px;
+    max-height: calc(770px - 26px - 32.7px - 140px);
+  }
+}

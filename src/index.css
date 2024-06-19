@@ -13,7 +13,6 @@
   --white-modal: #fcfcfc;
   --white: #fdfdfd;
   --white-text: #fff;
-  --scroll: #e8e8e8;
   --black: #121212;
   --dull-black: #161616;
   --noir-black: #151515;
@@ -86,6 +85,9 @@ body.dark {
   --header-background: #161616;
   --sidebar-background: #121212;
   --taskboard-background: #1f1f1f;
+  --taskboard-text-color: rgba(255, 255, 255, 0.5);
+  --taskboard-accent-text-color: #bedbb0;
+  --taskboard-hover-accent-text-color: #9dc888;
   --header-text-color: rgba(255, 255, 255, 0.8);
   --other-text-color: rgba(255, 255, 255, 0.5);
   --btn-background: #bedbb0;
@@ -117,7 +119,7 @@ body.dark {
   --input-hover-border-color: rgb(190, 219, 176);
   --edit-profile-plus-background: #bedbb0;
   --radio-background: rgba(255, 255, 255, 0.3);
-  --theme-modal-border-color: #BEDBB0;
+  --theme-modal-border-color: #bedbb0;
   --active-board-background: #1f1f1f;
   --board-line-color: #bedbb0;
   --board-icon-color: #fff;
@@ -126,9 +128,9 @@ body.dark {
   --create-board-icons-color: rgba(255, 255, 255, 0.5);
   --create-board-selected-icon-color: #fff;
   --bg-icon-color: rgba(255, 255, 255, 0.1);
-  --bg-icon-background:#1f1f1f;
+  --bg-icon-background: #1f1f1f;
   --plus-icon-background: #161616;
-  --plus-icon-btn-color: #FFFFFF;
+  --plus-icon-btn-color: #ffffff;
   --add-card-btn-background: #121212;
   --add-card-btn-text-color: #fff;
   --add-card-plus-icon-color: #121212;
@@ -136,7 +138,9 @@ body.dark {
   --column-card-background: #121212;
   --manage-column-icons-color: rgba(255, 255, 255, 0.5);
   --manage-column-icons-hover-color: #fff;
-
+  --scroll-color: #121212;
+  --scroll-background-color: rgba(255, 255, 255, 0.3);
+  --scroll-background-color-hover: rgba(255, 255, 255, 0.4);
 }
 
 body.light {
@@ -144,6 +148,9 @@ body.light {
   --header-background: #fcfcfc;
   --sidebar-background: #fff;
   --taskboard-background: #f6f6f7;
+  --taskboard-text-color: rgba(22, 22, 22, 0.7);
+  --taskboard-accent-text-color: #bedbb0;
+  --taskboard-hover-accent-text-color: #9dc888;
   --header-text-color: rgba(22, 22, 22, 0.8);
   --other-text-color: rgba(22, 22, 22, 0.5);
   --btn-background: #bedbb0;
@@ -176,8 +183,8 @@ body.light {
   --input-hover-border-color: rgb(190, 219, 176);
   --edit-profile-plus-background: #bedbb0;
   --radio-background: rgba(22, 22, 22, 0.3);
-  --theme-modal-border-color: #BEDBB0;
-  --active-board-background: #F6F6F7;
+  --theme-modal-border-color: #bedbb0;
+  --active-board-background: #f6f6f7;
   --board-line-color: #bedbb0;
   --board-icon-color: #161616;
   --manage-board-icons-color: rgba(22, 22, 22, 0.5);
@@ -185,17 +192,19 @@ body.light {
   --create-board-icons-color: rgba(22, 22, 22, 0.5);
   --create-board-selected-icon-color: #161616;
   --bg-icon-color: rgba(22, 22, 22, 0.1);
-  --bg-icon-background:#F6F6F7;
+  --bg-icon-background: #f6f6f7;
   --plus-icon-background: #161616;
-  --plus-icon-btn-color: #FFFFFF;
+  --plus-icon-btn-color: #ffffff;
   --add-card-btn-background: #fff;
   --add-card-btn-text-color: #161616;
-  --add-card-plus-icon-color: #FFFFFF;
+  --add-card-plus-icon-color: #ffffff;
   --add-card-plus-icon-background: #161616;
   --column-card-background: #fff;
   --manage-column-icons-color: rgba(22, 22, 22, 0.5);
   --manage-column-icons-hover-color: #161616;
-
+  --scroll-color: #e8e8e8;
+  --scroll-background-color: rgba(22, 22, 22, 0.1);
+  --scroll-background-color-hover: rgba(22, 22, 22, 0.2);
 }
 
 body.violet {
@@ -203,6 +212,9 @@ body.violet {
   --header-background: #fff;
   --sidebar-background: #5255bc;
   --taskboard-background: #ecedfd;
+  --taskboard-text-color: rgba(22, 22, 22, 0.7);
+  --taskboard-accent-text-color: #5255bc;
+  --taskboard-hover-accent-text-color: #7b7ede;
   --header-text-color: rgba(22, 22, 22, 0.8);
   --other-text-color: #ffffff80;
   --btn-background: #5255bc;
@@ -235,24 +247,26 @@ body.violet {
   --input-hover-border-color: rgb(82, 85, 188);
   --edit-profile-plus-background: #ecedfd;
   --radio-background: rgba(22, 22, 22, 0.3);
-  --theme-modal-border-color: #ECEDFD;
-  --active-board-background: #7477C9;
+  --theme-modal-border-color: #ecedfd;
+  --active-board-background: #7477c9;
   --board-line-color: #fff;
   --board-icon-color: #fff;
   --manage-board-icons-color: rgba(255, 255, 255, 0.5);
   --manage-board-icons-hover-color: #fff;
   --create-board-icons-color: rgba(22, 22, 22, 0.5);
   --create-board-selected-icon-color: #161616;
-  --bg-icon-background: #ECEDFD;
+  --bg-icon-background: #ecedfd;
   --bg-icon-color: rgba(22, 22, 22, 0.1);
-  --plus-icon-background: #FFFFFF;
+  --plus-icon-background: #ffffff;
   --plus-icon-btn-color: #161616;
-  --add-card-btn-background: #FFFFFF;
+  --add-card-btn-background: #ffffff;
   --add-card-btn-text-color: #161616;
-  --add-card-plus-icon-color: #FFFFFF;
+  --add-card-plus-icon-color: #ffffff;
   --add-card-plus-icon-background: #161616;
   --column-card-background: #fff;
   --manage-column-icons-color: rgba(22, 22, 22, 0.5);
   --manage-column-icons-hover-color: #161616;
-
+  --scroll-color: #b8bcfd;
+  --scroll-background-color: #fff;
+  --scroll-background-color-hover: #fbfcff;
 }

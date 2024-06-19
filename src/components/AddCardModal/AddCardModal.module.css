@@ -44,18 +44,24 @@
 
 .titleCard,
 .styledDescription {
-  padding-left: 18px;
+  padding: 0 18px;
   outline: transparent;
   outline-offset: -1px;
   border: 1px solid var(--btn-background);
   border-radius: 8px;
-  width: 287px;
+  width: 100%;
+  min-width: 287px;
+  max-width: 100%;
   height: 49px;
   box-shadow: 0 4px 16px 0 rgba(22, 22, 22, 0.08);
   opacity: 0.4;
   background-color: transparent;
   color: var(--modal-title-color);
   transition: opacity var(--transition);
+}
+
+.styledDescription {
+  padding: 14px;
 }
 
 
@@ -89,10 +95,13 @@
 
 .styledDescription {
   padding-top: 14px;
+  padding-right: 25px;
+  padding-bottom: 25px;
   margin-top: 14px;
   height: 154px;
   resize: none;
-  position: relative; 
+  position: relative;
+  overflow-y: auto; 
 }
 
 .textareaContainer {
@@ -101,9 +110,9 @@
 
 .charCount {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 12px;
+  bottom: 8px;
+  right: 8px;
+  font-size: 11px;
   color: var(--label-text-color);
   pointer-events: none;
 }
@@ -239,4 +248,19 @@
 
 .errorMessage {
   color: red;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.errorForm {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: red;
+  position: absolute;
+  top: 100%; 
+  left: 5%;
+  width: 100%;
 }
