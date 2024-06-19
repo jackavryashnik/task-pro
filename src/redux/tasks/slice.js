@@ -127,7 +127,6 @@ const slice = createSlice({
         state.columns = state.columns.filter(
           column => column.id !== action.payload.column.id
         );
-        state.tasks = [];
       })
       .addCase(deleteColumn.rejected, handleRejected)
       .addCase(createTask.pending, handlePending)
