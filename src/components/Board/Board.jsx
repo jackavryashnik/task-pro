@@ -1,28 +1,25 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from '../../images/icons.svg';
 import css from './Board.module.css';
 import { deleteBoard, fetchOneBoard } from '../../redux/tasks/operations';
 import CreateBoard from '../CreateBoard/CreateBoard';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 
-import { useTasks } from '../../redux/tasks/selectors';
+import { selectNextBoard, useTasks } from '../../redux/tasks/selectors';
 import { DeleteModal } from '../DeleteModal/DeleteModal';
 
 export default function Board({
   board: { name, icon, id },
   openModal,
   closeModal,
+  setIsEdit,
 }) {
-  const [isEdit, setIsEdit] = useState(true);
-  const dispatch = useDispatch();
-  const { selectedBoard, boards } = useTasks();
-  const { boardID } = useParams();
+  const nextBoard = useSelector(selectNextBoard);
 
-  if (selectedBoard) {
-    localStorage.setItem('activeBoardId', selectedBoard.id);
-  }
-  const activeBoardId = localStorage.getItem('activeBoardId');
+  const dispatch = useDispatch();
+  const { activeBoardId, boards } = useTasks();
+  const { boardID } = useParams();
 
   useEffect(() => {
     if (activeBoardId) {
@@ -34,21 +31,23 @@ export default function Board({
   }, [activeBoardId]);
 
   const handleClick = () => {
-    setIsEdit(false);
+    setIsEdit(true);
     openModal(
-      <CreateBoard isEdit={isEdit} setIsEdit={setIsEdit} onClose={closeModal} />
+      <CreateBoard isEdit={true} setIsEdit={setIsEdit} onClose={closeModal} />
     );
   };
 
   const handleDeleteBoard = id => {
-    if (boards.length > 1) {
-      const index = boards.findIndex(board => board.id === id);
-      const nextIndex = index === boards.length - 1 ? index - 1 : index + 1;
-      const nextBoard = boards[nextIndex];
-      dispatch(fetchOneBoard(nextBoard.id));
-    }
-
     dispatch(deleteBoard(id));
+    if (boards.length > 1) {
+      if (nextBoard) {
+        dispatch(fetchOneBoard(nextBoard.id));
+      }
+    } else if (boards.length === 0) {
+      dispatch(fetchOneBoard(boards[0].id));
+    } else {
+      return;
+    }
   };
 
   return (
@@ -56,42 +55,57 @@ export default function Board({
       className={`${css.item} ${id === activeBoardId ? css.active : ''}`}
       id={id}
     >
-      <div className={css.containerBoard}>
-        <svg className={css.icon} width={18} height={18}>
-          <use href={Icon + icon}></use>
-        </svg>
-        <p className={css.text}>{name}</p>
-      </div>
-
-      {id === activeBoardId && (
-        <div className={css.containerIcons}>
-          <button type="button" className={css.btn} onClick={handleClick}>
-            <svg className={css.focusIcon} width={16} height={16}>
-              <use href={`${Icon}#icon-pencil`}></use>
+      <NavLink
+        className={css.link}
+        to={`/home/${id}`}
+        onClick={e => {
+          if (activeBoardId !== id) {
+            return dispatch(fetchOneBoard(id));
+          }
+          e.preventDefault();
+        }}
+      >
+        <div className={css.containerBoard}>
+          <div className={css.containerContent}>
+            <svg className={css.icon} width={18} height={18}>
+              <use href={Icon + icon}></use>
             </svg>
-          </button>
+            <p className={css.text}>
+              {name.length > 14 ? `${name.slice(0, 14)}...` : name}
+            </p>
+          </div>
 
-          <button
-            type="button"
-            className={css.btn}
-            onClick={() =>
-              openModal(
-                <DeleteModal
-                  closeModal={closeModal}
-                  id={boardID}
-                  onDelete={()=>handleDeleteBoard(boardID)}
-                >
-                  Delete this board?
-                </DeleteModal>
-              )
-            }
-          >
-            <svg className={css.focusIcon} width={16} height={16}>
-              <use href={`${Icon}#icon-trash-can`}></use>
-            </svg>
-          </button>
+          {id === activeBoardId && (
+            <div className={css.containerIcons}>
+              <button type="button" className={css.btn} onClick={handleClick}>
+                <svg className={css.focusIcon} width={16} height={16}>
+                  <use href={`${Icon}#icon-pencil`}></use>
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                className={css.btn}
+                onClick={() =>
+                  openModal(
+                    <DeleteModal
+                      closeModal={closeModal}
+                      id={boardID}
+                      onDelete={() => handleDeleteBoard(boardID)}
+                    >
+                      Delete this board?
+                    </DeleteModal>
+                  )
+                }
+              >
+                <svg className={css.focusIcon} width={16} height={16}>
+                  <use href={`${Icon}#icon-trash-can`}></use>
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </NavLink>
     </li>
   );
 }

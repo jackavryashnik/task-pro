@@ -4,11 +4,11 @@ import icons from '../../images/icons.svg';
 import { useTasks } from '../../redux/tasks/selectors';
 
 const HeaderDashboard = ({ openModal, closeModal }) => {
-  const { selectedBoard } = useTasks();
+  const { selectedBoard, boards } = useTasks();
 
   return (
     <>
-      {selectedBoard && (
+      {boards.length > 0 && selectedBoard && (
         <div className={css.header}>
           <div className={css.wrapper}>
             <h1 className={css.boardName}>{selectedBoard.name}</h1>

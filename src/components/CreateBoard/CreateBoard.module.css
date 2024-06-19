@@ -21,7 +21,13 @@
   outline: none;
 }
 .iconX {
-  stroke: var(--white);
+  stroke: var(--create-board-icons-color);
+  cursor: pointer;
+  transition: all 250 ease;
+}
+.iconX:hover,
+.iconX:focus {
+  stroke: var(--create-board-selected-icon-color);
 }
 /* .input {
   background-color: var(--dark);
@@ -57,6 +63,11 @@
   color: var(--input-text-color);
 }
 
+.input:hover,
+.input:focus {
+  border-color: var(--input-hover-border-color);
+}
+
 @media screen and (min-width: 1024px) {
   .input:hover,
   .input:focus {
@@ -78,6 +89,10 @@
   margin-bottom: 24px;
 }
 
+.iconItem:hover .icon,
+.iconItem:focus .icon {
+  stroke: var(--create-board-selected-icon-color);
+}
 .icon {
   stroke: var(--create-board-icons-color);
 }
@@ -110,6 +125,22 @@
 .inputRadio {
   position: absolute;
   opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.iconItem,
+.bgItem {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon,
+.bg,
+.selectedBg,
+.iconBg {
+  pointer-events: none;
 }
 
 .iconPlus {
@@ -170,12 +201,13 @@
   height: 28px;
   padding: 7px;
   border-radius: 7px;
-  transform: scale(1.4);
+  transform: scale(1.2);
   box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
     0px 0px 2px 0px rgba(232, 249, 237, 0.12),
     0px 0px 2px 0px rgba(179, 245, 206, 0.1);
   transition: transform 250ms ease-in;
 }
+
 .selectedBgItemIcon .iconBg {
   opacity: 1;
 }
@@ -190,6 +222,9 @@
   box-shadow: 0px 0px 6px 0px rgba(206, 207, 218, 0.8),
     0px 0px 2px 0px rgba(232, 249, 237, 0.12),
     0px 0px 2px 0px rgba(179, 245, 206, 0.1);
-  transform: scale(1.4);
+  transform: scale(1.2);
   transition: transform 250ms ease-in;
+}
+input[type='radio'] {
+  margin-right: 0;
 }

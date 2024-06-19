@@ -5,10 +5,12 @@ import icon from '../../images/icons.svg';
 import CustomSupport from '../CustomSupport/CustomSupport';
 import BoardList from '../BoardList/BoardList';
 import CreateBoard from '../CreateBoard/CreateBoard';
+import { useState } from 'react';
 
 export default function Sidebar({ openModal, closeModal }) {
+  const [isEdit, setIsEdit] = useState(false);
   const handleClick = () => {
-    openModal(<CreateBoard onClose={closeModal} />);
+    openModal(<CreateBoard isEdit={false} onClose={closeModal} />);
   };
   return (
     <div className={css.containerBackground}>
@@ -26,7 +28,12 @@ export default function Sidebar({ openModal, closeModal }) {
         </div>
       </div>
       <div className={css.listBox}>
-        <BoardList openModal={openModal} closeModal={closeModal} />
+        <BoardList
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          openModal={openModal}
+          closeModal={closeModal}
+        />
       </div>
       <div className={css.container}>
         <CustomSupport openModal={openModal} closeModal={closeModal} />

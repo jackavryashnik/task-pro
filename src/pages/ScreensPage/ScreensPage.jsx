@@ -1,29 +1,28 @@
 import HeaderDashboard from '../../components/HeaderDashboard/HeaderDashboard';
 import MainDashboard from '../../components/MainDashboard/MainDashboard';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneBoard } from '../../redux/tasks/operations';
-import { useTasks } from '../../redux/tasks/selectors';
+import { selectNextBoard, useTasks } from '../../redux/tasks/selectors';
 import css from './ScreensPage.module.css';
 
 const ScreensPage = ({ openModal, closeModal }) => {
-  const { boards, selectedBoard } = useTasks();
+  const { boards, activeBoardId, selectedBoard } = useTasks();
   const dispatch = useDispatch();
+  const nextBoard = useSelector(selectNextBoard);
 
   useEffect(() => {
     if (boards.length > 0) {
-      const activeBoardId = localStorage.getItem('activeBoardId');
-      if (activeBoardId && activeBoardId !== 'undefined') {
-        dispatch(fetchOneBoard(activeBoardId));
-      } else {
-        dispatch(fetchOneBoard(boards[0].id));
+      const boardId = activeBoardId || boards[0]?.id;
+      if (boardId) {
+        dispatch(fetchOneBoard(boardId));
       }
     }
-  }, [dispatch, boards]);
+  }, [activeBoardId, dispatch, boards, nextBoard]);
 
   return (
     <div className={css.ScreensPage}>
-      {selectedBoard && selectedBoard.background !== '' && (
+      {activeBoardId && selectedBoard && selectedBoard.background !== '' && (
         <picture className={css.img}>
           <source
             srcSet={`
