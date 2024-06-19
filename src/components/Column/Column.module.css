@@ -7,7 +7,6 @@
 .tasks {
   overflow-y: auto;
   padding-right: 4px;
-  max-height: calc(770px - 26px - 32.7px - 140px - 24px);
 }
 
 .tasks::-webkit-scrollbar {
@@ -110,13 +109,11 @@ button.addCardButton > .iconPlus {
 @media screen and (min-width: 768px) {
   .tasks {
     padding-right: 8px;
-    max-height: calc(1024px - 96px - 48.7PX - 52px - 140px);
   }
 }
 
 @media screen and (min-width: 1440px) {
   .tasks {
     padding-right: 8px;
-    max-height: calc(770px - 26px - 32.7px - 140px);
   }
 }

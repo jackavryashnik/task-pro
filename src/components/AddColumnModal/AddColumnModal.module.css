@@ -4,23 +4,19 @@
   justify-content: center;
   gap: 24px;
   position: relative;
-
   width: 100%;
   padding: 24px;
   border: 1px solid var(--modal-border-color);
   border-radius: 8px;
-
   background-color: var(--modal-background);
 }
 
 .modal h2 {
   display: flex;
   align-items: center;
-
   height: 27px;
   font-weight: 500;
   font-size: 18px;
-
   color: var(--modal-title-color);
 }
 
@@ -30,7 +26,6 @@
   padding: 18px;
   border: 1px solid var(--btn-background);
   border-radius: 8px;
-
   background-color: transparent;
   color: var(--modal-title-color);
   opacity: 0.4;
@@ -41,11 +36,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: absolute;
   right: 14px;
   top: 14px;
-
   border: hidden;
   background-color: transparent;
   stroke: var(--dull-black);
@@ -62,11 +55,9 @@ button.button > .iconPlus {
   display: flex;
   justify-content: center;
   align-items: center;
- 
   width: 28px;
   height: 28px;
   border-radius: 8px;
-
   background: var(--dull-black);
   stroke: var(--white-text);
   fill: var(--white-text);

@@ -164,10 +164,6 @@
   gap: 8px;
 }
 
-.btnPlus:hover,
-.btnPlus:focus {
-  background-color: var(--green-btn-hover);
-}
 .bgItem {
   display: flex;
   justify-content: center;
