@@ -3,6 +3,7 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './NameInput.module.css';
 import { useId } from 'react';
 
+
 export const NameInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
   const inputId = useId();
 
@@ -27,9 +28,9 @@ export const NameInput = ({ placeholder, ariaLabel, errors, register, className,
         })}
         {...props}
       />
-      {errors?.name && (
-        <FormErrorMessages>{errors.name.message}</FormErrorMessages>
-      )}
+        {errors?.name && (
+            <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
+        )}
     </div>
   );
 };
