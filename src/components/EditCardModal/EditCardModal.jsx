@@ -29,6 +29,7 @@ export default function EditCardModal({
     setValue,
     watch,
     formState: { errors },
+    setError
   } = useForm({
     defaultValues: {
       name: '',
@@ -52,7 +53,10 @@ export default function EditCardModal({
     const trimmedName = data.name.trim();
 
     if (trimmedName === '') {
-      toast.error('Title cannot be empty or contain only spaces');
+      setError('name', {
+        type: 'required',
+        message: 'Title cannot be empty or contain only spaces',
+      });
       return;
     }
 

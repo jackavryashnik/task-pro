@@ -1,4 +1,5 @@
 .modal {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,4 +82,15 @@ button.button {
   .input:focus {
     border-color: var(--input-hover-border-color);
   }
+}
+
+.errorForm {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: red;
+  position: absolute;
+  top: 55%; 
+  left: 10%;
+  width: 100%;
 }
