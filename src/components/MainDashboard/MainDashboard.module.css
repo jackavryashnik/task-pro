@@ -91,6 +91,7 @@ button.addColumnButton > .iconPlus {
   font-size: 12px;
   line-height: 1.33333;
   text-align: center;
+  color: var(--taskboard-text-color);
 }
 
 @media screen and (min-width: 375px) {
@@ -104,10 +105,15 @@ button.addColumnButton > .iconPlus {
   }
 
   .spanCreateBoard {
-    color: #bedbb0;
+    color: var(--taskboard-accent-text-color);
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;
+    transition: color var(--transition);
+  }
+
+  .spanCreateBoard:hover {
+    color: var(--taskboard-hover-accent-text-color);
   }
 
   .addColumnButton {
