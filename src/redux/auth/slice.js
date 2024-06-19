@@ -7,6 +7,7 @@ import {
   getCurrentUser,
   changeTheme,
   needHelp,
+  terminateSessions,
 } from './operations.js';
 
 const handlePending = state => {
@@ -25,6 +26,7 @@ const initialState = {
     theme: null,
     avatar: null,
     oauth: false,
+    sessions: [],
   },
   accessToken: null,
   refreshToken: null,
@@ -80,6 +82,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.theme = action.payload.data.user.theme;
         state.user.avatar = action.payload.data.user.avatar;
+        state.user.sessions = action.payload.data.user.sessions;
         state.accessToken = action.payload.data.accessToken;
         state.refreshToken = action.payload.data.refreshToken;
         state.isLoggedIn = true;
@@ -113,6 +116,7 @@ const authSlice = createSlice({
         state.user.name = action.payload.data.user.name;
         state.user.email = action.payload.data.user.email;
         state.user.avatar = action.payload.data.user.avatar;
+        state.user.sessions = action.payload.data.user.sessions;
         state.isLoading = false;
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
@@ -120,7 +124,11 @@ const authSlice = createSlice({
       })
       .addCase(needHelp.fulfilled, state => {
         state.isLoading = false;
-      });
+      })
+      .addCase(terminateSessions.fulfilled, (state, action) => {
+        state.user.sessions = action.payload;
+        state.isLoading = false;
+      })
   },
 });
 

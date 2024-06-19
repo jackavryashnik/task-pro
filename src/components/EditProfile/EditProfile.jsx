@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { updateUser } from '../../redux/auth/operations.js';
+import { terminateSessions, updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 import clsx from 'clsx';
@@ -20,7 +20,6 @@ import clsx from 'clsx';
 export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
-  // console.log(currentDataUser);
 
   const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
@@ -29,10 +28,6 @@ export const EditProfile = ({ closeModal }) => {
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
   const [isShowTerminateButton, setIsShowTerminateButton] = useState(false);
-
-  const testArray = [
-    {sessions: ["123", "123"]}
-  ]
 
   useEffect(() => {
     if (currentDataUser) {
@@ -141,16 +136,25 @@ export const EditProfile = ({ closeModal }) => {
         }, 500);
       }
     } catch (error) {
-      console.log(error);
       toast.error('Error! Try again');
     }
   };
 
-  const handleDeleteSessions = (event) => {
+  const handleShowTerminateButton = (event) => {
     event.preventDefault();
 
-    if (testArray.length > 1) {
+    if (currentDataUser.sessions.length > 1) {
       setIsShowTerminateButton(!isShowTerminateButton);
+    }
+  }
+
+  const handleDeleteSessions = async () => {
+    try {
+      await dispatch(terminateSessions());
+      toast.success('Success');
+      setIsShowTerminateButton(false);
+    } catch (error) {
+      toast.error('Error! Try again');
     }
   }
 
@@ -242,8 +246,8 @@ export const EditProfile = ({ closeModal }) => {
           </Button>
         </form>
         <div className={css.sessionsContainer}>
-        <a className={clsx(testArray.length > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleDeleteSessions}>Quantity of active sessions: {testArray.length}</a>
-        <Button className={clsx(css.sessionsButton, isShowTerminateButton ? css.isShow : null)} type={'submit'}>
+        <a className={clsx(currentDataUser.sessions.length > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleShowTerminateButton}>Quantity of active sessions: {currentDataUser.sessions.length}</a>
+        <Button className={clsx(css.sessionsButton, isShowTerminateButton ? css.isShow : null)} onClick={handleDeleteSessions} type={'submit'}>
           Terminate
             <svg className={css.iconTrash} width={14} height={14}>
               <use href={`${icons}#icon-trash-can`}></use>
