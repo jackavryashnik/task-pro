@@ -40,8 +40,8 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const handleSubmitCreate = e => {
     e.preventDefault();
-    if (!boardName || boardName === '') {
-      return toast.success('Please write a title for the board');
+    if (boardName.trim().length === 0) {
+      return toast.error('Please write a title for the board');
     }
   
 
@@ -61,7 +61,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const handleSubmitEdit = e => {
     e.preventDefault();
-    if (!boardName.trim()) {
+    if (boardName.trim().length === 0) {
       return toast.error('Please write a title for the board');
     }
   
