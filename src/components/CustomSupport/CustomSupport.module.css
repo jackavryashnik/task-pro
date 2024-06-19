@@ -9,6 +9,11 @@
 
 .cactus {
   margin-bottom: 14px;
+  transition: transform 0.2s; /* плавний перехід для transform */
+}
+
+.cactus:hover {
+  transform: scale(1.2); /* збільшення масштабу при наведенні */
 }
 
 .text {
@@ -37,6 +42,13 @@
   font-size: 12px;
   letter-spacing: -0.02em;
   color: var(--main-text-color);
+  transition: color 250ms ease-in;
+}
+
+.helpText:hover,
+.helpText:focus {
+  color: var(--taskboard-hover-accent-text-color);
+  
 }
 
 @media screen and (min-width: 768px) {
