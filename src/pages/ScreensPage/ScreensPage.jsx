@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneBoard } from '../../redux/tasks/operations';
 import { selectNextBoard, useTasks } from '../../redux/tasks/selectors';
+import css from './ScreensPage.module.css';
 
 const ScreensPage = ({ openModal, closeModal }) => {
-  const { boards, activeBoardId } = useTasks();
+  const { boards, activeBoardId, selectedBoard } = useTasks();
   const dispatch = useDispatch();
   const nextBoard = useSelector(selectNextBoard);
 
@@ -21,7 +22,7 @@ const ScreensPage = ({ openModal, closeModal }) => {
 
   return (
     <div className={css.ScreensPage}>
-      {selectedBoard && selectedBoard.background !== '' && (
+      {activeBoardId && selectedBoard && selectedBoard.background !== '' && (
         <picture className={css.img}>
           <source
             srcSet={`
