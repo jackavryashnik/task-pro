@@ -18,11 +18,23 @@ const AddColumnModal = ({ onClose }) => {
     if (columnName === '') {
       return toast.success('Please write a title for the column');
     }
+   
     dispatch(
       createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
     );
     onClose();
     setColumnName('');
+  };
+
+  const handleNameChange = event => {
+    const inputValue = event.target.value;
+
+    if (inputValue.startsWith(' ')) {
+      toast.error('Title cannot contain spaces');
+      return;
+    } else {
+      setColumnName(inputValue);
+    }
   };
 
   return (
@@ -31,9 +43,10 @@ const AddColumnModal = ({ onClose }) => {
       <input
         type="text"
         value={columnName}
-        onChange={e => setColumnName(e.target.value)}
+        onChange={handleNameChange}
         placeholder="Title"
         className={css.input}
+        autoFocus
       />
       <Button onClick={handleCreateColumn} className={css.button}>
         <div className={css.iconPlus}>

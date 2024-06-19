@@ -34,11 +34,24 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
     mini: `${Icon}#icon-background`,
   });
 
+  const handleChange = e => {
+    const inputValue = e.target.value;
+
+    if (inputValue.startsWith(' ')) {
+      toast.error('Title cannot contain spaces');
+      return;
+    } else {
+      setBoardName(inputValue);
+    }
+  };
+
   const handleSubmitCreate = e => {
     e.preventDefault();
     if (!boardName || boardName === '') {
       return toast.success('Please write a title for the board');
     }
+  
+
     dispatch(
       addBoard({
         name: boardName.trim(),
@@ -55,6 +68,10 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const handleSubmitEdit = e => {
     e.preventDefault();
+    if (!boardName.trim()) {
+      return toast.error('Please write a title for the board');
+    }
+  
     dispatch(
       editBoard({
         id: selectedBoard.id,
@@ -95,9 +112,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
         placeholder="Title"
         autoFocus
         value={boardName}
-        onChange={e => {
-          setBoardName(e.target.value);
-        }}
+        onChange={handleChange}
       />
 
       <h4 className={css.subheader}>Icons</h4>

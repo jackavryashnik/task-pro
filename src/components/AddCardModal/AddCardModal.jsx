@@ -9,6 +9,8 @@ import clsx from 'clsx';
 import { format } from 'date-fns';
 import { Button } from '../Button/Button.jsx';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
+import toast from 'react-hot-toast';
+
 
 export default function AddCardModal({ onClose, boardId, columnId }) {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -38,6 +40,14 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
   }, [descriptionValue]);
 
   const onSubmit = data => {
+    if (data.name.includes(' ')) {
+      toast.error('Title cannot contain spaces');
+      return;
+    }
+    if (data.description.includes(' ')) {
+      toast.error('Description cannot contain spaces');
+      return;
+    }
     dispatch(
       createTask({
         boardId,
@@ -61,8 +71,13 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     const newDescription = event.target.value;
     if (newDescription.length <= 500) {
       setDescriptionLength(newDescription.length);
-      setValue('description', newDescription);
+      setValue('description', newDescription.replace(/\s+/g, ''));    
     }
+  };
+
+  const handleNameChange = event => {
+    const newValue = event.target.value.replace(/\s+/g, '');
+    setValue('name', newValue);
   };
 
   return (
@@ -83,9 +98,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
           type="text"
           placeholder="Title"
           autoFocus
-          onChange={e => {
-            setValue('name', e.target.value);
-          }}
+          onChange={handleNameChange}
           {...register('name', {
             required: 'Required field',
             minLength: {

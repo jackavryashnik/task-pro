@@ -4,16 +4,28 @@ import { editColumn } from '../../redux/tasks/operations';
 import css from './EditColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import { Button } from '../Button/Button';
+import toast from 'react-hot-toast';
 
 const EditColumnModal = ({ column, onClose }) => {
   const [columnName, setColumnName] = useState(column ? column.name : '');
   const dispatch = useDispatch();
 
   const handleChange = e => {
-    setColumnName(e.target.value);
+    const inputValue = e.target.value;
+
+    if (inputValue.startsWith(' ')) {
+      toast.error('Title cannot contain spaces');
+      return;
+    } else {
+      setColumnName(inputValue);
+    }
   };
 
   const handleSubmit = () => {
+    if (columnName.trim() === '') {
+      return toast.error('Please write a title for the column');
+    }
+   
     if (column && column.id) {
       dispatch(editColumn({ id: column.id, name: columnName }));
       onClose();

@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 import { Button } from '../Button/Button.jsx';
+import toast from 'react-hot-toast';
 
 export default function EditCardModal({
   id,
@@ -48,6 +49,15 @@ export default function EditCardModal({
   }, [name, deadline, description, priority, setValue, setSelectedDate]);
 
   const onSubmit = data => {
+    if (data.name.includes(' ')) {
+      toast.error('Title cannot contain spaces');
+      return;
+    }
+    if (data.description.includes(' ')) {
+      toast.error('Description cannot contain spaces');
+      return;
+    }
+
     const changes = {};
     if (data.name !== name) changes.name = data.name;
     if (data.description !== description)
@@ -62,6 +72,16 @@ export default function EditCardModal({
     const newPriority = event.target.value;
     setSelectedPriority(newPriority || 'without');
     setValue('priority', newPriority);
+  };
+
+  const handleDescriptionChange = event => {
+    const newDescription = event.target.value;
+    setValue('description', newDescription.replace(/\s+/g, ''));
+  };
+
+  const handleNameChange = event => {
+    const newValue = event.target.value.replace(/\s+/g, '');
+    setValue('name', newValue);
   };
 
   return (
@@ -82,9 +102,7 @@ export default function EditCardModal({
             type="text"
             placeholder="Title"
             autoFocus
-            onChange={e => {
-              setValue('name', e.target.value);
-            }}
+            onChange={handleNameChange}
             {...register('name', {
               required: 'Required field',
               minLength: {
@@ -110,10 +128,8 @@ export default function EditCardModal({
               rows={4}
               placeholder="Description"
               maxLength={500}
+              onChange={handleDescriptionChange}
               {...register('description')}
-              onChange={e => {
-                setValue('description', e.target.value);
-              }}
             />
           </label>
           <div>
