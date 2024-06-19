@@ -11,10 +11,10 @@ import {
   editTask,
   fetchBoards,
   fetchOneBoard,
-  moveTask,
 } from './operations';
 import { logout } from '../auth/operations';
 import { setFilterPriority } from '../filters/slice';
+import { selectNextBoard } from './selectors';
 
 const handlePending = state => {
   state.loading = true;
@@ -31,6 +31,7 @@ const slice = createSlice({
     board: [],
     backgroundLogos: [],
     selectedBoard: null,
+    activeBoardId: null,
     columns: [],
     tasks: [],
     loading: false,
@@ -41,12 +42,6 @@ const slice = createSlice({
       .addCase(setFilterPriority, (state, action) => {
         state.filterPriority = action.payload;
       })
-      .addCase(moveTask.pending, handlePending)
-      .addCase(moveTask.fulfilled, state => {
-        state.loading = false;
-        state.error = null;
-      })
-      .addCase(moveTask.rejected, handleRejected)
       .addCase(fetchBoards.pending, handlePending)
       .addCase(fetchBoards.fulfilled, (state, action) => {
         state.loading = false;
@@ -59,6 +54,7 @@ const slice = createSlice({
       .addCase(fetchOneBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.activeBoardId = action.payload.board.id;
         state.selectedBoard = action.payload.board;
         state.columns = action.payload.columns;
         state.tasks = action.payload.tasks;
@@ -70,6 +66,7 @@ const slice = createSlice({
         state.error = null;
         state.board.push(action.payload.board);
         state.selectedBoard = action.payload.board;
+        state.activeBoardId = action.payload.board.id;
       })
       .addCase(addBoard.rejected, handleRejected)
       .addCase(editBoard.pending, handlePending)
@@ -81,12 +78,24 @@ const slice = createSlice({
         );
         state.board[itemIndex] = action.payload.board;
         state.selectedBoard = action.payload.board;
+        state.activeBoardId = action.payload.board.id;
       })
       .addCase(editBoard.rejected, handleRejected)
       .addCase(deleteBoard.pending, handlePending)
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+
+        if (state.activeBoardId === action.payload.board.id) {
+          const nextBoard = selectNextBoard({ tasks: state });
+          if (nextBoard) {
+            state.activeBoardId = nextBoard.id;
+            state.selectedBoard = nextBoard;
+          }
+        } else {
+          state.activeBoardId = null;
+          state.selectedBoard = null;
+        }
         state.board = state.board.filter(
           item => item.id !== action.payload.board.id
         );
@@ -152,7 +161,9 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
         state.board = [];
+        state.backgroundLogos = [];
         state.selectedBoard = null;
+        state.activeBoardId = null;
         state.columns = [];
         state.tasks = [];
       })

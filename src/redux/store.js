@@ -15,9 +15,9 @@ import authReducer from './auth/slice';
 import filtersReducer from './filters/slice';
 
 const tasksPersistConfig = {
-  key: 'selectedBoard',
+  key: 'activeBoardId',
   storage,
-  whitelist: ['selectedBoard'],
+  whitelist: ['activeBoardId'],
 };
 const persistedBoardsReducer = persistReducer(tasksPersistConfig, tasksReducer);
 

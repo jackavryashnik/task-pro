@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import Icon from '../../images/icons.svg';
 import css from './CreateBoard.module.css';
 import {
@@ -23,8 +23,7 @@ const icons = [
 ];
 export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
   const dispatch = useDispatch();
-  const inputIconId = useId();
-  const inputBgId = useId();
+
   const { selectedBoard, backgroundLogos } = useTasks();
 
   const [boardName, setBoardName] = useState(isEdit ? selectedBoard.name : '');
@@ -37,7 +36,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const handleSubmitCreate = e => {
     e.preventDefault();
-    if (!boardName) {
+    if (!boardName || boardName === '') {
       return toast.success('Please write a title for the board');
     }
     dispatch(
@@ -64,13 +63,13 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
         background: selectedBackground.name,
       })
     );
-    setIsEdit(true);
+    setIsEdit(false);
     onClose();
   };
 
   const handleClick = () => {
     if (isEdit) {
-      setIsEdit(true);
+      setIsEdit(false);
     }
     onClose();
   };
@@ -114,16 +113,17 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
                   value={icon}
                   onChange={() => setSelectedIcon(icon)}
                   checked={selectedIcon === icon}
-                  id={inputIconId}
+                  id={`icon-${index}`}
                 />
-                <label htmlFor={inputIconId} />
-                <svg
-                  className={selectedIcon === icon ? css.selected : css.icon}
-                  width={18}
-                  height={18}
-                >
-                  <use href={Icon + icon}></use>
-                </svg>
+                <label htmlFor={`icon-${index}`}>
+                  <svg
+                    className={selectedIcon === icon ? css.selected : css.icon}
+                    width={18}
+                    height={18}
+                  >
+                    <use href={Icon + icon}></use>
+                  </svg>
+                </label>
               </li>
             );
           })}
@@ -138,9 +138,12 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
               : css.bgItemIcon
           }
         >
-          <svg className={css.iconBg} width={14} height={14}>
-            <use href={`${Icon}#icon-background`} />
-          </svg>
+          <label htmlFor={'bg-none'}>
+            <svg className={css.iconBg} width={14} height={14}>
+              <use href={`${Icon}#icon-background`} />
+            </svg>
+          </label>
+
           <input
             className={css.inputRadio}
             type="radio"
@@ -153,9 +156,8 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
               })
             }
             checked={selectedBackground.name === ''}
-            id={inputBgId}
+            id={'bg-none'}
           />
-          <label htmlFor={inputBgId} />
         </li>
         {backgroundLogos.length > 0 &&
           backgroundLogos.map((bg, index) => {
@@ -168,26 +170,26 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
                   value={bg.name}
                   onChange={() => setSelectedBackground(bg)}
                   checked={selectedBackground.name === bg.name}
-                  id={inputBgId}
+                  id={`bg-${index}`}
                 />
-                <label htmlFor={inputBgId} />
+                <label htmlFor={`bg-${index}`}>
+                  <picture>
+                    <source
+                      srcSet={`${bg.mini2x} 2x`}
+                      media="(min-width: 375px)"
+                    />
 
-                <picture>
-                  <source
-                    srcSet={`${bg.mini2x} 2x`}
-                    media="(min-width: 375px)"
-                  />
-
-                  <img
-                    className={
-                      selectedBackground.name === bg.name
-                        ? css.selectedBg
-                        : css.bg
-                    }
-                    src={bg.mini}
-                    alt={bg.name}
-                  />
-                </picture>
+                    <img
+                      className={
+                        selectedBackground.name === bg.name
+                          ? css.selectedBg
+                          : css.bg
+                      }
+                      src={bg.mini}
+                      alt={bg.name}
+                    />
+                  </picture>
+                </label>
               </li>
             );
           })}

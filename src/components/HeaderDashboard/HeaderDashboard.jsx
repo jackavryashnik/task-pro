@@ -4,13 +4,14 @@ import icons from '../../images/icons.svg';
 import { useTasks } from '../../redux/tasks/selectors';
 
 const HeaderDashboard = ({ openModal, closeModal }) => {
-  const { selectedBoard } = useTasks();
+  const { selectedBoard, boards } = useTasks();
 
   return (
     <>
-      {selectedBoard && (
+      {boards.length > 0 && selectedBoard && (
         <div className={css.header}>
           <h1 className={css.boardName}>{selectedBoard.name}</h1>
+
           <button
             onClick={() => openModal(<FilterModal onClose={closeModal} />)}
             className={css.filterButton}
