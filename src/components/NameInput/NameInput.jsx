@@ -3,6 +3,7 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './NameInput.module.css';
 import { useId } from 'react';
 
+
 export const NameInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
   const inputId = useId();
 
@@ -24,12 +25,13 @@ export const NameInput = ({ placeholder, ariaLabel, errors, register, className,
             value: 32,
             message: "Name cannot exceed 32 characters",
           },
+          validate: value => value.trim().length > 0 || "Name shouldn't be blank",
         })}
         {...props}
       />
-      {errors?.name && (
-        <FormErrorMessages>{errors.name.message}</FormErrorMessages>
-      )}
+        {errors?.name && (
+            <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
+        )}
     </div>
   );
 };

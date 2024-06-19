@@ -6,24 +6,29 @@ import { useId } from 'react';
 export const EmailInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
   const inputId = useId();
 
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateEmail = (email) => {
+    if (!emailPattern.test(email)) {
+      return "Enter a valid email";
+    }
+  };
+
   return (
     <div className={css.container}>
       <input
         className={clsx(css.input, className)}
-        type="email"
+        type="text"
         id={inputId}
         placeholder={placeholder}
         aria-label={ariaLabel}
         {...register("email", {
           required: "This field is required",
-          pattern: {
-            value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
-            message: "Enter a valid email",
-          },
+          validate: validateEmail,
         })}
         {...props}
       />
-      {errors?.email && <FormErrorMessages>{errors.email.message}</FormErrorMessages>}
+      {errors?.email && <FormErrorMessages className={clsx(css.errorForm)}>{errors.email.message}</FormErrorMessages>}
     </div>
   );
 };

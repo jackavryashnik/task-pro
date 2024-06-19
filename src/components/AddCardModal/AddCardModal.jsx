@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { format } from 'date-fns';
 import { Button } from '../Button/Button.jsx';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
+import toast from 'react-hot-toast';
 
 export default function AddCardModal({ onClose, boardId, columnId }) {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -31,24 +32,37 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     },
   });
 
-   const descriptionValue = watch('description', '');
+  const descriptionValue = watch('description', '');
 
-   useEffect(() => {
+  useEffect(() => {
     setDescriptionLength(descriptionValue.length);
   }, [descriptionValue]);
 
   const onSubmit = data => {
+    const trimmedName = data.name.trim();
+
+    if (trimmedName === '') {
+      toast.error('Title cannot be empty or contain only spaces');
+      return;
+    }
+
     dispatch(
       createTask({
         boardId,
         columnId,
-        name: data.name,
+        name: trimmedName,
         description: data.description,
         priority: data.priority,
         deadline: data.deadline || format(new Date(), 'yyyy-MM-dd'),
       })
-    );
-    onClose();
+    )
+      .then(() => {
+        onClose();
+      })
+      .catch((error) => {
+        console.error('Error creating task:', error);
+        toast.error('Failed to create task. Please try again.');
+      });
   };
 
   const handlePriorityChange = event => {
@@ -65,6 +79,11 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     }
   };
 
+  const handleNameChange = event => {
+    const newValue = event.target.value;
+    setValue('name', newValue);
+  };
+
   return (
     <div className={css.container}>
       <h2 className={css.titleModal}>Add card</h2>
@@ -78,31 +97,24 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputContainer}>
-        <input
-          className={css.titleCard}
-          type="text"
-          placeholder="Title"
-          autoFocus
-          onChange={e => {
-            setValue('name', e.target.value);
-          }}
-          {...register('name', {
-            required: 'Required field',
-            minLength: {
-              value: 2,
-              message: 'Title must be at least 2 characters',
-            },
-            maxLength: {
-              value: 32,
-              message: 'Title cannot exceed 32 characters',
-            },
-          })}
-        />
-        {errors?.name && (
-          <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
-        )}
+          <input
+            className={css.titleCard}
+            type="text"
+            placeholder="Title"
+            autoFocus
+            onChange={handleNameChange}
+            {...register('name', {
+              required: 'Required field',
+              maxLength: {
+                value: 32,
+                message: 'Title cannot exceed 32 characters',
+              },
+            })}
+          />
+          {errors?.name && (
+            <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
+          )}
         </div>
-       
 
         <div className={css.textareaContainer}>
           <label className={css.label}>
@@ -111,7 +123,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
               rows={4}
               placeholder="Description"
               maxLength={500}
-              onChange={handleDescriptionChange} 
+              onChange={handleDescriptionChange}
               {...register('description')}
             />
           </label>
@@ -119,7 +131,6 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
             {descriptionLength}/500
           </div>
         </div>
-      
 
         <p className={css.labelColorStyle}>Label color</p>
         <div className={css.options}>
