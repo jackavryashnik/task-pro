@@ -25,6 +25,7 @@ export const NameInput = ({ placeholder, ariaLabel, errors, register, className,
             value: 32,
             message: "Name cannot exceed 32 characters",
           },
+          validate: value => value.trim().length > 0 || "Name cannot contain only spaces",
         })}
         {...props}
       />
