@@ -13,7 +13,7 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
   };
 
   return (
-    <>
+    <div className={css.wrapperBox}>
       <label className={css.container} htmlFor={passwordInputId} >
         <input
           className={clsx(css.input, className)}
@@ -48,8 +48,8 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
         </button>
       </label>
       {errors?.password && (
-        <FormErrorMessages>{errors.password.message}</FormErrorMessages>
+        <FormErrorMessages className={clsx(css.errorForm)}>{errors.password.message}</FormErrorMessages>
       )}
-    </>
+    </div>
   );
 };
