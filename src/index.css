@@ -141,6 +141,8 @@ body.dark {
   --scroll-color: #121212;
   --scroll-background-color: rgba(255, 255, 255, 0.3);
   --scroll-background-color-hover: rgba(255, 255, 255, 0.4);
+  --movecard-modal-background: #1f1f1f;
+  --movecard-modal-text-color: rgba(255, 255, 255, 0.5);
 }
 
 body.light {
@@ -205,6 +207,8 @@ body.light {
   --scroll-color: #e8e8e8;
   --scroll-background-color: rgba(22, 22, 22, 0.1);
   --scroll-background-color-hover: rgba(22, 22, 22, 0.2);
+  --movecard-modal-background: #fcfcfc;
+  --movecard-modal-text-color: #161616;
 }
 
 body.violet {
@@ -269,4 +273,6 @@ body.violet {
   --scroll-color: #b8bcfd;
   --scroll-background-color: #fff;
   --scroll-background-color-hover: #fbfcff;
+  --movecard-modal-background: #fcfcfc;
+  --movecard-modal-text-color: #161616;
 }
