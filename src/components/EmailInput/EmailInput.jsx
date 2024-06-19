@@ -3,14 +3,21 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './EmailInput.module.css';
 import { useId } from 'react';
 
-export const EmailInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
+export const EmailInput = ({
+  placeholder,
+  ariaLabel,
+  errors,
+  register,
+  className,
+  ...props
+}) => {
   const inputId = useId();
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const validateEmail = (email) => {
+  const validateEmail = email => {
     if (!emailPattern.test(email)) {
-      return "Enter a valid email";
+      return 'Enter a valid email';
     }
   };
 
@@ -22,13 +29,18 @@ export const EmailInput = ({ placeholder, ariaLabel, errors, register, className
         id={inputId}
         placeholder={placeholder}
         aria-label={ariaLabel}
-        {...register("email", {
-          required: "This field is required",
+        autoComplete="off"
+        {...register('email', {
+          required: 'This field is required',
           validate: validateEmail,
         })}
         {...props}
       />
-      {errors?.email && <FormErrorMessages className={clsx(css.errorForm)}>{errors.email.message}</FormErrorMessages>}
+      {errors?.email && (
+        <FormErrorMessages className={clsx(css.errorForm)}>
+          {errors.email.message}
+        </FormErrorMessages>
+      )}
     </div>
   );
 };
