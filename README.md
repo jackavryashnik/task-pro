@@ -2,7 +2,7 @@
 
 Task Pro is a task manager application inspired by Trello. It allows users to register, log in (including Google authentication), create custom boards with background images, create columns and tasks within those columns, set task details such as title, description, priority, and deadline, move tasks between columns. Also, the application has a change of theme to dark, light and violet.
 
-![](https://github.com/jackavryashnik/task-pro/tree/main/src/vid/TaskProPreview.mp4)
+![](https://github.com/jackavryashnik/task-pro/tree/main/src/vid/TaskProPreview.gif)
 
 ## Features
 
