@@ -23,7 +23,7 @@ const ScreensPage = ({ openModal, closeModal }) => {
   return (
     <div className={css.ScreensPage}>
       {activeBoardId && selectedBoard && selectedBoard.background !== '' && (
-        <picture className={css.img}>
+        <picture className={css.picture}>
           <source
             srcSet={`
             ${selectedBoard.background.desktop2x} 2x, 
@@ -46,6 +46,7 @@ const ScreensPage = ({ openModal, closeModal }) => {
             media="(max-width: 767px)"
           />
           <img
+            className={css.img}
             src={selectedBoard.background.mobile}
             alt={selectedBoard.background.name}
           />
