@@ -4,6 +4,7 @@ import { editColumn } from '../../redux/tasks/operations';
 import { Button } from '../Button/Button';
 import css from './EditColumnModal.module.css';
 import icons from '../../images/icons.svg';
+import toast from 'react-hot-toast';
 
 const EditColumnModal = ({ column, onClose }) => {
   const [columnName, setColumnName] = useState(column ? column.name : '');
@@ -14,6 +15,10 @@ const EditColumnModal = ({ column, onClose }) => {
   };
 
   const handleSubmit = () => {
+    if (!columnName.trim().length > 0) {
+      return toast.error('Please write a title for the column');
+    }
+
     if (column && column.id) {
       dispatch(editColumn({ id: column.id, name: columnName.trim() }));
       onClose();
