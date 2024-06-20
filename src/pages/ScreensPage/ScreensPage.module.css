@@ -1,8 +1,16 @@
 .ScreensPage {
   background-color: var(--taskboard-background);
   position: relative;
+  height: 100%;
+  /* min-height: 100vh; */
+}
+
+.picture {
+  position: absolute;
+  height: 95%;
 }
 
 .img {
-    position: absolute;
+  object-fit: cover;
+  height: 100%;
 }

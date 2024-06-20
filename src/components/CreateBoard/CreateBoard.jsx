@@ -103,6 +103,7 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
         type="text"
         name="title"
         placeholder="Title"
+        autoComplete="off"
         autoFocus
         value={boardName}
         onChange={handleChange}

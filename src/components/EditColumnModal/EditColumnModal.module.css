@@ -1,15 +1,14 @@
 .modal {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 24px;
   position: relative;
-
   width: 100%;
   padding: 24px;
   border: 1px solid var(--modal-border-color);
   border-radius: 8px;
-
   background-color: var(--modal-background);
 }
 
@@ -17,7 +16,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 27px;
   font-weight: 500;
   font-size: 18px;
@@ -39,11 +37,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: absolute;
   right: 14px;
   top: 14px;
-
   border: hidden;
   background-color: transparent;
   stroke: var(--dull-black);
@@ -60,11 +56,9 @@ button.button {
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 28px;
   height: 28px;
   border-radius: 8px;
-
   background: var(--plus-icon-background);
   stroke: var(--plus-icon-btn-color);
   fill: var(--plus-icon-btn-color);
@@ -81,4 +75,15 @@ button.button {
   .input:focus {
     border-color: var(--input-hover-border-color);
   }
+}
+
+.errorForm {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: red;
+  position: absolute;
+  top: 55%; 
+  left: 10%;
+  width: 100%;
 }
