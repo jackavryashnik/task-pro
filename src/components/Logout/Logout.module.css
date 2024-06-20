@@ -11,13 +11,19 @@
   color: var(--main-text-color);
   min-width: 52px;
   align-items: center;
+  transition: color 250ms ease-in;
 }
+.button:hover .text,
+.button:focus .text {
+  color: var(--taskboard-hover-accent-text-color);
+}
+
 .icon {
   stroke: var(--logout-icon-color);
   transition: border-color, 250ms ease-in;
 }
-.icon:hover,
-.icon:focus {
+.button:hover .icon,
+.button:focus .icon {
   stroke: var(--logout-icon-hover-color);
 }
 .button {

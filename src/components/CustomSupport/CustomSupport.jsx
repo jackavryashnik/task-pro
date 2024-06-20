@@ -25,7 +25,7 @@ const CustomSupport = ({ openModal, closeModal }) => {
         team.
       </p>
       <div className={css.help} onClick={handleHelpClick}>
-        <svg width={20} height={20}>
+        <svg width={20} height={20} className={css.helpText}>
           <use href={`${icons}#icon-help-circle`}></use>
         </svg>
         <p className={css.helpText} style={{ cursor: 'pointer' }}>
