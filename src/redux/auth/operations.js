@@ -132,3 +132,19 @@ export const needHelp = createAsyncThunk(
     }
   }
 );
+
+export const terminateSessions = createAsyncThunk(
+  'auth/terminateSessions',
+  async (_, thunkAPI) => {
+    try {
+      const isValidTokens = await checkRefreshAuthTokens(thunkAPI);
+      if (!isValidTokens.status) throw isValidTokens.error;
+
+      const { data } = await axios.post('/auth/close-sessions');
+
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

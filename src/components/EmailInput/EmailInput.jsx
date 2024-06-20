@@ -18,7 +18,7 @@ export const EmailInput = ({ placeholder, ariaLabel, errors, register, className
     <div className={css.container}>
       <input
         className={clsx(css.input, className)}
-        type="text"
+        type="email"
         id={inputId}
         placeholder={placeholder}
         aria-label={ariaLabel}

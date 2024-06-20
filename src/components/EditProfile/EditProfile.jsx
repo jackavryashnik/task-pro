@@ -12,25 +12,22 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { updateUser } from '../../redux/auth/operations.js';
+import { terminateSessions, updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
+import clsx from 'clsx';
 
 export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-  } = useForm();
+  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
 
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
+  const [isShowTerminateButton, setIsShowTerminateButton] = useState(false);
 
   useEffect(() => {
     if (currentDataUser) {
@@ -123,8 +120,7 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 500)
-
+        }, 500);
       } else {
         const result = await dispatch(
           updateUser({ credentials: changedData, isFormData: false })
@@ -137,13 +133,30 @@ export const EditProfile = ({ closeModal }) => {
 
         setTimeout(() => {
           closeModal();
-        }, 500)
+        }, 500);
       }
     } catch (error) {
-      console.log(error);
       toast.error('Error! Try again');
     }
   };
+
+  const handleShowTerminateButton = (event) => {
+    event.preventDefault();
+
+    if (currentDataUser.sessions.length > 1) {
+      setIsShowTerminateButton(!isShowTerminateButton);
+    }
+  }
+
+  const handleDeleteSessions = async () => {
+    try {
+      await dispatch(terminateSessions());
+      toast.success('Success');
+      setIsShowTerminateButton(false);
+    } catch (error) {
+      toast.error('Error! Try again');
+    }
+  }
 
   return (
     <div className={css.wrapper}>
@@ -165,8 +178,9 @@ export const EditProfile = ({ closeModal }) => {
           <div className={css.avatarContainer}>
             <img
               className={css.avatar}
-              src={file ? URL.createObjectURL(file) : (currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar)}
-  srcSet={file ? `${URL.createObjectURL(file)} 1x, ${URL.createObjectURL(file)} 2x` : `${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`}
+              src={
+                file ? URL.createObjectURL(file) : currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar}
+              srcSet={file ? `${URL.createObjectURL(file)} 1x, ${URL.createObjectURL(file)} 2x` : `${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`}
             />
             <label className={css.label}>
               <svg className={css.icon} width={10} height={10}>
@@ -194,45 +208,53 @@ export const EditProfile = ({ closeModal }) => {
             />
             {changedInputData.name ? <span className={css.span}>*</span> : null}
           </div>
-          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
-            <EmailInput
-              placeholder={
-                currentDataUser ? currentDataUser.email : 'Enter a new email'
-              }
-              ariaLabel={'Enter a new email'}
-              errors={errors}
-              register={register}
-              className={css.color}
-              onChange={handleInputChange}
-            />
-            {changedInputData.email ? (
-              <span className={css.span}>*</span>
-            ) : null}
-          </div>}
-          {currentDataUser.oauth ? null : <div className={css.inputContainer}>
-            <PasswordInput
-              placeholder={'Enter a new password'}
-              ariaLabel={'Enter a new password'}
-              required={false}
-              errors={errors}
-              register={register}
-              className={css.color}
-              onChange={handleInputChange}
-            />
-            {changedInputData.password ? (
-              <span className={css.span}>*</span>
-            ) : null}
-          </div>}
+          {currentDataUser.oauth ? null : (
+            <div className={css.inputContainer}>
+              <EmailInput
+                placeholder={
+                  currentDataUser ? currentDataUser.email : 'Enter a new email'
+                }
+                ariaLabel={'Enter a new email'}
+                errors={errors}
+                register={register}
+                className={css.color}
+                onChange={handleInputChange}
+              />
+              {changedInputData.email ? (
+                <span className={css.span}>*</span>
+              ) : null}
+            </div>
+          )}
+          {currentDataUser.oauth ? null : (
+            <div className={css.inputContainer}>
+              <PasswordInput
+                placeholder={'Enter a new password'}
+                ariaLabel={'Enter a new password'}
+                required={false}
+                errors={errors}
+                register={register}
+                className={css.color}
+                onChange={handleInputChange}
+              />
+              {changedInputData.password ? (
+                <span className={css.span}>*</span>
+              ) : null}
+            </div>
+          )}
           <Button type={'submit'} disabled={isChangedInput}>
             Send
           </Button>
         </form>
-
-        <div>
-        </div>
+        <div className={css.sessionsContainer}>
+        <a className={clsx(currentDataUser.sessions.length > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleShowTerminateButton}>Quantity of active sessions: {currentDataUser.sessions.length}</a>
+        <Button className={clsx(css.sessionsButton, isShowTerminateButton ? css.isShow : null)} onClick={handleDeleteSessions} type={'submit'}>
+          Terminate
+            <svg className={css.iconTrash} width={14} height={14}>
+              <use href={`${icons}#icon-trash-can`}></use>
+            </svg>
+        </Button>
+      </div>
       </div>
     </div>
   );
 };
-
-// oauth
