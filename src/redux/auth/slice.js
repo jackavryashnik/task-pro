@@ -126,9 +126,13 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(terminateSessions.fulfilled, (state, action) => {
-        state.user.sessions = action.payload;
+        const deletedSessions = action.payload.sessions.map(s => s.id);
+
+        state.user.sessions = state.user.sessions.filter(
+          s => !deletedSessions.includes(s.id)
+        );
         state.isLoading = false;
-      })
+      });
   },
 });
 
