@@ -190,33 +190,28 @@
 .buttonPopUp:focus .popUpIcon {
   stroke: var(--green-btn);
 }
+.buttonPopUp {
+  position: relative;
+}
 .popUp {
-  position: absolute;
-  bottom: 10px;
-  right: 88px;
+  position: fixed;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  z-index: 99999999;
   border-radius: 8px;
   width: 135px;
-  height: auto;
   background-color: var(--dark);
   box-shadow: 0 4px 16px 0 rgba(17, 17, 17, 0.1);
   z-index: 9;
   padding: 18px;
-  overflow: auto;
-}
-.popUp::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-.popUp::-webkit-scrollbar-thumb {
-  background-color: var(--green-btn);
-  border-radius: 4px;
+  transition: all 250ms ease;
 }
 .popUpList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+  margin: 0;
 }
 .popUpItem {
   cursor: pointer;

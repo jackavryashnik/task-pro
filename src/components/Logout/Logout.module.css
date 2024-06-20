@@ -12,6 +12,7 @@
   min-width: 52px;
   align-items: center;
 }
+
 .icon {
   stroke: var(--logout-icon-color);
   transition: border-color, 250ms ease-in;
@@ -29,4 +30,8 @@
   background-color: inherit;
   border: none;
   padding: 0;
+}
+.button:hover .text,
+.button:focus .text {
+  color: var(--logout-icon-hover-color);
 }
