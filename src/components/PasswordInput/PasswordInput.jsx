@@ -4,7 +4,15 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import { useId, useState } from 'react';
 import clsx from 'clsx';
 
-export const PasswordInput = ({ placeholder, ariaLabel, required, errors, register, className, ...props }) => {
+export const PasswordInput = ({
+  placeholder,
+  ariaLabel,
+  required,
+  errors,
+  register,
+  className,
+  ...props
+}) => {
   const passwordInputId = useId();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -14,10 +22,11 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
 
   return (
     <div className={css.wrapperBox}>
-      <label className={css.container} htmlFor={passwordInputId} >
+      <label className={css.container} htmlFor={passwordInputId}>
         <input
           className={clsx(css.input, className)}
           type={showPassword ? 'text' : 'password'}
+          autoComplete="off"
           id={passwordInputId}
           placeholder={placeholder}
           aria-label={ariaLabel}
@@ -43,12 +52,17 @@ export const PasswordInput = ({ placeholder, ariaLabel, required, errors, regist
           aria-label="Show the entered password"
         >
           <svg width={18} height={18}>
-            <use className={showPassword ? css.iconShow : css.iconHide} href={`${icons}#icon-eye`}></use>
+            <use
+              className={showPassword ? css.iconShow : css.iconHide}
+              href={`${icons}#icon-eye`}
+            ></use>
           </svg>
         </button>
       </label>
       {errors?.password && (
-        <FormErrorMessages className={clsx(css.errorForm)}>{errors.password.message}</FormErrorMessages>
+        <FormErrorMessages className={clsx(css.errorForm)}>
+          {errors.password.message}
+        </FormErrorMessages>
       )}
     </div>
   );

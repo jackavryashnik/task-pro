@@ -33,6 +33,7 @@ const EditColumnModal = ({ column, onClose }) => {
         value={columnName}
         onChange={handleChange}
         className={css.input}
+        autoComplete="off"
         autoFocus
         maxLength={25}
       />

@@ -58,7 +58,7 @@ export default function EditCardModal({
 
     const changes = {};
     if (trimmedName !== name) changes.name = trimmedName;
-    if (data.description !== description) 
+    if (data.description !== description)
       changes.description = data.description;
     if (data.priority !== priority) changes.priority = data.priority;
     if (data.deadline !== deadline) changes.deadline = data.deadline;
@@ -67,7 +67,7 @@ export default function EditCardModal({
       .then(() => {
         onClose();
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error editing task:', error);
         toast.error('Failed to edit task. Please try again.');
       });
@@ -107,6 +107,7 @@ export default function EditCardModal({
             type="text"
             placeholder="Title"
             autoFocus
+            autoComplete="off"
             onChange={handleNameChange}
             {...register('name', {
               required: 'Required field',

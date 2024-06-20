@@ -36,6 +36,7 @@ const AddColumnModal = ({ onClose }) => {
         onChange={handleChange}
         placeholder="Title"
         className={css.input}
+        autoComplete="off"
         maxLength={25}
         autoFocus
       />

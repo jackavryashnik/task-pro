@@ -3,8 +3,14 @@ import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages';
 import css from './NameInput.module.css';
 import { useId } from 'react';
 
-
-export const NameInput = ({ placeholder, ariaLabel, errors, register, className, ...props }) => {
+export const NameInput = ({
+  placeholder,
+  ariaLabel,
+  errors,
+  register,
+  className,
+  ...props
+}) => {
   const inputId = useId();
 
   return (
@@ -13,25 +19,29 @@ export const NameInput = ({ placeholder, ariaLabel, errors, register, className,
         className={clsx(css.input, className)}
         type="text"
         id={inputId}
+        autoComplete="off"
         placeholder={placeholder}
         aria-label={ariaLabel}
-        {...register("name", {
-          required: "Required field",
+        {...register('name', {
+          required: 'Required field',
           minLength: {
             value: 2,
-            message: "Name must be at least 2 characters",
+            message: 'Name must be at least 2 characters',
           },
           maxLength: {
             value: 32,
-            message: "Name cannot exceed 32 characters",
+            message: 'Name cannot exceed 32 characters',
           },
-          validate: value => value.trim().length > 0 || "Name shouldn't be blank",
+          validate: value =>
+            value.trim().length > 0 || "Name shouldn't be blank",
         })}
         {...props}
       />
-        {errors?.name && (
-            <FormErrorMessages className={clsx(css.errorForm)}>{errors.name.message}</FormErrorMessages>
-        )}
+      {errors?.name && (
+        <FormErrorMessages className={clsx(css.errorForm)}>
+          {errors.name.message}
+        </FormErrorMessages>
+      )}
     </div>
   );
 };
