@@ -178,6 +178,10 @@ input.color:focus {
 }
 
 button.sessionsButton {
+  display: none;
+}
+
+button.sessionsButton.isShow {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,18 +190,13 @@ button.sessionsButton {
   width: 100px;
   height: 24px;
 
-  opacity: 0;
   background-color: var(--terminate-button);
-  transition: background-color, 250ms ease-in, opacity, 250ms ease-in;
+  transition: background-color, 250ms ease-in;
 }
 
 .iconTrash {
   transition: border-color, 250ms ease-in;
   stroke: rgba(22, 22, 22, 0.5);
-}
-
-button.sessionsButton.isShow {
-  opacity: 1;
 }
 
 @media screen and (min-width: 375px) {
