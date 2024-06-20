@@ -4,25 +4,55 @@ import { editColumn } from '../../redux/tasks/operations';
 import { Button } from '../Button/Button';
 import css from './EditColumnModal.module.css';
 import icons from '../../images/icons.svg';
+import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
+import clsx from 'clsx';
 import toast from 'react-hot-toast';
 
 const EditColumnModal = ({ column, onClose }) => {
   const [columnName, setColumnName] = useState(column ? column.name : '');
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
+  const maxColumnNameLength = 32; 
+
   const handleChange = e => {
-    setColumnName(e.target.value.slice(0, 25));
+    const inputValue = e.target.value;
+
+    if (inputValue.length <= maxColumnNameLength) {
+      setColumnName(inputValue);
+      setErrors({});
+    } else {
+      setErrors({ name: `Column title must not exceed ${maxColumnNameLength} characters` });
+    }
   };
 
   const handleSubmit = () => {
-    if (!columnName.trim().length > 0) {
-      return toast.error('Please write a title for the column');
+    const trimmedColumnName = columnName.trim();
+    const newErrors = {};
+
+    if (trimmedColumnName === '') {
+      newErrors.name = 'Please write a title for the column';
+    } else if (trimmedColumnName.length > maxColumnNameLength) {
+      newErrors.name = `Column title must not exceed ${maxColumnNameLength} characters`;
     }
 
-    if (column && column.id) {
-      dispatch(editColumn({ id: column.id, name: columnName.trim() }));
-      onClose();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
     }
+
+
+    if (column && column.id) {
+      dispatch(editColumn({ id: column.id, name: trimmedColumnName }))
+        .then(() => {
+          onClose();
+        })
+        .catch(error => {
+          console.error('Error editing column:', error);
+          toast.error('Failed to edit column. Please try again.');
+        });
+    }
+  
   };
 
   return (
@@ -37,6 +67,11 @@ const EditColumnModal = ({ column, onClose }) => {
         autoFocus
         maxLength={25}
       />
+      {errors?.name && (
+        <FormErrorMessages className={clsx(css.errorForm)}>
+          {errors.name}
+        </FormErrorMessages>
+      )}
       <Button onClick={handleSubmit} className={css.button}>
         <div className={css.iconPlus}>
           <svg width={14} height={14}>

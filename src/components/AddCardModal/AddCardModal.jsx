@@ -23,6 +23,7 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     setValue,
     watch,
     formState: { errors },
+    setError
   } = useForm({
     defaultValues: {
       name: '',
@@ -42,7 +43,10 @@ export default function AddCardModal({ onClose, boardId, columnId }) {
     const trimmedName = data.name.trim();
 
     if (trimmedName === '') {
-      toast.error('Title cannot be empty or contain only spaces');
+      setError('name', {
+        type: 'required',
+        message: 'Title cannot be empty or contain only spaces',
+      });
       return;
     }
 
