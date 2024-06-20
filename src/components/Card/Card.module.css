@@ -197,10 +197,12 @@
   position: fixed;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
-  z-index: 99999999;
+  z-index: 999;
   border-radius: 8px;
   width: 135px;
-  background-color: var(--dark);
+
+  background-color: var(--movecard-modal-background);
+
   box-shadow: 0 4px 16px 0 rgba(17, 17, 17, 0.1);
   z-index: 9;
   padding: 18px;
@@ -215,13 +217,13 @@
 }
 .popUpItem {
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--movecard-modal-text-color);
 }
 .popUpItem:hover .popUpIcon,
 .popUpItem:hover .textPopUp,
 .popUpItem:focus .popUpIcon .popUpItem:focus .textPopUp {
-  stroke: var(--green-btn);
-  color: var(--green-btn);
+  stroke: var(--btn-background);
+  color: var(--btn-background);
 }
 .popUpBox {
   display: flex;

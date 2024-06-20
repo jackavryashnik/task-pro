@@ -4,12 +4,10 @@
   justify-content: center;
   gap: 24px;
   position: relative;
-
   width: 100%;
   padding: 24px;
   border: 1px solid var(--modal-border-color);
   border-radius: 8px;
-
   background-color: var(--modal-background);
 }
 
@@ -17,7 +15,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 27px;
   font-weight: 500;
   font-size: 18px;
@@ -39,11 +36,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: absolute;
   right: 14px;
   top: 14px;
-
   border: hidden;
   background-color: transparent;
   stroke: var(--dull-black);
@@ -60,11 +55,9 @@ button.button {
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 28px;
   height: 28px;
   border-radius: 8px;
-
   background: var(--plus-icon-background);
   stroke: var(--plus-icon-btn-color);
   fill: var(--plus-icon-btn-color);

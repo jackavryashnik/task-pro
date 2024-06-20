@@ -2,52 +2,29 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createColumn } from '../../redux/tasks/operations';
 import { useTasks } from '../../redux/tasks/selectors';
+import { Button } from '../Button/Button';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
-import Modal from 'react-modal';
-import { Button } from '../Button/Button';
 import toast from 'react-hot-toast';
-Modal.setAppElement('#root');
 
 const AddColumnModal = ({ onClose }) => {
   const { selectedBoard } = useTasks();
   const [columnName, setColumnName] = useState('');
   const dispatch = useDispatch();
 
-  const maxColumnNameLength = 32; 
-
   const handleCreateColumn = () => {
-    const trimmedColumnName = columnName.trim();
-
-    if (trimmedColumnName === '') {
+    if (columnName.trim() === '') {
       return toast.error('Please write a title for the column');
     }
-
-    if (trimmedColumnName.length > maxColumnNameLength) {
-      return toast.error(`Column title must not exceed ${maxColumnNameLength} characters`);
-    }
-
     dispatch(
-      createColumn({ name: trimmedColumnName, boardId: selectedBoard.id })
-    ).then(() => {
-      onClose();
-      setColumnName('');
-    }).catch((error) => {
-      console.error('Error creating column:', error);
-      toast.error('Failed to create column. Please try again.');
-    });
+      createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
+    );
+    onClose();
+    setColumnName('');
   };
 
-  const handleNameChange = event => {
-    const inputValue = event.target.value;
-
-    // Перевірка максимальної довжини введеного тексту
-    if (inputValue.length > maxColumnNameLength) {
-      toast.error(`Column title must not exceed ${maxColumnNameLength} characters`);
-      return;
-    }
-
-    setColumnName(inputValue);
+  const handleChange = e => {
+    setColumnName(e.target.value.slice(0, 25));
   };
 
   return (
@@ -56,9 +33,10 @@ const AddColumnModal = ({ onClose }) => {
       <input
         type="text"
         value={columnName}
-        onChange={handleNameChange}
+        onChange={handleChange}
         placeholder="Title"
         className={css.input}
+        maxLength={25}
         autoFocus
       />
       <Button onClick={handleCreateColumn} className={css.button}>
