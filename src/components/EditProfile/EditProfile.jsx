@@ -28,7 +28,7 @@ export const EditProfile = ({ closeModal }) => {
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
   const [isShowTerminateButton, setIsShowTerminateButton] = useState(false);
-  const [sessionsLength, setSessionsLength] = useState(currentDataUser.sessions?.length || 0);
+  const [sessionsLength, setSessionsLength] = useState(currentDataUser.sessions.length);
   
 
   useEffect(() => {
