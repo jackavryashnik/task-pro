@@ -61,11 +61,11 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
 
   const handleSubmitEdit = async e => {
     e.preventDefault();
-    
+
     if (boardName.trim().length === 0) {
       return toast.error('Please write a title for the board');
     }
-  
+
     try {
       await dispatch(
         editBoard({
