@@ -11,7 +11,7 @@ import { Button } from '../Button/Button.jsx';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors.js';
+import { selectUser, selectSessions } from '../../redux/auth/selectors.js';
 import { terminateSessions, updateUser } from '../../redux/auth/operations.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
@@ -20,16 +20,23 @@ import clsx from 'clsx';
 export const EditProfile = ({ closeModal }) => {
   const dispatch = useDispatch();
   const currentDataUser = useSelector(selectUser);
+  const sessions = useSelector(selectSessions);
 
-  const {register, formState: { errors }, handleSubmit, setValue} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm();
 
   const [file, setFile] = useState(null);
   const [isChangedInput, setIsChangedInput] = useState(true);
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
   const [isShowTerminateButton, setIsShowTerminateButton] = useState(false);
-  const [sessionsLength, setSessionsLength] = useState(currentDataUser.sessions.length);
-  
+  // const [sessionsLength, setSessionsLength] = useState(
+  //   currentDataUser.sessions.length
+  // );
 
   useEffect(() => {
     if (currentDataUser) {
@@ -143,24 +150,36 @@ export const EditProfile = ({ closeModal }) => {
     }
   };
 
-  const handleShowTerminateButton = (event) => {
+  const handleShowTerminateButton = event => {
     event.preventDefault();
 
-    if (sessionsLength > 1) {
+    if (sessions.length > 1) {
       setIsShowTerminateButton(!isShowTerminateButton);
     }
-  }
+  };
 
   const handleDeleteSessions = async () => {
-    try {
-      const result = await dispatch(terminateSessions()).unwrap();
-      setSessionsLength(result.sessions.length);
-      toast.success('Success');
-      setIsShowTerminateButton(false);
-    } catch (error) {
-      toast.error('Error! Try again');
-    }
-  }
+    // try {
+    //   const result = await dispatch(terminateSessions())
+    //     .unwrap()
+    //     .then()
+    //     .catch();
+    //   setSessionsLength(result.sessions.length);
+    //   toast.success('Success');
+    //   setIsShowTerminateButton(false);
+    // } catch (error) {
+    //   toast.error('Error! Try again');
+    // }
+    dispatch(terminateSessions())
+      .unwrap()
+      .then(() => {
+        toast.success('Success');
+        setIsShowTerminateButton(false);
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className={css.wrapper}>
@@ -183,8 +202,27 @@ export const EditProfile = ({ closeModal }) => {
             <img
               className={css.avatar}
               src={
-                file ? URL.createObjectURL(file) : currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar}
-              srcSet={file ? `${URL.createObjectURL(file)} 1x, ${URL.createObjectURL(file)} 2x` : `${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar} 1x, ${currentDataUser.avatar ? currentDataUser.avatar : defaultAvatar2x} 2x`}
+                file
+                  ? URL.createObjectURL(file)
+                  : currentDataUser.avatar
+                  ? currentDataUser.avatar
+                  : defaultAvatar
+              }
+              srcSet={
+                file
+                  ? `${URL.createObjectURL(file)} 1x, ${URL.createObjectURL(
+                      file
+                    )} 2x`
+                  : `${
+                      currentDataUser.avatar
+                        ? currentDataUser.avatar
+                        : defaultAvatar
+                    } 1x, ${
+                      currentDataUser.avatar
+                        ? currentDataUser.avatar
+                        : defaultAvatar2x
+                    } 2x`
+              }
             />
             <label className={css.label}>
               <svg className={css.icon} width={10} height={10}>
@@ -250,14 +288,28 @@ export const EditProfile = ({ closeModal }) => {
           </Button>
         </form>
         <div className={css.sessionsContainer}>
-        <a className={clsx(sessionsLength > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleShowTerminateButton}>Quantity of active sessions: {sessionsLength}</a>
-        <Button className={clsx(css.sessionsButton, isShowTerminateButton ? css.isShow : null)} onClick={handleDeleteSessions} type={'submit'}>
-          Terminate
+          <a
+            className={clsx(
+              sessions.length > 1 ? css.sessionsLinkClickable : css.sessionsLink
+            )}
+            onClick={handleShowTerminateButton}
+          >
+            Quantity of active sessions: {sessions.length}
+          </a>
+          <Button
+            className={clsx(
+              css.sessionsButton,
+              isShowTerminateButton ? css.isShow : null
+            )}
+            onClick={handleDeleteSessions}
+            type={'submit'}
+          >
+            Terminate
             <svg className={css.iconTrash} width={14} height={14}>
               <use href={`${icons}#icon-trash-can`}></use>
             </svg>
-        </Button>
-      </div>
+          </Button>
+        </div>
       </div>
     </div>
   );
