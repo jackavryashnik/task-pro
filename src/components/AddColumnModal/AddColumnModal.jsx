@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createColumn } from '../../redux/tasks/operations';
 import { useTasks } from '../../redux/tasks/selectors';
+import { Button } from '../Button/Button';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
@@ -17,8 +18,6 @@ const AddColumnModal = ({ onClose }) => {
   const [columnName, setColumnName] = useState('');
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-
-  const maxColumnNameLength = 32; 
 
   const handleCreateColumn = () => {
     const trimmedColumnName = columnName.trim();
@@ -64,9 +63,10 @@ const AddColumnModal = ({ onClose }) => {
       <input
         type="text"
         value={columnName}
-        onChange={handleNameChange}
+        onChange={handleChange}
         placeholder="Title"
         className={css.input}
+        maxLength={25}
         autoFocus
       />
       {errors?.name && (

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editColumn } from '../../redux/tasks/operations';
+import { Button } from '../Button/Button';
 import css from './EditColumnModal.module.css';
 import icons from '../../images/icons.svg';
-import { Button } from '../Button/Button';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
@@ -52,6 +52,7 @@ const EditColumnModal = ({ column, onClose }) => {
           toast.error('Failed to edit column. Please try again.');
         });
     }
+  
   };
 
   return (
@@ -63,6 +64,7 @@ const EditColumnModal = ({ column, onClose }) => {
         onChange={handleChange}
         className={css.input}
         autoFocus
+        maxLength={25}
       />
       {errors?.name && (
         <FormErrorMessages className={clsx(css.errorForm)}>
