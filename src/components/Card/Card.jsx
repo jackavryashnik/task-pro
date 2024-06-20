@@ -262,7 +262,7 @@ export default function Card({
                             {' '}
                             {column.name.length > 8
                               ? `${column.name.slice(0, 8)}...`
-                              : name}
+                              : column.name}
                           </p>
                           <svg width={16} height={16} className={css.popUpIcon}>
                             <use
