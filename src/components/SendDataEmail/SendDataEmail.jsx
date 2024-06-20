@@ -10,7 +10,8 @@ export const sendDataEmail = async (data, token) => {
       },
     });
     toast.success('Successfully sent!');
-  } catch (error) {
-    toast.error('Oops. Something went wrong.');
+  }catch (error) {
+    const errorMessage = error.response?.data?.message || 'Oops. Something went wrong.';
+    toast.error(`Error: ${errorMessage}`);
   }
 };

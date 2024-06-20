@@ -5,6 +5,18 @@ import { Button } from '../Button/Button';
 import toast from 'react-hot-toast';
 
 export const DeleteModal = ({ closeModal, onDelete, children }) => {
+  const handleDelete = async () => {
+    try {
+      await onDelete();
+      toast.success('Successfully deleted');
+      setTimeout(() => {
+        closeModal();
+      }, 500);
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
+    }
+  };
   return (
     <div className={css.wrapper}>
       <div className={css.container}>
@@ -42,7 +54,7 @@ export const DeleteModal = ({ closeModal, onDelete, children }) => {
           <Button
             className={css.button}
             type={'button'}
-            onClick={() => closeModal()}
+            onClick={handleDelete}
           >
             No
           </Button>

@@ -22,11 +22,13 @@ const Column = ({ column, openModal, closeModal }) => {
     );
   });
 
-  const handleDeleteColumn = () => {
+  const handleDeleteColumn = async() => {
     try {
-      dispatch(deleteColumn(column.id));
+      await dispatch(deleteColumn(column.id)).unwrap();
+      toast.success(`Column ${column.name} was deleted`);
     } catch (error) {
-      toast.error(`Column wasn't deleted`);
+      const errorMessage = error.response.data.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
     }
   };
 

@@ -18,7 +18,7 @@ const AddColumnModal = ({ onClose }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
-  const maxColumnNameLength = 32; 
+  const maxColumnNameLength = 32;
 
   const handleCreateColumn = () => {
     const trimmedColumnName = columnName.trim();
@@ -37,14 +37,16 @@ const AddColumnModal = ({ onClose }) => {
 
     dispatch(
       createColumn({ name: trimmedColumnName, boardId: selectedBoard.id })
-    ).then(() => {
-      onClose();
-      setColumnName('');
-      setErrors({});
-    }).catch((error) => {
-      console.error('Error creating column:', error);
-      toast.error('Failed to create column. Please try again.');
-    });
+    )
+      .then(() => {
+        onClose();
+        setColumnName('');
+        setErrors({});
+      })
+      .catch(error => {
+        console.error('Error creating column:', error);
+        toast.error('Failed to create column. Please try again.');
+      });
   };
 
   const handleNameChange = event => {
@@ -54,8 +56,20 @@ const AddColumnModal = ({ onClose }) => {
       setColumnName(inputValue);
       setErrors({});
     } else {
-      setErrors({ name: `Column title must not exceed ${maxColumnNameLength} characters` });
+      setErrors({
+        name: `Column title must not exceed ${maxColumnNameLength} characters`,
+      });
     }
+    createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
+      .unwrap()
+      .then(() => {
+        toast.success('Column created successfully');
+        onClose();
+        setColumnName('');
+      })
+      .catch(error => {
+        toast.error(`Error: ${error}`);
+      });
   };
 
   return (

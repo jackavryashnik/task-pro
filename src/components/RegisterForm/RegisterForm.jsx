@@ -27,7 +27,10 @@ export default function RegisterForm() {
         toast.success('Success register');
         navigate('/home', { replace: true });
       })
-      .catch(() => toast.error(`Email already registered`));
+      .catch(error => {
+        const errorMessage = error.message || 'Registration failed';
+        toast.error(errorMessage);
+      });
   };
 
   return (

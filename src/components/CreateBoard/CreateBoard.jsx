@@ -38,43 +38,49 @@ export default function CreateBoard({ onClose, isEdit, setIsEdit }) {
     setBoardName(e.target.value);
   };
 
-  const handleSubmitCreate = e => {
+  const handleSubmitCreate = async e => {
     e.preventDefault();
-    if (boardName.trim().length === 0) {
+    if (!boardName || boardName === '') {
       return toast.error('Please write a title for the board');
     }
-  
-
-    dispatch(
-      addBoard({
-        name: boardName.trim(),
-        icon: selectedIcon,
-        background: selectedBackground.name,
-      })
-    )
-      .unwrap()
-      .then(createdBoard => {
-        dispatch(fetchOneBoard(createdBoard.board.id));
-        onClose();
-      });
+    try {
+      const createdBoard = await dispatch(
+        addBoard({
+          name: boardName.trim(),
+          icon: selectedIcon,
+          background: selectedBackground.name,
+        })
+      ).unwrap();
+      dispatch(fetchOneBoard(createdBoard.board.id));
+      onClose();
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
+    }
   };
 
-  const handleSubmitEdit = e => {
+  const handleSubmitEdit = async e => {
     e.preventDefault();
+
     if (boardName.trim().length === 0) {
       return toast.error('Please write a title for the board');
     }
-  
-    dispatch(
-      editBoard({
-        id: selectedBoard.id,
-        name: boardName,
-        icon: selectedIcon,
-        background: selectedBackground.name,
-      })
-    );
-    setIsEdit(false);
-    onClose();
+
+    try {
+      await dispatch(
+        editBoard({
+          id: selectedBoard.id,
+          name: boardName,
+          icon: selectedIcon,
+          background: selectedBackground.name,
+        })
+      ).unwrap();
+      setIsEdit(false);
+      onClose();
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
+    }
   };
 
   const handleClick = () => {
