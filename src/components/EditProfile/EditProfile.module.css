@@ -179,12 +179,6 @@ input.color:focus {
 
 button.sessionsButton {
   display: none;
-
-  width: 100px;
-  height: 24px;
-
-  opacity: 0;
-  transition: background-color, 250ms ease-in, opacity, 250ms ease-in;
 }
 
 button.sessionsButton.isShow {
@@ -193,8 +187,11 @@ button.sessionsButton.isShow {
   align-items: center;
   gap: 8px;
 
-  opacity: 1;
+  width: 100px;
+  height: 24px;
+
   background-color: var(--terminate-button);
+  transition: background-color, 250ms ease-in;
 }
 
 .iconTrash {

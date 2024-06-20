@@ -37,7 +37,6 @@ export const EditProfile = ({ closeModal }) => {
       setValue('email', currentDataUser.email);
       setValue('password', '');
     }
-
   }, [currentDataUser, setValue]);
 
   const handleFileChange = event => {
