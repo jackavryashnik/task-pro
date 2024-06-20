@@ -6,7 +6,6 @@ import { Button } from '../Button/Button';
 import css from './AddColumnModal.module.css';
 import icons from '../../images/icons.svg';
 import Modal from 'react-modal';
-import { Button } from '../Button/Button';
 import { FormErrorMessages } from '../FormErrorMessages/FormErrorMessages.jsx';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
@@ -18,6 +17,8 @@ const AddColumnModal = ({ onClose }) => {
   const [columnName, setColumnName] = useState('');
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
+
+  const maxColumnNameLength = 32; 
 
   const handleCreateColumn = () => {
     const trimmedColumnName = columnName.trim();
@@ -63,7 +64,7 @@ const AddColumnModal = ({ onClose }) => {
       <input
         type="text"
         value={columnName}
-        onChange={handleChange}
+        onChange={handleNameChange}
         placeholder="Title"
         className={css.input}
         maxLength={25}
