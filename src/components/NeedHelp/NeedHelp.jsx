@@ -68,6 +68,7 @@ export default function NeedHelp({ closeModal }) {
           type="email"
           placeholder="Email address"
           value={email}
+          autoComplete="off"
           onChange={event => setEmail(event.target.value)}
           className={css.inputCardTitle}
           required
@@ -76,6 +77,7 @@ export default function NeedHelp({ closeModal }) {
           type="text"
           placeholder="Comment"
           value={comment}
+          autoComplete='off'
           onChange={event => setComment(event.target.value)}
           className={css.inputCardDescription}
           required

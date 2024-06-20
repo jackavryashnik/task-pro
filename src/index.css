@@ -28,6 +28,8 @@
   --label-color-red: #e09cb5;
   --label-color-green: #bedbb0;
   --form-error-red: #e7b4ad;
+  --terminate-button: #ec7f70;
+  --terminate-button-hover: #ec6c5a;
   --transition: 250ms ease-in;
 }
 

@@ -36,16 +36,13 @@ export default function Card({
       ? description.substring(0, 95) + '...'
       : description;
 
-  // поточна дата
   const today = new Date();
 
   today.setHours(0, 0, 0, 0);
   dateDeadline.setHours(0, 0, 0, 0);
 
-  // перевірка, чи пройшов дедлайн
   const passedDeadline = today > dateDeadline;
 
-  // перевірка, чи поточна дата рівна дедлайну
   const isTodayDeadline = today.getTime() === dateDeadline.getTime();
   const bell = isTodayDeadline || today > dateDeadline;
 
