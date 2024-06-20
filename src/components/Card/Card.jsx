@@ -5,8 +5,9 @@ import { deleteTask, editTask } from '../../redux/tasks/operations.js';
 import { DeleteModal } from '../DeleteModal/DeleteModal.jsx';
 import EditCardModal from '../EditCardModal/EditCardModal.jsx';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTasks } from '../../redux/tasks/selectors.js';
+import Portal from '../Portal/Portal.jsx';
 
 export default function Card({
   task: { id, name, description, priority, deadline },
@@ -15,8 +16,10 @@ export default function Card({
   columnId,
 }) {
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
+  const [popUpPosition, setPopUpPosition] = useState({});
   const dispatch = useDispatch();
-  // const popUpRef = useRef(null);
+  const popUpRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const { columns } = useTasks();
 
@@ -86,8 +89,41 @@ export default function Card({
     }
   };
 
+  const handleClickOutside = event => {
+    if (buttonRef.current && buttonRef.current.contains(event.target)) {
+      setIsOpenPopUp(true);
+    } else if (
+      popUpRef.current &&
+      !popUpRef.current.contains(event.target) &&
+      buttonRef.current !== event.target
+    ) {
+      setIsOpenPopUp(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpenPopUp) {
+      document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('scroll', calcPopUpPosition);
+      window.addEventListener('resize', calcPopUpPosition);
+      calcPopUpPosition();
+      document.body.classList.add('no-scroll');
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', calcPopUpPosition);
+      window.removeEventListener('resize', calcPopUpPosition);
+      document.body.classList.remove('no-scroll');
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', calcPopUpPosition);
+      window.removeEventListener('resize', calcPopUpPosition);
+      document.body.classList.remove('no-scroll');
+    };
+  }, [isOpenPopUp]);
+
   const handleTogglePopUp = () => {
-    setIsOpenPopUp(prev => !prev);
+    setIsOpenPopUp(!isOpenPopUp);
   };
 
   const handleColumnSelect = newColumnId => {
@@ -98,6 +134,29 @@ export default function Card({
       })
     );
     setIsOpenPopUp(false);
+  };
+
+  const calcPopUpPosition = () => {
+    if (buttonRef.current && popUpRef.current) {
+      const btnRect = buttonRef.current.getBoundingClientRect();
+
+      const popUpHeight = popUpRef.current.scrollHeight;
+      const viewportHeight = window.innerHeight;
+
+      let top, bottom;
+      if (viewportHeight > btnRect.bottom + popUpHeight + 10) {
+        top = btnRect.bottom + 10;
+        bottom = 'auto';
+      } else {
+        top = btnRect.top - popUpHeight - 10;
+        bottom = 'auto';
+      }
+      setPopUpPosition({
+        top: `${top}px`,
+        bottom: bottom !== 'auto' ? `${bottom}px` : 'auto',
+        left: `${btnRect.left + 20}px`,
+      });
+    }
   };
 
   return (
@@ -138,6 +197,7 @@ export default function Card({
             <button
               type="button"
               className={css.buttonPopUp}
+              ref={buttonRef}
               onClick={handleTogglePopUp}
             >
               <svg width={16} height={16} className={css.popUpIcon}>
@@ -175,34 +235,47 @@ export default function Card({
         </div>
       </div>
       {isOpenPopUp && (
-        <div
-          className={css.popUp}
-          // ref={popUpRef}
-        >
-          <ul className={css.popUpList}>
-            {columns.length > 0 &&
-              columns
-                .filter(column => column.id !== columnId)
-                .map(column => {
-                  return (
-                    <li
-                      className={css.popUpItem}
-                      key={column.id}
-                      onClick={() => handleColumnSelect(column.id)}
-                    >
-                      <div className={css.popUpBox}>
-                        <p className={css.textPopUp}> {column.name}</p>
-                        <svg width={16} height={16} className={css.popUpIcon}>
-                          <use
-                            href={`${icons}#icon-arrow-circle-broken-right`}
-                          ></use>
-                        </svg>
-                      </div>
-                    </li>
-                  );
-                })}
-          </ul>
-        </div>
+        <Portal>
+          <div
+            className={css.popUp}
+            ref={popUpRef}
+            style={{
+              top: popUpPosition.top,
+              bottom: popUpPosition.bottom,
+              left: popUpPosition.left,
+              position: 'fixed',
+            }}
+          >
+            <ul className={css.popUpList}>
+              {columns.length > 0 &&
+                columns
+                  .filter(column => column.id !== columnId)
+                  .map(column => {
+                    return (
+                      <li
+                        className={css.popUpItem}
+                        key={column.id}
+                        onClick={() => handleColumnSelect(column.id)}
+                      >
+                        <div className={css.popUpBox}>
+                          <p className={css.textPopUp}>
+                            {' '}
+                            {column.name.length > 8
+                              ? `${column.name.slice(0, 8)}...`
+                              : name}
+                          </p>
+                          <svg width={16} height={16} className={css.popUpIcon}>
+                            <use
+                              href={`${icons}#icon-arrow-circle-broken-right`}
+                            ></use>
+                          </svg>
+                        </div>
+                      </li>
+                    );
+                  })}
+            </ul>
+          </div>
+        </Portal>
       )}
     </li>
   );
