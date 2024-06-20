@@ -140,8 +140,8 @@ export const EditProfile = ({ closeModal }) => {
         }, 500)
       }
     } catch (error) {
-      console.log(error);
-      toast.error('Error! Try again');
+      сonst errorMessage = error.response.data.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
     }
   };
 

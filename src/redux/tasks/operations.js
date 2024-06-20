@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import toast from 'react-hot-toast';
 import axios from '../../utils/backendAPI';
 import { checkRefreshAuthTokens } from '../../utils/backendAPI';
 
@@ -104,6 +104,8 @@ export const createColumn = createAsyncThunk(
       const { data } = await axios.post('/columns', { ...newColumn });
       return data.data;
     } catch (error) {
+      const errorMessage = error.response.data.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -20,9 +20,16 @@ const AddColumnModal = ({ onClose }) => {
     }
     dispatch(
       createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
-    );
-    onClose();
-    setColumnName('');
+    )
+      .unwrap()
+      .then(() => {
+        toast.success('Column created successfully');
+        onClose();
+        setColumnName('');
+      })
+      .catch((error) => {
+        toast.error(`Error: ${error}`);
+      });
   };
 
   return (
