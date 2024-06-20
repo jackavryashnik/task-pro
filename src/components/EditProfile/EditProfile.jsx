@@ -28,6 +28,8 @@ export const EditProfile = ({ closeModal }) => {
   const initialValues = { name: false, email: false, password: false };
   const [changedInputData, setChangedInputData] = useState(initialValues);
   const [isShowTerminateButton, setIsShowTerminateButton] = useState(false);
+  const [sessionsLength, setSessionsLength] = useState(currentDataUser.sessions?.length || 0);
+  
 
   useEffect(() => {
     if (currentDataUser) {
@@ -35,6 +37,7 @@ export const EditProfile = ({ closeModal }) => {
       setValue('email', currentDataUser.email);
       setValue('password', '');
     }
+
   }, [currentDataUser, setValue]);
 
   const handleFileChange = event => {
@@ -144,14 +147,15 @@ export const EditProfile = ({ closeModal }) => {
   const handleShowTerminateButton = (event) => {
     event.preventDefault();
 
-    if (currentDataUser.sessions.length > 1) {
+    if (sessionsLength > 1) {
       setIsShowTerminateButton(!isShowTerminateButton);
     }
   }
 
   const handleDeleteSessions = async () => {
     try {
-      await dispatch(terminateSessions());
+      const result = await dispatch(terminateSessions()).unwrap();
+      setSessionsLength(result.sessions.length);
       toast.success('Success');
       setIsShowTerminateButton(false);
     } catch (error) {
@@ -247,7 +251,7 @@ export const EditProfile = ({ closeModal }) => {
           </Button>
         </form>
         <div className={css.sessionsContainer}>
-        <a className={clsx(currentDataUser.sessions.length > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleShowTerminateButton}>Quantity of active sessions: {currentDataUser.sessions.length}</a>
+        <a className={clsx(sessionsLength > 1 ? css.sessionsLinkClickable : css.sessionsLink)} onClick={handleShowTerminateButton}>Quantity of active sessions: {sessionsLength}</a>
         <Button className={clsx(css.sessionsButton, isShowTerminateButton ? css.isShow : null)} onClick={handleDeleteSessions} type={'submit'}>
           Terminate
             <svg className={css.iconTrash} width={14} height={14}>
