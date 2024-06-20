@@ -56,6 +56,16 @@ const AddColumnModal = ({ onClose }) => {
     } else {
       setErrors({ name: `Column title must not exceed ${maxColumnNameLength} characters` });
     }
+      createColumn({ name: columnName.trim(), boardId: selectedBoard.id })
+      .unwrap()
+      .then(() => {
+        toast.success('Column created successfully');
+        onClose();
+        setColumnName('');
+      })
+      .catch((error) => {
+        toast.error(`Error: ${error}`);
+      });
   };
 
   return (

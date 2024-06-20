@@ -48,7 +48,8 @@ export default function NeedHelp({ closeModal }) {
         setComment('');
         closeModal();
       } catch (error) {
-        toast.error('There was an error sending your request');
+        const errorMessage = error.response.data.message || error.message;
+        toast.error(`Error: ${errorMessage}`);
       }
     }
   };

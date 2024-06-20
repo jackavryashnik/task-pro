@@ -26,7 +26,10 @@ export default function LoginForm() {
         toast.success('Welcome!');
         navigate('/home', { replace: true });
       })
-      .catch(() => toast.error(`Email or password is incorrect`));
+      .catch(error => {
+        const errorMessage = error.response.data.message || 'Email or password is incorrect';
+        toast.error(errorMessage);
+      });
   };
 
   return (

@@ -136,7 +136,8 @@ export const EditProfile = ({ closeModal }) => {
         }, 500);
       }
     } catch (error) {
-      toast.error('Error! Try again');
+      const errorMessage = error.response.data.message || error.message;
+      toast.error(`Error: ${errorMessage}`);
     }
   };
 
